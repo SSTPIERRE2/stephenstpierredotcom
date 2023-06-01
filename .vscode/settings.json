@@ -1,5 +1,6 @@
 {
   "search.exclude": {
     "**/.sst": true
-  }
+  },
+  "eslint.workingDirectories": ["packages/dashboard", "packages/portfolio"]
 }

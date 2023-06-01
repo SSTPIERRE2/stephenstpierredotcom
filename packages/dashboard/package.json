@@ -21,6 +21,9 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.2",
+    "eslint-config-prettier": "^8.8.0",
     "sst": "^2.8.23"
   }
 }

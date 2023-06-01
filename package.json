@@ -9,14 +9,17 @@
     "deploy": "sst deploy",
     "remove": "sst remove",
     "console": "sst console",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "next lint",
+    "gen": "hygen"
   },
   "devDependencies": {
-    "sst": "^2.8.23",
+    "@tsconfig/node16": "^1.0.4",
     "aws-cdk-lib": "2.72.1",
     "constructs": "10.1.156",
-    "typescript": "^5.0.4",
-    "@tsconfig/node16": "^1.0.4"
+    "hygen": "^6.2.11",
+    "sst": "^2.8.23",
+    "typescript": "^5.0.4"
   },
   "workspaces": [
     "packages/*"

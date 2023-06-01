@@ -4,7 +4,8 @@
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
-      "@stevestpierredotcom/core/*": ["../core/src/*"]
+      "@stevestpierredotcom/core/*": ["../core/src/*"],
+      "@graphql-rds/core/*": ["../core/src/*"]
     }
   }
 }
