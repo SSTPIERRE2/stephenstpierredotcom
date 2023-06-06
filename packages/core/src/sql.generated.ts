@@ -30,7 +30,6 @@ export interface AnalyticsEvent {
   device_vendor: string;
   os_name: string;
   os_version: string;
-  cpu_architecture: string;
   email: string | null;
   metadata: Json;
   created: Generated<Timestamp>;

@@ -105,6 +105,9 @@ importers:
       '@pothos/core':
         specifier: ^3.30.0
         version: 3.30.0(graphql@16.6.0)
+      device-detector-js:
+        specifier: ^3.0.3
+        version: 3.0.3
       graphql:
         specifier: ^16.6.0
         version: 16.6.0
@@ -145,6 +148,9 @@ importers:
       eslint-config-next:
         specifier: ^13.4.2
         version: 13.4.2(eslint@8.39.0)(typescript@5.0.4)
+      graphql:
+        specifier: ^16.6.0
+        version: 16.6.0
       next:
         specifier: ^13.4.2
         version: 13.4.2(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
@@ -160,12 +166,26 @@ importers:
       typescript:
         specifier: 5.0.4
         version: 5.0.4
+      urql:
+        specifier: ^4.0.3
+        version: 4.0.3(graphql@16.6.0)(react@18.2.0)
     devDependencies:
       '@types/styled-components':
         specifier: ^5.1.26
         version: 5.1.26
 
 packages:
+
+  /@0no-co/graphql.web@1.0.1(graphql@16.6.0):
+    resolution: {integrity: sha512-6Yaxyv6rOwRkLIvFaL0NrLDgfNqC/Ng9QOPmTmlqW4mORXMEKmh5NYGkIvvt5Yw8fZesnMAqkj8cIqTj8f40cQ==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+    peerDependenciesMeta:
+      graphql:
+        optional: true
+    dependencies:
+      graphql: 16.6.0
+    dev: false
 
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -3945,6 +3965,15 @@ packages:
       '@typescript-eslint/types': 5.59.6
       eslint-visitor-keys: 3.4.1
 
+  /@urql/core@4.0.10(graphql@16.6.0):
+    resolution: {integrity: sha512-Vs3nOSAnYftqOCg034Ostp/uSqWlQg5ryLIzcOrm8+O43s4M+Ew4GQAuemIH7ZDB8dek6h61zzWI3ujd8FH3NA==}
+    dependencies:
+      '@0no-co/graphql.web': 1.0.1(graphql@16.6.0)
+      wonka: 6.3.2
+    transitivePeerDependencies:
+      - graphql
+    dev: false
+
   /@vitest/expect@0.31.0:
     resolution: {integrity: sha512-Jlm8ZTyp6vMY9iz9Ny9a0BHnCG4fqBa8neCF6Pk/c/6vkUk49Ls6UBlgGAU82QnzzoaUs9E/mUhq/eq9uMOv/g==}
     dependencies:
@@ -5245,6 +5274,11 @@ packages:
     resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
     dev: true
+
+  /device-detector-js@3.0.3:
+    resolution: {integrity: sha512-jM89LJAvP6uOd84at8OlD9dWP8KeYCCHUde0RT0HQo/stdoRH4b54Xl/fntx2nEXCmqiFhmo+/cJetS2VGUHPw==}
+    engines: {node: '>= 8.11.4'}
+    dev: false
 
   /didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
@@ -9566,6 +9600,18 @@ packages:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
     dev: true
 
+  /urql@4.0.3(graphql@16.6.0)(react@18.2.0):
+    resolution: {integrity: sha512-ynwez59f5uo31RO9/OD1RveasLGsaRC2mEm5nNGuPiQbpIeuZLQJTya61hr6I9c24YWIHf3Ld29xZy6JW3scvQ==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@urql/core': 4.0.10(graphql@16.6.0)
+      react: 18.2.0
+      wonka: 6.3.2
+    transitivePeerDependencies:
+      - graphql
+    dev: false
+
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -9828,6 +9874,10 @@ packages:
     engines: {node: '>= 0.10.0'}
     hasBin: true
     dev: true
+
+  /wonka@6.3.2:
+    resolution: {integrity: sha512-2xXbQ1LnwNS7egVm1HPhW2FyKrekolzhpM3mCwXdQr55gO+tAiY76rhb32OL9kKsW8taj++iP7C6hxlVzbnvrw==}
+    dev: false
 
   /word-wrap@1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}

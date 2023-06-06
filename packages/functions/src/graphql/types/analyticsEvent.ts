@@ -1,6 +1,9 @@
 import { SQL } from '@graphql-rds/core/sql';
 import { builder } from '../builder';
 import { AnalyticsEvent } from '@graphql-rds/core/analyticsEvent';
+import DeviceDetector from 'device-detector-js';
+
+const deviceDetector = new DeviceDetector();
 
 const AnalyticsEventType = builder
   .objectRef<SQL.Row['analytics_event']>('AnalyticsEvent')
@@ -16,19 +19,28 @@ const AnalyticsEventType = builder
       deviceType: t.exposeString('device_type'),
       deviceVendor: t.exposeString('device_vendor'),
       osName: t.exposeString('os_name'),
-      cpuArchitecture: t.exposeString('cpu_architecture'),
+      osVersion: t.exposeString('os_version'),
       email: t.exposeString('email', {
         nullable: true,
       }),
-      metadata: t.field({ type: 'JSON', resolve: () => {} }),
-      created: t.field({ type: 'Date', resolve: () => new Date() }),
+      metadata: t.field({ type: 'JSON', resolve: (parent) => parent.metadata }),
+      created: t.field({ type: 'Date', resolve: (parent) => parent.created }),
     }),
   });
 
 builder.queryFields((t) => ({
   analyticsEvents: t.field({
     type: [AnalyticsEventType],
-    resolve: () => AnalyticsEvent.list(),
+    args: {
+      fields: t.arg.string(),
+    },
+    resolve: (_, args) => {
+      let fields = [];
+      if (args.fields) {
+        fields = JSON.parse(args.fields);
+      }
+      return AnalyticsEvent.list(fields);
+    },
   }),
 }));
 
@@ -37,34 +49,31 @@ builder.mutationFields((t) => ({
     type: AnalyticsEventType,
     args: {
       name: t.arg.string({ required: true }),
-      url: t.arg.string({ required: true }),
-      browser_name: t.arg.string({ required: true }),
-      browser_version: t.arg.string({ required: true }),
-      browser_engine: t.arg.string({ required: true }),
-      device_model: t.arg.string({ required: true }),
-      device_type: t.arg.string({ required: true }),
-      device_vendor: t.arg.string({ required: true }),
-      os_name: t.arg.string({ required: true }),
-      os_version: t.arg.string({ required: true }),
-      cpu_architecture: t.arg.string({ required: true }),
       metadata: t.arg.string({ required: true }),
-      userID: t.arg.string(),
+      email: t.arg.string(),
     },
-    resolve: (_, args) =>
-      AnalyticsEvent.create(
+    resolve: (_, args, context) => {
+      const headers = context.event.headers;
+      const userAgent = deviceDetector.parse(headers['user-agent'] || '');
+      const { client, os, device } = userAgent;
+      console.log('Got the user agent', userAgent);
+      console.log(`got metadata`, args.metadata);
+
+      return AnalyticsEvent.create(
         args.name,
-        args.url,
-        args.browser_name,
-        args.browser_version,
-        args.browser_engine,
-        args.device_model,
-        args.device_type,
-        args.device_vendor,
-        args.os_name,
-        args.os_version,
-        args.cpu_architecture,
+        headers.origin || '',
+        client?.name || '',
+        client?.version || '',
+        // @ts-ignore it doesn't matter if engine exists, this is completely safe
+        client?.engine || '',
+        device?.model || '',
+        device?.type || '',
+        device?.brand || '',
+        os?.name || '',
+        os?.version || '',
         args.metadata,
-        args.userID
-      ),
+        args.email
+      );
+    },
   }),
 }));

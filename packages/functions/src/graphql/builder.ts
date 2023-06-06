@@ -1,5 +1,6 @@
 import SchemaBuilder from '@pothos/core';
-import { DateTimeResolver, JSONResolver } from 'graphql-scalars';
+import { APIGatewayProxyEvent } from 'aws-lambda';
+import { DateTimeResolver, JSONObjectResolver } from 'graphql-scalars';
 
 export const builder = new SchemaBuilder<{
   Scalars: {
@@ -12,9 +13,12 @@ export const builder = new SchemaBuilder<{
       Output: Date;
     };
   };
+  Context: {
+    event: APIGatewayProxyEvent;
+  };
 }>({});
 
-builder.addScalarType('JSON', JSONResolver, {});
+builder.addScalarType('JSON', JSONObjectResolver, {});
 builder.addScalarType('Date', DateTimeResolver, {});
 builder.queryType({});
 builder.mutationType({});
