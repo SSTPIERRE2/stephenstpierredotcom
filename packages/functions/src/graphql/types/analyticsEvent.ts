@@ -23,7 +23,12 @@ const AnalyticsEventType = builder
       email: t.exposeString('email', {
         nullable: true,
       }),
-      metadata: t.field({ type: 'JSON', resolve: (parent) => parent.metadata }),
+      metadata: t.field({
+        type: 'JSON',
+        resolve: (parent) => {
+          return JSON.parse(parent.metadata as string);
+        },
+      }),
       created: t.field({ type: 'Date', resolve: (parent) => parent.created }),
     }),
   });
@@ -36,6 +41,8 @@ builder.queryFields((t) => ({
     },
     resolve: (_, args) => {
       let fields = [];
+      console.log(`querying events`, args.fields);
+
       if (args.fields) {
         fields = JSON.parse(args.fields);
       }

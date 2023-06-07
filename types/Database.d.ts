@@ -3,3 +3,12 @@ interface FieldQuery {
   value: string;
   matcher?: ComparisonOperatorExpression;
 }
+
+type AnalyticsEventName =
+  | 'pageView'
+  | 'click'
+  | 'cursorThrash'
+  | 'error'
+  | 'navigation'
+  | 'hover'
+  | 'rageClick';

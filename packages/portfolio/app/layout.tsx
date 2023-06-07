@@ -4,6 +4,7 @@ import StyledComponentsRegistry from './lib/registry';
 import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import { ReactNode } from 'react';
 import UrqlProvider from './UrqlProvider';
+import AnalyticsWrapper from './AnalyticsWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <UrqlProvider>
           <StyledComponentsRegistry>
-            {children}
-            <GlobalStyles />
+            <AnalyticsWrapper>
+              {children}
+              <GlobalStyles />
+            </AnalyticsWrapper>
           </StyledComponentsRegistry>
         </UrqlProvider>
       </body>

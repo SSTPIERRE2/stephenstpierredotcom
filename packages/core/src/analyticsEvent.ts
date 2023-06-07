@@ -2,13 +2,7 @@ export * as AnalyticsEvent from './analyticsEvent';
 
 import { ulid } from 'ulid';
 import { SQL } from './sql';
-import {
-  ComparisonOperatorExpression,
-  RawBuilder,
-  ReferenceExpression,
-  sql,
-} from 'kysely';
-import { Database } from './sql.generated';
+import { RawBuilder, sql } from 'kysely';
 
 function json<T>(obj: T): RawBuilder<T> {
   return sql`${obj}::jsonb`;
@@ -62,6 +56,7 @@ export function list(fields?: FieldQuery[]) {
   let query = SQL.DB.selectFrom('analytics_event').selectAll();
 
   fields?.forEach((field) => {
+    console.log(`inside list function`, field);
     query = query.where(field.name, field.matcher || '=', field.value);
   });
 
