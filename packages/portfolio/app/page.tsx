@@ -7,10 +7,10 @@ import { useQueryAnalytics } from '@/hooks/useAnalytics';
 
 export default function Home() {
   const [key, setKey] = useState(0);
-  const { result } = useQueryAnalytics({
-    fields: [{ name: 'email', value: 'tester@gmail.com' }],
-  });
-  console.log('got result?', result);
+  // const { result } = useQueryAnalytics({
+  //   fields: [{ name: 'email', value: 'tester@gmail.com' }],
+  // });
+  // console.log('got result?', result);
 
   const handleClick = () => {
     setKey(key + 1);

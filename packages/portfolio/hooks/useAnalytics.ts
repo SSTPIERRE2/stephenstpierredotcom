@@ -12,7 +12,7 @@ const AnalyticsQuery = gql`
 `;
 
 const CreateAnalyticsQuery = gql`
-  mutation ($name: AnalyticsEvent!, $email: String!, $metadata: String!) {
+  mutation ($name: EventName!, $email: String, $metadata: String) {
     createAnalyticsEvent(name: $name, email: $email, metadata: $metadata) {
       name
       email

@@ -7,7 +7,9 @@ import { useCreateAnalytic } from '@/hooks/useAnalytics';
 import { ReactNode, useEffect } from 'react';
 
 const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
-  const { createAnalytic } = useCreateAnalytic();
+  const { createAnalytic, result } = useCreateAnalytic();
+
+  console.log(`createAnalytic result`, result);
 
   useEffect(() => {
     console.log(
@@ -31,17 +33,17 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
         console.log('handleClick', event, numOfClicks);
         if (numOfClicks >= 3) {
           console.log('recording rage click');
-          // createAnalytic({
-          //   name: 'rageClick',
-          //   metadata: JSON.stringify({
-          //     numOfClicks,
-          //     clientX: event.clientX,
-          //     clientY: event.clientY,
-          //   }),
-          // });
+          createAnalytic({
+            name: 'rageClick',
+            metadata: JSON.stringify({
+              numOfClicks,
+              clientX: event.clientX,
+              clientY: event.clientY,
+            }),
+          });
         }
       },
-      1500
+      500
     );
 
     window.addEventListener('click', handleRageClick);
@@ -57,20 +59,29 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
         e: MouseEvent,
         didThrash: boolean,
         timeElapsed: number,
-        numOfThrashes: number
+        numOfThrashes: number,
+        numOfDirectionChanges: number
       ) => {
-        console.log('onMouseMove', didThrash, timeElapsed, numOfThrashes);
+        console.log(
+          'onMouseMove',
+          didThrash,
+          timeElapsed,
+          numOfThrashes,
+          numOfDirectionChanges
+        );
         if (didThrash) {
-          // createAnalytic({
-          //   name: 'cursorThrash',
-          //   metadata: JSON.stringify({
-          //     clientX: e.clientX,
-          //     clientY: e.clientY,
-          //   }),
-          // });
+          createAnalytic({
+            name: 'cursorThrash',
+            metadata: JSON.stringify({
+              clientX: e.clientX,
+              clientY: e.clientY,
+              timeElapsed,
+              numOfThrashes,
+              numOfDirectionChanges,
+            }),
+          });
         }
-      },
-      1500
+      }
     );
 
     window.addEventListener('mousemove', onMouseMove);

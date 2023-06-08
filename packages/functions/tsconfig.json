@@ -7,5 +7,6 @@
       "@stevestpierredotcom/core/*": ["../core/src/*"],
       "@graphql-rds/core/*": ["../core/src/*"]
     }
-  }
+  },
+  "include": ["../../types/*", "**/*.ts"]
 }

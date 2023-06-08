@@ -5,12 +5,27 @@ import DeviceDetector from 'device-detector-js';
 
 const deviceDetector = new DeviceDetector();
 
+export const EventName = builder.enumType('EventName', {
+  values: [
+    'pageView',
+    'click',
+    'cursorThrash',
+    'error',
+    'navigation',
+    'hover',
+    'rageClick',
+  ] as const,
+});
+
 const AnalyticsEventType = builder
   .objectRef<SQL.Row['analytics_event']>('AnalyticsEvent')
   .implement({
     fields: (t) => ({
       id: t.exposeID('id'),
-      name: t.exposeString('name'),
+      name: t.field({
+        type: EventName,
+        resolve: (parent) => parent.name as AnalyticsEventName,
+      }),
       url: t.exposeString('url'),
       browserName: t.exposeString('browser_name'),
       browserVersion: t.exposeString('browser_version'),
@@ -55,8 +70,8 @@ builder.mutationFields((t) => ({
   createAnalyticsEvent: t.field({
     type: AnalyticsEventType,
     args: {
-      name: t.arg.string({ required: true }),
-      metadata: t.arg.string({ required: true }),
+      name: t.arg({ type: EventName, required: true }),
+      metadata: t.arg.string(),
       email: t.arg.string(),
     },
     resolve: (_, args, context) => {
@@ -78,7 +93,7 @@ builder.mutationFields((t) => ({
         device?.brand || '',
         os?.name || '',
         os?.version || '',
-        args.metadata,
+        args.metadata || '{}',
         args.email
       );
     },
