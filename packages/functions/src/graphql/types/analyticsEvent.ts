@@ -22,6 +22,7 @@ const AnalyticsEventType = builder
   .implement({
     fields: (t) => ({
       id: t.exposeID('id'),
+      visitorId: t.exposeString('visitor_id'),
       name: t.field({
         type: EventName,
         resolve: (parent) => parent.name as AnalyticsEventName,
@@ -71,6 +72,7 @@ builder.mutationFields((t) => ({
     type: AnalyticsEventType,
     args: {
       name: t.arg({ type: EventName, required: true }),
+      visitorId: t.arg.string({ required: true }),
       metadata: t.arg.string(),
       email: t.arg.string(),
     },
@@ -83,6 +85,7 @@ builder.mutationFields((t) => ({
 
       return AnalyticsEvent.create(
         args.name,
+        args.visitorId,
         headers.origin || '',
         client?.name || '',
         client?.version || '',

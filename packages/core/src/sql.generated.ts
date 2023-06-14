@@ -20,6 +20,7 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 export interface AnalyticsEvent {
   id: string;
+  visitor_id: string;
   name: string;
   url: string;
   browser_name: string;
@@ -42,7 +43,15 @@ export interface Message {
   created: Generated<Timestamp>;
 }
 
+export interface User {
+  id: string;
+  user_name: string;
+  password: string;
+  created: Generated<Timestamp>;
+}
+
 export interface Database {
   analytics_event: AnalyticsEvent;
   message: Message;
+  user: User;
 }

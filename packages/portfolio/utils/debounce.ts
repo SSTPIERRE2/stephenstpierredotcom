@@ -69,7 +69,7 @@ export const handleCursorThrash = (func: Function, timeout = 500) => {
     ) {
       numOfDirectionChanges++;
       directionX = directionX === 'left' ? 'right' : 'left';
-      console.log(`X direction changed`, currentDirectionX);
+      // console.log(`X direction changed`, currentDirectionX);
     }
 
     if (
@@ -79,7 +79,7 @@ export const handleCursorThrash = (func: Function, timeout = 500) => {
     ) {
       numOfDirectionChanges++;
       directionY = directionY === 'up' ? 'down' : 'up';
-      console.log(`Y direction changed`, currentDirectionY);
+      // console.log(`Y direction changed`, currentDirectionY);
     }
 
     // Wait until we have a previous timestamp to compare to so we can calculate time elapsed and speed
@@ -89,17 +89,17 @@ export const handleCursorThrash = (func: Function, timeout = 500) => {
       const speedY = Math.abs(event.movementY / timeElapsed);
 
       // Define a threshold to differentiate erratic movement
-      const erraticThreshold = 8;
+      const erraticThreshold = 10;
 
       if (speedX > erraticThreshold || speedY > erraticThreshold) {
-        console.log(
-          'Erratic mouse movement detected',
-          timeElapsed,
-          speedX,
-          speedY,
-          event.movementX,
-          event.movementY
-        );
+        // console.log(
+        //   'Erratic mouse movement detected',
+        //   timeElapsed,
+        //   speedX,
+        //   speedY,
+        //   event.movementX,
+        //   event.movementY
+        // );
         numOfThrashes++;
       }
     }
@@ -110,7 +110,7 @@ export const handleCursorThrash = (func: Function, timeout = 500) => {
 
     timer = setTimeout(() => {
       const didThrash =
-        (numOfThrashes >= 1 && numOfDirectionChanges >= 4) ||
+        (numOfThrashes >= 2 && numOfDirectionChanges >= 6) ||
         numOfDirectionChanges >= 10;
 
       // Finally call debounced function

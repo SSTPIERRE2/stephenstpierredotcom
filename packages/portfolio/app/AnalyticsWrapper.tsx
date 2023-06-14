@@ -29,19 +29,39 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const handleRageClick = debounce(
-      (event: MouseEvent, numOfClicks: number) => {
-        console.log('handleClick', event, numOfClicks);
-        if (numOfClicks >= 3) {
-          console.log('recording rage click');
-          createAnalytic({
-            name: 'rageClick',
-            metadata: JSON.stringify({
-              numOfClicks,
-              clientX: event.clientX,
-              clientY: event.clientY,
-            }),
-          });
-        }
+      (
+        { clientX, clientY, target, ...rest }: MouseEvent,
+        numOfClicks: number
+      ) => {
+        console.log(
+          'handleClick',
+          rest,
+          numOfClicks,
+          target instanceof HTMLElement && target.className
+        );
+
+        // if (numOfClicks >= 3) {
+        //   console.log('recording rage click');
+        //   createAnalytic({
+        //     name: 'rageClick',
+        //     metadata: JSON.stringify({
+        //       numOfClicks,
+        //       clientX,
+        //       clientY,
+        //       target: target instanceof HTMLElement && target.className,
+        //     }),
+        //   });
+        // } else {
+        //   createAnalytic({
+        //     name: 'click',
+        //     metadata: JSON.stringify({
+        //       numOfClicks,
+        //       clientX,
+        //       clientY,
+        //       target: target instanceof HTMLElement && target.className,
+        //     }),
+        //   });
+        // }
       },
       500
     );
@@ -69,18 +89,18 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
           numOfThrashes,
           numOfDirectionChanges
         );
-        if (didThrash) {
-          createAnalytic({
-            name: 'cursorThrash',
-            metadata: JSON.stringify({
-              clientX: e.clientX,
-              clientY: e.clientY,
-              timeElapsed,
-              numOfThrashes,
-              numOfDirectionChanges,
-            }),
-          });
-        }
+        // if (didThrash) {
+        //   createAnalytic({
+        //     name: 'cursorThrash',
+        //     metadata: JSON.stringify({
+        //       clientX: e.clientX,
+        //       clientY: e.clientY,
+        //       timeElapsed,
+        //       numOfThrashes,
+        //       numOfDirectionChanges,
+        //     }),
+        //   });
+        // }
       }
     );
 

@@ -12,9 +12,20 @@ const AnalyticsQuery = gql`
 `;
 
 const CreateAnalyticsQuery = gql`
-  mutation ($name: EventName!, $email: String, $metadata: String) {
-    createAnalyticsEvent(name: $name, email: $email, metadata: $metadata) {
+  mutation (
+    $name: EventName!
+    $visitorId: String!
+    $email: String
+    $metadata: String
+  ) {
+    createAnalyticsEvent(
+      name: $name
+      visitorId: $visitorId
+      email: $email
+      metadata: $metadata
+    ) {
       name
+      visitorId
       email
       metadata
     }
@@ -24,9 +35,23 @@ const CreateAnalyticsQuery = gql`
 export const useCreateAnalytic = () => {
   const [result, createAnalytic] = useMutation<
     unknown,
-    { name: AnalyticsEventName; email?: string; metadata?: string }
+    {
+      name: AnalyticsEventName;
+      visitorId: string;
+      email?: string;
+      metadata?: string;
+    }
   >(CreateAnalyticsQuery);
-  return { result, createAnalytic };
+  const visitorId = '';
+
+  return {
+    result,
+    createAnalytic: (
+      name: AnalyticsEventName,
+      email?: string,
+      metadata?: string
+    ) => createAnalytic({ name, visitorId, email, metadata }),
+  };
 };
 
 export const useQueryAnalytics = (variables: { fields: FieldQuery[] }) => {

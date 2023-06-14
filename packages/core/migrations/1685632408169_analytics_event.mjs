@@ -7,6 +7,7 @@ export async function up(db) {
   await db.schema
     .createTable('analytics_event')
     .addColumn('id', 'text', (col) => col.primaryKey())
+    .addColumn('visitor_id', 'text', (col) => col.notNull())
     .addColumn('name', 'text', (col) => col.notNull())
     .addColumn('url', 'text', (col) => col.notNull())
     .addColumn('browser_name', 'text', (col) => col.notNull())

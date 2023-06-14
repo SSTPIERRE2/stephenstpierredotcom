@@ -10,6 +10,7 @@ function json<T>(obj: T): RawBuilder<T> {
 
 export async function create(
   name: string,
+  visitor_id: string,
   url: string,
   browser_name: string,
   browser_version: string,
@@ -25,6 +26,7 @@ export async function create(
   const [result] = await SQL.DB.insertInto('analytics_event')
     .values({
       id: ulid(),
+      visitor_id,
       name,
       url,
       browser_name,

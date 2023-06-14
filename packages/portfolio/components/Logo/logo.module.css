@@ -29,6 +29,13 @@
   }
 }
 
+.link {
+  display: block;
+  /* Need to specify actual width due to transforms */
+  width: 11.065rem;
+  /* padding-right: 3.75rem; */
+}
+
 .wrapper {
   display: block;
   position: relative;

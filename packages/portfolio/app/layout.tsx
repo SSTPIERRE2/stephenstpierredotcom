@@ -5,6 +5,10 @@ import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import { ReactNode } from 'react';
 import UrqlProvider from './UrqlProvider';
 import AnalyticsWrapper from './AnalyticsWrapper';
+import Header from '@/components/Header/Header';
+import NavBar from '@/components/NavBar/NavBar';
+import Footer from '@/components/Footer/Footer';
+import AuthProvider from './context/AuthContext/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,10 +23,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <UrqlProvider>
           <StyledComponentsRegistry>
-            <AnalyticsWrapper>
-              {children}
-              <GlobalStyles />
-            </AnalyticsWrapper>
+            <AuthProvider>
+              <AnalyticsWrapper>
+                <Header>
+                  <NavBar />
+                </Header>
+                {children}
+                <Footer />
+                <GlobalStyles />
+              </AnalyticsWrapper>
+            </AuthProvider>
           </StyledComponentsRegistry>
         </UrqlProvider>
       </body>
