@@ -43,7 +43,7 @@ export interface Message {
   created: Generated<Timestamp>;
 }
 
-export interface User {
+export interface Users {
   id: string;
   user_name: string;
   password: string;
@@ -53,5 +53,5 @@ export interface User {
 export interface Database {
   analytics_event: AnalyticsEvent;
   message: Message;
-  user: User;
+  users: Users;
 }

@@ -1,11 +1,12 @@
-import { use, StackContext, Api as ApiGateway } from 'sst/constructs';
+import { use, StackContext, Api as ApiGateway, Config } from 'sst/constructs';
 import { Database } from './Database';
 
 export function Api({ stack }: StackContext) {
+  const JWT_SECRET = new Config.Secret(stack, 'JWT_SECRET');
   const api = new ApiGateway(stack, 'api', {
     defaults: {
       function: {
-        bind: [use(Database)],
+        bind: [use(Database), JWT_SECRET],
       },
     },
     routes: {

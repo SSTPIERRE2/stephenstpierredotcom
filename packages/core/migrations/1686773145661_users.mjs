@@ -5,7 +5,7 @@ import { Kysely, sql } from 'kysely';
  */
 export async function up(db) {
   await db.schema
-    .createTable('user')
+    .createTable('users')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('user_name', 'text', (col) => col.notNull())
     .addColumn('password', 'text', (col) => col.notNull())
@@ -13,18 +13,11 @@ export async function up(db) {
       col.notNull().defaultTo(sql`now()`)
     )
     .execute();
-
-  await db.schema
-    .createIndex('idx_user_created')
-    .on('user')
-    .column('created')
-    .execute();
 }
 
 /**
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropIndex('idx_user_created').execute();
-  await db.schema.dropTable('user').execute();
+  await db.schema.dropTable('users').execute();
 }
