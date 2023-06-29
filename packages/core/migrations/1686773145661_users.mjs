@@ -7,7 +7,7 @@ export async function up(db) {
   await db.schema
     .createTable('users')
     .addColumn('id', 'text', (col) => col.primaryKey())
-    .addColumn('user_name', 'text', (col) => col.notNull())
+    .addColumn('email', 'text', (col) => col.notNull())
     .addColumn('password', 'text', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)

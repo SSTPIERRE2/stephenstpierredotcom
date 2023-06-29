@@ -81,3 +81,9 @@ export const QUERIES = {
   tabletAndBelow: `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
   laptopAndBelow: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
 };
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_ENDPOINTS = {
+  graphql: `${API_URL}/graphql`,
+  magicLink: `${API_URL}/auth/link/authorize`,
+};

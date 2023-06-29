@@ -45,7 +45,7 @@ export interface Message {
 
 export interface Users {
   id: string;
-  user_name: string;
+  email: string;
   password: string;
   created: Generated<Timestamp>;
 }

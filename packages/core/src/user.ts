@@ -2,9 +2,9 @@ export * as User from './user';
 
 import { SQL } from './sql';
 
-export function getByUsername(username: string) {
+export function getByEmail(email: string) {
   return SQL.DB.selectFrom('users')
     .selectAll()
-    .where('user_name', '=', username)
+    .where('email', '=', email)
     .executeTakeFirst();
 }

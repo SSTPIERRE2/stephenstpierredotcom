@@ -1,25 +1,26 @@
 'use client';
 
+import { API_ENDPOINTS } from '@/utils/constant';
 import { useEffect, useState } from 'react';
 import { gql, useMutation } from 'urql';
 
 const defaultState = {
-  username: '',
+  email: '',
   password: '',
 };
 
 const LoginQuery = gql`
-  mutation ($username: String!, $password: String!) {
-    signIn(username: $username, password: $password) {
+  mutation ($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
       error
-      token
+      isAuthorized
     }
   }
 `;
 
 const LoginForm = () => {
   const [value, setValue] = useState(defaultState);
-  const { username, password } = value;
+  const { email, password } = value;
   const [result, signIn] = useMutation(LoginQuery);
 
   console.log('Login result: ', result);
@@ -33,24 +34,28 @@ const LoginForm = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    signIn({ username, password });
+    signIn({ email, password });
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-
-    if (!token && !result.fetching && !!result.data.signIn.token) {
-      localStorage.setItem('authToken', result.data.signIn.token);
+    if (!result.fetching && !!result?.data?.signIn?.isAuthorized) {
+      // make request to auth API route
+      fetch(`${API_ENDPOINTS.magicLink}?email=${result.data.signIn.email}`);
     }
   }, [result]);
 
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor="username">Username:</label>
-      <input id="username" value={username} onChange={onChange} />
+      <label htmlFor="email">Email:</label>
+      <input id="email" value={email} onChange={onChange} />
       <label htmlFor="password">Password:</label>
       <input id="password" value={password} onChange={onChange} />
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={result.fetching}>
+        Submit
+      </button>
+      {!!result?.data?.signIn?.isAuthorized && (
+        <p>Success! A magic link has been sent to your email.</p>
+      )}
     </form>
   );
 };

@@ -5,6 +5,7 @@ export function middleware(req: NextRequest) {
   const nextUrl = req.nextUrl;
   if (nextUrl.pathname === '/dashboard') {
     const authToken = req.cookies.get('authToken');
+
     console.log(
       'dashboard middleware, authToken: ',
       authToken,
