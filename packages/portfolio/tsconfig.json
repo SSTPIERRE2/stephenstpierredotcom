@@ -21,8 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@utils/*": ["../../utils/*"]
+      "@utils/*": ["../../utils/*"],
+      "@core/*": ["../core/src/*"]
     }
   },
   "include": [
@@ -31,7 +31,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "../../types/*",
-    "../../utils/*"
+    "../../utils/*",
+    "components/PlotFigure/PlotFigure.js",
+    "components/PlotFigure/index.js"
   ],
   "exclude": ["node_modules"]
 }

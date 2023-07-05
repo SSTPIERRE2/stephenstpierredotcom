@@ -10,16 +10,15 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "lint": "next lint",
     "gen": "hygen"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.4",
     "aws-cdk-lib": "2.84.0",
-    "constructs": "10.1.156",
+    "constructs": "10.2.69",
     "hygen": "^6.2.11",
-    "sst": "^2.17.8",
-    "typescript": "^5.0.4"
+    "sst": "^2.18.4",
+    "typescript": "5.1.6"
   },
   "workspaces": [
     "packages/*"
