@@ -58,7 +58,12 @@ const LoginForm = () => {
       <label htmlFor="email">Email:</label>
       <input id="email" value={email} onChange={onChange} />
       <label htmlFor="password">Password:</label>
-      <input id="password" value={password} onChange={onChange} />
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={onChange}
+      />
       <button type="submit" disabled={result.fetching}>
         Submit
       </button>

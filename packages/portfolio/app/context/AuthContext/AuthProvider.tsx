@@ -27,8 +27,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  const storeSetEmail = (email: string) => {
+    localStorage.setItem('email', email);
+    setEmail(email);
+  };
+
   return (
-    <AuthContext.Provider value={{ visitorId, email, setEmail }}>
+    <AuthContext.Provider value={{ visitorId, email, setEmail: storeSetEmail }}>
       {children}
     </AuthContext.Provider>
   );

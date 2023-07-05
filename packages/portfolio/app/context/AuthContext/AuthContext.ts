@@ -4,7 +4,7 @@ const AuthContext = createContext<
   | {
       visitorId: string | null;
       email: string | null;
-      setEmail: React.Dispatch<React.SetStateAction<string | null>>;
+      setEmail: (email: string) => void;
     }
   | undefined
 >(undefined);
