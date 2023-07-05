@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// executeMutation doesn't change ever
 'use client';
 
 import debounce, { handleCursorThrash } from '../utils/debounce';
@@ -17,15 +15,15 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
       document.referrer,
       window.location.hostname
     );
-    if (document.referrer.indexOf(window.location.hostname) == -1) {
+    if (document.referrer.indexOf(window.location.hostname) === -1) {
       console.log(
         'first page view from either direct url navigation or from a link from another website!'
       );
-      // createAnalytic({
-      //   name: 'pageView',
-      // });
+      createAnalytic({
+        name: 'pageView',
+      });
     }
-  }, []);
+  }, [createAnalytic]);
 
   useEffect(() => {
     const handleRageClick = debounce(
@@ -40,28 +38,28 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
           target instanceof HTMLElement && target.className
         );
 
-        // if (numOfClicks >= 3) {
-        //   console.log('recording rage click');
-        //   createAnalytic({
-        //     name: 'rageClick',
-        //     metadata: JSON.stringify({
-        //       numOfClicks,
-        //       clientX,
-        //       clientY,
-        //       target: target instanceof HTMLElement && target.className,
-        //     }),
-        //   });
-        // } else {
-        //   createAnalytic({
-        //     name: 'click',
-        //     metadata: JSON.stringify({
-        //       numOfClicks,
-        //       clientX,
-        //       clientY,
-        //       target: target instanceof HTMLElement && target.className,
-        //     }),
-        //   });
-        // }
+        if (numOfClicks >= 3) {
+          console.log('recording rage click');
+          createAnalytic({
+            name: 'rageClick',
+            metadata: JSON.stringify({
+              numOfClicks,
+              clientX,
+              clientY,
+              target: target instanceof HTMLElement && target.className,
+            }),
+          });
+        } else {
+          createAnalytic({
+            name: 'click',
+            metadata: JSON.stringify({
+              numOfClicks,
+              clientX,
+              clientY,
+              target: target instanceof HTMLElement && target.className,
+            }),
+          });
+        }
       },
       500
     );
@@ -71,7 +69,7 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
     return () => {
       window.removeEventListener('click', handleRageClick);
     };
-  }, []);
+  }, [createAnalytic]);
 
   useEffect(() => {
     const onMouseMove = handleCursorThrash(
@@ -89,18 +87,18 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
           numOfThrashes,
           numOfDirectionChanges
         );
-        // if (didThrash) {
-        //   createAnalytic({
-        //     name: 'cursorThrash',
-        //     metadata: JSON.stringify({
-        //       clientX: e.clientX,
-        //       clientY: e.clientY,
-        //       timeElapsed,
-        //       numOfThrashes,
-        //       numOfDirectionChanges,
-        //     }),
-        //   });
-        // }
+        if (didThrash) {
+          createAnalytic({
+            name: 'cursorThrash',
+            metadata: JSON.stringify({
+              clientX: e.clientX,
+              clientY: e.clientY,
+              timeElapsed,
+              numOfThrashes,
+              numOfDirectionChanges,
+            }),
+          });
+        }
       }
     );
 
@@ -109,7 +107,7 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
     };
-  }, []);
+  }, [createAnalytic]);
 
   return children as JSX.Element;
 };

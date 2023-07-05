@@ -1,3 +1,5 @@
+import { useAuth } from '@/app/context/AuthContext';
+import { useCallback } from 'react';
 import { gql, useMutation, useQuery } from 'urql';
 
 const AnalyticsQuery = gql`
@@ -32,6 +34,12 @@ const CreateAnalyticsQuery = gql`
   }
 `;
 
+type createAnalyticType = {
+  name: AnalyticsEventName;
+  email?: string;
+  metadata?: string;
+};
+
 export const useCreateAnalytic = () => {
   const [result, createAnalytic] = useMutation<
     unknown,
@@ -42,15 +50,24 @@ export const useCreateAnalytic = () => {
       metadata?: string;
     }
   >(CreateAnalyticsQuery);
-  const visitorId = '';
+  const { visitorId } = useAuth();
+  /**
+   * Memoize extended createAnalytic mutation with visitorId from localStorage
+   * Only execute query once visitorId is retrieved (on second render (on client))
+   */
+  const createAnalyticMemo = useCallback(
+    ({ name, email, metadata }: createAnalyticType) => {
+      console.log(`createAnalyticMemo called`, visitorId);
+      if (visitorId) {
+        createAnalytic({ name, email, visitorId, metadata });
+      }
+    },
+    [visitorId]
+  );
 
   return {
     result,
-    createAnalytic: (
-      name: AnalyticsEventName,
-      email?: string,
-      metadata?: string
-    ) => createAnalytic({ name, visitorId, email, metadata }),
+    createAnalytic: createAnalyticMemo,
   };
 };
 

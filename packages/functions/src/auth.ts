@@ -1,9 +1,4 @@
-import {
-  AuthHandler,
-  GoogleAdapter,
-  LinkAdapter,
-  Session,
-} from 'sst/node/auth';
+import { AuthHandler, LinkAdapter, Session } from 'sst/node/auth';
 import { User } from '@graphql-rds/core/user';
 import { Resend } from 'resend';
 import { Config } from 'sst/node/config';
@@ -12,22 +7,12 @@ const resend = new Resend(Config.RESEND_API_KEY);
 
 export const handler = AuthHandler({
   providers: {
-    google: GoogleAdapter({
-      mode: 'oidc',
-      clientID: 'XXXX',
-      onSuccess: async (tokenset) => {
-        return {
-          statusCode: 200,
-          body: JSON.stringify(tokenset.claims()),
-        };
-      },
-    }),
     link: LinkAdapter({
+      // @ts-ignore onLink doesn't need to return anything
       onLink: async (link, claims) => {
-        const { email } = claims;
-        // const user = await User.getByUsername(email);
         console.log('on magic link', claims);
-        // maybe use aws simple email service to send it?
+
+        // Resend requires a registered domain
         resend.emails.send({
           from: 'steve@stevestpierre.com',
           to: 'stephencstpierre@gmail.com',
@@ -37,11 +22,15 @@ export const handler = AuthHandler({
       },
       onSuccess: async (claims) => {
         console.log('Magic link success', claims);
+        const { email } = claims;
+        // Since the user successfully authenticated and clicked their magic link, the user will certainly exist
+        const user = (await User.getByEmail(email)) as { id: string };
+
         return Session.cookie({
           redirect: '/dashboard',
           type: 'user',
           properties: {
-            userID: '1',
+            userID: user.id,
           },
         });
       },
@@ -49,10 +38,10 @@ export const handler = AuthHandler({
   },
 });
 
-// declare module 'sst/node/auth' {
-//   export interface SessionTypes {
-//     user: {
-//       userID: string;
-//     };
-//   }
-// }
+declare module 'sst/node/auth' {
+  export interface SessionTypes {
+    user: {
+      userID: string;
+    };
+  }
+}

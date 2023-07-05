@@ -2,20 +2,22 @@
 
 import { API_ENDPOINTS } from '@/utils/constant';
 import { Client, cacheExchange, fetchExchange, Provider } from 'urql';
+// import { useSession } from 'sst/node/auth';
 // import { authExchange } from '@urql/exchange-auth';
 
 const urql = new Client({
   url: API_ENDPOINTS.graphql,
   exchanges: [
     cacheExchange,
+    // I think we shouldn't need to manage this part ourselves according to the Auth construct docs https://docs.sst.dev/auth#frontend
     // authExchange(async (utils) => {
-    //   const token = localStorage.getItem('authToken');
+    //   const session = useSession();
 
     //   return {
     //     addAuthToOperation(operation) {
-    //       if (!token) return operation;
+    //       if (session && session.type === 'user') return operation;
     //       return utils.appendHeaders(operation, {
-    //         Authorization: `Bearer ${token}`,
+    //         Authorization: `Bearer ${session.user.userID}`,
     //       });
     //     },
     //     didAuthError(error) {
