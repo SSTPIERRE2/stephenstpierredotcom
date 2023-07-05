@@ -6,7 +6,7 @@ const AnalyticsQuery = gql`
   query ($fields: String!) {
     analyticsEvents(fields: $fields) {
       name
-      email
+      visitorId
       url
       metadata
     }
@@ -14,21 +14,14 @@ const AnalyticsQuery = gql`
 `;
 
 const CreateAnalyticsQuery = gql`
-  mutation (
-    $name: EventName!
-    $visitorId: String!
-    $email: String
-    $metadata: String
-  ) {
+  mutation ($name: EventName!, $visitorId: String!, $metadata: String) {
     createAnalyticsEvent(
       name: $name
       visitorId: $visitorId
-      email: $email
       metadata: $metadata
     ) {
       name
       visitorId
-      email
       metadata
     }
   }
@@ -36,7 +29,6 @@ const CreateAnalyticsQuery = gql`
 
 type createAnalyticType = {
   name: AnalyticsEventName;
-  email?: string;
   metadata?: string;
 };
 
@@ -46,7 +38,6 @@ export const useCreateAnalytic = () => {
     {
       name: AnalyticsEventName;
       visitorId: string;
-      email?: string;
       metadata?: string;
     }
   >(CreateAnalyticsQuery);
@@ -56,10 +47,10 @@ export const useCreateAnalytic = () => {
    * Only execute query once visitorId is retrieved (on second render (on client))
    */
   const createAnalyticMemo = useCallback(
-    ({ name, email, metadata }: createAnalyticType) => {
+    ({ name, metadata }: createAnalyticType) => {
       console.log(`createAnalyticMemo called`, visitorId);
       if (visitorId) {
-        createAnalytic({ name, email, visitorId, metadata });
+        createAnalytic({ name, visitorId, metadata });
       }
     },
     [visitorId]

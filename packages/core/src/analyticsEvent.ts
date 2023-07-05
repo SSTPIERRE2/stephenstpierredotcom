@@ -20,8 +20,7 @@ export async function create(
   device_vendor: string,
   os_name: string,
   os_version: string,
-  metadata: string,
-  email?: string | null
+  metadata: string
 ) {
   const [result] = await SQL.DB.insertInto('analytics_event')
     .values({
@@ -38,7 +37,6 @@ export async function create(
       os_name,
       os_version,
       metadata: json(metadata),
-      email,
     })
     .returningAll()
     .execute();

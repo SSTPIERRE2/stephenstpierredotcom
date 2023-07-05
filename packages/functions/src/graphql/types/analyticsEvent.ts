@@ -14,6 +14,7 @@ export const EventName = builder.enumType('EventName', {
     'navigation',
     'hover',
     'rageClick',
+    'form',
   ] as const,
 });
 
@@ -36,9 +37,6 @@ const AnalyticsEventType = builder
       deviceVendor: t.exposeString('device_vendor'),
       osName: t.exposeString('os_name'),
       osVersion: t.exposeString('os_version'),
-      email: t.exposeString('email', {
-        nullable: true,
-      }),
       metadata: t.field({
         type: 'JSON',
         resolve: (parent) => {
@@ -74,7 +72,6 @@ builder.mutationFields((t) => ({
       name: t.arg({ type: EventName, required: true }),
       visitorId: t.arg.string({ required: true }),
       metadata: t.arg.string(),
-      email: t.arg.string(),
     },
     resolve: (_, args, context) => {
       const headers = context.event.headers;
@@ -89,15 +86,14 @@ builder.mutationFields((t) => ({
         headers.origin || '',
         client?.name || '',
         client?.version || '',
-        // @ts-ignore it doesn't matter if engine exists, this is completely safe
+        // @ts-ignore it doesn't matter if engine exists, this is safe
         client?.engine || '',
         device?.model || '',
         device?.type || '',
         device?.brand || '',
         os?.name || '',
         os?.version || '',
-        args.metadata || '{}',
-        args.email
+        args.metadata || '{}'
       );
     },
   }),

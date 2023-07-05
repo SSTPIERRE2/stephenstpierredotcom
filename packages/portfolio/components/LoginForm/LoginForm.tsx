@@ -1,5 +1,6 @@
 'use client';
 
+import { useCreateAnalytic } from '@/hooks/useAnalytics';
 import { API_ENDPOINTS } from '@/utils/constant';
 import { useEffect, useState } from 'react';
 import { gql, useMutation } from 'urql';
@@ -22,6 +23,7 @@ const LoginForm = () => {
   const [value, setValue] = useState(defaultState);
   const { email, password } = value;
   const [result, signIn] = useMutation(LoginQuery);
+  const { createAnalytic } = useCreateAnalytic();
 
   console.log('Login result: ', result);
 
@@ -38,8 +40,15 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
+    if (!result.fetching && !!result?.data) {
+      createAnalytic({
+        name: 'form',
+        metadata: JSON.stringify(result.data),
+      });
+    }
+
     if (!result.fetching && !!result?.data?.signIn?.isAuthorized) {
-      // make request to auth API route
+      // make request to magic link auth route
       fetch(`${API_ENDPOINTS.magicLink}?email=${result.data.signIn.email}`);
     }
   }, [result]);

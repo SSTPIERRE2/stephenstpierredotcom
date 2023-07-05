@@ -11,4 +11,5 @@ type AnalyticsEventName =
   | 'error'
   | 'navigation'
   | 'hover'
-  | 'rageClick';
+  | 'rageClick'
+  | 'form';

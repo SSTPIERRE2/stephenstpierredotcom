@@ -18,7 +18,6 @@ export async function up(db) {
     .addColumn('device_vendor', 'text', (col) => col.notNull())
     .addColumn('os_name', 'text', (col) => col.notNull())
     .addColumn('os_version', 'text', (col) => col.notNull())
-    .addColumn('email', 'text')
     .addColumn('metadata', 'jsonb', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
