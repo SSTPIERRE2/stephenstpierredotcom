@@ -13,6 +13,15 @@ const AnalyticsQuery = gql`
   }
 `;
 
+const CountAnalyticsQuery = gql`
+  query {
+    countEvents {
+      name
+      total
+    }
+  }
+`;
+
 const CreateAnalyticsQuery = gql`
   mutation ($name: EventName!, $visitorId: String!, $metadata: String) {
     createAnalyticsEvent(
@@ -73,5 +82,13 @@ export const useQueryAnalytics = (variables?: { fields: FieldQuery[] }) => {
     variables: { fields: JSON.stringify(variables?.fields || []) },
   });
   console.log('useQueryAnalytics', result);
+  return { result, reexecuteQuery };
+};
+
+export const useCountAnalytics = () => {
+  const [result, reexecuteQuery] = useQuery({
+    query: CountAnalyticsQuery,
+  });
+  console.log('useCountAnalytics', result);
   return { result, reexecuteQuery };
 };

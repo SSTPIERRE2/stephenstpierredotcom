@@ -4,7 +4,7 @@
 import styles from './page.module.css';
 import * as Plot from '@observablehq/plot';
 // import penguins from './penguins.json';
-import { useQueryAnalytics } from '@/hooks/useAnalytics';
+import { useCountAnalytics, useQueryAnalytics } from '@/hooks/useAnalytics';
 import { useEffect, useRef } from 'react';
 import { gql, useQuery } from 'urql';
 
@@ -20,41 +20,22 @@ import { gql, useQuery } from 'urql';
 //   return res;
 // }
 
-// const BarChart = () =>
-//   Plot.plot({
-//     marks: [
-//       Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }),
-//     ],
-//   });
-
 export default function PublicDashboard({
   searchParams,
 }: {
   searchParams: { visitor?: string };
 }) {
-  const barChartRef = useRef<HTMLDivElement>();
+  const barChartRef = useRef<HTMLDivElement>(null);
   // const myEvents = await getMyEvents(searchParams.visitor);
   // const allEvents = await getAllEvents();
-  const { result } = useQueryAnalytics();
-
-  // {JSON.stringify(allEvents[0])}
+  const { result } = useCountAnalytics();
 
   useEffect(() => {
-    // const plot = Plot.plot({
-    //   marks: [
-    //     Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }),
-    //   ],
-    // });
-    if (result.data) {
-      console.log('got some penguins?', result.data);
+    if (result?.data?.countEvents) {
+      console.log('got counted events', result.data);
+
       const plot = Plot.plot({
-        marks: [
-          Plot.rectY(
-            result.data.analyticsEvents,
-            Plot.binX({ y: 'count' }, { x: 'name' })
-          ),
-          Plot.ruleY([0]),
-        ],
+        marks: [Plot.barY(result.data.countEvents, { x: 'name', y: 'total' })],
         style: {
           background: 'black',
         },

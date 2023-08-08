@@ -62,3 +62,10 @@ export function list(fields?: FieldQuery[]) {
 
   return query.orderBy('created', 'desc').execute();
 }
+
+export function countEvents() {
+  return SQL.DB.selectFrom('analytics_event')
+    .select(['name', (eb) => eb.fn.count('name').as('total')])
+    .groupBy('name')
+    .execute();
+}

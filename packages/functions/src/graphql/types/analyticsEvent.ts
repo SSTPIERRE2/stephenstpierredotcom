@@ -47,6 +47,15 @@ const AnalyticsEventType = builder
     }),
   });
 
+const AnalyticsCount = builder
+  .objectRef<{ name: string; total: number }>('AnalyticsCount')
+  .implement({
+    fields: (t) => ({
+      name: t.exposeString('name'),
+      total: t.exposeInt('total'),
+    }),
+  });
+
 builder.queryFields((t) => ({
   analyticsEvents: t.field({
     type: [AnalyticsEventType],
@@ -61,6 +70,19 @@ builder.queryFields((t) => ({
         fields = JSON.parse(args.fields);
       }
       return AnalyticsEvent.list(fields);
+    },
+  }),
+  countEvents: t.field({
+    type: [AnalyticsCount],
+    resolve: async () => {
+      const counted = await AnalyticsEvent.countEvents();
+      console.log('counted events', counted);
+      const numerical = counted.map((e) => ({
+        ...e,
+        total: Number(e.total),
+      }));
+
+      return numerical;
     },
   }),
 }));

@@ -23,5 +23,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "resolutions": {
+    "styled-components": "^5"
+  }
 }

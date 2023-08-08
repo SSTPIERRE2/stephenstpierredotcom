@@ -25,8 +25,5 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26"
-  },
-  "resolutions": {
-    "styled-components": "^5"
   }
 }
