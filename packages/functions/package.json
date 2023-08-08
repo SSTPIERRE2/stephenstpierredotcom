@@ -10,17 +10,16 @@
     "@types/aws-lambda": "^8.10.119",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^9.0.2",
-    "@types/node": "^20.3.3",
-    "vitest": "^0.32.4"
+    "@types/node": "^20.4.8"
   },
   "dependencies": {
-    "@pothos/core": "^3.30.0",
+    "@pothos/core": "^3.32.1",
     "bcryptjs": "^2.4.3",
     "device-detector-js": "^3.0.3",
     "graphql": "^16.7.1",
     "graphql-scalars": "^1.22.2",
     "jsonwebtoken": "^9.0.1",
-    "resend": "^0.16.0",
+    "resend": "^0.17.2",
     "ulid": "^2.3.0"
   }
 }

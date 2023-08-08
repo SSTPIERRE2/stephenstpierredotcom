@@ -62,10 +62,16 @@ export const useCreateAnalytic = () => {
   };
 };
 
-export const useQueryAnalytics = (variables: { fields: FieldQuery[] }) => {
+/**
+ * Query analytics given a list of fields to filter results, otherwise select all.
+ * @param variables
+ * @returns
+ */
+export const useQueryAnalytics = (variables?: { fields: FieldQuery[] }) => {
   const [result, reexecuteQuery] = useQuery({
     query: AnalyticsQuery,
-    variables: { fields: JSON.stringify(variables.fields) },
+    variables: { fields: JSON.stringify(variables?.fields || []) },
   });
+  console.log('useQueryAnalytics', result);
   return { result, reexecuteQuery };
 };
