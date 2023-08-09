@@ -153,14 +153,13 @@ builder.mutationFields((t) => ({
           'latitude',
           'longitude',
           'org',
-        ];
+        ] as const;
 
-        for (let key in ipData) {
-          let value = ipData[key as keyof IpData];
-          if (selectedData.includes(key)) {
-            metadata[key] = value;
+        selectedData.forEach((data) => {
+          if (data in ipData) {
+            metadata[data] = ipData[data];
           }
-        }
+        });
       }
 
       console.log(`creating with final metadata`, metadata);
