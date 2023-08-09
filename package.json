@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"sst dev\" \"pnpm generate --watch\"",
+    "dev": "concurrently \"sst dev\" \"pnpm generate\"",
     "build": "sst build",
     "deploy": "sst deploy",
     "remove": "sst remove",
@@ -27,8 +27,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "resolutions": {
-    "styled-components": "^5"
-  }
+  ]
 }

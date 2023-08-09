@@ -1,9 +1,40 @@
 import { SQL } from '@graphql-rds/core/sql';
 import { builder } from '../builder';
 import { AnalyticsEvent } from '@graphql-rds/core/analyticsEvent';
+import fetch from 'node-fetch';
 import DeviceDetector from 'device-detector-js';
 
 const deviceDetector = new DeviceDetector();
+
+interface IpData {
+  ip: string;
+  network: string;
+  version: string;
+  city: string;
+  region: string;
+  region_code: string;
+  country: string;
+  country_name: string;
+  country_code: string;
+  country_code_iso3: string;
+  country_capital: string;
+  country_tld: string;
+  continent_code: string;
+  in_eu: boolean;
+  postal: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
+  utc_offset: string;
+  country_calling_code: string;
+  currency: string;
+  currency_name: string;
+  languages: string;
+  country_area: number;
+  country_population: number;
+  asn: string;
+  org: string;
+}
 
 export const EventName = builder.enumType('EventName', {
   values: [
@@ -95,12 +126,44 @@ builder.mutationFields((t) => ({
       visitorId: t.arg.string({ required: true }),
       metadata: t.arg.string(),
     },
-    resolve: (_, args, context) => {
+    resolve: async (root, args, context) => {
       const headers = context.event.headers;
       const userAgent = deviceDetector.parse(headers['user-agent'] || '');
       const { client, os, device } = userAgent;
+      const metadata: Record<string, unknown> = args.metadata
+        ? JSON.parse(args.metadata)
+        : {};
+
       console.log('Got the user agent', userAgent);
-      console.log(`got metadata`, args.metadata);
+      console.log(`given metadata`, args.metadata);
+
+      if (args.name === 'pageView') {
+        const ipRequest = await fetch(
+          `https://ipapi.co/${headers['x-forwarded-for']}/json/`
+        );
+        const ipData = (await ipRequest.json()) as IpData;
+        console.log('got user location', ipData);
+        const selectedData = [
+          'ip',
+          'city',
+          'region',
+          'region_code',
+          'country_name',
+          'country_code_iso3',
+          'latitude',
+          'longitude',
+          'org',
+        ];
+
+        for (let key in ipData) {
+          let value = ipData[key as keyof IpData];
+          if (selectedData.includes(key)) {
+            metadata[key] = value;
+          }
+        }
+      }
+
+      console.log(`creating with final metadata`, metadata);
 
       return AnalyticsEvent.create(
         args.name,
@@ -115,7 +178,7 @@ builder.mutationFields((t) => ({
         device?.brand || '',
         os?.name || '',
         os?.version || '',
-        args.metadata || '{}'
+        JSON.stringify(metadata)
       );
     },
   }),

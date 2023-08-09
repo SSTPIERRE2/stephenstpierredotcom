@@ -19,6 +19,7 @@
     "graphql": "^16.7.1",
     "graphql-scalars": "^1.22.2",
     "jsonwebtoken": "^9.0.1",
+    "node-fetch": "^3.3.2",
     "resend": "^0.17.2",
     "ulid": "^2.3.0"
   }

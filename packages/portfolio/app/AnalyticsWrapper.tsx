@@ -7,23 +7,23 @@ import { ReactNode, useEffect } from 'react';
 const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
   const { createAnalytic, result } = useCreateAnalytic();
 
-  // console.log(`createAnalytic result`, result);
+  console.log(`createAnalytic result`, result);
 
-  // useEffect(() => {
-  //   console.log(
-  //     'hello analytics wrapper',
-  //     document.referrer,
-  //     window.location.hostname
-  //   );
-  //   if (document.referrer.indexOf(window.location.hostname) === -1) {
-  //     console.log(
-  //       'first page view from either direct url navigation or from a link from another website!'
-  //     );
-  //     createAnalytic({
-  //       name: 'pageView',
-  //     });
-  //   }
-  // }, [createAnalytic]);
+  useEffect(() => {
+    console.log(
+      'hello analytics wrapper',
+      document.referrer,
+      window.location.hostname
+    );
+    if (document.referrer.indexOf(window.location.hostname) === -1) {
+      console.log(
+        'first page view from either direct url navigation or from a link from another website!'
+      );
+      createAnalytic({
+        name: 'pageView',
+      });
+    }
+  }, [createAnalytic]);
 
   // useEffect(() => {
   //   const handleRageClick = debounce(

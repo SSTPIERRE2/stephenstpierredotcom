@@ -9,4 +9,7 @@ import './types/user';
 export const schema = builder.toSchema({});
 const schemaAsString = printSchema(lexicographicSortSchema(schema));
 
-writeFileSync('/packages/functions/src/graphql/schema.graphql', schemaAsString);
+writeFileSync(
+  './packages/functions/src/graphql/schema.graphql',
+  schemaAsString
+);
