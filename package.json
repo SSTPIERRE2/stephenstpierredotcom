@@ -4,17 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sst dev",
+    "dev": "concurrently \"sst dev\" \"pnpm generate --watch\"",
     "build": "sst build",
     "deploy": "sst deploy",
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "gen": "hygen"
+    "gen": "hygen",
+    "generate": "graphql-codegen"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
     "@tsconfig/node16": "1.0.4",
     "aws-cdk-lib": "2.84.0",
+    "concurrently": "^8.2.0",
     "constructs": "10.2.69",
     "hygen": "^6.2.11",
     "sst": "^2.23.14",

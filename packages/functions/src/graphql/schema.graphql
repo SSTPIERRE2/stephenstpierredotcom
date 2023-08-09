@@ -1,0 +1,66 @@
+type AnalyticsCount {
+  name: String!
+  total: Int!
+}
+
+type AnalyticsEvent {
+  browserEngine: String!
+  browserName: String!
+  browserVersion: String!
+  created: Date!
+  deviceModel: String!
+  deviceType: String!
+  deviceVendor: String!
+  id: ID!
+  metadata: JSON!
+  name: EventName!
+  osName: String!
+  osVersion: String!
+  url: String!
+  visitorId: String!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+enum EventName {
+  click
+  cursorThrash
+  error
+  form
+  hover
+  navigation
+  pageView
+  rageClick
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Message {
+  created: Date!
+  email: String!
+  id: ID!
+  text: String!
+}
+
+type Mutation {
+  createAnalyticsEvent(metadata: String, name: EventName!, visitorId: String!): AnalyticsEvent!
+  createMessage(email: String!, text: String!): Message!
+  signIn(email: String!, password: String!): SignInResult!
+}
+
+type Query {
+  Messages: [Message!]!
+  analyticsEvents(fields: String): [AnalyticsEvent!]!
+  countEvents: [AnalyticsCount!]!
+}
+
+type SignInResult {
+  error: String
+  isAuthorized: Boolean
+}
