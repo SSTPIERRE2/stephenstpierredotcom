@@ -1,0 +1,9 @@
+.wrapper {
+  padding-top: 96px;
+  text-align: center;
+}
+
+.wrapper h1,
+.wrapper p {
+  margin-bottom: 2rem;
+}

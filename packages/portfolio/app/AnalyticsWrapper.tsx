@@ -19,9 +19,9 @@ const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
       console.log(
         'first page view from either direct url navigation or from a link from another website!'
       );
-      createAnalytic({
-        name: 'pageView',
-      });
+      // createAnalytic({
+      //   name: 'pageView',
+      // });
     }
   }, [createAnalytic]);
 

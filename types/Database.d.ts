@@ -13,3 +13,5 @@ type AnalyticsEventName =
   | 'hover'
   | 'rageClick'
   | 'form';
+
+type AnalyticsEventField = 'name' | 'created' | 'metadata';

@@ -1,11 +1,10 @@
-'use client';
-import MessageForm from '@/components/MessageForm/MessageForm';
+import MessageForm from '@/components/MessageForm';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      This is the home page
+      <h2>Welcome to my website</h2>
       <MessageForm />
     </main>
   );

@@ -28,9 +28,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Header>
                   <NavBar />
                 </Header>
-                {children}
+                <main>{children}</main>
                 <Footer />
-                <GlobalStyles />
+                {/* <GlobalStyles /> */}
               </AnalyticsWrapper>
             </AuthProvider>
           </StyledComponentsRegistry>

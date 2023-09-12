@@ -26,9 +26,13 @@ export default function PublicDashboard({
   searchParams: { visitor?: string };
 }) {
   const barChartRef = useRef<HTMLDivElement>(null);
+  const pageViewChartRef = useRef<HTMLDivElement>(null);
   // const myEvents = await getMyEvents(searchParams.visitor);
   // const allEvents = await getAllEvents();
   const { result } = useCountAnalytics();
+  const { result: pageViews } = useQueryAnalytics({
+    fields: [{ name: 'name', value: 'pageView' }],
+  });
 
   useEffect(() => {
     if (result?.data?.countEvents) {
@@ -52,11 +56,36 @@ export default function PublicDashboard({
     }
   }, [result]);
 
+  useEffect(() => {
+    if (pageViews?.data?.analyticsEvents) {
+      console.log(`got pageViews`, pageViews.data);
+      const plot = Plot.plot({
+        marks: [
+          Plot.line(pageViews.data.analyticsEvents, {
+            x: 'created',
+          }),
+        ],
+        style: {
+          background: 'black',
+        },
+        y: { grid: true },
+      });
+
+      if (pageViewChartRef.current) {
+        pageViewChartRef.current.append(plot);
+      }
+
+      return () => plot.remove();
+    }
+  }, [pageViews]);
+
   return (
     <main className={styles.main}>
       This is the Public Dashboard
-      <h2>Penguins scatterplot</h2>
+      <h2>Events by type</h2>
       <div ref={barChartRef} />
+      <h2>Page views over time</h2>
+      <div ref={pageViewChartRef} />
       {/* <Plot.plot
         marks={[
           Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }),

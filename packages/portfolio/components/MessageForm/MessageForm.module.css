@@ -1,0 +1,45 @@
+.wrapper {
+  max-width: 480px;
+}
+
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 64px;
+  gap: 32px;
+  align-items: flex-end;
+}
+
+.container {
+  position: relative;
+}
+
+.emailFlexContainer {
+  flex: 2 1 200px;
+}
+
+.email {
+  display: block;
+  width: 100%;
+}
+
+.messageFlexContainer {
+  flex: 3 1 250px;
+}
+
+.message {
+  display: block;
+  width: 100%;
+}
+
+.send {
+  width: 175px;
+  height: 50px;
+  margin-left: auto;
+}
+
+.sendText {
+}
+
+.successText {
+}

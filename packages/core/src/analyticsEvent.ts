@@ -52,10 +52,19 @@ export function getByEventName(name: string) {
     .execute();
 }
 
-export function list(fields?: FieldQuery[]) {
+export function list(
+  whereFields?: FieldQuery[]
+  // selectFields?: AnalyticsEventField[]
+) {
   let query = SQL.DB.selectFrom('analytics_event').selectAll();
 
-  fields?.forEach((field) => {
+  // if (selectFields) {
+  //   query = query.select(selectFields);
+  // } else {
+  //   query = query.selectAll();
+  // }
+
+  whereFields?.forEach((field) => {
     console.log(`inside list function`, field);
     query = query.where(field.name, field.matcher || '=', field.value);
   });
@@ -67,5 +76,13 @@ export function countEvents() {
   return SQL.DB.selectFrom('analytics_event')
     .select(['name', (eb) => eb.fn.count('name').as('total')])
     .groupBy('name')
+    .execute();
+}
+
+export function getPageViews() {
+  return SQL.DB.selectFrom('analytics_event')
+    .select(['name', 'created', 'metadata'])
+    .where('name', '=', 'pageView')
+    .orderBy('created', 'desc')
     .execute();
 }

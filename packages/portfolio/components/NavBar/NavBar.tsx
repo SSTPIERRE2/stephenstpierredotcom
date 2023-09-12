@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Logo from '../Logo/Logo';
 import styles from './navBar.module.css';
+import { SubMark } from '../Logo';
 
 const NavBar = () => {
   const isAuthed = true;
@@ -9,8 +9,13 @@ const NavBar = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
-        <Logo />
+        <Link href="/" id="logo">
+          <SubMark size={48} />
+        </Link>
       </div>
+      <Link href="/blog" id="blogLink">
+        Blog
+      </Link>
       <Link href="/projects" id="projectsLink">
         Projects
       </Link>

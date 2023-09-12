@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Shuriken from '../Shuriken/Shuriken';
-import styles from './logo.module.css';
+import Shuriken from '../Shuriken';
+import styles from './primary.module.css';
 
 const Logo = () => {
   return (

@@ -87,6 +87,15 @@ const AnalyticsCount = builder
     }),
   });
 
+const PageViewsOverTime = builder
+  .objectRef<{ date: string; total: number }>('PageViewsOverTime')
+  .implement({
+    fields: (t) => ({
+      date: t.exposeString('date'),
+      total: t.exposeInt('total'),
+    }),
+  });
+
 builder.queryFields((t) => ({
   analyticsEvents: t.field({
     type: [AnalyticsEventType],
@@ -116,6 +125,12 @@ builder.queryFields((t) => ({
       return numerical;
     },
   }),
+  // pageViewsOverTime: t.field({
+  //   type: [PageViewsOverTime],
+  //   resolve: async () => {
+  //     const allPageViews = await
+  //   }
+  // })
 }));
 
 builder.mutationFields((t) => ({
