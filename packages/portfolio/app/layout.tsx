@@ -1,7 +1,5 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import StyledComponentsRegistry from './lib/registry';
-import GlobalStyles from '../components/GlobalStyles/GlobalStyles';
 import { ReactNode } from 'react';
 import UrqlProvider from './UrqlProvider';
 import AnalyticsWrapper from './AnalyticsWrapper';
@@ -22,18 +20,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className={inter.className}>
         <UrqlProvider>
-          <StyledComponentsRegistry>
-            <AuthProvider>
-              <AnalyticsWrapper>
-                <Header>
-                  <NavBar />
-                </Header>
-                <main>{children}</main>
-                <Footer />
-                {/* <GlobalStyles /> */}
-              </AnalyticsWrapper>
-            </AuthProvider>
-          </StyledComponentsRegistry>
+          <AuthProvider>
+            <AnalyticsWrapper>
+              <Header>
+                <NavBar />
+              </Header>
+              <main>{children}</main>
+              <Footer />
+            </AnalyticsWrapper>
+          </AuthProvider>
         </UrqlProvider>
       </body>
     </html>
