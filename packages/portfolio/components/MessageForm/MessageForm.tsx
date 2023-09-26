@@ -62,7 +62,7 @@ const MessageForm = () => {
         <p>
           I would appreciate any job inquiries and/or feedback about this
           website, so shoot me a message any time. In the future I plan to let
-          subscribers know when I publish new content, but you can unsubuscribe
+          subscribers know when I publish new content, but you can unsubscribe
           any time, stay tuned.{' '}
         </p>
       </div>
