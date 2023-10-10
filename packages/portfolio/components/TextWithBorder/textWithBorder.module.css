@@ -1,0 +1,15 @@
+.wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.border {
+  position: absolute;
+  left: -15px;
+  top: -12px;
+  width: 100%;
+  height: 100%;
+
+  background-color: greenyellow;
+  clip-path: polygon(0% 0%, 0% 100%, 3% 100%, 3% 17%, 90% 17%, 90% 0%);
+}

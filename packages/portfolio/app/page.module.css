@@ -1,10 +1,26 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  gap: 1rem;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   padding: 6rem;
   /* min-height: 100vh; */
+}
+
+.greeting {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.greetingLeft {
+  flex: 3 350px;
+}
+
+.greetingRight {
+  flex: 2 100px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Enable hover only on non-touch devices */

@@ -141,3 +141,5 @@ export const API_ENDPOINTS = {
   graphql: `${API_URL}/graphql`,
   magicLink: `${API_URL}/auth/link/authorize`,
 };
+
+export const AVATAR_HEIGHT_WIDTH_RATIO = 0.354;

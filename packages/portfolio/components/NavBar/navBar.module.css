@@ -3,9 +3,21 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  justify-content: space-between;
   gap: 0.75rem;
 }
 
 .left {
-  margin-right: auto;
+}
+
+.middle {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
 }

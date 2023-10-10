@@ -1,0 +1,28 @@
+---
+title: 'How I Built Yet Another Developer Blog'
+abstract: The first post of any developer blog is of course about how it was built. In this post we'll dive into the architecture, technologies, design, and the challenges I faced to put it all together.
+publishedOn: '2023-09-28T12:00:00-0400'
+---
+
+When I first became a developer, one of my dreams was having my own website, but I never felt like I had the chops to actually make one. I remember when Github Pages first came out I was stoked to be able to have a site of my own hosted for free, but at the time I was too inexperienced to make something that looked good, worked well, and had interesting content to explore, although I did give it a shot. Well, now it's 2023 and the web development ecosystem has changed a lot since then!
+
+React came in hot onto the scene with convenient ways to manage state and interact with the DOM, signaling an end to the era of jQuery. Next.js comes with many optimizations out of the box that you would normally have to implement manually. CSS modules and CSS-in-JS tools like Styled Components offer a method of implementing styles without having to worry about class name collisions anymore, effectively eliminating the need for the BEM pattern. Serverless offers a way to work with AWS services more easily, and the ecosystem will only continue to evolve.
+
+## Project planning, tooling, and architecture
+
+In the beginning I had some wild ideas about what I wanted my website to be: a portfolio, blog, dashboard, forum, you name it! This part is super important because it determines the scope of the project and directly leads into selection of technologies. Analytics is one of those things managers want to see in every professional application, and for good reason, so for me it was a high priority. While there are a number of existing analytics services, <a href='https://plausible.io/blog/remove-google-analytics#:~:text=solution%20is%20needed.-,It%E2%80%99s%20overkill%20for%20the%20majority%20of%20site%20owners,-For%20most%20site'>Google Analytics tends to be overkill for most site owners</a> despite being free, and other services generally cost money. Well, I only wanted to collect minimal data and push my limits as a developer, so I decided to build a custom analytics service which meant I needed a database. As for the dashboard, when I took my first swing at learning D3 I quickly realized it would take another course of some sort to actually become proficient with it, so the dashboard would not end up in the first release of the website, but I still wanted to show a page view count which is much easier. Whenever starting a project you have to consider what the Minimum Viable Product (MVP) is - if you try to fit every conceivable feature in the first version of any project, it will take an unreasonable amount of time or may not get finished at all! That said, I definitely had a project or two to display and some blog content, so I finally decided the MVP of my site would be a developer blog/portfolio with custom analytics and room to add features like user profiles and comments.
+
+With the overall plan for what the site should do out of the way, it was time to pick the technologies to build it with. I've dabbled with Angular 4 and 6, but I've always been a <a href='https://react.dev/'>React</a> guy so that's where we start as far as the tooling goes. Since I wanted to get experience with the different flavors of Server Side Rendering, <a href='https://nextjs.org/blog/next-13-4'>Next.js v13.4 was just being released with the now stable App Router</a>, and having recently finished Josh W Comeau's <a href='https://www.joyofreact.com/'>The Joy of React</a> which includes lessons on Next.js, it seemed to be an obvious choice. But, what about hosting? <a href='https://vercel.com/'>Vercel</a> is quite popular for Next.js projects since that's what it was built for, but I wanted to use AWS RDS which it didn't have an integration for at the time. With all of this in mind, one of my classmates suggested I check out <a href='https://sst.dev/'>Serverless Stack</a> which offers a way to build full-stack applications all on AWS. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive! That's where SST comes in, by using the <a href='https://open-next.js.org/'>OpenNext</a> serverless adapter for Next.js we can actually <a href='https://sst.dev/examples/how-to-create-a-nextjs-app-with-serverless.html'>deploy our app</a> as function, and our api will be another function, both which can directly interact with RDS 🤯
+
+Now that I had a good idea of the shape of the project, it was time to make some architecture diagrams in <a href='https://www.figma.com/'>Figma</a>, here is the second version after reducing it to the MVP:
+
+<img
+  src="/packages/portfolio/content/assets/Arch_diagram_0.2.png"
+  alt="Architecture diagram version 0.2"
+/>
+
+It may not picture the precise locations within AWS where each of the components will live, but now we have a pretty good idea about how all of the pieces fit together written down somewhere to remind us what we're building.
+
+## Building a modern frontend
+
+When it comes to making the frontend, I think it helps to decide the overall design of the app early, namely the tone and color palette

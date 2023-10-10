@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.container}>
-        <Decoration />
+        {/* <Decoration /> */}
         <div
           className={styles.leftContainer}
           ref={elementRef}

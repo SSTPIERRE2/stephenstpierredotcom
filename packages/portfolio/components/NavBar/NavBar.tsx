@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './navBar.module.css';
 import { SubMark } from '../Logo';
+import { Rss, Sun } from 'react-feather';
 
 const NavBar = () => {
   const isAuthed = true;
@@ -13,15 +14,25 @@ const NavBar = () => {
           <SubMark size={48} />
         </Link>
       </div>
-      <Link href="/blog" id="blogLink">
-        Blog
-      </Link>
-      <Link href="/projects" id="projectsLink">
-        Projects
-      </Link>
-      <Link as="/dashboard" href={path} id="dashboardLink">
-        Dashboard
-      </Link>
+      <div className={styles.middle}>
+        <Link href="/about" id="aboutLink">
+          About
+        </Link>
+        <Link href="/snacks" id="snacksLink">
+          Snacks
+        </Link>
+        <Link as="/posts" href={path} id="postsLink">
+          Posts
+        </Link>
+      </div>
+      <div className={styles.right}>
+        <a>
+          <Sun />
+        </a>
+        <a>
+          <Rss />
+        </a>
+      </div>
     </nav>
   );
 };

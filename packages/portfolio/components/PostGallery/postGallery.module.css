@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.gallery {
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+}
+
+.box {
+  flex: 1 0 100px;
+  width: 100px;
+  height: 100px;
+  background-color: darkslategray;
+}
