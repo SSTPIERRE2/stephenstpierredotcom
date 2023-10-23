@@ -12,8 +12,17 @@
 }
 
 .box {
-  flex: 1 0 100px;
+  flex: 0 0 100px;
   width: 100px;
   height: 100px;
   background-color: darkslategray;
+}
+
+.link {
+  text-wrap: balance;
+  line-height: 1.1;
+  overflow-wrap: break-word;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
 }

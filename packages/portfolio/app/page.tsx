@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import styles from './page.module.css';
-import avatar from '../content/assets/Avatar_2_2_2.png';
+import avatar from '../content/assets/crossed_arms_nowatermark.png';
 import SnackGallery from '@/components/SnackGallery/SnackGallery';
 import PostGallery from '@/components/PostGallery/PostGallery';
-import { AVATAR_HEIGHT_WIDTH_RATIO } from '@/utils/constant';
+// import { AVATAR_HEIGHT_WIDTH_RATIO } from '@/utils/constant';
 
 export default function Home() {
   return (
@@ -18,8 +18,8 @@ export default function Home() {
             src={avatar}
             alt="Stephen's avatar"
             sizes="100vw"
-            width={500 * AVATAR_HEIGHT_WIDTH_RATIO}
-            height={500}
+            width={427 * 0.8356}
+            height={511}
             style={{
               filter: `drop-shadow(
               2px 4px 32px hsl(0deg 0% 0% / 0.4)
@@ -27,8 +27,8 @@ export default function Home() {
               width: '100%',
               height: 'auto',
               maxHeight: '400px',
-              maxWidth: 400 * AVATAR_HEIGHT_WIDTH_RATIO,
-              objectFit: 'cover',
+              maxWidth: 400 * 0.8356,
+              // objectFit: 'cover',
             }}
           />
         </div>

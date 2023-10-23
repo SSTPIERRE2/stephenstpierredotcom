@@ -29,6 +29,18 @@
   );
 }
 
+@media (min-width: 500px) {
+  ::-webkit-scrollbar {
+    /* Track color */
+    background-color: var(--color-background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* Thumb color */
+    background-color: var(--color-background-accent);
+  }
+}
+
 /*
   CSS RESET
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -63,8 +75,10 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   /* Slate 900 */
-  background: #0f172a;
-  color: white;
+  /* background: #0f172a;
+  color: white; */
+  background: var(--color-background);
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
 }
@@ -222,7 +236,11 @@ body::before {
   left: 0;
   right: 0;
   height: 50vh;
-  background: linear-gradient(to top, #0f172a, #1e293b);
+  background: linear-gradient(
+    to top,
+    var(--color-background),
+    var(--color-background-accent)
+  );
 }
 
 a {
