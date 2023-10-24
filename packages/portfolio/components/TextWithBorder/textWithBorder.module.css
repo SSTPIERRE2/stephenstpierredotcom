@@ -9,7 +9,7 @@
   background-color: var(--color-primary);
   position: absolute;
   inset: 0;
-  transition: clip-path 1s;
+  transition: clip-path 0.75s;
   will-change: transform;
 }
 
@@ -19,5 +19,5 @@
   overflow-wrap: break-word;
   display: block;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
 }

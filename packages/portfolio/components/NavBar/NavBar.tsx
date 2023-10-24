@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import DarkLightToggle from '../DarkLightToggle';
 import { THEME } from '@/utils/constant';
+import Icon from '../Logo/Icon';
 
 type slug = 'about' | 'snacks' | 'posts';
 
@@ -26,9 +27,7 @@ const NavBar = ({ theme }: { theme: THEME }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
-        <Link href="/" id="logo">
-          <SubMark size={48} />
-        </Link>
+        <Icon />
       </div>
       <div className={styles.middle}>
         <Link

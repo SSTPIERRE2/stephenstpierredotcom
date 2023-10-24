@@ -1,0 +1,62 @@
+@keyframes orbit {
+  from {
+    transform: rotate(var(--icon-logo-border-turn));
+  }
+  to {
+    transform: rotate(calc(var(--icon-logo-border-turn) + 0.75turn));
+  }
+}
+.wrapper {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  width: fit-content;
+  padding: 0.4rem 0.6rem 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.text {
+  display: block;
+  text-wrap: balance;
+  line-height: 1;
+  overflow-wrap: break-word;
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.primary {
+  color: var(--color-primary);
+  position: relative;
+}
+
+.accent {
+  color: var(--color-primary-accent);
+  position: absolute;
+  top: 0.4rem;
+  left: 0.7rem;
+}
+
+.border {
+  background-color: var(--color-primary);
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  animation: orbit 1500ms;
+  animation-fill-mode: both;
+  animation-delay: var(--animation-delay);
+}
+
+.bottomLeft {
+  clip-path: polygon(0% 100%, 50% 100%, 50% 92.5%, 10% 92.5%, 10% 50%, 0% 50%);
+}
+
+.topRight {
+  clip-path: polygon(
+    100% 0%,
+    100% 50%,
+    92.5% 50%,
+    92.5% 7.5%,
+    50% 7.5%,
+    50% 0%
+  );
+}

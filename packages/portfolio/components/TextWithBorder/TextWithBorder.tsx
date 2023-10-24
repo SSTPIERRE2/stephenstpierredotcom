@@ -16,8 +16,8 @@ const TextWithBorder = <C extends React.ElementType = 'h2'>({
   Omit<ComponentPropsWithoutRef<C>, keyof Props<C>>) => {
   const [isHovered, setIsHovered] = useState(false);
   const clipPath = isHovered
-    ? 'polygon(0% 0%, 0% 75%, 3.5% 75%, 3.5% 11.5%, 90% 11.5%, 90% 0%)'
-    : 'polygon(0% 0%, 0% 50%, 3.5% 50%, 3.5% 11.5%, 50% 11.5%, 50% 0%)';
+    ? 'polygon(7.5% 100%, 90% 100%, 90% 88.5%, 11.5% 88.5%, 11.5% 88.5%, 7.5% 88.5%)'
+    : 'polygon(0% 100%, 65% 100%, 65% 88.5%, 0.4rem 88.5%, 0.4rem 35%, 0% 35%)';
   const Component = as || 'h2';
 
   return (

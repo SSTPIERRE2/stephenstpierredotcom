@@ -90,7 +90,7 @@
 
 .mainText {
   --x-offset-end: 0;
-  color: rgb(119, 233, 133);
+  color: var(--color-primary);
   position: relative;
   z-index: 2;
 
@@ -102,7 +102,7 @@
 
 .subCopy {
   --x-offset-end: calc(1rem / 6);
-  color: rgb(78, 135, 85);
+  color: var(--color-primary-accent);
   position: absolute;
   z-index: 1;
   top: 0;

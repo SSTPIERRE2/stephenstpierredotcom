@@ -7,6 +7,7 @@ export const LIGHT_COLORS = {
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
 
   '--color-primary': '#7935e6',
+  '--color-primary-accent': '#bfa0f3',
   '--color-secondary': '#354ae6',
   '--color-accent': '#E3008A',
 
@@ -35,6 +36,7 @@ export const DARK_COLORS = {
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
 
   '--color-primary': '#a3e635',
+  '--color-primary-accent': '#4d7c0f',
   '--color-secondary': '#a855f7',
   '--color-accent': '#ec4899',
 

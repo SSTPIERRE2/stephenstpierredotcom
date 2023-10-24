@@ -23,7 +23,7 @@
 }
 
 .hoveredBorder {
-  background-color: greenyellow;
+  background-color: var(--color-primary);
   position: absolute;
   bottom: 0;
   left: 0;
