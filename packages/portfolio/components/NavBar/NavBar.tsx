@@ -2,74 +2,99 @@
 
 import Link from 'next/link';
 import styles from './navBar.module.css';
-import { SubMark } from '../Logo';
 import { Rss } from 'react-feather';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import DarkLightToggle from '../DarkLightToggle';
 import { THEME } from '@/utils/constant';
 import Icon from '../Logo/Icon';
+import { usePathname } from 'next/navigation';
 
 type slug = 'about' | 'snacks' | 'posts';
+type label = 'About' | 'Snacks' | 'Posts';
+type href = '/about' | '/snacks' | '/posts';
+
+const LINKS: { slug: slug; label: label; href: href }[] = [
+  {
+    slug: 'about',
+    label: 'About',
+    href: '/about',
+  },
+  {
+    slug: 'snacks',
+    label: 'Snacks',
+    href: '/snacks',
+  },
+  {
+    slug: 'posts',
+    label: 'Posts',
+    href: '/posts',
+  },
+];
 
 const NavBar = ({ theme }: { theme: THEME }) => {
-  const [hoveredLink, setHoveredLink] = useState<slug>();
-  const isAuthed = true;
-  const path = isAuthed ? '/dashboard' : '/dashboard/public';
+  const [hoveredLink, setHoveredLink] = useState<slug | null>();
+  const pathName = usePathname();
+  const backdropId = useId();
+  const underlineId = useId();
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement> & { target: { id: slug } }
   ) => {
-    console.log(`clicked a nav item`, e.target);
     setHoveredLink(e.target.id);
   };
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.left}>
-        <Icon />
-      </div>
-      <div className={styles.middle}>
-        <Link
-          href="/about"
-          id="about"
-          onClick={handleClick}
-          className={styles.link}
-        >
-          {hoveredLink === 'about' && (
-            <motion.div layoutId="link" className={styles.hoveredBorder} />
-          )}
-          About
-        </Link>
-        <Link
-          href="/snacks"
-          id="snacks"
-          onClick={handleClick}
-          className={styles.link}
-        >
-          {hoveredLink === 'snacks' && (
-            <motion.div layoutId="link" className={styles.hoveredBorder} />
-          )}
-          Snacks
-        </Link>
-        <Link
-          as="/posts"
-          href={path}
-          id="posts"
-          onClick={handleClick}
-          className={styles.link}
-        >
-          {hoveredLink === 'posts' && (
-            <motion.div layoutId="link" className={styles.hoveredBorder} />
-          )}
-          Posts
-        </Link>
-      </div>
+      <Icon />
+
+      <ul className={styles.middle} onMouseLeave={() => setHoveredLink(null)}>
+        {LINKS.map(({ slug, label, href }) => (
+          <li
+            key={slug}
+            style={{
+              zIndex: hoveredLink === slug ? 1 : 2,
+              position: 'relative',
+            }}
+          >
+            {hoveredLink === slug && (
+              <motion.div
+                layoutId={backdropId}
+                className={styles.hoveredBackdrop}
+                initial={{ borderRadius: '8px' }}
+              />
+            )}
+            <div>
+              {pathName === href && (
+                <motion.div
+                  layoutId={underlineId}
+                  className={styles.underline}
+                />
+              )}
+              <Link
+                href={href}
+                id={slug}
+                onClick={handleClick}
+                className={styles.link}
+                data-text={label}
+                style={{
+                  fontWeight:
+                    pathName === href ? 'var(--font-weight-bold)' : 'revert',
+                }}
+                onMouseEnter={() => setHoveredLink(slug)}
+              >
+                {label}
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ul>
+
       <div className={styles.right}>
         <DarkLightToggle initialTheme={theme} />
-        <a>
-          <Rss />
-        </a>
+        <button className={styles.action}>
+          <Rss size="1.5rem" />
+        </button>
       </div>
     </nav>
   );

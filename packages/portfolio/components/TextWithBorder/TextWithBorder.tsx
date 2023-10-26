@@ -3,6 +3,7 @@
 import { ComponentPropsWithoutRef, PropsWithChildren, useState } from 'react';
 import styles from './textWithBorder.module.css';
 import Link from 'next/link';
+import { ChevronRight } from 'react-feather';
 
 interface Props<C extends React.ElementType> {
   as?: C;
@@ -29,7 +30,17 @@ const TextWithBorder = <C extends React.ElementType = 'h2'>({
         cursor: as === 'a' || typeof as === typeof Link ? 'pointer' : 'default',
       }}
     >
-      <Component {...rest}>{children}</Component>
+      <div className={styles.chevronWrapper}>
+        <Component {...rest}>{children}</Component>
+        <ChevronRight
+          size="1.5rem"
+          className={styles.chevron}
+          style={{
+            opacity: isHovered ? 1 : 0,
+            transition: `opacity ${isHovered ? 1500 : 500}ms`,
+          }}
+        />
+      </div>
       <div
         className={styles.border}
         style={{

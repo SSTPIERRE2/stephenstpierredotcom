@@ -41,7 +41,7 @@ const DarkLightToggle = ({ initialTheme }: Props) => {
   };
 
   return (
-    <button className={styles.wrapper} onClick={handleClick}>
+    <button className={styles.action} onClick={handleClick}>
       {theme === 'light' ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
       <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
     </button>

@@ -21,3 +21,13 @@
   font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
 }
+
+.chevronWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chevron {
+  color: var(--color-primary);
+}
