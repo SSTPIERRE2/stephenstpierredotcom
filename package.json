@@ -17,11 +17,11 @@
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
     "@tsconfig/node16": "1.0.4",
-    "aws-cdk-lib": "2.84.0",
+    "aws-cdk-lib": "2.103.1",
     "concurrently": "^8.2.0",
     "constructs": "10.2.69",
     "hygen": "^6.2.11",
-    "sst": "^2.23.14",
+    "sst": "^2.32.2",
     "typescript": "5.1.6",
     "vitest": "^0.34.1"
   },
