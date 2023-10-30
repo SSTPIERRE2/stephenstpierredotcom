@@ -8,8 +8,8 @@ export const LIGHT_COLORS = {
 
   '--color-primary': '#7935e6',
   '--color-primary-accent': '#bfa0f3',
-  '--color-secondary': '#354ae6',
-  '--color-accent': '#E3008A',
+  '--color-secondary': '#E3008A',
+  '--color-accent': '#354ae6',
 
   '--color-info': '#3041db',
   '--color-success': '#4d7c0f',

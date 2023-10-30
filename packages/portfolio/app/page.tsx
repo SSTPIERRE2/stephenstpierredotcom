@@ -15,6 +15,7 @@ export default function Home() {
           <p>I'm a Full Stack Developer from Boston, Massachusetts.</p>
         </div>
         <div className={styles.greetingRight}>
+          <div className={styles.flourish} />
           <Image
             src={avatar}
             alt="Stephen's avatar"

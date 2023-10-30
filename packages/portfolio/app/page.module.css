@@ -4,8 +4,14 @@
   gap: 1rem;
   /* justify-content: space-between; */
   /* align-items: center; */
-  padding: 6rem;
+  padding: 2rem;
   /* min-height: 100vh; */
+}
+
+@media (min-width: 64rem) {
+  .main {
+    padding: 6rem;
+  }
 }
 
 .greeting {
@@ -21,6 +27,27 @@
   flex: 2 100px;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.flourish {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    #ef17fe,
+    #9e6cfe 40%,
+    #7197ff,
+    #44ccff 70%,
+    #32a1e9 90%
+  );
+  width: 260px;
+  height: 200px;
+  z-index: 0;
+  content: '';
+  filter: blur(90px);
+  transform: translateZ(0);
 }
 
 /* Enable hover only on non-touch devices */

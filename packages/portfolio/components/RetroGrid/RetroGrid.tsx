@@ -6,7 +6,7 @@ import { useWindowSize } from '@uidotdev/usehooks';
 
 const RetroGrid = () => {
   const { width } = useWindowSize();
-  const X_SPACER = 60;
+  const X_SPACER = 55;
   const Y_SPACER = 20;
 
   if (!width) {
@@ -20,32 +20,44 @@ const RetroGrid = () => {
 
   return (
     <svg height="210px" width={'100%'} className={styles.grid}>
-      {range(xLines / 2).map((num) => {
+      {/* Diagonal lines, drawn from left */}
+      {range(xLines / 2 <= 18 ? xLines / 2 + 3 : xLines / 2).map((num) => {
         return (
           <line
             key={num}
-            x1={num < 6 ? 0 : (num - 5) * 100}
+            x1={num < 6 ? 0 : Math.min((num - 5) * 95, width / 2)}
             y1={num < 6 ? (num + 1) * 33.333 : 207}
-            x2={(num + 1) * 60}
+            x2={Math.min((num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}
           />
         );
       })}
 
-      {range(xLines / 2).map((num) => {
+      {/* Diagonal lines, drawn from right */}
+      {range(xLines / 2 <= 18 ? xLines / 2 + 3 : xLines / 2).map((num) => {
         return (
           <line
             key={num}
-            x1={num < 6 ? width : width - (num - 5) * 100}
+            x1={num < 6 ? width : Math.max(width - (num - 5) * 95, width / 2)}
             y1={num < 6 ? (num + 1) * 33.333 : 207}
-            x2={width - (num + 1) * 60}
+            x2={Math.max(width - (num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}
           />
         );
       })}
 
+      {/* Vertical, middle line */}
+      <line
+        x1={width / 2}
+        y1={0}
+        x2={width / 2}
+        y2={207}
+        className={styles.gridLine}
+      />
+
+      {/* Horizontal lines, drawn from top with increasing space between */}
       {range(yLines).map((num) => {
         const Y = num * (5 + num * 2);
         return (
