@@ -3,7 +3,8 @@ import styles from './page.module.css';
 import avatar from '../content/assets/crossed_arms_nowatermark.png';
 import SnackGallery from '@/components/SnackGallery/SnackGallery';
 import PostGallery from '@/components/PostGallery/PostGallery';
-// import { AVATAR_HEIGHT_WIDTH_RATIO } from '@/utils/constant';
+import RetroGrid from '@/components/RetroGrid';
+import FullBleed from '@/components/FullBleed';
 
 export default function Home() {
   return (
@@ -27,14 +28,17 @@ export default function Home() {
               width: '100%',
               height: 'auto',
               maxHeight: '400px',
-              maxWidth: 400 * 0.8356,
-              // objectFit: 'cover',
+              maxWidth: 400 * 0.8356, // height-width ratio
+              objectFit: 'cover',
             }}
           />
         </div>
       </div>
       <SnackGallery />
       <PostGallery />
+      <FullBleed>
+        <RetroGrid />
+      </FullBleed>
     </main>
   );
 }
