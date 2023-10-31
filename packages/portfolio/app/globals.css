@@ -81,6 +81,7 @@ body {
   color: var(--color-text);
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 /*
@@ -129,6 +130,7 @@ h6 {
   9. Set CSS variables
 */
 html {
+  overflow-x: clip;
   /* --color-white: ${COLORS.white};
   --color-primary-light: ${COLORS.primary.light};
   --color-primary: ${COLORS.primary.normal};

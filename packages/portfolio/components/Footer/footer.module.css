@@ -1,6 +1,18 @@
 .footer {
-  border-top: 1px solid var(--color-gray-900);
-  /* background: linear-gradient(0deg, #0f172a, #334155); */
+  /* border-top: 1px solid var(--color-gray-900); */
+  /* background: linear-gradient(
+    to bottom,
+    #ef17fe,
+    #9e6cfe 40%,
+    #7197ff,
+    #44ccff 70%,
+    #32a1e9 90%
+  ); */
+  background: linear-gradient(
+    to top,
+    var(--color-background),
+    var(--color-background-accent)
+  );
   position: relative;
   transition: background 350ms ease 0s;
 }

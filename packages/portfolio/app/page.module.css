@@ -5,6 +5,7 @@
   /* justify-content: space-between; */
   /* align-items: center; */
   padding: 2rem;
+  padding-bottom: 16px;
   /* min-height: 100vh; */
 }
 
@@ -32,7 +33,7 @@
 
 .flourish {
   position: absolute;
-  left: 0;
+  left: -15px;
   top: 0;
   background: linear-gradient(
     to bottom,
@@ -48,6 +49,23 @@
   content: '';
   filter: blur(90px);
   transform: translateZ(0);
+}
+
+.retroSun {
+  position: absolute;
+  left: calc(50% - 100px);
+  top: -200px;
+  clip-path: circle(50%);
+  background: var(--retro-sun-gradient);
+  width: 200px;
+  height: 200px;
+  z-index: 0;
+  content: '';
+  transform: translateZ(0);
+}
+
+.retroSunWrapper {
+  filter: var(--retro-sun-shadow);
 }
 
 /* Enable hover only on non-touch devices */

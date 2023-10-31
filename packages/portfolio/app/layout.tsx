@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Header>
                 <NavBar theme={theme as THEME} />
               </Header>
-              <main>{children}</main>
+              {children}
               <Footer />
             </AnalyticsWrapper>
           </AuthProvider>

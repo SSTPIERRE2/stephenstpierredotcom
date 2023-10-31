@@ -27,6 +27,34 @@ export const LIGHT_COLORS = {
   '--color-gray-800': '#1e293b',
   '--color-gray-900': '#0f172a',
   '--color-gray-1000': '#020617',
+
+  '--retro-sun-gradient': `linear-gradient(
+    to bottom,
+    #ef17fe,
+    #c540ff 30%,
+    #9e6cfe 45%,
+    #9e6cfe 54.9%,
+    var(--color-background) 55%,
+    var(--color-background) 57%,
+    #8d75ff 57.1%,
+    #8d75ff 62.1%,
+    var(--color-background) 62.2%,
+    var(--color-background) 64.2%,
+    #55a9ff 64.3%,
+    #55a9ff 70.3%,
+    var(--color-background) 70.4%,
+    var(--color-background) 72.4%,
+    #40c4ff 72.5%,
+    #40c4ff 78.5%,
+    var(--color-background) 78.6%,
+    var(--color-background) 80.6%,
+    #4cdeff 80.7%,
+    #4cdeff 86.7%,
+    var(--color-background) 86.8%,
+    var(--color-background) 88.8%,
+    #57f9fe 88.9%
+  )`,
+  '--retro-sun-shadow': 'drop-shadow(0px -5px 24px #c540ff)',
 };
 
 export const DARK_COLORS = {
@@ -56,6 +84,34 @@ export const DARK_COLORS = {
   '--color-gray-800': '#1f2937',
   '--color-gray-900': '#111827',
   '--color-gray-1000': '#030712',
+
+  '--retro-sun-gradient': `linear-gradient(
+    to bottom,
+    #f9b214,
+    #f67e5a 30%,
+    #f4598b 45%,
+    #f4598b 54.9%,
+    var(--color-background) 55%,
+    var(--color-background) 57%,
+    #f44d93 57.1%,
+    #f44d93 62.1%,
+    var(--color-background) 62.2%,
+    var(--color-background) 64.2%,
+    #f441a9 64.3%,
+    #f441a9 70.3%,
+    var(--color-background) 70.4%,
+    var(--color-background) 72.4%,
+    #f234bb 72.5%,
+    #f234bb 78.5%,
+    var(--color-background) 78.6%,
+    var(--color-background) 80.6%,
+    #ef27cc 80.7%,
+    #ef27cc 86.7%,
+    var(--color-background) 86.8%,
+    var(--color-background) 88.8%,
+    #f20aff 88.9%
+  )`,
+  '--retro-sun-shadow': 'drop-shadow(0px -5px 24px #f67e5a)',
 };
 
 export const COLORS = {

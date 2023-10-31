@@ -32,6 +32,7 @@ const LINKS: { slug: slug; label: label; href: href }[] = [
   },
 ];
 
+// @TODO: Implement a slide-out menu for mobile navigation
 const NavBar = ({ theme }: { theme: THEME }) => {
   const [hoveredLink, setHoveredLink] = useState<slug | null>();
   const pathName = usePathname();

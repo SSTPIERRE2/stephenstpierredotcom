@@ -26,7 +26,7 @@ const RetroGrid = () => {
           <line
             key={num}
             x1={num < 6 ? 0 : Math.min((num - 5) * 95, width / 2)}
-            y1={num < 6 ? (num + 1) * 33.333 : 207}
+            y1={num < 6 ? (num + 1) * 33.333 : 210}
             x2={Math.min((num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}
@@ -40,7 +40,7 @@ const RetroGrid = () => {
           <line
             key={num}
             x1={num < 6 ? width : Math.max(width - (num - 5) * 95, width / 2)}
-            y1={num < 6 ? (num + 1) * 33.333 : 207}
+            y1={num < 6 ? (num + 1) * 33.333 : 210}
             x2={Math.max(width - (num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}
@@ -53,13 +53,13 @@ const RetroGrid = () => {
         x1={width / 2}
         y1={0}
         x2={width / 2}
-        y2={207}
+        y2={210}
         className={styles.gridLine}
       />
 
       {/* Horizontal lines, drawn from top with increasing space between */}
       {range(yLines).map((num) => {
-        const Y = num * (5 + num * 2);
+        const Y = num === yLines - 1 ? 210 : num * (5 + num * 2);
         return (
           <line
             key={num}

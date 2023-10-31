@@ -37,7 +37,11 @@ export default function Home() {
       </div>
       <SnackGallery />
       <PostGallery />
+      <div style={{ width: '100%', height: '200px' }} />
       <FullBleed>
+        <div className={styles.retroSunWrapper}>
+          <div className={styles.retroSun} />
+        </div>
         <RetroGrid />
       </FullBleed>
     </main>
