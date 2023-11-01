@@ -6,7 +6,6 @@ import { Rss } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useId, useState } from 'react';
 import DarkLightToggle from '../DarkLightToggle';
-import { THEME } from '@/utils/constant';
 import Icon from '../Logo/Icon';
 import { usePathname } from 'next/navigation';
 
@@ -33,7 +32,7 @@ const LINKS: { slug: slug; label: label; href: href }[] = [
 ];
 
 // @TODO: Implement a slide-out menu for mobile navigation
-const NavBar = ({ theme }: { theme: THEME }) => {
+const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState<slug | null>();
   const pathName = usePathname();
   const backdropId = useId();
@@ -92,7 +91,7 @@ const NavBar = ({ theme }: { theme: THEME }) => {
       </ul>
 
       <div className={styles.right}>
-        <DarkLightToggle initialTheme={theme} />
+        <DarkLightToggle />
         <button className={styles.action}>
           <Rss size="1.5rem" />
         </button>

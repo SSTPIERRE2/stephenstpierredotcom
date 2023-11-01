@@ -131,29 +131,6 @@ h6 {
 */
 html {
   overflow-x: clip;
-  /* --color-white: ${COLORS.white};
-  --color-primary-light: ${COLORS.primary.light};
-  --color-primary: ${COLORS.primary.normal};
-  --color-primary-dark: ${COLORS.primary.dark};
-  --color-primary-darker: ${COLORS.primary.darker};
-  --color-primary-darkest: ${COLORS.primary.darkest};
-  --color-secondary-light: ${COLORS.secondary.light};
-  --color-secondary: ${COLORS.secondary.normal};
-  --color-secondary-dark: ${COLORS.secondary.dark};
-  --color-gray-50: ${COLORS.gray[50]};
-  --color-gray-100: ${COLORS.gray[100]};
-  --color-gray-200: ${COLORS.gray[200]};
-  --color-gray-300: ${COLORS.gray[300]};
-  --color-gray-400: ${COLORS.gray[400]};
-  --color-gray-500: ${COLORS.gray[500]};
-  --color-gray-600: ${COLORS.gray[600]};
-  --color-gray-700: hsl(${COLORS.gray[700]});
-  --color-gray-800: ${COLORS.gray[800]};
-  --color-gray-900: ${COLORS.gray[900]};
-  --color-gray-950: ${COLORS.gray[950]};
-  --color-backdrop: hsl(${COLORS.gray[700]} / 0.8);
-  --gradient-blue-spectrum: ${COLORS.primary.spectrumGradient};
-  --gradient-blue-purple: ${COLORS.indigo.bluePurpleGradient}; */
 
   /*
     Font weights

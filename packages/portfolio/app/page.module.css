@@ -25,43 +25,46 @@
 }
 
 .greetingRight {
-  flex: 2 100px;
-  display: flex;
-  justify-content: center;
+  flex: 2 150px;
   position: relative;
 }
 
-.flourish {
-  position: absolute;
-  left: -15px;
-  top: 0;
-  background: linear-gradient(
-    to bottom,
-    #ef17fe,
-    #9e6cfe 40%,
-    #7197ff,
-    #44ccff 70%,
-    #32a1e9 90%
-  );
-  width: 260px;
-  height: 200px;
-  z-index: 0;
-  content: '';
-  filter: blur(90px);
-  transform: translateZ(0);
+.gradientText {
+  width: fit-content;
+  background: var(--retro-horizontal-gradient);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  transform: skewX(-12deg);
+  display: inline-block;
+}
+
+.simpleLink {
+  text-decoration-color: var(--color-primary);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 0.3rem;
 }
 
 .retroSun {
   position: absolute;
-  left: calc(50% - 100px);
-  top: -200px;
+  left: 0;
+  top: -30px;
   clip-path: circle(50%);
   background: var(--retro-sun-gradient);
-  width: 200px;
-  height: 200px;
+  min-width: 150px;
+  max-width: 200px;
+  width: 100%;
+  aspect-ratio: 1/1;
   z-index: 0;
   content: '';
   transform: translateZ(0);
+}
+
+.oasis {
+  position: relative;
+  top: 50px;
+  min-width: 300px;
+  max-width: 350px;
 }
 
 .retroSunWrapper {

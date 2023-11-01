@@ -1,17 +1,14 @@
 'use client';
-import { useState } from 'react';
+
 import styles from './DarkLightToggle.module.css';
 import { Moon, Sun } from 'react-feather';
 import VisuallyHidden from '../VisuallyHidden';
 import Cookie from 'js-cookie';
 import { DARK_COLORS, LIGHT_COLORS } from '@/utils/constant';
+import { useTheme } from '@/app/context/ThemeContext';
 
-interface Props {
-  initialTheme: 'light' | 'dark';
-}
-
-const DarkLightToggle = ({ initialTheme }: Props) => {
-  const [theme, setTheme] = useState(initialTheme);
+const DarkLightToggle = () => {
+  const { theme, setTheme } = useTheme();
 
   const handleClick = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';

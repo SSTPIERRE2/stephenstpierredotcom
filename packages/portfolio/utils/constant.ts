@@ -55,6 +55,24 @@ export const LIGHT_COLORS = {
     #57f9fe 88.9%
   )`,
   '--retro-sun-shadow': 'drop-shadow(0px -5px 24px #c540ff)',
+  '--retro-horizontal-gradient': `linear-gradient(
+    90deg,
+    hsl(296deg 99% 54%) 0%,
+    hsl(286deg 100% 64%) 23%,
+    hsl(273deg 100% 68%) 33%,
+    hsl(261deg 99% 71%) 41%,
+    hsl(235deg 100% 74%) 49%,
+    hsl(218deg 100% 69%) 55%,
+    hsl(210deg 100% 67%) 62%,
+    hsl(200deg 100% 61%) 68%,
+    hsl(194deg 100% 60%) 74%,
+    hsl(191deg 100% 65%) 80%,
+    hsl(197deg 100% 50%) 86%,
+    hsl(208deg 100% 50%) 93%,
+    hsl(233deg 78% 55%) 100%
+  )`,
+  '--retro-vertical-gradient': ``,
+  '--retro-oasis-glow': 'drop-shadow(-3px -1px 3px #c540ff)',
 };
 
 export const DARK_COLORS = {
@@ -112,72 +130,23 @@ export const DARK_COLORS = {
     #f20aff 88.9%
   )`,
   '--retro-sun-shadow': 'drop-shadow(0px -5px 24px #f67e5a)',
-};
-
-export const COLORS = {
-  white: 'hsl(0, 0%, 100%)',
-  gray: {
-    50: 'hsl(60, 9.1%, 97.8%)',
-    100: 'hsl(60, 4.8%, 95.9%)',
-    200: 'hsl(20, 5.9%, 90%)',
-    300: 'hsl(24, 5.7%, 82.9%)',
-    400: 'hsl(24, 5.4%, 63.9%)',
-    500: 'hsl(25, 5.3%, 44.7%)',
-    600: 'hsl(33.3, 5.5%, 32.4%)',
-    700: '30deg 6.3% 25.1%)',
-    800: 'hsl(12, 6.5%, 15.1%)',
-    900: 'hsl(24, 9.8%, 10%)',
-    950: 'hsl(20, 14.3%, 4.1%)',
-  },
-  primary: {
-    light: '#93c5fd',
-    normal: 'hsl(213.1, 93.9%, 67.8%)',
-    dark: '#2563eb',
-    darker: 'hsl(224.3, 76.3%, 48%)',
-    darkest: 'hsl(225.9, 70.7%, 40.2%)',
-    spectrumGradient: `linear-gradient(
-        125deg,
-        hsl(212deg 96% 78%) 0%,
-        hsl(213deg 96% 72%) 8%,
-        hsl(215deg 95% 66%) 17%,
-        hsl(217deg 91% 60%) 25%,
-        hsl(218deg 89% 57%) 33%,
-        hsl(219deg 86% 55%) 42%,
-        hsl(221deg 83% 53%) 50%,
-        hsl(222deg 79% 52%) 58%,
-        hsl(223deg 75% 50%) 67%,
-        hsl(224deg 76% 48%) 75%,
-        hsl(225deg 74% 45%) 83%,
-        hsl(225deg 73% 43%) 92%,
-        hsl(226deg 71% 40%) 100%
-    );`,
-  },
-  secondary: {
-    light: 'hsl(52.8, 98.3%, 76.9%)',
-    normal: 'hsl(45, 93%, 47%)',
-    dark: 'hsl(40.6, 96.1%, 40.4%)',
-  },
-  indigo: {
-    normal: 'hsl(238.7, 83.5%, 66.7%)',
-    dark: 'hsl(243.4, 75.4%, 58.6%)',
-    darker: 'hsl(244.5, 57.9%, 50.6%)',
-    bluePurpleGradient: `linear-gradient(
-        125deg,
-        hsl(212deg 96% 78%) 0%,
-        hsl(213deg 96% 72%) 8%,
-        hsl(215deg 95% 66%) 17%,
-        hsl(217deg 91% 60%) 25%,
-        hsl(218deg 89% 57%) 33%,
-        hsl(219deg 86% 55%) 42%,
-        hsl(221deg 83% 53%) 50%,
-        hsl(228deg 74% 54%) 58%,
-        hsl(235deg 65% 53%) 67%,
-        hsl(245deg 58% 51%) 75%,
-        hsl(244deg 56% 48%) 83%,
-        hsl(244deg 55% 44%) 92%,
-        hsl(244deg 55% 41%) 100%
-    );`,
-  },
+  '--retro-horizontal-gradient': `linear-gradient(
+    90deg,
+    hsl(41deg 95% 53%) 0%,
+    hsl(33deg 99% 59%) 19%,
+    hsl(26deg 99% 63%) 32%,
+    hsl(19deg 95% 65%) 42%,
+    hsl(10deg 91% 67%) 51%,
+    hsl(358deg 94% 69%) 58%,
+    hsl(346deg 93% 66%) 65%,
+    hsl(334deg 85% 62%) 72%,
+    hsl(325deg 88% 59%) 78%,
+    hsl(316deg 95% 57%) 85%,
+    hsl(307deg 96% 52%) 92%,
+    hsl(297deg 100% 52%) 100%
+  )`,
+  '--retro-vertical-gradient': ``,
+  '--retro-oasis-glow': 'drop-shadow(-3px -1px 3px #f67e5a)',
 };
 
 export const WEIGHTS = {

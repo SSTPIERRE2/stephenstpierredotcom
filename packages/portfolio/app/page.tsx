@@ -1,47 +1,61 @@
-import Image from 'next/image';
 import styles from './page.module.css';
-import avatar from '../content/assets/crossed_arms_nowatermark.png';
 import SnackGallery from '@/components/SnackGallery/SnackGallery';
 import PostGallery from '@/components/PostGallery/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import FullBleed from '@/components/FullBleed';
+import Oasis from '@/components/Oasis';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.greeting}>
         <div className={styles.greetingLeft}>
-          <h2>Hi, I'm Stephen</h2>
-          <p>I'm a Full Stack Developer from Boston, Massachusetts.</p>
+          <h2>Hi, I'm Stephen!</h2>
+          <p>
+            I'm a full stack JavaScript developer from{' '}
+            <h2 className={styles.gradientText}>Boston, Massachusetts.</h2>
+          </p>
+          <br></br>
+          <p>
+            Welcome to my{' '}
+            <h2 className={styles.gradientText}>digital oasis,</h2>
+          </p>
+          <p>
+            a curated collection of programming tips and tricks. Please enjoy
+            and vote on what you like!
+          </p>
+          <br></br>
+          <h2 className={styles.gradientText}>Looking for work!</h2>
+          <p>
+            <Link href="/about" className={styles.simpleLink}>
+              Read more about me here
+            </Link>{' '}
+            or{' '}
+            <Link
+              href="/Resume2023.pdf"
+              className={styles.simpleLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              locale={false}
+            >
+              view my resume
+            </Link>
+          </p>
         </div>
         <div className={styles.greetingRight}>
-          <div className={styles.flourish} />
-          <Image
-            src={avatar}
-            alt="Stephen's avatar"
-            sizes="100vw"
-            width={427 * 0.8356}
-            height={511}
-            style={{
-              filter: `drop-shadow(
-              2px 4px 32px hsl(0deg 0% 0% / 0.4)
-            )`,
-              width: '100%',
-              height: 'auto',
-              maxHeight: '400px',
-              maxWidth: 400 * 0.8356, // height-width ratio
-              objectFit: 'cover',
-            }}
-          />
+          <div className={styles.retroSunWrapper}>
+            <div className={styles.retroSun} />
+          </div>
+          <Oasis className={styles.oasis} />
         </div>
       </div>
+
       <SnackGallery />
+
       <PostGallery />
-      <div style={{ width: '100%', height: '200px' }} />
+
       <FullBleed>
-        <div className={styles.retroSunWrapper}>
-          <div className={styles.retroSun} />
-        </div>
         <RetroGrid />
       </FullBleed>
     </main>

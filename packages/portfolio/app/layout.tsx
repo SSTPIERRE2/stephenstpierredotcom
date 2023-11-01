@@ -9,6 +9,7 @@ import NavBar from '@/components/NavBar/NavBar';
 import Footer from '@/components/Footer/Footer';
 import AuthProvider from './context/AuthContext/AuthProvider';
 import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
+import { ThemeProvider } from './context/ThemeContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +19,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const savedTheme = cookies().get('color-theme');
+  const savedTheme = cookies().get('color-theme') as
+    | {
+        value: THEME;
+      }
+    | undefined;
   const theme = savedTheme?.value || 'light';
 
   const themeColors = theme === 'light' ? LIGHT_COLORS : DARK_COLORS;
@@ -32,13 +37,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <UrqlProvider>
           <AuthProvider>
-            <AnalyticsWrapper>
-              <Header>
-                <NavBar theme={theme as THEME} />
-              </Header>
-              {children}
-              <Footer />
-            </AnalyticsWrapper>
+            <ThemeProvider initialTheme={theme}>
+              <AnalyticsWrapper>
+                <Header>
+                  <NavBar />
+                </Header>
+                {children}
+                <Footer />
+              </AnalyticsWrapper>
+            </ThemeProvider>
           </AuthProvider>
         </UrqlProvider>
       </body>
