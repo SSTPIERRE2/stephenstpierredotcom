@@ -4,7 +4,7 @@ export const LIGHT_COLORS = {
   '--color-text': '#030712',
   '--color-background': '#FFFFFF',
   '--color-background-accent': '#cbd5e1',
-  '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.85)',
+  '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
 
   '--color-primary': '#7935e6',
   '--color-primary-accent': '#bfa0f3',

@@ -140,7 +140,7 @@ const NavBar = () => {
           <nav className={styles.mobileNavContainer}>
             <div className={styles.mainMobileNav}>
               <div>
-                {LINKS.map(({ slug, label, href }) => (
+                {LINKS.map(({ slug, label, href }, index) => (
                   <div
                     className={styles.mobileNavItem}
                     style={{
@@ -148,6 +148,9 @@ const NavBar = () => {
                         ? 'translateX(0%)'
                         : 'translateX(-100%)',
                       transition: 'transform 500ms',
+                      transitionDelay: isMobileMenuOpen
+                        ? `${index * 100}ms`
+                        : '0ms',
                     }}
                   >
                     <Link key={slug} href={href}>

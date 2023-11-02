@@ -10,8 +10,8 @@
   ); */
   background: linear-gradient(
     to top,
-    var(--color-background),
-    var(--color-background-accent)
+    var(--color-background-accent),
+    var(--color-background)
   );
   position: relative;
   transition: background 350ms ease 0s;
