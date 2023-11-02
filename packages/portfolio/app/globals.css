@@ -204,6 +204,17 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+button {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
 /*
   Top gradient
 */

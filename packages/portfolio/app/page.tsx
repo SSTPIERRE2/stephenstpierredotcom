@@ -11,7 +11,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.greeting}>
         <div className={styles.greetingLeft}>
-          <h2>Hi, I'm Stephen!</h2>
+          <h2>Hey, I'm Stephen!</h2>
           <p>
             I'm a full stack JavaScript developer from{' '}
             <h2 className={styles.gradientText}>Boston, Massachusetts.</h2>

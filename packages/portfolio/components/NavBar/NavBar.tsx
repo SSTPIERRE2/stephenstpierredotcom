@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import styles from './navBar.module.css';
-import { Rss } from 'react-feather';
+import { Menu, Rss, X } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useId, useState } from 'react';
 import DarkLightToggle from '../DarkLightToggle';
 import Icon from '../Logo/Icon';
 import { usePathname } from 'next/navigation';
+import * as Portal from '@radix-ui/react-portal';
+import { useToggle } from '@uidotdev/usehooks';
 
 type slug = 'about' | 'snacks' | 'posts';
 type label = 'About' | 'Snacks' | 'Posts';
@@ -31,9 +33,9 @@ const LINKS: { slug: slug; label: label; href: href }[] = [
   },
 ];
 
-// @TODO: Implement a slide-out menu for mobile navigation
 const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState<slug | null>();
+  const [isMobileMenuOpen, toggleMobileMenu] = useToggle(false);
   const pathName = usePathname();
   const backdropId = useId();
   const underlineId = useId();
@@ -96,6 +98,80 @@ const NavBar = () => {
           <Rss size="1.5rem" />
         </button>
       </div>
+
+      <Portal.Root>
+        <button
+          className={styles.mobileMenuButton}
+          onClick={() => toggleMobileMenu()}
+        >
+          <div
+            className={styles.mobileMenuIcon}
+            style={{
+              opacity: isMobileMenuOpen ? 1 : 0,
+              transition: `opacity ${isMobileMenuOpen ? '800ms' : '200ms'}`,
+            }}
+          >
+            <X size="2rem" />
+          </div>
+          <div
+            style={{
+              opacity: isMobileMenuOpen ? 0 : 1,
+              transition: `opacity ${isMobileMenuOpen ? '200ms' : '800ms'}`,
+            }}
+          >
+            <Menu size="2rem" />
+          </div>
+        </button>
+
+        <div
+          className={styles.mobileNavWrapper}
+          style={{ pointerEvents: isMobileMenuOpen ? 'auto' : 'none' }}
+        >
+          <button
+            className={styles.mobileMenuCatchAll}
+            style={{
+              opacity: isMobileMenuOpen ? 1 : 0,
+              touchAction: isMobileMenuOpen ? 'none' : 'auto',
+            }}
+            onClick={() => (isMobileMenuOpen ? toggleMobileMenu() : {})}
+            tabIndex={-1}
+            aria-hidden
+          />
+          <nav className={styles.mobileNavContainer}>
+            <div className={styles.mainMobileNav}>
+              <div>
+                {LINKS.map(({ slug, label, href }) => (
+                  <div
+                    className={styles.mobileNavItem}
+                    style={{
+                      transform: isMobileMenuOpen
+                        ? 'translateX(0%)'
+                        : 'translateX(-100%)',
+                      transition: 'transform 500ms',
+                    }}
+                  >
+                    <Link key={slug} href={href}>
+                      {label}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className={styles.mobileNavSettings}
+              style={{
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transition: `opacity ${
+                  isMobileMenuOpen ? '250ms ease 500ms' : '250ms ease 0ms'
+                }`,
+              }}
+            >
+              <DarkLightToggle />
+            </div>
+          </nav>
+        </div>
+      </Portal.Root>
     </nav>
   );
 };

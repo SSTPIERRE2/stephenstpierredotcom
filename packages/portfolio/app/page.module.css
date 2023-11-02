@@ -4,7 +4,7 @@
   gap: 1rem;
   /* justify-content: space-between; */
   /* align-items: center; */
-  padding: 2rem;
+  padding: 3rem;
   padding-bottom: 16px;
   /* min-height: 100vh; */
 }
@@ -39,10 +39,15 @@
 }
 
 .simpleLink {
-  text-decoration-color: var(--color-primary);
+  /* text-decoration-color: var(--color-primary);
   text-decoration-line: underline;
   text-decoration-style: solid;
-  text-underline-offset: 0.3rem;
+  text-underline-offset: 0.3rem; */
+  text-decoration: none;
+  background: var(--retro-horizontal-gradient);
+  background-repeat: repeat-x;
+  background-size: 100% 2px;
+  background-position: 0 95%;
 }
 
 .retroSun {
@@ -69,6 +74,19 @@
 
 .retroSunWrapper {
   filter: var(--retro-sun-shadow);
+}
+
+@media (max-width: 46.5625rem) {
+  .greetingRight {
+    padding-top: 3.5rem;
+  }
+  .retroSun {
+    left: 15%;
+  }
+  .oasis {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Enable hover only on non-touch devices */
