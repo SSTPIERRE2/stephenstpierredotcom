@@ -174,3 +174,25 @@ export const API_ENDPOINTS = {
 };
 
 export const AVATAR_HEIGHT_WIDTH_RATIO = 0.354;
+
+export type slug = 'about' | 'snacks' | 'posts';
+export type label = 'About' | 'Snacks' | 'Posts';
+export type href = '/about' | '/snacks' | '/posts';
+
+export const LINKS: { slug: slug; label: label; href: href }[] = [
+  {
+    slug: 'about',
+    label: 'About',
+    href: '/about',
+  },
+  {
+    slug: 'snacks',
+    label: 'Snacks',
+    href: '/snacks',
+  },
+  {
+    slug: 'posts',
+    label: 'Posts',
+    href: '/posts',
+  },
+];
