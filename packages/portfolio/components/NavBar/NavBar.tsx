@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './navBar.module.css';
+import styles from './NavBar.module.css';
 import { Rss } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useId, useState } from 'react';

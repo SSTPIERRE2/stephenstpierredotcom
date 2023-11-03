@@ -1,13 +1,13 @@
 import range from '@/utils/range';
 import TextWithBorder from '../TextWithBorder';
-import styles from './snackGallery.module.css';
+import styles from './TipGallery.module.css';
 import Link from 'next/link';
 
-const SnackGallery = () => {
+const TipGallery = () => {
   return (
     <div className={styles.container}>
       <TextWithBorder as={Link} href="/snacks" className={styles.link}>
-        Code Snacks
+        Coding Tips
       </TextWithBorder>
       <div className={styles.gallery}>
         {range(10).map((num) => (
@@ -18,4 +18,4 @@ const SnackGallery = () => {
   );
 };
 
-export default SnackGallery;
+export default TipGallery;

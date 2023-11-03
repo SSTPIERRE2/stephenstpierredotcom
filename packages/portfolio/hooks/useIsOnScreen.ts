@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useIsOnscreen() {
+const useIsOnscreen = <E extends Element>() => {
   const [isOnscreen, setIsOnscreen] = useState(false);
 
-  const elementRef = useRef();
+  const elementRef = useRef<E>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
 
-      console.log('observing!', entry.isIntersecting);
-
       setIsOnscreen(entry.isIntersecting);
     });
-
-    console.log(`observer`, elementRef.current);
 
     if (elementRef.current) {
       observer.observe(elementRef.current);
@@ -25,7 +21,7 @@ function useIsOnscreen() {
     };
   }, []);
 
-  return [isOnscreen, elementRef];
-}
+  return [isOnscreen, elementRef] as const;
+};
 
 export default useIsOnscreen;

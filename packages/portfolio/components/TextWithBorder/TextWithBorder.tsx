@@ -1,7 +1,7 @@
 'use client';
 
 import { ComponentPropsWithoutRef, PropsWithChildren, useState } from 'react';
-import styles from './textWithBorder.module.css';
+import styles from './TextWithBorder.module.css';
 import Link from 'next/link';
 import { ChevronRight } from 'react-feather';
 

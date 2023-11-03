@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@observablehq/plot": "^0.6.9",
-    "@radix-ui/react-portal": "^1.0.4",
     "@types/js-cookie": "^3.0.5",
     "@types/node": "20.4.8",
     "@types/react": "18.2.19",

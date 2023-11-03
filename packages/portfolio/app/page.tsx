@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import SnackGallery from '@/components/SnackGallery/SnackGallery';
+import SnackGallery from '@/components/TipGallery/TipGallery';
 import PostGallery from '@/components/PostGallery/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import FullBleed from '@/components/FullBleed';
@@ -11,22 +11,29 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.greeting}>
         <div className={styles.greetingLeft}>
-          <h2>Hey, I'm Stephen!</h2>
+          <h2 style={{ marginBottom: '1rem' }}>Hey, I'm Stephen!</h2>
           <p>
             I'm a full stack JavaScript developer from{' '}
-            <h2 className={styles.gradientText}>Boston, Massachusetts.</h2>
+            <span className={styles.gradientText}>Boston, Massachusetts.</span>
           </p>
-          <br></br>
-          <p>
+
+          <p
+            style={{
+              margin: '1rem 0',
+            }}
+          >
             Welcome to my{' '}
-            <h2 className={styles.gradientText}>digital oasis,</h2>
+            <span className={styles.gradientText}>digital oasis,</span> a
+            curated collection of programming tips and tricks. Please enjoy and
+            vote on what you like!
           </p>
-          <p>
-            a curated collection of programming tips and tricks. Please enjoy
-            and vote on what you like!
-          </p>
-          <br></br>
-          <h2 className={styles.gradientText}>Looking for work!</h2>
+
+          <h2
+            className={styles.gradientText}
+            style={{ fontSize: '1.5rem', marginBottom: '0.2rem' }}
+          >
+            Looking for work!
+          </h2>
           <p>
             <Link href="/about" className={styles.simpleLink}>
               Read more about me here

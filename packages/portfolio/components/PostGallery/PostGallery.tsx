@@ -1,6 +1,6 @@
 import range from '@/utils/range';
 import TextWithBorder from '../TextWithBorder';
-import styles from './postGallery.module.css';
+import styles from './PostGallery.module.css';
 import Link from 'next/link';
 
 const PostGallery = () => {

@@ -2,18 +2,14 @@
 
 import useIsOnscreen from '@/hooks/useIsOnScreen';
 import Logo from '../Logo/Primary';
-import Decoration from './Decoration';
-import styles from './footer.module.css';
+import styles from './Footer.module.css';
 
 const Footer = () => {
-  const [isOnScreen, elementRef] = useIsOnscreen();
-
-  console.log(`Footer`, isOnScreen);
+  const [isOnScreen, elementRef] = useIsOnscreen<HTMLDivElement>();
 
   return (
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.container}>
-        {/* <Decoration /> */}
         <div
           className={styles.leftContainer}
           ref={elementRef}

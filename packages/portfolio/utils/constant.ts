@@ -175,9 +175,9 @@ export const API_ENDPOINTS = {
 
 export const AVATAR_HEIGHT_WIDTH_RATIO = 0.354;
 
-export type slug = 'about' | 'snacks' | 'posts';
-export type label = 'About' | 'Snacks' | 'Posts';
-export type href = '/about' | '/snacks' | '/posts';
+export type slug = 'about' | 'tips' | 'posts';
+export type label = 'About' | 'Tips' | 'Posts';
+export type href = '/about' | '/tips' | '/posts';
 
 export const LINKS: { slug: slug; label: label; href: href }[] = [
   {
@@ -186,9 +186,9 @@ export const LINKS: { slug: slug; label: label; href: href }[] = [
     href: '/about',
   },
   {
-    slug: 'snacks',
-    label: 'Snacks',
-    href: '/snacks',
+    slug: 'tips',
+    label: 'Tips',
+    href: '/tips',
   },
   {
     slug: 'posts',
