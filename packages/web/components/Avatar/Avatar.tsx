@@ -8,13 +8,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const Avatar = () => {
+  const sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+  const alt = "Stephen's avatar";
   const [isHovered, setIsHovered] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>();
 
   const handleMouseEnter = () => {
-    console.log(`mouse entered!`);
-
     setIsHovered(true);
     setIsRunning(true);
   };
@@ -22,91 +22,51 @@ const Avatar = () => {
   const handleMouseLeave = () => {
     setIsHovered(false);
 
-    console.log(`mouse left!`);
-
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
 
     const id: ReturnType<typeof setTimeout> = setTimeout(() => {
       setIsRunning(false);
-      console.log(`3 seconds passed`);
     }, 2000);
 
     setTimeoutId(id);
   };
 
-  console.log(`avatar `, isHovered, isRunning);
-
   return (
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ position: 'relative' }}
+      className={styles.wrapper}
     >
       <Image
         src={avatar}
-        alt="Stephen's avatar"
-        sizes="100vw"
-        width={427 * 0.8356}
-        height={511}
+        alt={alt}
+        sizes={sizes}
+        className={styles.base}
         style={{
-          filter: `drop-shadow(
-      2px 4px 32px hsl(0deg 0% 0% / 0.4)
-    )`,
-          width: '100%',
-          height: 'auto',
-          maxHeight: '400px',
-          maxWidth: 400 * 0.8356, // height-width ratio
-          objectFit: 'cover',
           opacity: !isHovered && !isRunning ? 1 : 0,
-          transition: 'opacity 500ms',
-          position: 'relative',
         }}
       />
+
       <Image
         src={no}
-        alt="Stephen's avatar"
-        sizes="100vw"
-        width={427 * 0.8356}
-        height={511}
+        alt={alt}
+        sizes={sizes}
+        className={`${styles.base} ${styles.stacked}`}
         style={{
-          filter: `drop-shadow(
-              2px 4px 32px hsl(0deg 0% 0% / 0.4)
-            )`,
-          width: '100%',
-          height: 'auto',
-          maxHeight: '400px',
-          maxWidth: 400 * 0.8356, // height-width ratio
-          objectFit: 'cover',
           opacity: isHovered ? 1 : 0,
           transition: 'opacity 500ms',
-          position: 'absolute',
-          top: 0,
-          left: 0,
         }}
       />
 
       <Image
         src={yes}
-        alt="Stephen's avatar"
-        sizes="100vw"
-        width={427 * 0.8356}
-        height={511}
+        alt={alt}
+        sizes={sizes}
+        className={`${styles.base} ${styles.stacked}`}
         style={{
-          filter: `drop-shadow(
-        2px 4px 32px hsl(0deg 0% 0% / 0.4)
-      )`,
-          width: '100%',
-          height: 'auto',
-          maxHeight: '400px',
-          maxWidth: 400 * 0.8356, // height-width ratio
-          objectFit: 'cover',
           opacity: !isHovered && isRunning ? 1 : 0,
-          transition: 'opacity 500ms',
-          position: 'absolute',
-          top: 0,
-          left: 0,
         }}
       />
     </div>

@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+}
+
+.base {
+  filter: drop-shadow(2px 4px 32px hsl(0deg 0% 0% / 0.4));
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  transition: opacity 500ms;
+  position: relative;
+}
+
+.stacked {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
