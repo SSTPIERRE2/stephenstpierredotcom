@@ -35,10 +35,30 @@ export interface AnalyticsEvent {
   created: Generated<Timestamp>;
 }
 
+export interface Categories {
+  id: string;
+  name: string;
+  created: Generated<Timestamp>;
+}
+
 export interface Message {
   id: string;
   text: string;
   email: string;
+  created: Generated<Timestamp>;
+}
+
+export interface PostCategories {
+  id: string;
+  post_id: number;
+  category_id: number;
+  created: Generated<Timestamp>;
+}
+
+export interface Posts {
+  id: string;
+  type: number;
+  likes: number;
   created: Generated<Timestamp>;
 }
 
@@ -51,6 +71,9 @@ export interface Users {
 
 export interface Database {
   analytics_event: AnalyticsEvent;
+  categories: Categories;
   message: Message;
+  post_categories: PostCategories;
+  posts: Posts;
   users: Users;
 }

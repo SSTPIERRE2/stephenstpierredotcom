@@ -1,4 +1,4 @@
 ---
-to: packages/portfolio/components/<%= name %>/index.ts
+to: packages/web/components/<%= name %>/index.ts
 ---
 export { default } from './<%= name %>';

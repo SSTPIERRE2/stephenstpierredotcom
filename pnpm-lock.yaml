@@ -107,7 +107,7 @@ importers:
         specifier: ^20.4.8
         version: 20.4.8
 
-  packages/portfolio:
+  packages/web:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.17

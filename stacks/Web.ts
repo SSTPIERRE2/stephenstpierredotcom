@@ -5,8 +5,8 @@ import { Database } from './Database';
 export function Web({ stack }: StackContext) {
   const api = use(Api);
 
-  const portfolio = new NextjsSite(stack, 'portfolio', {
-    path: 'packages/portfolio',
+  const web = new NextjsSite(stack, 'web', {
+    path: 'packages/web',
     environment: {
       NEXT_PUBLIC_API_URL: api.url,
     },
@@ -14,6 +14,6 @@ export function Web({ stack }: StackContext) {
   });
 
   stack.addOutputs({
-    portfolioUrl: portfolio.url,
+    webUrl: web.url,
   });
 }

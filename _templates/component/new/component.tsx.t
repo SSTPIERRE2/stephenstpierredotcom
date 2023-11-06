@@ -1,5 +1,5 @@
 ---
-to: packages/portfolio/components/<%= name %>/<%= name %>.tsx
+to: packages/web/components/<%= name %>/<%= name %>.tsx
 ---
 import styles from './<%= name %>.module.css';
 

@@ -139,8 +139,11 @@ html {
   --font-weight-medium: 600;
   --font-weight-bold: 800;
 
+  --font-size-sm: 0.75rem;
+  --font-size-normal: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
+  --font-size-xxl: 1.75rem;
 
   /*
     Silence the warning about missing Reach Dialog styles

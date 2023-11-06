@@ -1,3 +1,3 @@
 ---
-to: packages/portfolio/components/<%= name %>/<%= name %>.module.css
+to: packages/web/components/<%= name %>/<%= name %>.module.css
 ---
