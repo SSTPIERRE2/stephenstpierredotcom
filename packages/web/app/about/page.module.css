@@ -8,11 +8,11 @@
 }
 
 .greetingLeft {
-  flex: 3 350px;
+  flex: 3 calc(600 / 16 * 1rem);
 }
 
 .greetingRight {
-  flex: 2 100px;
+  flex: 2 300px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -36,4 +36,9 @@
   content: '';
   filter: blur(90px);
   transform: translateZ(0);
+}
+
+.carouselWrapper {
+  padding: 1rem;
+  background: var(--color-background-accent);
 }

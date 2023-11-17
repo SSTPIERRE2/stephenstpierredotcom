@@ -4,7 +4,7 @@
 
 .base {
   filter: drop-shadow(2px 4px 32px hsl(0deg 0% 0% / 0.4));
-  width: 100%;
+  width: 100vw;
   max-width: 400px;
   height: auto;
   object-fit: cover;

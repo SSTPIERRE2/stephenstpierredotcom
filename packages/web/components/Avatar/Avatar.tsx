@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const Avatar = () => {
-  const sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+  const sizes = '100vw';
   const alt = "Stephen's avatar";
   const [isHovered, setIsHovered] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
@@ -46,6 +46,7 @@ const Avatar = () => {
         className={styles.base}
         style={{
           opacity: !isHovered && !isRunning ? 1 : 0,
+          maxWidth: '334.24px', // ratio = 0.8356, image is taller so we must further constrain width
         }}
       />
 

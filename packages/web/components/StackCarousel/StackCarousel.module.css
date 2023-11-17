@@ -1,0 +1,24 @@
+.swiper {
+  overflow: visible;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.wordMark {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-medium);
+}
+
+.logo {
+  transition: transform 300ms;
+}
+
+.logo:hover {
+  transform: scale(1.15);
+}

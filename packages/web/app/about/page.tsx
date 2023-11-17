@@ -1,5 +1,7 @@
+import StackCarousel from '@/components/StackCarousel';
 import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
+import FullBleed from '@/components/FullBleed';
 
 export default function AboutPage() {
   return (
@@ -14,6 +16,11 @@ export default function AboutPage() {
           <Avatar />
         </div>
       </div>
+
+      <h2 style={{ margin: '1rem 0' }}>Tech Stack</h2>
+      <FullBleed className={styles.carouselWrapper}>
+        <StackCarousel />
+      </FullBleed>
     </main>
   );
 }
