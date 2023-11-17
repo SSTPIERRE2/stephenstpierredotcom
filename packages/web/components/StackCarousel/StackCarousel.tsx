@@ -3,7 +3,7 @@
 // Swiper-related imports
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Autoplay, Mousewheel } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import './SwiperOverrides.css';
 
 // Logos and other imports
@@ -22,6 +22,9 @@ import TypeScriptLogo from '../TypeScriptLogo';
 import VitestLogo from '../VitestLogo';
 import styles from './StackCarousel.module.css';
 import { useTheme } from '@/app/context/ThemeContext';
+import FigmaLogo from '../FigmaLogo';
+import StyledComponentsLogo from '../StyledComponentsLogo';
+import DockerLogo from '../DockerLogo';
 
 interface Props {}
 
@@ -34,35 +37,27 @@ const StackCarousel = ({}: Props) => {
       breakpoints={{
         320: {
           slidesPerView: 2,
-          spaceBetween: 20,
         },
         480: {
           slidesPerView: 3,
-          spaceBetween: 30,
         },
         640: {
           slidesPerView: 4,
-          spaceBetween: 40,
         },
         1080: {
           slidesPerView: 6,
-          spaceBetween: 40,
         },
       }}
-      speed={1000}
+      speed={3000}
       autoplay={{
-        delay: 3000,
+        delay: 0,
         pauseOnMouseEnter: true,
         disableOnInteraction: true,
-      }}
-      keyboard={{
-        enabled: true,
       }}
       a11y={{
         enabled: true,
       }}
-      mousewheel={true}
-      modules={[Autoplay, Mousewheel]}
+      modules={[Autoplay]}
       grabCursor
       loop
     >
@@ -76,7 +71,7 @@ const StackCarousel = ({}: Props) => {
         <JavaScriptLogo className={styles.logo} />
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
-        <ReactLogo className={styles.logo} />
+        <ReactLogo className={`${styles.logo} ${styles.reactLogo}`} />
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <NextJsLogo className={styles.logo} theme={theme} />
@@ -108,6 +103,16 @@ const StackCarousel = ({}: Props) => {
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <EslintLogo className={styles.logo} theme={theme} />
+      </SwiperSlide>
+      <SwiperSlide className={styles.slide}>
+        <FigmaLogo className={styles.logo} />
+        <span className={styles.wordMark}>Figma</span>
+      </SwiperSlide>
+      <SwiperSlide className={styles.slide}>
+        <StyledComponentsLogo className={styles.logo} theme={theme} />
+      </SwiperSlide>
+      <SwiperSlide className={styles.slide}>
+        <DockerLogo className={styles.logo} theme={theme} />
       </SwiperSlide>
     </Swiper>
   );

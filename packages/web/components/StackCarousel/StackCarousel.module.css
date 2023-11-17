@@ -22,3 +22,9 @@
 .logo:hover {
   transform: scale(1.15);
 }
+
+.reactLogo {
+  background: #0f172a;
+  border-radius: 4px;
+  padding: 8px;
+}

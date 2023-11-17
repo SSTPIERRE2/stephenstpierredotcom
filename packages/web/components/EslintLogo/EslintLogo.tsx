@@ -9,8 +9,8 @@ interface Props {
 const EslintLogo = ({ className, theme }: Props) => {
   return (
     <svg
-      width="203"
-      height="58"
+      width="192"
+      // height="58"
       viewBox="0 0 203 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
