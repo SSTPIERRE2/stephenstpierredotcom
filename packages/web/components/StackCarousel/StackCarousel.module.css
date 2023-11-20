@@ -1,5 +1,16 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .swiper {
   overflow: visible;
+  animation: 1s fadeIn both;
+  animation-delay: 1.75s;
 }
 
 .slide {
@@ -8,19 +19,16 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  transition: transform 300ms;
+}
+
+.slide:hover {
+  transform: scale(1.15);
 }
 
 .wordMark {
   font-size: var(--font-size-medium);
   font-weight: var(--font-weight-medium);
-}
-
-.logo {
-  transition: transform 300ms;
-}
-
-.logo:hover {
-  transform: scale(1.15);
 }
 
 .reactLogo {
