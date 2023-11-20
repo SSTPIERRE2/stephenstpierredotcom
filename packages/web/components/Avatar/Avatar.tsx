@@ -48,6 +48,7 @@ const Avatar = () => {
           opacity: !isHovered && !isRunning ? 1 : 0,
           maxWidth: '334.24px', // ratio = 0.8356, image is taller so we must further constrain width
         }}
+        priority
       />
 
       <Image
@@ -59,6 +60,8 @@ const Avatar = () => {
           opacity: isHovered ? 1 : 0,
           transition: 'opacity 500ms',
         }}
+        priority
+        aria-hidden
       />
 
       <Image
@@ -69,6 +72,8 @@ const Avatar = () => {
         style={{
           opacity: !isHovered && isRunning ? 1 : 0,
         }}
+        priority
+        aria-hidden
       />
     </div>
   );

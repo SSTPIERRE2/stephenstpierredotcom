@@ -12,8 +12,8 @@ const MobileMenu = () => {
   const [isMobileMenuOpen, toggleMobileMenu] = useToggle(false);
 
   return (
-    <div className={styles.portal}>
-      <Portal>
+    <Portal>
+      <div className={styles.portal}>
         <button
           className={styles.mobileMenuButton}
           onClick={() => toggleMobileMenu()}
@@ -87,8 +87,8 @@ const MobileMenu = () => {
             </div>
           </nav>
         </div>
-      </Portal>
-    </div>
+      </div>
+    </Portal>
   );
 };
 

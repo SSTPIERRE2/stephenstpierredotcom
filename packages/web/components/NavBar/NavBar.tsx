@@ -10,6 +10,7 @@ import Icon from '../Logo/Icon';
 import { usePathname } from 'next/navigation';
 import { LINKS, slug } from '@/utils/constant';
 import MobileMenu from '../MobileMenu';
+import VisuallyHidden from '../VisuallyHidden';
 
 const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState<slug | null>();
@@ -74,6 +75,7 @@ const NavBar = () => {
         <DarkLightToggle />
         <button className={styles.action}>
           <Rss size="1.5rem" />
+          <VisuallyHidden>RSS Feed</VisuallyHidden>
         </button>
       </div>
 

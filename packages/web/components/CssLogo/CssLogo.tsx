@@ -15,6 +15,7 @@ const CssLogo = ({ className }: Props) => {
       version="1.1"
       className={className}
     >
+      <title>CSS</title>
       <g transform="translate(-193.633,-276.3622)">
         <g transform="translate(119,276.3622)">
           <polygon

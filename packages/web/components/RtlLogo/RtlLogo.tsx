@@ -13,6 +13,7 @@ const RtlLogo = ({ className }: Props) => {
       viewBox="0 0 256 256"
       className={className}
     >
+      <title>React Testing Library</title>
       <defs>
         <radialGradient
           id="logosTestingLibrary0"

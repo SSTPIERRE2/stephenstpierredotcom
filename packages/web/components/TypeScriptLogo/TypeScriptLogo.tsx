@@ -8,12 +8,12 @@ const TypeScriptLogo = ({ className }: Props) => {
   return (
     <svg
       fill="none"
-      height="128"
       viewBox="0 0 128 128"
       width="128"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>TypeScript</title>
       <rect fill="#3178c6" height="128" rx="6" width="128" />
       <path
         clipRule="evenodd"

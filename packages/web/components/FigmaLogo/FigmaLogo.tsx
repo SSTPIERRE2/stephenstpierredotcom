@@ -14,11 +14,12 @@ const FigmaLogo = ({ className }: Props) => {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>Figma</title>
       <rect
         width="95.0226"
         height="142.534"
         fill="black"
-        fill-opacity="0"
+        fillOpacity="0"
         transform="translate(1.46603 2.19946) scale(3)"
       />
       <path

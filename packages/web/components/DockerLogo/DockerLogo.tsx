@@ -19,9 +19,9 @@ const DockerLogo = ({ className, theme }: Props) => {
       xmlSpace="preserve"
       enableBackground="new 0 0 1200 309" // ratio = 0.2575
       width="192"
-      // height="32.96"
       className={className}
     >
+      <title>Docker</title>
       <path
         fill={theme === 'light' ? '#00084D' : '#E5F2FC'}
         d="M379.6,111.7c-2.3-16.7-11.5-31.2-28.1-44.3l-9.6-6.5l-6.4,9.7c-8.2,12.5-12.3,29.9-11,46.6

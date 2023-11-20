@@ -18,9 +18,9 @@ const AwsLogo = ({ className, theme }: Props) => {
       style={{ enableBackground: 'new 0 0 304 182' } as React.CSSProperties}
       xmlSpace="preserve"
       width="128"
-      height="76.672"
       className={className}
     >
+      <title>Amazon Web Services</title>
       <g>
         <path
           fill={theme === 'light' ? '#252F3E' : 'var(--color-text)'}

@@ -16,6 +16,7 @@ const NextJsLogo = ({ className, theme }: Props) => {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>Next.js</title>
       <path
         d="M261.919 0.0330722H330.547V12.7H303.323V79.339H289.71V12.7H261.919V0.0330722Z"
         fill={theme === 'light' ? 'black' : 'var(--color-text)'}

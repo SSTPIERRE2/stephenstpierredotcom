@@ -12,7 +12,7 @@ const HtmlLogo = ({ className }: Props) => {
       width="128px"
       className={className}
     >
-      <title>HTML5 Logo</title>
+      <title>HTML5</title>
 
       <polygon
         fill="#E44D26"

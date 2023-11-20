@@ -25,7 +25,7 @@ import { useTheme } from '@/app/context/ThemeContext';
 import FigmaLogo from '../FigmaLogo';
 import StyledComponentsLogo from '../StyledComponentsLogo';
 import DockerLogo from '../DockerLogo';
-import VisuallyHidden from '../VisuallyHidden';
+import GraphqlLogo from '../GraphqlLogo';
 
 interface Props {}
 
@@ -57,6 +57,7 @@ const StackCarousel = ({}: Props) => {
       }}
       a11y={{
         enabled: true,
+        containerMessage: 'Tech Stack',
       }}
       modules={[Autoplay]}
       grabCursor
@@ -64,67 +65,69 @@ const StackCarousel = ({}: Props) => {
     >
       <SwiperSlide className={styles.slide}>
         <HtmlLogo />
-        <VisuallyHidden>HTML</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <CssLogo />
-        <VisuallyHidden>CSS</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <JavaScriptLogo />
-        <VisuallyHidden>JavaScript</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <ReactLogo className={styles.reactLogo} />
-        <VisuallyHidden>React.js</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <NextJsLogo theme={theme} />
-        <VisuallyHidden>Next.js</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <TypeScriptLogo />
-        <VisuallyHidden>TypeScript</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <NodeJsLogo theme={theme} />
-        <VisuallyHidden>Node.js</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <PostgresLogo />
-        <span className={styles.wordMark}>PostgreSQL</span>
+        <span className={styles.wordMark} aria-hidden>
+          PostgreSQL
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <AwsLogo theme={theme} />
-        <VisuallyHidden>Amazon Web Services</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <ServerlessLogo />
-        <span className={styles.wordMark}>Serverless</span>
+        <span className={styles.wordMark} aria-hidden>
+          Serverless
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <RtlLogo />
-        <span className={styles.wordMark}>React Testing Library</span>
+        <span className={styles.wordMark} aria-hidden>
+          React Testing Library
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <VitestLogo />
-        <span className={styles.wordMark}>Vitest</span>
+        <span className={styles.wordMark} aria-hidden>
+          Vitest
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <EslintLogo theme={theme} />
-        <VisuallyHidden>ESLint</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <FigmaLogo />
-        <span className={styles.wordMark}>Figma</span>
+        <span className={styles.wordMark} aria-hidden>
+          Figma
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <StyledComponentsLogo theme={theme} />
-        <VisuallyHidden>Styled Components</VisuallyHidden>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <DockerLogo theme={theme} />
-        <VisuallyHidden>Docker</VisuallyHidden>
+      </SwiperSlide>
+      <SwiperSlide className={styles.slide}>
+        <GraphqlLogo />
       </SwiperSlide>
     </Swiper>
   );

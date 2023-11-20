@@ -7,13 +7,13 @@ interface Props {
 const PostgresLogo = ({ className }: Props) => {
   return (
     <svg
-      width="93.12" // 432.071 124.16
       height="96" // 445.383 128 ratio = 0.97
       viewBox="0 0 432.071 445.383"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>PostgreSQL</title>
       <g
         fillRule="nonzero"
         clipRule="nonzero"
