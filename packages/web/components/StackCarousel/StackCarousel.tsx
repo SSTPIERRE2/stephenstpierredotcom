@@ -3,7 +3,7 @@
 // Swiper-related imports
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Autoplay } from 'swiper/modules';
+import { FreeMode, Mousewheel } from 'swiper/modules';
 import './SwiperOverrides.css';
 
 // Logos and other imports
@@ -36,30 +36,26 @@ const StackCarousel = ({}: Props) => {
     <Swiper
       className={styles.swiper}
       breakpoints={{
-        320: {
+        400: {
           slidesPerView: 2,
         },
-        480: {
+        550: {
           slidesPerView: 3,
         },
-        640: {
+        800: {
           slidesPerView: 4,
         },
         1080: {
           slidesPerView: 6,
         },
       }}
-      speed={4000}
-      autoplay={{
-        delay: 0,
-        pauseOnMouseEnter: true,
-        disableOnInteraction: true,
-      }}
       a11y={{
         enabled: true,
         containerMessage: 'Tech Stack',
       }}
-      modules={[Autoplay]}
+      modules={[FreeMode, Mousewheel]}
+      freeMode
+      mousewheel
       grabCursor
       loop
     >
