@@ -38,7 +38,24 @@
   transform: translateZ(0);
 }
 
+@media (max-width: 70.375rem) {
+  .flourish {
+    top: 100px;
+    left: 15%;
+  }
+}
+
 .carouselWrapper {
   padding: 1rem;
   background: var(--color-background-accent);
+}
+
+.techStackIntro {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin: 1rem 0;
+}
+
+.heading {
+  padding: 1rem 0;
 }

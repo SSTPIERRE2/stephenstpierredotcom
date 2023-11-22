@@ -26,6 +26,7 @@ import FigmaLogo from '../FigmaLogo';
 import StyledComponentsLogo from '../StyledComponentsLogo';
 import DockerLogo from '../DockerLogo';
 import GraphqlLogo from '../GraphqlLogo';
+import PrettierLogo from '../PrettierLogo';
 
 interface Props {}
 
@@ -109,6 +110,12 @@ const StackCarousel = ({}: Props) => {
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <EslintLogo theme={theme} />
+      </SwiperSlide>
+      <SwiperSlide className={styles.slide}>
+        <PrettierLogo />
+        <span className={styles.wordMark} aria-hidden>
+          Prettier
+        </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <FigmaLogo />
