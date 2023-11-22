@@ -27,7 +27,7 @@
 }
 
 .wordMark {
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
 }
 

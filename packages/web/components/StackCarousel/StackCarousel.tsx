@@ -124,7 +124,7 @@ const StackCarousel = ({}: Props) => {
         </span>
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
-        <StyledComponentsLogo theme={theme} />
+        <StyledComponentsLogo />
       </SwiperSlide>
       <SwiperSlide className={styles.slide}>
         <DockerLogo theme={theme} />

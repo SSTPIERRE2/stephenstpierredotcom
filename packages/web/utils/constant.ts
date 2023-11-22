@@ -6,7 +6,11 @@ export const LIGHT_COLORS = {
   '--color-background-accent': '#cbd5e1',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
 
+  '--color-primary-300': '#a577ef',
+  '--color-primary-400': '#8f57eb',
   '--color-primary': '#7935e6',
+  '--color-primary-600': '#6e30df',
+  '--color-primary-700': '#5e27d6',
   '--color-primary-accent': '#bfa0f3',
   '--color-secondary': '#E3008A',
   '--color-accent': '#354ae6',
@@ -81,7 +85,11 @@ export const DARK_COLORS = {
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
 
+  '--color-primary-300': '#bdef76',
+  '--color-primary-400': '#afea56',
   '--color-primary': '#a3e635',
+  '--color-primary-600': '#99d32c',
+  '--color-primary-700': '#8cbd1f',
   '--color-primary-accent': '#4d7c0f',
   '--color-secondary': '#a855f7',
   '--color-accent': '#ec4899',

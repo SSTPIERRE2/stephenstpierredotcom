@@ -1,0 +1,48 @@
+.base {
+  font-size: var(--font-size);
+  padding: var(--padding);
+  border-radius: var(--borderRadius);
+  font-weight: var(--font-weight-medium);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+}
+
+.base:focus {
+  outline-color: var(--color-primary);
+  outline-offset: 4px;
+}
+
+.fill {
+  background-color: var(--color-primary);
+  color: var(--color-fill-base-text);
+}
+
+.fill:hover {
+  background-color: var(--color-primary-600);
+}
+
+.outline {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid currentColor;
+}
+
+.outline:hover {
+  background-color: var(--color-background-accent);
+}
+
+.ghost {
+  color: var(--color-gray-500);
+  background-color: transparent;
+}
+
+.ghost:focus {
+  outline: 2px solid var(--color-gray-500);
+}
+
+.ghost:hover {
+  background: hsl(240deg 10% 50% / 0.15);
+  color: var(--color-ghost-hover-text);
+}
