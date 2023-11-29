@@ -33,6 +33,9 @@ export const LIGHT_COLORS = {
   '--color-gray-900': '#0f172a',
   '--color-gray-1000': '#020617',
 
+  '--scrollbar-color': 'var(--color-gray-600)',
+  '--scrollbar-background-color': 'var(--color-gray-100)',
+
   '--retro-sun-gradient': `linear-gradient(
     to bottom,
     #ef17fe,
@@ -112,6 +115,9 @@ export const DARK_COLORS = {
   '--color-gray-800': '#1f2937',
   '--color-gray-900': '#111827',
   '--color-gray-1000': '#030712',
+
+  '--scrollbar-color': 'var(--color-gray-400)',
+  '--scrollbar-background-color': 'var(--color-gray-800)',
 
   '--retro-sun-gradient': `linear-gradient(
     to bottom,
