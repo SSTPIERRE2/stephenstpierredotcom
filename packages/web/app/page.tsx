@@ -1,8 +1,7 @@
 import styles from './page.module.css';
-import SnackGallery from '@/components/TipGallery/TipGallery';
+import TipGallery from '@/components/TipGallery/TipGallery';
 import PostGallery from '@/components/PostGallery/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
-import FullBleed from '@/components/FullBleed';
 import Oasis from '@/components/Oasis';
 import Link from 'next/link';
 
@@ -58,13 +57,13 @@ export default function Home() {
         </div>
       </div>
 
-      <SnackGallery />
+      <TipGallery />
 
       <PostGallery />
 
-      <FullBleed>
+      <div className={styles.fullBleed}>
         <RetroGrid />
-      </FullBleed>
+      </div>
     </main>
   );
 }

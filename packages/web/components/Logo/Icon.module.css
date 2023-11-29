@@ -30,7 +30,7 @@
 }
 
 .accent {
-  color: var(--color-primary-accent);
+  color: var(--color-primary-200);
   position: absolute;
   top: 0.4rem;
   left: 0.7rem;

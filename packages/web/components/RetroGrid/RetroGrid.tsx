@@ -25,7 +25,7 @@ const RetroGrid = () => {
         return (
           <line
             key={num}
-            x1={num < 6 ? 0 : Math.min((num - 5) * 95, width / 2)}
+            x1={num < 6 ? 0 : Math.min((num - 5) * 88, width / 2)}
             y1={num < 6 ? (num + 1) * 33.333 : 210}
             x2={Math.min((num + 1) * 57, width / 2)}
             y2={0}
@@ -39,7 +39,7 @@ const RetroGrid = () => {
         return (
           <line
             key={num}
-            x1={num < 6 ? width : Math.max(width - (num - 5) * 95, width / 2)}
+            x1={num < 6 ? width : Math.max(width - (num - 5) * 88, width / 2)}
             y1={num < 6 ? (num + 1) * 33.333 : 210}
             x2={Math.max(width - (num + 1) * 57, width / 2)}
             y2={0}

@@ -1,32 +1,14 @@
-.nav {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 0.75rem;
+@media (max-width: 41.875rem) {
+  .nav {
+    display: none;
+  }
 }
 
-.middle {
+.links {
   display: flex;
   flex-direction: row;
   gap: 2rem;
   list-style-type: none;
-}
-
-.right {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-}
-
-@media (max-width: 41.875rem) {
-  .middle {
-    display: none;
-  }
-  .right {
-    display: none;
-  }
 }
 
 .underline {
@@ -66,16 +48,4 @@
   inset: 0;
   background: var(--color-backdrop);
   border-radius: 16px;
-}
-
-.action {
-  border: none;
-  background: transparent;
-  color: var(--color-text);
-  opacity: 0.7;
-  cursor: pointer;
-}
-
-.action:hover {
-  opacity: 1;
 }

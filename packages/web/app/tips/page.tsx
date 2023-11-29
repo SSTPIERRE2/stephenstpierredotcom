@@ -1,9 +1,9 @@
 import styles from './page.module.css';
 
-export default function SnacksPage() {
+export default function TipsPage() {
   return (
     <main className={styles.main}>
-      <h2>Code Snacks</h2>
+      <h2>Code Tips</h2>
     </main>
   );
 }

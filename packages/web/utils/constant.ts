@@ -6,14 +6,15 @@ export const LIGHT_COLORS = {
   '--color-background-accent': '#cbd5e1',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
 
-  '--color-primary-300': '#a577ef',
-  '--color-primary-400': '#8f57eb',
-  '--color-primary': '#7935e6',
-  '--color-primary-600': '#6e30df',
-  '--color-primary-700': '#5e27d6',
-  '--color-primary-accent': '#bfa0f3',
+  '--color-primary-200': '#a1a7f4',
+  '--color-primary-300': '#7884f0',
+  '--color-primary-400': '#5867ec',
+  '--color-primary': '#354ae6',
+  '--color-primary-600': '#3041db',
+  '--color-primary-700': '#2535ce',
+
   '--color-secondary': '#E3008A',
-  '--color-accent': '#354ae6',
+  '--color-accent': '#7935e6',
 
   '--color-info': '#3041db',
   '--color-success': '#4d7c0f',
@@ -85,12 +86,13 @@ export const DARK_COLORS = {
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
 
+  '--color-primary-200': '#4d7c0f',
   '--color-primary-300': '#bdef76',
   '--color-primary-400': '#afea56',
   '--color-primary': '#a3e635',
   '--color-primary-600': '#99d32c',
   '--color-primary-700': '#8cbd1f',
-  '--color-primary-accent': '#4d7c0f',
+
   '--color-secondary': '#a855f7',
   '--color-accent': '#ec4899',
 
@@ -186,8 +188,10 @@ export const AVATAR_HEIGHT_WIDTH_RATIO = 0.354;
 export type slug = 'about' | 'tips' | 'posts';
 export type label = 'About' | 'Tips' | 'Posts';
 export type href = '/about' | '/tips' | '/posts';
+export type navLink = { slug: slug; label: label; href: href };
+export type link = { slug: string; label: string; href: string };
 
-export const LINKS: { slug: slug; label: label; href: href }[] = [
+export const LINKS: navLink[] = [
   {
     slug: 'about',
     label: 'About',
@@ -202,5 +206,33 @@ export const LINKS: { slug: slug; label: label; href: href }[] = [
     slug: 'posts',
     label: 'Posts',
     href: '/posts',
+  },
+];
+
+export const SOCIAL_LINKS: link[] = [
+  {
+    slug: 'github',
+    label: 'Github',
+    href: 'https://github.com/SSTPIERRE2',
+  },
+  {
+    slug: 'linkedIn',
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/stevecstpierre/',
+  },
+  {
+    slug: 'stackOverflow',
+    label: 'Stack Overflow',
+    href: 'https://stackoverflow.com/users/8183576/steve',
+  },
+  {
+    slug: 'twitter',
+    label: 'Twitter',
+    href: 'https://twitter.com/nothisisSteve',
+  },
+  {
+    slug: 'email',
+    label: 'Email',
+    href: 'mailto:stephencstpierre@gmail.com',
   },
 ];

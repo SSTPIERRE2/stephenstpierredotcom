@@ -4,12 +4,12 @@ import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 import UrqlProvider from './UrqlProvider';
 import AnalyticsWrapper from './AnalyticsWrapper';
-import Header from '@/components/Header/Header';
-import NavBar from '@/components/NavBar/NavBar';
-import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import AuthProvider from './context/AuthContext/AuthProvider';
 import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
 import { ThemeProvider } from './context/ThemeContext';
+import MobileMenu from '@/components/MobileMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -39,9 +39,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AuthProvider>
             <ThemeProvider initialTheme={theme}>
               <AnalyticsWrapper>
-                <Header>
-                  <NavBar />
-                </Header>
+                <Header />
+                <MobileMenu />
                 {children}
                 <Footer />
               </AnalyticsWrapper>

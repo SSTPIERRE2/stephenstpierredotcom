@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Shuriken from '../Shuriken';
+// import Shuriken from '../Shuriken';
 import styles from './Primary.module.css';
 
 const Logo = () => {
@@ -8,8 +8,8 @@ const Logo = () => {
       <div className={styles.wrapper}>
         <span className={`${styles.text} ${styles.mainText}`}>Stephen</span>
         <span className={`${styles.text} ${styles.subCopy}`}>Stephen</span>
-        <Shuriken className={styles.star} />
-        <Shuriken className={`${styles.star} ${styles.starTwo}`} />
+        {/* <Shuriken className={styles.star} />
+        <Shuriken className={`${styles.star} ${styles.starTwo}`} /> */}
         <div className={`${styles.wrapper} ${styles.lastNameWrapper}`}>
           <span
             className={`${styles.text} ${styles.mainText} ${styles.lastNameText}`}

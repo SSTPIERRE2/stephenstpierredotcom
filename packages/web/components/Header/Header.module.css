@@ -1,13 +1,34 @@
-.sticky {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
 .header {
   width: 100%;
-  padding: 1rem 3rem;
-  position: relative;
-  z-index: 2;
-  /* transition: top 0.3s; */
+  max-width: min(1000px, calc(100% - 64px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+@media (max-width: 41.875rem) {
+  .right {
+    display: none;
+  }
+}
+
+.action {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.action:hover {
+  opacity: 1;
 }

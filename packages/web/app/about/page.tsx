@@ -92,6 +92,67 @@ export default function AboutPage() {
 
       <h2 className={styles.heading}>A little more about me</h2>
 
+      <div>
+        <h3>Hobbies</h3>
+        <ul style={{ listStyle: 'none', padding: '0' }}>
+          <li
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Shuriken
+              size="2rem"
+              style={{
+                display: 'inline-block',
+                marginRight: '1rem',
+                transform: 'rotate(-30deg)',
+              }}
+            />{' '}
+            Olympic weight training
+          </li>
+          <li
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Shuriken
+              size="2rem"
+              style={{
+                display: 'inline-block',
+                marginRight: '1rem',
+                transform: 'rotate(-35deg)',
+              }}
+            />{' '}
+            Cooking
+          </li>
+          <li
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Shuriken
+              size="2rem"
+              style={{
+                display: 'inline-block',
+                marginRight: '1rem',
+                transform: 'rotate(-40deg)',
+              }}
+            />{' '}
+            Hiking
+          </li>
+          <li>Gaming</li>
+          <li>Gardening</li>
+          <li>Archery</li>
+          <li>Woodworking</li>
+        </ul>
+      </div>
+
       <h3 className={styles.heading}>Favorites</h3>
     </main>
   );

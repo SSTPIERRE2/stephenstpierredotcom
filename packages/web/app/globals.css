@@ -145,6 +145,8 @@ html {
   --font-size-xl: 1.5rem;
   --font-size-xxl: 1.75rem;
 
+  --max-width: 1000px;
+
   /*
     Silence the warning about missing Reach Dialog styles
   */

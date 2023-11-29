@@ -6,7 +6,7 @@ import Link from 'next/link';
 const TipGallery = () => {
   return (
     <div className={styles.container}>
-      <TextWithBorder as={Link} href="/snacks" className={styles.link}>
+      <TextWithBorder as={Link} href="/tips" className={styles.link}>
         Coding Tips
       </TextWithBorder>
       <div className={styles.gallery}>

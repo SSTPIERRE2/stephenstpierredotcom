@@ -2,15 +2,10 @@
 
 import Link from 'next/link';
 import styles from './NavBar.module.css';
-import { Rss } from 'react-feather';
 import { motion } from 'framer-motion';
 import { useId, useState } from 'react';
-import DarkLightToggle from '../DarkLightToggle';
-import Icon from '../Logo/Icon';
 import { usePathname } from 'next/navigation';
 import { LINKS, slug } from '@/utils/constant';
-import MobileMenu from '../MobileMenu';
-import VisuallyHidden from '../VisuallyHidden';
 
 const NavBar = () => {
   const [hoveredLink, setHoveredLink] = useState<slug | null>();
@@ -27,9 +22,7 @@ const NavBar = () => {
 
   return (
     <nav className={styles.nav}>
-      <Icon />
-
-      <ul className={styles.middle} onMouseLeave={() => setHoveredLink(null)}>
+      <ul className={styles.links} onMouseLeave={() => setHoveredLink(null)}>
         {LINKS.map(({ slug, label, href }) => (
           <li
             key={slug}
@@ -60,7 +53,9 @@ const NavBar = () => {
                 data-text={label}
                 style={{
                   fontWeight:
-                    pathName === href ? 'var(--font-weight-bold)' : 'revert',
+                    pathName === href
+                      ? 'var(--font-weight-bold)'
+                      : 'var(--font-weight-medium)',
                 }}
                 onMouseEnter={() => setHoveredLink(slug)}
               >
@@ -70,16 +65,6 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
-
-      <div className={styles.right}>
-        <DarkLightToggle />
-        <button className={styles.action}>
-          <Rss size="1.5rem" />
-          <VisuallyHidden>RSS Feed</VisuallyHidden>
-        </button>
-      </div>
-
-      <MobileMenu />
     </nav>
   );
 };
