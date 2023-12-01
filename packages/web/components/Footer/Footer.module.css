@@ -17,11 +17,13 @@
     #44ccff 70%,
     #32a1e9 90%
   ); */
-  background: linear-gradient(
+  grid-column: 1 / -1;
+  background: var(--color-background-accent);
+  /* background: linear-gradient(
     to top,
-    var(--color-background-accent),
-    var(--color-background)
-  );
+    var(--color-primary-50),
+    var(--color-background-accent)
+  ); */
   position: relative;
   transition: background 350ms ease 0s;
 }

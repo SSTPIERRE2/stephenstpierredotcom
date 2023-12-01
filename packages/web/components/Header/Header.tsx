@@ -8,16 +8,18 @@ import NavBar from '../NavBar';
 const Header = () => {
   return (
     <header className={styles.header}>
-      <Icon />
+      <div className={styles.wrapper}>
+        <Icon />
 
-      <NavBar />
+        <NavBar />
 
-      <div className={styles.right}>
-        <DarkLightToggle />
-        <button className={styles.action}>
-          <Rss size="1.5rem" />
-          <VisuallyHidden>RSS Feed</VisuallyHidden>
-        </button>
+        <div className={styles.right}>
+          <DarkLightToggle />
+          <button className={styles.action}>
+            <Rss size="1.5rem" />
+            <VisuallyHidden>RSS Feed</VisuallyHidden>
+          </button>
+        </div>
       </div>
     </header>
   );

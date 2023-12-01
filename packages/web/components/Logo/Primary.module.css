@@ -102,7 +102,7 @@
 
 .subCopy {
   --x-offset-end: calc(1rem / 6);
-  color: var(--color-primary-200);
+  color: var(--color-primary-accent);
   position: absolute;
   z-index: 1;
   top: 0;

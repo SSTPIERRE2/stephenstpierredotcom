@@ -1,16 +1,13 @@
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .swiper {
   overflow: visible;
-  animation: 1s fadeIn both;
-  animation-delay: 1.75s;
+  display: flex;
+  gap: 32px;
+  padding-inline-start: 32px;
+}
+
+.swiper::after {
+  content: '';
+  min-width: 32px;
 }
 
 .slide {
@@ -20,6 +17,7 @@
   justify-content: center;
   gap: 0.5rem;
   transition: transform 300ms;
+  min-width: 128px;
 }
 
 .slide:hover {

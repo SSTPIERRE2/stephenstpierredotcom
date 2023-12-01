@@ -4,9 +4,17 @@ import useIsOnscreen from '@/hooks/useIsOnScreen';
 import Logo from '../Logo/Primary';
 import styles from './Footer.module.css';
 import { SOCIAL_LINKS } from '@/utils/constant';
+import { useEffect, useState } from 'react';
 
 const Footer = () => {
   const [isOnScreen, elementRef] = useIsOnscreen<HTMLDivElement>();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!isInitialized && isOnScreen) {
+      setIsInitialized(true);
+    }
+  }, [isOnScreen]);
 
   return (
     <footer className={styles.footer} role="contentinfo">
@@ -16,10 +24,10 @@ const Footer = () => {
           ref={elementRef}
           style={{ visibility: isOnScreen ? 'revert' : 'hidden' }}
         >
-          <Logo key={isOnScreen ? 'logo' : 'invisibleLogo'} />
+          <Logo key={!isInitialized && isOnScreen ? 'logo' : 'invisibleLogo'} />
           <span
             className={styles.thanks}
-            key={isOnScreen ? 'thanks' : 'invisible'}
+            key={!isInitialized && isOnScreen ? 'thanks' : 'invisible'}
           >
             Thanks for visiting!
           </span>

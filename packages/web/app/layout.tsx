@@ -10,6 +10,7 @@ import AuthProvider from './context/AuthContext/AuthProvider';
 import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
 import { ThemeProvider } from './context/ThemeContext';
 import MobileMenu from '@/components/MobileMenu';
+import styles from './layout.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -39,10 +40,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AuthProvider>
             <ThemeProvider initialTheme={theme}>
               <AnalyticsWrapper>
-                <Header />
-                <MobileMenu />
-                {children}
-                <Footer />
+                <div className={styles.maxWidthGridWrapper}>
+                  <Header />
+                  <MobileMenu />
+                  {children}
+                  <Footer />
+                </div>
               </AnalyticsWrapper>
             </ThemeProvider>
           </AuthProvider>

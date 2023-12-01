@@ -4,6 +4,7 @@ import PostGallery from '@/components/PostGallery/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import Oasis from '@/components/Oasis';
 import Link from 'next/link';
+import FullBleed from '@/components/FullBleed';
 
 export default function Home() {
   return (
@@ -61,9 +62,11 @@ export default function Home() {
 
       <PostGallery />
 
-      <div className={styles.fullBleed}>
+      {/* <div className={styles.fullBleed}> */}
+      <FullBleed>
         <RetroGrid />
-      </div>
+      </FullBleed>
+      {/* </div> */}
     </main>
   );
 }

@@ -1,0 +1,13 @@
+.aside {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .aside {
+    display: block;
+    grid-column: 15/16;
+    grid-row: 2/7;
+    align-self: start;
+    margin: 0;
+  }
+}

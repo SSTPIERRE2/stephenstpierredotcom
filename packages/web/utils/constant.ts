@@ -3,15 +3,20 @@ export type THEME = 'light' | 'dark';
 export const LIGHT_COLORS = {
   '--color-text': '#030712',
   '--color-background': '#FFFFFF',
-  '--color-background-accent': '#cbd5e1',
+  '--color-background-accent': 'var(--color-gray-200)',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
 
+  '--color-primary-50': '#e9eafd',
+  '--color-primary-100': '#c7caf8',
   '--color-primary-200': '#a1a7f4',
   '--color-primary-300': '#7884f0',
   '--color-primary-400': '#5867ec',
   '--color-primary': '#354ae6',
   '--color-primary-600': '#3041db',
   '--color-primary-700': '#2535ce',
+  '--color-primary-800': '#1929c3',
+  '--color-primary-900': '#000bb1',
+  '--color-primary-accent': 'var(--color-primary-200)',
 
   '--color-secondary': '#E3008A',
   '--color-accent': '#7935e6',
@@ -89,12 +94,15 @@ export const DARK_COLORS = {
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
 
-  '--color-primary-200': '#4d7c0f',
+  '--color-primary-200': '#cff49e',
   '--color-primary-300': '#bdef76',
   '--color-primary-400': '#afea56',
   '--color-primary': '#a3e635',
   '--color-primary-600': '#99d32c',
   '--color-primary-700': '#8cbd1f',
+  '--color-primary-800': '#7fa510',
+  '--color-primary-900': '#6b7e00',
+  '--color-primary-accent': 'var(--color-primary-900)',
 
   '--color-secondary': '#a855f7',
   '--color-accent': '#ec4899',

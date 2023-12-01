@@ -1,6 +1,11 @@
 .header {
   width: 100%;
-  max-width: min(1000px, calc(100% - 64px));
+  grid-column: 1 / -1;
+  background: var(--color-background-accent);
+}
+
+.wrapper {
+  max-width: min(1100px, calc(100% - 64px));
   margin: 0 auto;
   display: flex;
   align-items: center;

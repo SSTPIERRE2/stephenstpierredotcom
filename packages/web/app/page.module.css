@@ -1,14 +1,10 @@
 .main {
-  display: grid;
-  grid-template-columns: 1fr min(1000px, calc(100% - 64px)) 1fr;
-  column-gap: 32px;
-  row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* row-gap: 2rem; */
   padding-bottom: 1rem;
   padding-top: 3rem;
-}
-
-.main > * {
-  grid-column: 2;
 }
 
 .fullBleed {
@@ -53,10 +49,6 @@
 }
 
 .simpleLink {
-  /* text-decoration-color: var(--color-primary);
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-underline-offset: 0.3rem; */
   text-decoration: none;
   background: var(--retro-horizontal-gradient);
   background-repeat: repeat-x;
@@ -100,49 +92,5 @@
   .oasis {
     margin-left: auto;
     margin-right: auto;
-  }
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
-
-  .card:hover span {
-    transform: translateX(4px);
-  }
-}
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
   }
 }
