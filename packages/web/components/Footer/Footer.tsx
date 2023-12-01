@@ -18,7 +18,7 @@ const Footer = () => {
 
   return (
     <footer className={styles.footer} role="contentinfo">
-      {/* container necessary for max width + background gradient */}
+      {/* container necessary for max width + background color */}
       <div className={styles.container}>
         <div
           ref={elementRef}

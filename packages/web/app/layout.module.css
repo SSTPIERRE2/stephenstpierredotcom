@@ -1,6 +1,6 @@
 .maxWidthGridWrapper {
   display: grid;
-  grid-template-columns: 1fr min(1100px, calc(100% - 64px)) 1fr;
+  grid-template-columns: 1fr min(var(--max-width), calc(100% - 64px)) 1fr;
   column-gap: 32px;
 }
 

@@ -62,11 +62,9 @@ export default function Home() {
 
       <PostGallery />
 
-      {/* <div className={styles.fullBleed}> */}
       <FullBleed>
         <RetroGrid />
       </FullBleed>
-      {/* </div> */}
     </main>
   );
 }

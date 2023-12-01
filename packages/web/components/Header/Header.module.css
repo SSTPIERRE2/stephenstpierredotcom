@@ -2,19 +2,19 @@
   width: 100%;
   grid-column: 1 / -1;
   background: var(--color-background-accent);
+  /* Necessary so flourishes don't overlap */
+  position: relative;
+  z-index: 1;
 }
 
 .wrapper {
-  max-width: min(1100px, calc(100% - 64px));
+  max-width: min(var(--max-width), calc(100% - 64px));
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 0;
-  /* Necessary so top gradient doesn't overlap */
-  position: relative;
-  z-index: 2;
 }
 
 .right {

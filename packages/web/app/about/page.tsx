@@ -29,33 +29,23 @@ const tableOfContents: link[] = [
 export default function AboutPage() {
   return (
     <main className={styles.main}>
-      <div className={styles.greeting}>
-        <div className={styles.greetingLeft} style={{ maxWidth: '65ch' }}>
-          <h1
-            style={{
-              padding: '1rem 0',
-              paddingTop: '3rem',
-            }}
-          >
-            About
-          </h1>
-          <p style={{ marginBottom: '0.5rem' }}>
-            Thanks for visiting my digital space! I'm Stephen, the human behind
-            the coding content you'll find here. I started making websites when
-            I was 17 with plain old HTML, CSS, and JavaScript.
-          </p>
-          <p>
-            These days I primarily build web applications with TypeScript,
-            React.js, Node.js, Express, and PostgreSQL, but am constantly
-            experimenting with cutting-edge technologies like Next.js,
-            Serverless, and GraphQL. Continue on to view my full tech stack and
-            resume below!
-          </p>
-        </div>
+      <div className={styles.content}>
+        <h1 className={styles.mainHeading}>About</h1>
+        <p className={styles.innerParagraph}>
+          Thanks for visiting my digital space! I'm Stephen, the human behind
+          the coding content you'll find here. I started making websites when I
+          was 17 with plain old HTML, CSS, and JavaScript.
+        </p>
+        <p>
+          These days I primarily build web applications with TypeScript,
+          React.js, Node.js, Express, and PostgreSQL, but am constantly
+          experimenting with cutting-edge technologies like Next.js, Serverless,
+          and GraphQL. Continue on to view my full tech stack and resume below!
+        </p>
       </div>
 
-      <div className={styles.techStackIntro}>
-        <h2 style={{ paddingBottom: '1rem' }} id="#techStack">
+      <div className={styles.fullBleed}>
+        <h2 className={styles.heading} id="#techStack">
           Tech Stack
         </h2>
         <div className={styles.techStackDescriptionGroup}>
@@ -120,7 +110,7 @@ export default function AboutPage() {
         <h2 className={styles.heading}>A little more about me</h2>
 
         <h3 id="#hobbies">Hobbies</h3>
-        <ul style={{ listStyle: 'none', padding: '0' }}>
+        <ul role="list">
           <li
             style={{
               display: 'flex',
@@ -183,10 +173,8 @@ export default function AboutPage() {
 
       <div className={styles.aside}>
         {/* <TableOfContents links={tableOfContents} /> */}
-        {/* <div className={styles.greetingRight}> */}
         <div className={styles.flourish} />
         <Avatar />
-        {/* </div> */}
       </div>
     </main>
   );
