@@ -189,6 +189,11 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+/* Add some space between inner paragraphs */
+p + p {
+  margin-top: 0.5rem;
+}
+
 button {
   display: block;
   margin: 0px;

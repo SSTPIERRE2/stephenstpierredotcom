@@ -1,43 +1,5 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding-bottom: 1rem;
-  padding-top: 3rem;
-}
-
-.fullBleed {
-  width: 100%;
-  grid-column: 1 / -1;
-}
-
-.padded {
-  padding: 0 2rem;
-}
-
-@media (min-width: 64rem) {
-  .padded {
-    padding: 0 6rem;
-  }
-}
-
-.greeting {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.greetingLeft {
-  flex: 3 350px;
-  padding-right: 1rem;
-}
-
-.greetingRight {
-  flex: 2 150px;
-  position: relative;
-}
-
 .gradientText {
-  width: fit-content;
+  line-height: 1.1;
   background: var(--retro-horizontal-gradient);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -55,10 +17,42 @@
   background-position: 0 95%;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.mainHeading {
+  margin-bottom: 1rem;
+}
+
+.heading {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-xl);
+}
+
+.greeting {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.greetingLeft {
+  flex: 3 350px;
+  padding-right: 1rem;
+}
+
+.greetingRight {
+  flex: 2 150px;
+  position: relative;
+}
+
 .retroSun {
   position: absolute;
   left: 0;
-  top: -30px;
+  top: -10px;
   clip-path: circle(50%);
   background: var(--retro-sun-gradient);
   min-width: 150px;

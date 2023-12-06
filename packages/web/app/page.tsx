@@ -11,27 +11,20 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.greeting}>
         <div className={styles.greetingLeft}>
-          <h2 style={{ marginBottom: '1rem' }}>Hey, I'm Stephen!</h2>
+          <h2 className={styles.mainHeading}>Hey, I'm Stephen!</h2>
           <p>
             I'm a full stack JavaScript developer from{' '}
             <span className={styles.gradientText}>Boston, Massachusetts.</span>
           </p>
 
-          <p
-            style={{
-              margin: '1rem 0',
-            }}
-          >
+          <p>
             Welcome to my{' '}
             <span className={styles.gradientText}>digital oasis,</span> a
-            curated collection of programming tips and tricks. Please enjoy and
-            vote on what you like!
+            curated collection of programming tips and tricks. Please enjoy,
+            vote on what you like, and share with your friends and colleagues!
           </p>
 
-          <h2
-            className={styles.gradientText}
-            style={{ fontSize: '1.5rem', marginBottom: '0.2rem' }}
-          >
+          <h2 className={`${styles.gradientText} ${styles.heading}`}>
             Looking for work!
           </h2>
           <p>

@@ -4,34 +4,13 @@ import Avatar from '@/components/Avatar';
 import Link from 'next/link';
 import Button from '@/components/Button';
 import { ArrowRight } from 'react-feather';
-import Shuriken from '@/components/Shuriken';
-import TableOfContents from '@/components/TableOfContents';
-import { link } from '@/utils/constant';
-
-const tableOfContents: link[] = [
-  {
-    slug: 'techStack',
-    href: '#techStack',
-    label: 'Tech Stack',
-  },
-  {
-    slug: 'background',
-    href: '#background',
-    label: 'Background',
-  },
-  {
-    slug: 'hobbies',
-    href: '#hobbies',
-    label: 'Hobbies',
-  },
-];
 
 export default function AboutPage() {
   return (
     <main className={styles.main}>
       <div className={styles.content}>
         <h1 className={styles.mainHeading}>About</h1>
-        <p className={styles.innerParagraph}>
+        <p>
           Thanks for visiting my digital space! I'm Stephen, the human behind
           the coding content you'll find here. I started making websites when I
           was 17 with plain old HTML, CSS, and JavaScript.
@@ -77,21 +56,21 @@ export default function AboutPage() {
         <h2 className={styles.heading} id="#background">
           Background
         </h2>
-        <p className={styles.innerParagraph}>
+        <p>
           Programming classes weren't common when I was going to high school,
           but during my junior year there happened to be a general multimedia
           class which involved HTML and CSS, and editing images and videos.
         </p>
-        <p className={styles.innerParagraph}>
+        <p>
           Even in college, web development wasn't core to the Computer Science
           curriculum, but I did manage to take an elective where I got into more
           technologies including JavaScript, Bootstrap, Node.js, and Heroku.
         </p>
-        <p className={styles.innerParagraph}>
+        <p>
           Returning to web development felt like reuniting with an old friend,
           and I've been hooked on the feedback loop ever since.
         </p>
-        <p className={styles.innerParagraph}>
+        <p>
           Much of what I learned after school came from official documentation
           like{' '}
           <Link
@@ -132,30 +111,11 @@ export default function AboutPage() {
           . Techniques and technologies are constantly evolving which is what
           makes it so exciting to be immersed in.
         </p>
-
-        {/* <h3 className={styles.heading} id="#hobbies">
-          Hobbies
-        </h3>
-        <ul
-          role="list"
-          style={{
-            listStyleType: 'disc',
-          }}
-        >
-          <li>Weightlifting: a strong body makes the mind strong</li>
-          <li>Cooking - cast iron enjoyer, wok novice</li>
-          <li>Hiking</li>
-          <li>Gaming - I build my own gaming PCs</li>
-          <li>Gardening</li>
-          <li>Archery - "Free your mind" like Morpheus said</li>
-        </ul>
-
-        <h3 className={styles.heading}>Favorites</h3> */}
       </div>
 
-      <div className={styles.content}>
+      <div className={`${styles.content} ${styles.bottomMargin}`}>
         <h2 className={styles.heading}>A little more</h2>
-        <p className={styles.innerParagraph}>
+        <p>
           <strong>I live</strong> in a small farmtown called Westport,
           Massachusetts with my cat, chickens, and 50 square foot garden.
         </p>
@@ -171,7 +131,6 @@ export default function AboutPage() {
       </div>
 
       <div className={styles.aside}>
-        {/* <TableOfContents links={tableOfContents} /> */}
         <div className={styles.flourish} />
         <Avatar />
       </div>
