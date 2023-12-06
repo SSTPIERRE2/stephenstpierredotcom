@@ -16,21 +16,15 @@ const Footer = () => {
     }
   }, [isOnScreen]);
 
+  console.log(`Footer`, isOnScreen);
+
   return (
-    <footer className={styles.footer} role="contentinfo">
+    <footer className={styles.footer} role="contentinfo" ref={elementRef}>
       {/* container necessary for max width + background color */}
       <div className={styles.container}>
-        <div
-          ref={elementRef}
-          style={{ visibility: isOnScreen ? 'revert' : 'hidden' }}
-        >
-          <Logo key={!isInitialized && isOnScreen ? 'logo' : 'invisibleLogo'} />
-          <span
-            className={styles.thanks}
-            key={!isInitialized && isOnScreen ? 'thanks' : 'invisible'}
-          >
-            Thanks for visiting!
-          </span>
+        <div style={{ visibility: isInitialized ? 'revert' : 'hidden' }}>
+          <Logo />
+          <span className={styles.thanks}>Thanks for visiting!</span>
         </div>
 
         <div>

@@ -1,8 +1,8 @@
 .wrapper {
   position: absolute;
   top: 8px;
-  left: 8px;
-  width: 100%;
+  right: 4px;
+  width: 80%;
 }
 
 .base {
@@ -19,7 +19,7 @@
   left: 0;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
   .wrapper {
     position: relative;
   }

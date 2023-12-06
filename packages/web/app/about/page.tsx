@@ -77,98 +77,97 @@ export default function AboutPage() {
         <h2 className={styles.heading} id="#background">
           Background
         </h2>
+        <p className={styles.innerParagraph}>
+          Programming classes weren't common when I was going to high school,
+          but during my junior year there happened to be a general multimedia
+          class which involved HTML and CSS, and editing images and videos.
+        </p>
+        <p className={styles.innerParagraph}>
+          Even in college, web development wasn't core to the Computer Science
+          curriculum, but I did manage to take an elective where I got into more
+          technologies including JavaScript, Bootstrap, Node.js, and Heroku.
+        </p>
+        <p className={styles.innerParagraph}>
+          Returning to web development felt like reuniting with an old friend,
+          and I've been hooked on the feedback loop ever since.
+        </p>
+        <p className={styles.innerParagraph}>
+          Much of what I learned after school came from official documentation
+          like{' '}
+          <Link
+            href="https://en.wikipedia.org/wiki/MDN"
+            className={styles.simpleLink}
+          >
+            MDN Web Docs
+          </Link>
+          ,{' '}
+          <Link href="https://react.dev/" className={styles.simpleLink}>
+            react.dev
+          </Link>
+          , online courses and resources from{' '}
+          <Link
+            href="https://www.freecodecamp.org/"
+            className={styles.simpleLink}
+          >
+            Free Code Camp
+          </Link>
+          ,{' '}
+          <Link href="https://zerotomastery.io/" className={styles.simpleLink}>
+            Zero to Mastery
+          </Link>
+          ,{' '}
+          <Link
+            href="https://www.joshwcomeau.com/"
+            className={styles.simpleLink}
+          >
+            Josh W Comeau
+          </Link>
+          , and working on real projects with professional teams.
+        </p>
         <p>
-          I'll be honest I'm not a prodigy who was introduced to coding at a
-          young age, really the first time I touched code was in high school by
-          a stroke of luck. In my junior year of high school there happened to
-          be a general multimedia class which involved basic web development
-          with HTML and CSS, and editing images and videos. Programming classes
-          weren't common in high schools at the time, and even when I made it to
-          college to study Computer Science Java was the first language they
-          taught, until soon Python took over as the more approachable
-          object-oriented language for teaching beginners. Furthermore, my
-          college lacked specific web development classes where my only option
-          was a single elective where I got into more advanced web technologies
-          including JavaScript, Bootstrap, Node.js, and Heroku.
-        </p>
-        <p style={{ padding: '1rem 0' }}>
-          All of this is to say that getting into web development is different
-          for everyone depending on your background, and for some like me the
-          path was ill-defined. Most of what I've learned about web development
-          has come from official documentation like{' '}
-          <Link href="https://en.wikipedia.org/wiki/MDN">MDN Web Docs</Link> ,{' '}
-          <Link href="https://react.dev/">react.dev</Link>, online courses and
-          resources from{' '}
-          <Link href="https://www.freecodecamp.org/">Free Code Camp</Link>,{' '}
-          <Link href="https://zerotomastery.io/">Zero to Mastery</Link>,{' '}
-          <Link href="https://www.joshwcomeau.com/">Josh W Comeau</Link>, and
-          more. It's very much a "you get out what you put in" type industry
-          where techniques and technologies are constantly evolving which is
-          what makes it so exciting to be immersed in.
+          In this industry{' '}
+          <span className={styles.gradientText}>
+            "you get out what you put in"
+          </span>
+          . Techniques and technologies are constantly evolving which is what
+          makes it so exciting to be immersed in.
         </p>
 
-        <h2 className={styles.heading}>A little more about me</h2>
-
-        <h3 id="#hobbies">Hobbies</h3>
-        <ul role="list">
-          <li
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Shuriken
-              size="2rem"
-              style={{
-                display: 'inline-block',
-                marginRight: '1rem',
-                transform: 'rotate(-30deg)',
-              }}
-            />{' '}
-            Olympic weight training
-          </li>
-          <li
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Shuriken
-              size="2rem"
-              style={{
-                display: 'inline-block',
-                marginRight: '1rem',
-                transform: 'rotate(-35deg)',
-              }}
-            />{' '}
-            Cooking
-          </li>
-          <li
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Shuriken
-              size="2rem"
-              style={{
-                display: 'inline-block',
-                marginRight: '1rem',
-                transform: 'rotate(-40deg)',
-              }}
-            />{' '}
-            Hiking
-          </li>
-          <li>Gaming</li>
+        {/* <h3 className={styles.heading} id="#hobbies">
+          Hobbies
+        </h3>
+        <ul
+          role="list"
+          style={{
+            listStyleType: 'disc',
+          }}
+        >
+          <li>Weightlifting: a strong body makes the mind strong</li>
+          <li>Cooking - cast iron enjoyer, wok novice</li>
+          <li>Hiking</li>
+          <li>Gaming - I build my own gaming PCs</li>
           <li>Gardening</li>
-          <li>Archery</li>
-          <li>Woodworking</li>
+          <li>Archery - "Free your mind" like Morpheus said</li>
         </ul>
 
-        <h3 className={styles.heading}>Favorites</h3>
+        <h3 className={styles.heading}>Favorites</h3> */}
+      </div>
+
+      <div className={styles.content}>
+        <h2 className={styles.heading}>A little more</h2>
+        <p className={styles.innerParagraph}>
+          <strong>I live</strong> in a small farmtown called Westport,
+          Massachusetts with my cat, chickens, and 50 square foot garden.
+        </p>
+        <p>
+          <strong>I have a few hobbies.</strong> I've built a handful of gaming
+          PCs from scratch over the years and take pride in a 12 year old
+          Toshiba laptop I refurbished myself. I exercise and lift weights daily
+          in the home gym I designed and built, as a strong body makes the mind
+          strong. I love to cook which is another exciting area of constant
+          improvement and innovation - cast iron, dutch oven, wok, smoker, any
+          style of pizza, you name it!
+        </p>
       </div>
 
       <div className={styles.aside}>

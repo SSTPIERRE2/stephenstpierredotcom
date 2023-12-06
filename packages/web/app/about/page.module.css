@@ -22,6 +22,7 @@
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: auto;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .main > * {
@@ -79,7 +80,6 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
 .mainHeading {
@@ -87,7 +87,7 @@
 }
 
 .heading {
-  padding: 1rem 0;
+  padding-bottom: 1rem;
   text-decoration: underline var(--color-primary) 2px;
   text-underline-offset: 6px;
 }
@@ -96,8 +96,13 @@
   margin-bottom: 0.5rem;
 }
 
+.bottomParagraph {
+  margin-bottom: 2rem;
+}
+
 .techStackDescription {
   flex: 0 0 65ch;
+  max-width: 65ch;
 }
 
 .resumeLink {
@@ -109,13 +114,32 @@
   margin-left: 0.5rem;
 }
 
+.gradientText {
+  width: fit-content;
+  background: var(--retro-horizontal-gradient);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  transform: skewX(-12deg);
+  display: inline-block;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+}
+
+.simpleLink {
+  text-decoration: none;
+  background: var(--retro-horizontal-gradient);
+  background-repeat: repeat-x;
+  background-size: 100% 2px;
+  background-position: 0 95%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .resumeLinkArrow {
     animation: 1000ms bounceRight infinite alternate ease-in-out;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
   .main > * {
     grid-column: 1 / -1;
     padding: 0;
@@ -124,5 +148,17 @@
   .aside {
     grid-column: 10 / -1;
     grid-row: revert;
+  }
+
+  .techStackDescriptionGroup {
+    flex-direction: column;
+  }
+
+  .techStackDescription {
+    flex: 0;
+  }
+
+  .resumeLink {
+    flex: 0;
   }
 }
