@@ -4,13 +4,14 @@ import styles from './NodeJsLogo.module.css';
 interface Props {
   className?: string;
   theme: THEME;
+  size?: number;
 }
 
-const NodeJsLogo = ({ className, theme }: Props) => {
+const NodeJsLogo = ({ className, theme, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="128" // 589.827 ratio = 0.6125
+      width={size} // ratio = 0.6125
       version="1.2"
       viewBox="0 0 442.37 270.929"
       className={className}

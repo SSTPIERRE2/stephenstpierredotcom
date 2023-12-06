@@ -2,14 +2,15 @@ import styles from './RtlLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const RtlLogo = ({ className }: Props) => {
+const RtlLogo = ({ className, size = 80 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="96"
-      height="96"
+      width={size}
+      height={size}
       viewBox="0 0 256 256"
       className={className}
     >

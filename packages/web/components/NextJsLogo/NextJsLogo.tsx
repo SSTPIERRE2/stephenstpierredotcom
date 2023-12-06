@@ -2,15 +2,15 @@ import { THEME } from '@/utils/constant';
 import styles from './NextJsLogo.module.css';
 
 interface Props {
-  className?: string;
   theme: THEME;
+  className?: string;
+  size?: number;
 }
 
-const NextJsLogo = ({ className, theme }: Props) => {
+const NextJsLogo = ({ className, theme, size = 96 }: Props) => {
   return (
     <svg
-      width="160"
-      height="80"
+      width={size} // ratio = 0.5
       viewBox="0 0 394 80"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

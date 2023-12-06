@@ -1,15 +1,18 @@
 import styles from './GraphqlLogo.module.css';
 
-interface Props {}
+interface Props {
+  className?: string;
+  size?: number;
+}
 
-const GraphqlLogo = ({}: Props) => {
+const GraphqlLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 131 144"
       fill="#e10098"
-      height="128"
-      tabIndex={0}
+      height={size}
+      className={className}
     >
       <title>GraphQL</title>
       <path

@@ -2,12 +2,13 @@ import styles from './PostgresLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const PostgresLogo = ({ className }: Props) => {
+const PostgresLogo = ({ className, size = 80 }: Props) => {
   return (
     <svg
-      height="96" // 445.383 128 ratio = 0.97
+      height={size} // 445.383 128 ratio = 0.97
       viewBox="0 0 432.071 445.383"
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"

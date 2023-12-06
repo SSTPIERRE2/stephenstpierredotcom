@@ -2,11 +2,12 @@ import { THEME } from '@/utils/constant';
 import styles from './AwsLogo.module.css';
 
 interface Props {
-  className?: string;
   theme: THEME;
+  className?: string;
+  size?: number;
 }
 
-const AwsLogo = ({ className, theme }: Props) => {
+const AwsLogo = ({ className, theme, size = 96 }: Props) => {
   return (
     <svg
       version="1.1"
@@ -17,7 +18,7 @@ const AwsLogo = ({ className, theme }: Props) => {
       viewBox="0 0 304 182" // ratio = 0.599
       style={{ enableBackground: 'new 0 0 304 182' } as React.CSSProperties}
       xmlSpace="preserve"
-      width="128"
+      width={size}
       className={className}
     >
       <title>Amazon Web Services</title>

@@ -1,15 +1,19 @@
 import styles from './PrettierLogo.module.css';
 
-interface Props {}
+interface Props {
+  className?: string;
+  size?: number;
+}
 
-const PrettierLogo = ({}: Props) => {
+const PrettierLogo = ({ className, size = 80 }: Props) => {
   return (
     <svg
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 210 210"
-      width="96"
-      height="96"
+      width={size}
+      height={size}
+      className={className}
     >
       <title>Prettier</title>
       <g id="Page-1">

@@ -2,13 +2,14 @@ import styles from './VitestLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const VitestLogo = ({ className }: Props) => {
+const VitestLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="96" // ratio = 0.914
+      width={size} // ratio = 0.914
       viewBox="0 0 256 234"
       className={className}
     >

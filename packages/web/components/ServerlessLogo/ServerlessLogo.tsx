@@ -2,12 +2,13 @@ import styles from './ServerlessLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const ServerlessLogo = ({ className }: Props) => {
+const ServerlessLogo = ({ className, size = 80 }: Props) => {
   return (
     <svg
-      width="96" // ratio = 0.797
+      width={size} // ratio = 0.797
       viewBox="0 0 256 204"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

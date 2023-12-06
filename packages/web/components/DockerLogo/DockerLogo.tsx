@@ -2,11 +2,12 @@ import { THEME } from '@/utils/constant';
 import styles from './DockerLogo.module.css';
 
 interface Props {
-  className?: string;
   theme: THEME;
+  className?: string;
+  size?: number;
 }
 
-const DockerLogo = ({ className, theme }: Props) => {
+const DockerLogo = ({ className, theme, size = 128 }: Props) => {
   return (
     <svg
       version="1.1"
@@ -18,7 +19,7 @@ const DockerLogo = ({ className, theme }: Props) => {
       viewBox="0 0 1200 309"
       xmlSpace="preserve"
       enableBackground="new 0 0 1200 309" // ratio = 0.2575
-      width="192"
+      width={size}
       className={className}
     >
       <title>Docker</title>

@@ -66,11 +66,7 @@ const StackCarousel = ({}: Props) => {
       </li>
       <li className={styles.slide}>
         <RtlLogo />
-        <span
-          className={styles.wordMark}
-          style={{ fontSize: 'var(--font-size-medium)' }}
-          aria-hidden
-        >
+        <span className={styles.wordMark} aria-hidden>
           React Testing Library
         </span>
       </li>

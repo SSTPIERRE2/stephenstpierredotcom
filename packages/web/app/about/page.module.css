@@ -96,7 +96,7 @@
 /* necessary since overflow-x: auto and overflow-y: visible don't mix, visible becomes auto when combined with anything besides visible */
 .carouselWrapper {
   overflow-x: auto;
-  padding: 1rem;
+  padding: 1rem 0;
   background: var(--color-background-accent);
 }
 

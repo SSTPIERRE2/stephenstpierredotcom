@@ -2,16 +2,17 @@ import styles from './ReactLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const ReactLogo = ({ className }: Props) => {
+const ReactLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 128 128"
       enableBackground="new 0 0 128 128"
-      width="128"
-      height="128"
+      width={size}
+      height={size}
       className={className}
     >
       <title>React.js</title>

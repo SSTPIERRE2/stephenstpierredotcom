@@ -2,14 +2,15 @@ import styles from './HtmlLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const HtmlLogo = ({ className }: Props) => {
+const HtmlLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-      width="128px"
+      width={size}
       className={className}
     >
       <title>HTML5</title>

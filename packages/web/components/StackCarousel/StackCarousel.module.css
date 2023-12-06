@@ -1,13 +1,8 @@
 .swiper {
   overflow: visible;
   display: flex;
-  gap: 32px;
+  gap: 16px;
   padding-inline-start: 32px;
-}
-
-.swiper::after {
-  content: '';
-  min-width: 32px;
 }
 
 .slide {
@@ -25,12 +20,13 @@
 }
 
 .wordMark {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-medium);
   font-weight: var(--font-weight-medium);
+  text-align: center;
 }
 
 .reactLogo {
   background: #0f172a;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 8px;
 }

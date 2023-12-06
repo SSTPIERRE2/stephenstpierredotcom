@@ -2,13 +2,13 @@ import styles from './FigmaLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const FigmaLogo = ({ className }: Props) => {
+const FigmaLogo = ({ className, size = 80 }: Props) => {
   return (
     <svg
-      width="64.0032"
-      height="96"
+      height={size}
       viewBox="0 0 288 432" // ratio = 0.6667
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

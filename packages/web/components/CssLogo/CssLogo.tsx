@@ -2,14 +2,14 @@ import styles from './CssLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const CssLogo = ({ className }: Props) => {
+const CssLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="90.688px" // 90.688px 102.3716mm
-      height="128px" // 128px 144.49777mm
+      height={size}
       viewBox="0 0 362.73401 511.99998"
       id="svg3476"
       version="1.1"

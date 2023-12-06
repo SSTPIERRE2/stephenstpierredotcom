@@ -2,14 +2,15 @@ import { THEME } from '@/utils/constant';
 import styles from './EslintLogo.module.css';
 
 interface Props {
-  className?: string;
   theme: THEME;
+  className?: string;
+  size?: number;
 }
 
-const EslintLogo = ({ className, theme }: Props) => {
+const EslintLogo = ({ className, theme, size = 128 }: Props) => {
   return (
     <svg
-      width="192"
+      width={size}
       viewBox="0 0 203 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

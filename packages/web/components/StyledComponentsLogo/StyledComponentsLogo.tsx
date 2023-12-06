@@ -2,16 +2,17 @@ import styles from './StyledComponentsLogo.module.css';
 
 interface Props {
   className?: string;
+  size?: number;
 }
 
-const StyledComponentsLogo = ({ className }: Props) => {
+const StyledComponentsLogo = ({ className, size = 96 }: Props) => {
   return (
     <svg
       viewBox="0 0 318 318"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="128"
-      height="128"
+      width={size}
+      height={size}
       className={className}
       style={{ border: '2px solid var(--color-text)' }}
     >
