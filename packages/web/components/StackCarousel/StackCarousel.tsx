@@ -1,25 +1,25 @@
 'use client';
 
-import AwsLogo from '../AwsLogo';
-import CssLogo from '../CssLogo';
-import EslintLogo from '../EslintLogo';
-import HtmlLogo from '../HtmlLogo';
-import JavaScriptLogo from '../JavaScriptLogo';
-import NextJsLogo from '../NextJsLogo';
-import NodeJsLogo from '../NodeJsLogo';
-import PostgresLogo from '../PostgresLogo';
-import ReactLogo from '../ReactLogo';
-import RtlLogo from '../RtlLogo';
-import ServerlessLogo from '../ServerlessLogo';
-import TypeScriptLogo from '../TypeScriptLogo';
-import VitestLogo from '../VitestLogo';
+import AwsLogo from '../logos/AwsLogo';
+import CssLogo from '../logos/CssLogo';
+import EslintLogo from '../logos/EslintLogo';
+import HtmlLogo from '../logos/HtmlLogo';
+import JavaScriptLogo from '../logos/JavaScriptLogo';
+import NextJsLogo from '../logos/NextJsLogo';
+import NodeJsLogo from '../logos/NodeJsLogo';
+import PostgresLogo from '../logos/PostgresLogo';
+import ReactLogo from '../logos/ReactLogo';
+import RtlLogo from '../logos/RtlLogo';
+import ServerlessLogo from '../logos/ServerlessLogo';
+import TypeScriptLogo from '../logos/TypeScriptLogo';
+import VitestLogo from '../logos/VitestLogo';
 import styles from './StackCarousel.module.css';
 import { useTheme } from '@/app/context/ThemeContext';
-import FigmaLogo from '../FigmaLogo';
-import StyledComponentsLogo from '../StyledComponentsLogo';
-import DockerLogo from '../DockerLogo';
-import GraphqlLogo from '../GraphqlLogo';
-import PrettierLogo from '../PrettierLogo';
+import FigmaLogo from '../logos/FigmaLogo';
+import StyledComponentsLogo from '../logos/StyledComponentsLogo';
+import DockerLogo from '../logos/DockerLogo';
+import GraphqlLogo from '../logos/GraphqlLogo';
+import PrettierLogo from '../logos/PrettierLogo';
 
 interface Props {}
 
