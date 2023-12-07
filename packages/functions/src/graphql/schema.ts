@@ -3,7 +3,7 @@ import { builder } from './builder';
 import { printSchema, lexicographicSortSchema } from 'graphql';
 
 import './types/analyticsEvent';
-import './types/message';
+import './types/category';
 import './types/user';
 
 export const schema = builder.toSchema({});

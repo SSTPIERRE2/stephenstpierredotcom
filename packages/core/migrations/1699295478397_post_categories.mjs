@@ -7,8 +7,8 @@ export async function up(db) {
   await db.schema
     .createTable('post_categories')
     .addColumn('id', 'text', (col) => col.primaryKey())
-    .addColumn('post_id', 'integer', (col) => col.notNull())
-    .addColumn('category_id', 'integer', (col) => col.notNull())
+    .addColumn('post_id', 'text', (col) => col.notNull())
+    .addColumn('category_id', 'text', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
     )

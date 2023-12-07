@@ -1,4 +1,4 @@
-import { RDS, StackContext } from 'sst/constructs';
+import { RDS, Script, StackContext } from 'sst/constructs';
 
 export function Database({ stack }: StackContext) {
   const rds = new RDS(stack, 'db', {
@@ -6,6 +6,15 @@ export function Database({ stack }: StackContext) {
     defaultDatabaseName: 'main',
     migrations: 'packages/core/migrations',
     types: 'packages/core/src/sql.generated.ts',
+  });
+
+  new Script(stack, 'seed-rds', {
+    defaults: {
+      function: {
+        bind: [rds],
+      },
+    },
+    onCreate: 'packages/functions/src/seed.handler',
   });
 
   return rds;

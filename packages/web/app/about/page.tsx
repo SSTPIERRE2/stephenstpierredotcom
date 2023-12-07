@@ -116,17 +116,21 @@ export default function AboutPage() {
       <div className={`${styles.content} ${styles.bottomMargin}`}>
         <h2 className={styles.heading}>A little more</h2>
         <p>
-          <strong>I live</strong> in a small farmtown called Westport,
-          Massachusetts with my cat, chickens, and 50 square foot garden.
+          <strong>I live</strong> in a town called Westport, Massachusetts with
+          my cat, chickens, and 50 square foot garden.
         </p>
         <p>
-          <strong>I have a few hobbies.</strong> I've built a handful of gaming
-          PCs from scratch over the years and take pride in a 12 year old
-          Toshiba laptop I refurbished myself. I exercise and lift weights daily
-          in the home gym I designed and built, as a strong body makes the mind
-          strong. I love to cook which is another exciting area of constant
-          improvement and innovation - cast iron, dutch oven, wok, smoker, any
-          style of pizza, you name it!
+          <strong>I have a few hobbies.</strong> I've built a handful of
+          high-end PCs from scratch over the years and take pride in a 12 year
+          old Toshiba laptop I refurbished myself. I exercise and lift weights
+          daily in the home gym I designed and built, as a strong body makes the
+          mind strong. I love to cook and grow my own ingredients which is
+          another exciting area of constant improvement and innovation - cast
+          iron, dutch oven, wok, barbeque, casseroles, any style of pizza, you
+          name it.
+        </p>
+        <p>
+          <strong></strong>
         </p>
       </div>
 

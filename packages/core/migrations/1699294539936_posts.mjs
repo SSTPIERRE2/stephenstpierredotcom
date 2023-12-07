@@ -8,7 +8,8 @@ export async function up(db) {
     .createTable('posts')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('type', 'integer', (col) => col.notNull())
-    .addColumn('likes', 'integer', (col) => col.notNull())
+    .addColumn('upvotes', 'integer', (col) => col.notNull())
+    .addColumn('views', 'integer', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
     )
