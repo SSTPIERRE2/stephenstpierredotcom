@@ -250,3 +250,8 @@ export const SOCIAL_LINKS: link[] = [
     href: 'mailto:stephencstpierre@gmail.com',
   },
 ];
+
+export enum PostType {
+  Post = 1,
+  Tip,
+}

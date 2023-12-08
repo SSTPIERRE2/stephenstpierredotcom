@@ -5,7 +5,7 @@ import { Kysely, sql } from 'kysely';
  */
 export async function up(db) {
   await db.schema
-    .createTable('analytics_event')
+    .createTable('analytic')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('visitor_id', 'text', (col) => col.notNull())
     .addColumn('name', 'text', (col) => col.notNull())
@@ -25,8 +25,8 @@ export async function up(db) {
     .execute();
 
   await db.schema
-    .createIndex('idx_analytics_event_created')
-    .on('analytics_event')
+    .createIndex('idx_analytic_created')
+    .on('analytic')
     .column('created')
     .execute();
 }
@@ -35,6 +35,6 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropIndex('idx_analytics_event_created').execute();
-  await db.schema.dropTable('analytics_event').execute();
+  await db.schema.dropIndex('idx_analytic_created').execute();
+  await db.schema.dropTable('analytic').execute();
 }

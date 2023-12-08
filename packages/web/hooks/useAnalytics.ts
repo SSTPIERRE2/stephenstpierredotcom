@@ -37,7 +37,7 @@ const CreateAnalyticsQuery = gql`
 `;
 
 type createAnalyticType = {
-  name: AnalyticsEventName;
+  name: AnalyticName;
   metadata?: string;
 };
 
@@ -45,7 +45,7 @@ export const useCreateAnalytic = () => {
   const [result, createAnalytic] = useMutation<
     unknown,
     {
-      name: AnalyticsEventName;
+      name: AnalyticName;
       visitorId: string;
       metadata?: string;
     }

@@ -4,7 +4,7 @@ interface FieldQuery {
   matcher?: ComparisonOperatorExpression;
 }
 
-type AnalyticsEventName =
+type AnalyticName =
   | 'pageView'
   | 'click'
   | 'cursorThrash'
@@ -14,4 +14,4 @@ type AnalyticsEventName =
   | 'rageClick'
   | 'form';
 
-type AnalyticsEventField = 'name' | 'created' | 'metadata';
+type AnalyticField = 'name' | 'created' | 'metadata';

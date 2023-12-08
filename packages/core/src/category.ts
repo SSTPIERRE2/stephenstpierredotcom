@@ -4,7 +4,7 @@ import { ulid } from 'ulid';
 import { SQL } from './sql';
 
 export async function create(name: string) {
-  const [result] = await SQL.DB.insertInto('categories')
+  const [result] = await SQL.DB.insertInto('category')
     .values({ id: ulid(), name })
     .returningAll()
     .execute();
@@ -13,14 +13,12 @@ export async function create(name: string) {
 }
 
 export async function createAll(names: string[]) {
-  console.log(`createAll categories`, names);
-
   const values = names.map((name) => ({
     id: ulid(),
     name,
   }));
 
-  const [result] = await SQL.DB.insertInto('categories')
+  const [result] = await SQL.DB.insertInto('category')
     .values(values)
     .returningAll()
     .execute();
@@ -29,7 +27,7 @@ export async function createAll(names: string[]) {
 }
 
 export function list() {
-  return SQL.DB.selectFrom('categories')
+  return SQL.DB.selectFrom('category')
     .selectAll()
     .orderBy('created', 'desc')
     .execute();

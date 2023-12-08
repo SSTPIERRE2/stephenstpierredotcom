@@ -18,7 +18,7 @@ export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-export interface AnalyticsEvent {
+export interface Analytic {
   id: string;
   visitor_id: string;
   name: string;
@@ -35,28 +35,29 @@ export interface AnalyticsEvent {
   created: Generated<Timestamp>;
 }
 
-export interface Categories {
+export interface Category {
   id: string;
   name: string;
   created: Generated<Timestamp>;
 }
 
-export interface PostCategories {
+export interface Post {
+  id: string;
+  type: number;
+  upvotes: number;
+  views: number;
+  created: Generated<Timestamp>;
+  updated: Timestamp | null;
+}
+
+export interface PostCategory {
   id: string;
   post_id: string;
   category_id: string;
   created: Generated<Timestamp>;
 }
 
-export interface Posts {
-  id: string;
-  type: number;
-  upvotes: number;
-  views: number;
-  created: Generated<Timestamp>;
-}
-
-export interface Users {
+export interface User {
   id: string;
   email: string;
   password: string;
@@ -64,9 +65,9 @@ export interface Users {
 }
 
 export interface Database {
-  analytics_event: AnalyticsEvent;
-  categories: Categories;
-  post_categories: PostCategories;
-  posts: Posts;
-  users: Users;
+  analytic: Analytic;
+  category: Category;
+  post: Post;
+  post_category: PostCategory;
+  user: User;
 }

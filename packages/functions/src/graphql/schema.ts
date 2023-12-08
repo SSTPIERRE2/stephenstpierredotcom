@@ -2,7 +2,7 @@ import { writeFileSync } from 'fs';
 import { builder } from './builder';
 import { printSchema, lexicographicSortSchema } from 'graphql';
 
-import './types/analyticsEvent';
+import './types/analytic';
 import './types/category';
 import './types/user';
 

@@ -3,7 +3,7 @@ import { builder } from '../builder';
 import { Category } from '@graphql-rds/core/Category';
 
 const CategoryType = builder
-  .objectRef<SQL.Row['categories']>('Category')
+  .objectRef<SQL.Row['category']>('Category')
   .implement({
     fields: (t) => ({
       id: t.exposeID('id'),

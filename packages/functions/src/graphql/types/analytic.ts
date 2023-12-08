@@ -1,6 +1,6 @@
 import { SQL } from '@graphql-rds/core/sql';
 import { builder } from '../builder';
-import { AnalyticsEvent } from '@graphql-rds/core/analyticsEvent';
+import { Analytic } from '@graphql-rds/core/analytic';
 import fetch from 'node-fetch';
 import DeviceDetector from 'device-detector-js';
 
@@ -49,15 +49,15 @@ export const EventName = builder.enumType('EventName', {
   ] as const,
 });
 
-const AnalyticsEventType = builder
-  .objectRef<SQL.Row['analytics_event']>('AnalyticsEvent')
+const AnalyticType = builder
+  .objectRef<SQL.Row['analytic']>('Analytic')
   .implement({
     fields: (t) => ({
       id: t.exposeID('id'),
       visitorId: t.exposeString('visitor_id'),
       name: t.field({
         type: EventName,
-        resolve: (parent) => parent.name as AnalyticsEventName,
+        resolve: (parent) => parent.name as AnalyticName,
       }),
       url: t.exposeString('url'),
       browserName: t.exposeString('browser_name'),
@@ -78,8 +78,8 @@ const AnalyticsEventType = builder
     }),
   });
 
-const AnalyticsCount = builder
-  .objectRef<{ name: string; total: number }>('AnalyticsCount')
+const AnalyticCount = builder
+  .objectRef<{ name: string; total: number }>('AnalyticCount')
   .implement({
     fields: (t) => ({
       name: t.exposeString('name'),
@@ -97,8 +97,8 @@ const PageViewsOverTime = builder
   });
 
 builder.queryFields((t) => ({
-  analyticsEvents: t.field({
-    type: [AnalyticsEventType],
+  Analytics: t.field({
+    type: [AnalyticType],
     args: {
       fields: t.arg.string(),
     },
@@ -109,13 +109,13 @@ builder.queryFields((t) => ({
       if (args.fields) {
         fields = JSON.parse(args.fields);
       }
-      return AnalyticsEvent.list(fields);
+      return Analytic.list(fields);
     },
   }),
   countEvents: t.field({
-    type: [AnalyticsCount],
+    type: [AnalyticCount],
     resolve: async () => {
-      const counted = await AnalyticsEvent.countEvents();
+      const counted = await Analytic.countEvents();
       console.log('counted events', counted);
       const numerical = counted.map((e) => ({
         ...e,
@@ -134,8 +134,8 @@ builder.queryFields((t) => ({
 }));
 
 builder.mutationFields((t) => ({
-  createAnalyticsEvent: t.field({
-    type: AnalyticsEventType,
+  createAnalytic: t.field({
+    type: AnalyticType,
     args: {
       name: t.arg({ type: EventName, required: true }),
       visitorId: t.arg.string({ required: true }),
@@ -159,14 +159,11 @@ builder.mutationFields((t) => ({
         const ipData = (await ipRequest.json()) as IpData;
         console.log('got user location', ipData);
         const selectedData = [
-          'ip',
           'city',
           'region',
           'region_code',
           'country_name',
           'country_code_iso3',
-          'latitude',
-          'longitude',
           'org',
         ] as const;
 
@@ -179,7 +176,7 @@ builder.mutationFields((t) => ({
 
       console.log(`creating with final metadata`, metadata);
 
-      return AnalyticsEvent.create(
+      return Analytic.create(
         args.name,
         args.visitorId,
         headers.origin || '',

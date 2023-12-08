@@ -1,4 +1,4 @@
-export * as AnalyticsEvent from './analyticsEvent';
+export * as Analytic from './analytic';
 
 import { ulid } from 'ulid';
 import { SQL } from './sql';
@@ -22,7 +22,7 @@ export async function create(
   os_version: string,
   metadata: string
 ) {
-  const [result] = await SQL.DB.insertInto('analytics_event')
+  const [result] = await SQL.DB.insertInto('analytic')
     .values({
       id: ulid(),
       visitor_id,
@@ -45,7 +45,7 @@ export async function create(
 }
 
 export function getByEventName(name: string) {
-  return SQL.DB.selectFrom('analytics_event')
+  return SQL.DB.selectFrom('analytic')
     .selectAll()
     .where('name', '=', name)
     .orderBy('created', 'desc')
@@ -56,7 +56,7 @@ export function list(
   whereFields?: FieldQuery[]
   // selectFields?: AnalyticsEventField[]
 ) {
-  let query = SQL.DB.selectFrom('analytics_event').selectAll();
+  let query = SQL.DB.selectFrom('analytic').selectAll();
 
   // if (selectFields) {
   //   query = query.select(selectFields);
@@ -73,14 +73,14 @@ export function list(
 }
 
 export function countEvents() {
-  return SQL.DB.selectFrom('analytics_event')
+  return SQL.DB.selectFrom('analytic')
     .select(['name', (eb) => eb.fn.count('name').as('total')])
     .groupBy('name')
     .execute();
 }
 
 export function getPageViews() {
-  return SQL.DB.selectFrom('analytics_event')
+  return SQL.DB.selectFrom('analytic')
     .select(['name', 'created', 'metadata'])
     .where('name', '=', 'pageView')
     .orderBy('created', 'desc')
