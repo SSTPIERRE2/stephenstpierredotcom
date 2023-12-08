@@ -4,7 +4,7 @@ import { User } from '@graphql-rds/core/user';
 import bcrypt, { getRounds } from 'bcryptjs';
 // import jwt from 'jsonwebtoken';
 // import { Config } from 'sst/node/config';
-// import { Login } from '@stevestpierredotcom/core/login';
+// import { Login } from '@stephenstpierredotcom/core/login';
 
 // const UserType = builder.objectRef<SQL.Row['users']>('Users').implement({
 //   fields: (t) => ({

@@ -44,8 +44,7 @@ export interface Category {
 export interface Post {
   id: string;
   type: number;
-  upvotes: number;
-  views: number;
+  views: Generated<number>;
   created: Generated<Timestamp>;
   updated: Timestamp | null;
 }
@@ -54,6 +53,14 @@ export interface PostCategory {
   id: string;
   post_id: string;
   category_id: string;
+  created: Generated<Timestamp>;
+}
+
+export interface PostUpvote {
+  id: string;
+  post_id: string;
+  visitor_id: string;
+  votes: Generated<number>;
   created: Generated<Timestamp>;
 }
 
@@ -69,5 +76,6 @@ export interface Database {
   category: Category;
   post: Post;
   post_category: PostCategory;
+  post_upvote: PostUpvote;
   user: User;
 }

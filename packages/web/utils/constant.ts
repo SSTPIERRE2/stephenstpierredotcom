@@ -232,12 +232,12 @@ export const SOCIAL_LINKS: link[] = [
   {
     slug: 'linkedIn',
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/stevecstpierre/',
+    href: 'https://www.linkedin.com/in/stephencstpierre/',
   },
   {
     slug: 'stackOverflow',
     label: 'Stack Overflow',
-    href: 'https://stackoverflow.com/users/8183576/steve',
+    href: 'https://stackoverflow.com/users/8183576/stephen',
   },
   {
     slug: 'twitter',

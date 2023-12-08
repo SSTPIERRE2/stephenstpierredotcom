@@ -14,7 +14,7 @@ export const handler = AuthHandler({
 
         // Resend requires a registered domain
         resend.emails.send({
-          from: 'steve@stevestpierre.com',
+          from: 'steve@stephenstpierre.com',
           to: 'stephencstpierre@gmail.com',
           subject: 'Your magic link',
           html: `<p>Here's your <a href="${link}">magic link</a>!</p>`,

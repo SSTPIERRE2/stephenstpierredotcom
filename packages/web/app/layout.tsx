@@ -15,7 +15,7 @@ import styles from './layout.module.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Steve St.Pierre',
+  title: 'Stephen St.Pierre',
   description: 'Personal Blog',
 };
 

@@ -5,14 +5,14 @@ import { Kysely, sql } from 'kysely';
  */
 export async function up(db) {
   await db.schema
-    .createTable('post')
+    .createTable('post_upvote')
     .addColumn('id', 'text', (col) => col.primaryKey())
-    .addColumn('type', 'integer', (col) => col.notNull())
-    .addColumn('views', 'integer', (col) => col.notNull().defaultTo(0))
+    .addColumn('post_id', 'text', (col) => col.notNull())
+    .addColumn('visitor_id', 'text', (col) => col.notNull())
+    .addColumn('votes', 'integer', (col) => col.notNull().defaultTo(0))
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
     )
-    .addColumn('updated', 'timestamp')
     .execute();
 }
 
@@ -20,5 +20,5 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropTable('post').execute();
+  await db.schema.dropTable('post_upvote').execute();
 }

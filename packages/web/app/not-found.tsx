@@ -1,7 +1,7 @@
 import styles from './not-found.module.css';
 
 export const metadata = {
-  title: `404 Not found • Steve St.Pierre`,
+  title: `404 Not found • StephenStPierre.com`,
 };
 
 const NotFound = () => {
