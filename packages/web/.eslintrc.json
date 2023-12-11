@@ -2,7 +2,7 @@
   "extends": ["next/core-web-vitals", "prettier"],
   "settings": {
     "next": {
-      "rootDir": "packages/portfolio"
+      "rootDir": "packages/web"
     }
   }
 }
