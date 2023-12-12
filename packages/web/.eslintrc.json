@@ -1,8 +1,4 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
-  "settings": {
-    "next": {
-      "rootDir": "packages/web"
-    }
-  }
+  "rules": { "react/no-unescaped-entities": 0 }
 }

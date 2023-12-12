@@ -20,7 +20,7 @@ const Icon = () => {
         }
       }, 1500);
     }
-  }, [isPlaying]);
+  }, [isPlaying, initialized]);
 
   useEffect(() => {
     if (initialized) {

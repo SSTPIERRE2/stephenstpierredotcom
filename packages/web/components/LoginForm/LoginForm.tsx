@@ -51,7 +51,7 @@ const LoginForm = () => {
       // make request to magic link auth route
       fetch(`${API_ENDPOINTS.magicLink}?email=${result.data.signIn.email}`);
     }
-  }, [result]);
+  }, [result, createAnalytic]);
 
   return (
     <form onSubmit={onSubmit}>

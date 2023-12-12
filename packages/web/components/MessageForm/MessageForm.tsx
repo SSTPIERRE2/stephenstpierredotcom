@@ -53,7 +53,7 @@ const MessageForm = () => {
         metadata: JSON.stringify(result.data),
       });
     }
-  }, [result]);
+  }, [result, createAnalytic, email, setEmail]);
 
   return (
     <div className={styles.wrapper}>

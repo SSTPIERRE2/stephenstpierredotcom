@@ -14,7 +14,7 @@ const Footer = () => {
     if (!isInitialized && isOnScreen) {
       setIsInitialized(true);
     }
-  }, [isOnScreen]);
+  }, [isOnScreen, isInitialized]);
 
   console.log(`Footer`, isOnScreen);
 
