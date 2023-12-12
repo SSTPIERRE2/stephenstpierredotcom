@@ -9,6 +9,7 @@ export function Web({ stack }: StackContext) {
     path: 'packages/web',
     environment: {
       NEXT_PUBLIC_API_URL: api.url,
+      NEXT_SHARP_PATH: 'node_modules/sharp',
     },
     bind: [use(Database)],
   });
