@@ -10,6 +10,7 @@ export function Web({ stack }: StackContext) {
     environment: {
       NEXT_PUBLIC_API_URL: api.url,
       NEXT_SHARP_PATH: 'node_modules/sharp',
+      NEXT_LOGROCKET_ID: 'g6xusi/stephenstpierrecom',
     },
     bind: [use(Database)],
   });

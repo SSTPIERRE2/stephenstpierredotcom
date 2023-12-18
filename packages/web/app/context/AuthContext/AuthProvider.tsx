@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 import AuthContext from './AuthContext';
+import LogRocket from 'logrocket';
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [visitorId, setVisitorId] = useState<string | null>(null);
@@ -19,6 +20,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const id = crypto.randomUUID();
       localStorage.setItem('visitorId', id);
       setVisitorId(id);
+
+      LogRocket.identify(id);
       console.log('set new visitor id', id);
     }
 

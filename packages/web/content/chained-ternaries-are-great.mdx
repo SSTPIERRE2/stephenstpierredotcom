@@ -1,0 +1,25 @@
+---
+title: 'Chained Ternaries Are Great'
+abstract:
+publishedOn: '2023-12-08T12:00:00-0400'
+---
+
+Check out these two functionally equivalent pieces of code, which do you like better?
+
+```
+let isShown = false;
+
+if (conditionA && conditionB) {
+  isShown = true;
+} else if (conditionC) {
+  isShown = true;
+}
+
+const isShown = conditionA && conditionB
+  ? true
+  : conditionC
+  ? true
+  : false;
+```
+
+<Sandpack />
