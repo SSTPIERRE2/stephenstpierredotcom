@@ -18,14 +18,8 @@ export type Scalars = {
   JSON: { input: unknown; output: unknown; }
 };
 
-export type AnalyticsCount = {
-  __typename?: 'AnalyticsCount';
-  name: Scalars['String']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type AnalyticsEvent = {
-  __typename?: 'AnalyticsEvent';
+export type Analytic = {
+  __typename?: 'Analytic';
   browserEngine: Scalars['String']['output'];
   browserName: Scalars['String']['output'];
   browserVersion: Scalars['String']['output'];
@@ -42,6 +36,19 @@ export type AnalyticsEvent = {
   visitorId: Scalars['String']['output'];
 };
 
+export type AnalyticCount = {
+  __typename?: 'AnalyticCount';
+  name: Scalars['String']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type Category = {
+  __typename?: 'Category';
+  created: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
 export enum EventName {
   Click = 'click',
   CursorThrash = 'cursorThrash',
@@ -53,32 +60,17 @@ export enum EventName {
   RageClick = 'rageClick'
 }
 
-export type Message = {
-  __typename?: 'Message';
-  created: Scalars['Date']['output'];
-  email: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  text: Scalars['String']['output'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  createAnalyticsEvent: AnalyticsEvent;
-  createMessage: Message;
+  createAnalytic: Analytic;
   signIn: SignInResult;
 };
 
 
-export type MutationCreateAnalyticsEventArgs = {
+export type MutationCreateAnalyticArgs = {
   metadata: InputMaybe<Scalars['String']['input']>;
   name: EventName;
   visitorId: Scalars['String']['input'];
-};
-
-
-export type MutationCreateMessageArgs = {
-  email: Scalars['String']['input'];
-  text: Scalars['String']['input'];
 };
 
 
@@ -87,15 +79,21 @@ export type MutationSignInArgs = {
   password: Scalars['String']['input'];
 };
 
+export type PageViewsOverTime = {
+  __typename?: 'PageViewsOverTime';
+  date: Scalars['String']['output'];
+  total: Scalars['Int']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  Messages: Array<Message>;
-  analyticsEvents: Array<AnalyticsEvent>;
-  countEvents: Array<AnalyticsCount>;
+  Analytics: Array<Analytic>;
+  Categories: Array<Category>;
+  countEvents: Array<AnalyticCount>;
 };
 
 
-export type QueryAnalyticsEventsArgs = {
+export type QueryAnalyticsArgs = {
   fields: InputMaybe<Scalars['String']['input']>;
 };
 

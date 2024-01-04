@@ -4,6 +4,7 @@ import { printSchema, lexicographicSortSchema } from 'graphql';
 
 import './types/analytic';
 import './types/category';
+import './types/postUpvote';
 import './types/user';
 
 export const schema = builder.toSchema({});

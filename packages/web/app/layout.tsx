@@ -11,7 +11,8 @@ import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
 import { ThemeProvider } from './context/ThemeContext';
 import MobileMenu from '@/components/MobileMenu';
 import styles from './layout.module.css';
-import LogRocket from 'logrocket';
+import Logrocket from '@/components/Logrocket';
+import { Config } from 'sst/node/config';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,8 +20,6 @@ export const metadata = {
   title: 'Stephen St.Pierre',
   description: 'Personal Blog',
 };
-
-LogRocket.init(process.env.NEXT_LOGROCKET_ID as string);
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const savedTheme = cookies().get('color-theme') as
@@ -39,7 +38,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       style={themeColors as React.CSSProperties}
     >
       <body className={inter.className}>
-        <UrqlProvider>
+        <Logrocket appId={Config.LOGROCKET_APP_ID} />
+        <UrqlProvider apiUrl={Config.API_URL}>
           <AuthProvider>
             <ThemeProvider initialTheme={theme}>
               <AnalyticsWrapper>

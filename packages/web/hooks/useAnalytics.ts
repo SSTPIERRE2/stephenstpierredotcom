@@ -24,11 +24,7 @@ const CountAnalyticsQuery = gql`
 
 const CreateAnalyticsQuery = gql`
   mutation ($name: EventName!, $visitorId: String!, $metadata: String) {
-    createAnalyticsEvent(
-      name: $name
-      visitorId: $visitorId
-      metadata: $metadata
-    ) {
+    createAnalytic(name: $name, visitorId: $visitorId, metadata: $metadata) {
       name
       visitorId
       metadata

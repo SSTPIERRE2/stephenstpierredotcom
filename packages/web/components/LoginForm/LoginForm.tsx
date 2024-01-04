@@ -1,7 +1,6 @@
 'use client';
 
 import { useCreateAnalytic } from '@/hooks/useAnalytics';
-import { API_ENDPOINTS } from '@/utils/constant';
 import { useEffect, useState } from 'react';
 import { gql, useMutation } from 'urql';
 
@@ -49,7 +48,7 @@ const LoginForm = () => {
 
     if (!result.fetching && !!result?.data?.signIn?.isAuthorized) {
       // make request to magic link auth route
-      fetch(`${API_ENDPOINTS.magicLink}?email=${result.data.signIn.email}`);
+      // fetch(`${API_URL}/auth/link/authorize?email=${result.data.signIn.email}`);
     }
   }, [result, createAnalytic]);
 

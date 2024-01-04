@@ -8,21 +8,19 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [visitorId, setVisitorId] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
 
-  console.log(`authContext, visitorID: ${visitorId} email: ${email}`);
-
   useEffect(() => {
     const storedId = localStorage.getItem('visitorId');
     const storedEmail = localStorage.getItem('email');
 
     if (storedId) {
       setVisitorId(storedId);
+      LogRocket.identify(storedId);
     } else {
       const id = crypto.randomUUID();
       localStorage.setItem('visitorId', id);
       setVisitorId(id);
 
       LogRocket.identify(id);
-      console.log('set new visitor id', id);
     }
 
     if (storedEmail) {

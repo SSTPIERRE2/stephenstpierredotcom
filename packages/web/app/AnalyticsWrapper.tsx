@@ -2,26 +2,28 @@
 
 import debounce, { handleCursorThrash } from '../utils/debounce';
 import { useCreateAnalytic } from '@/hooks/useAnalytics';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
   const { createAnalytic, result } = useCreateAnalytic();
+  const isInitialized = useRef(false);
 
-  console.log(`createAnalytic result`, result);
+  // console.log(`createAnalytic result`, result);
 
   useEffect(() => {
-    console.log(
-      'hello analytics wrapper',
-      document.referrer,
-      window.location.hostname
-    );
-    if (document.referrer.indexOf(window.location.hostname) === -1) {
+    // console.log(
+    //   'hello analytics wrapper',
+    //   document.referrer,
+    //   window.location.hostname
+    // );
+    if (document.referrer.indexOf(window.location.hostname) === -1 && !isInitialized.current) {
       console.log(
         'first page view from either direct url navigation or from a link from another website!'
       );
       // createAnalytic({
       //   name: 'pageView',
       // });
+      isInitialized.current = true;
     }
   }, [createAnalytic]);
 

@@ -43,6 +43,7 @@ export interface Category {
 
 export interface Post {
   id: string;
+  slug: string;
   type: number;
   views: Generated<number>;
   created: Generated<Timestamp>;

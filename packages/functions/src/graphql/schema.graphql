@@ -1,9 +1,4 @@
-type AnalyticsCount {
-  name: String!
-  total: Int!
-}
-
-type AnalyticsEvent {
+type Analytic {
   browserEngine: String!
   browserName: String!
   browserVersion: String!
@@ -18,6 +13,17 @@ type AnalyticsEvent {
   osVersion: String!
   url: String!
   visitorId: String!
+}
+
+type AnalyticCount {
+  name: String!
+  total: Int!
+}
+
+type Category {
+  created: Date!
+  id: ID!
+  name: String!
 }
 
 """
@@ -41,23 +47,27 @@ The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](
 """
 scalar JSON
 
-type Message {
-  created: Date!
-  email: String!
-  id: ID!
-  text: String!
-}
-
 type Mutation {
-  createAnalyticsEvent(metadata: String, name: EventName!, visitorId: String!): AnalyticsEvent!
-  createMessage(email: String!, text: String!): Message!
+  createAnalytic(metadata: String, name: EventName!, visitorId: String!): Analytic!
+  createOrUpdateUpvote(exists: Boolean!, postId: String!, visitorId: String!): PostUpvote!
   signIn(email: String!, password: String!): SignInResult!
 }
 
+type PageViewsOverTime {
+  date: String!
+  total: Int!
+}
+
+type PostUpvote {
+  votes: Int!
+}
+
 type Query {
-  Messages: [Message!]!
-  analyticsEvents(fields: String): [AnalyticsEvent!]!
-  countEvents: [AnalyticsCount!]!
+  Analytics(fields: String): [Analytic!]!
+  Categories: [Category!]!
+  countEvents: [AnalyticCount!]!
+  recentUpvotesByVisitorId(postId: String!, visitorId: String!): PostUpvote!
+  totalPostUpvotes(postId: String!): PostUpvote!
 }
 
 type SignInResult {

@@ -16,7 +16,7 @@ const Footer = () => {
     }
   }, [isOnScreen, isInitialized]);
 
-  console.log(`Footer`, isOnScreen);
+  // console.log(`Footer`, isOnScreen);
 
   return (
     <footer className={styles.footer} role="contentinfo" ref={elementRef}>
