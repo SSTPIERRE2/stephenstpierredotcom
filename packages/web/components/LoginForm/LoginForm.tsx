@@ -9,22 +9,22 @@ const defaultState = {
   password: '',
 };
 
-const LoginQuery = gql`
-  mutation ($email: String!, $password: String!) {
-    signIn(email: $email, password: $password) {
-      error
-      isAuthorized
-    }
-  }
-`;
+// const LoginQuery = gql`
+//   mutation ($email: String!, $password: String!) {
+//     signIn(email: $email, password: $password) {
+//       error
+//       isAuthorized
+//     }
+//   }
+// `;
 
 const LoginForm = () => {
   const [value, setValue] = useState(defaultState);
   const { email, password } = value;
-  const [result, signIn] = useMutation(LoginQuery);
+  // const [result, signIn] = useMutation(LoginQuery);
   const { createAnalytic } = useCreateAnalytic();
 
-  console.log('Login result: ', result);
+  // console.log('Login result: ', result);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
@@ -35,22 +35,22 @@ const LoginForm = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    signIn({ email, password });
+    // signIn({ email, password });
   };
 
-  useEffect(() => {
-    if (!result.fetching && !!result?.data) {
-      createAnalytic({
-        name: 'form',
-        metadata: JSON.stringify(result.data),
-      });
-    }
+  // useEffect(() => {
+  //   if (!result.fetching && !!result?.data) {
+  //     createAnalytic({
+  //       name: 'form',
+  //       metadata: JSON.stringify(result.data),
+  //     });
+  //   }
 
-    if (!result.fetching && !!result?.data?.signIn?.isAuthorized) {
-      // make request to magic link auth route
-      // fetch(`${API_URL}/auth/link/authorize?email=${result.data.signIn.email}`);
-    }
-  }, [result, createAnalytic]);
+  //   if (!result.fetching && !!result?.data?.signIn?.isAuthorized) {
+  //     // make request to magic link auth route
+  //     // fetch(`${API_URL}/auth/link/authorize?email=${result.data.signIn.email}`);
+  //   }
+  // }, [result, createAnalytic]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -63,12 +63,12 @@ const LoginForm = () => {
         value={password}
         onChange={onChange}
       />
-      <button type="submit" disabled={result.fetching}>
+      {/* <button type="submit" disabled={result.fetching}>
         Submit
-      </button>
-      {!!result?.data?.signIn?.isAuthorized && (
+      </button> */}
+      {/* {!!result?.data?.signIn?.isAuthorized && (
         <p>Success! A magic link has been sent to your email.</p>
-      )}
+      )} */}
     </form>
   );
 };

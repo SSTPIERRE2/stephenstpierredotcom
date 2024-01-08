@@ -3,8 +3,9 @@ import { useCallback } from 'react';
 import { gql, useMutation, useQuery } from 'urql';
 
 const AnalyticsQuery = gql`
-  query ($fields: String!) {
+  query AnalyticsEvents($fields: String!) {
     analyticsEvents(fields: $fields) {
+      id
       name
       visitorId
       url
@@ -14,7 +15,7 @@ const AnalyticsQuery = gql`
 `;
 
 const CountAnalyticsQuery = gql`
-  query {
+  query CountAnalytics {
     countEvents {
       name
       total
@@ -23,8 +24,13 @@ const CountAnalyticsQuery = gql`
 `;
 
 const CreateAnalyticsQuery = gql`
-  mutation ($name: EventName!, $visitorId: String!, $metadata: String) {
+  mutation CreateAnalytic(
+    $name: EventName!
+    $visitorId: String!
+    $metadata: String
+  ) {
     createAnalytic(name: $name, visitorId: $visitorId, metadata: $metadata) {
+      id
       name
       visitorId
       metadata
@@ -58,7 +64,7 @@ export const useCreateAnalytic = () => {
         createAnalytic({ name, visitorId, metadata });
       }
     },
-    [visitorId]
+    [visitorId, createAnalytic]
   );
 
   return {

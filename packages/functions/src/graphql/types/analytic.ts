@@ -97,7 +97,7 @@ const PageViewsOverTime = builder
   });
 
 builder.queryFields((t) => ({
-  Analytics: t.field({
+  analyticsEvents: t.field({
     type: [AnalyticType],
     args: {
       fields: t.arg.string(),

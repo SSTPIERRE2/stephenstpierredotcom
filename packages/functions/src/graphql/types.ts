@@ -63,6 +63,8 @@ export enum EventName {
 export type Mutation = {
   __typename?: 'Mutation';
   createAnalytic: Analytic;
+  createOrUpdateUpvote: PostUpvote;
+  incrementViews: Post;
   signIn: SignInResult;
 };
 
@@ -71,6 +73,18 @@ export type MutationCreateAnalyticArgs = {
   metadata: InputMaybe<Scalars['String']['input']>;
   name: EventName;
   visitorId: Scalars['String']['input'];
+};
+
+
+export type MutationCreateOrUpdateUpvoteArgs = {
+  exists: Scalars['Boolean']['input'];
+  postId: Scalars['String']['input'];
+  visitorId: Scalars['String']['input'];
+};
+
+
+export type MutationIncrementViewsArgs = {
+  postId: Scalars['String']['input'];
 };
 
 
@@ -85,11 +99,23 @@ export type PageViewsOverTime = {
   total: Scalars['Int']['output'];
 };
 
+export type Post = {
+  __typename?: 'Post';
+  views: Scalars['Int']['output'];
+};
+
+export type PostUpvote = {
+  __typename?: 'PostUpvote';
+  votes: Scalars['Int']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
   Analytics: Array<Analytic>;
   Categories: Array<Category>;
   countEvents: Array<AnalyticCount>;
+  recentUpvotesByVisitorId: PostUpvote;
+  totalPostUpvotes: TotalVotes;
 };
 
 
@@ -97,8 +123,26 @@ export type QueryAnalyticsArgs = {
   fields: InputMaybe<Scalars['String']['input']>;
 };
 
+
+export type QueryRecentUpvotesByVisitorIdArgs = {
+  postId: Scalars['String']['input'];
+  visitorId: Scalars['String']['input'];
+};
+
+
+export type QueryTotalPostUpvotesArgs = {
+  postId: Scalars['String']['input'];
+  visitorId: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SignInResult = {
   __typename?: 'SignInResult';
   error: Maybe<Scalars['String']['output']>;
   isAuthorized: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type TotalVotes = {
+  __typename?: 'TotalVotes';
+  recentVisitorUpvotes: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
 };

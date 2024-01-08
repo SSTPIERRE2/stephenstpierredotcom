@@ -11,22 +11,22 @@ const defaultState = {
   message: '',
 };
 
-const MessageQuery = gql`
-  mutation ($email: String!, $text: String!) {
-    createMessage(email: $email, text: $text) {
-      id
-    }
-  }
-`;
+// const MessageQuery = gql`
+//   mutation ($email: String!, $text: String!) {
+//     createMessage(email: $email, text: $text) {
+//       id
+//     }
+//   }
+// `;
 
 const MessageForm = () => {
   const [value, setValue] = useState(defaultState);
   const { email, message } = value;
-  const [result, createMessage] = useMutation(MessageQuery);
+  // const [result, createMessage] = useMutation(MessageQuery);
   const { createAnalytic } = useCreateAnalytic();
   const { setEmail } = useAuth();
 
-  console.log('MessageForm ', email, message, result);
+  // console.log('MessageForm ', email, message, result);
 
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,20 +40,20 @@ const MessageForm = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('onSubmit ran!');
-    createMessage({ email, text: message });
+    // createMessage({ email, text: message });
   };
 
-  useEffect(() => {
-    if (!result.fetching && !!result?.data) {
-      console.log(`setting email with result now`);
+  // useEffect(() => {
+  //   if (!result.fetching && !!result?.data) {
+  //     console.log(`setting email with result now`);
 
-      setEmail(email);
-      createAnalytic({
-        name: 'form',
-        metadata: JSON.stringify(result.data),
-      });
-    }
-  }, [result, createAnalytic, email, setEmail]);
+  //     setEmail(email);
+  //     createAnalytic({
+  //       name: 'form',
+  //       metadata: JSON.stringify(result.data),
+  //     });
+  //   }
+  // }, [result, createAnalytic, email, setEmail]);
 
   return (
     <div className={styles.wrapper}>
@@ -91,19 +91,19 @@ const MessageForm = () => {
             />
           </div>
         </div>
-        <button
+        {/* <button
           type="submit"
           disabled={result?.fetching || false}
           className={styles.send}
         >
           <span className={styles.sendText}>Send</span>
-        </button>
-        {!!result?.data?.createMessage && (
+        </button> */}
+        {/* {!!result?.data?.createMessage && (
           <p className={styles.successText}>
             Success! Thanks for engaging with my website! I went ahead and saved
             your email for future messages.
           </p>
-        )}
+        )} */}
       </form>
     </div>
   );

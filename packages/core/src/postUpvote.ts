@@ -35,7 +35,7 @@ export async function update(post_id: string, visitor_id: string) {
     throw new Error('Post upvote not found.');
   }
 
-  return { votes: result.votes };
+  return result;
 }
 
 export async function getTotalPostUpvotes(post_id: string) {

@@ -9,7 +9,7 @@ export async function up(db) {
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('post_id', 'text', (col) => col.notNull())
     .addColumn('visitor_id', 'text', (col) => col.notNull())
-    .addColumn('votes', 'integer', (col) => col.notNull().defaultTo(0))
+    .addColumn('votes', 'integer', (col) => col.notNull().defaultTo(1))
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
     )

@@ -39,6 +39,7 @@
     "urql": "^4.0.5"
   },
   "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
     "eslint-config-prettier": "^9.1.0"
   }
 }

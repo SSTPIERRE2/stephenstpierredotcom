@@ -19,15 +19,44 @@ const VotesType = builder.objectRef<{ votes: number }>('PostUpvote').implement({
   }),
 });
 
+const TotalVotesType = builder
+  .objectRef<{ total: number; recentVisitorUpvotes: number }>('TotalVotes')
+  .implement({
+    fields: (t) => ({
+      total: t.exposeInt('total'),
+      recentVisitorUpvotes: t.exposeInt('recentVisitorUpvotes'),
+    }),
+  });
+
 builder.queryFields((t) => ({
   totalPostUpvotes: t.field({
-    type: VotesType,
+    type: TotalVotesType,
     args: {
       postId: t.arg.string({ required: true }),
+      visitorId: t.arg.string(),
     },
-    resolve: (_, args) => {
-      const { postId } = args;
-      return PostUpvote.getTotalPostUpvotes(postId);
+    resolve: async (_, args) => {
+      const { postId, visitorId } = args;
+      const { votes: total } = await PostUpvote.getTotalPostUpvotes(postId);
+      let recentVisitorUpvotes = 0;
+
+      if (visitorId) {
+        const result = await PostUpvote.getRecentUpvotesByVisitorId(
+          postId,
+          visitorId
+        );
+
+        if (result) {
+          recentVisitorUpvotes = result.votes;
+        }
+      }
+
+      console.log(`getting total post upvotes`, recentVisitorUpvotes, total);
+
+      return {
+        total: recentVisitorUpvotes ? total - recentVisitorUpvotes : total,
+        recentVisitorUpvotes,
+      };
     },
   }),
   recentUpvotesByVisitorId: t.field({
@@ -58,12 +87,13 @@ builder.mutationFields((t) => ({
     },
     resolve: (root, args, context) => {
       const { postId, visitorId, exists } = args;
+      console.log(`create or update upvote`, postId, visitorId, exists);
 
       if (exists) {
-        return PostUpvote.create(postId, visitorId);
+        return PostUpvote.update(postId, visitorId);
       }
 
-      return PostUpvote.update(postId, visitorId);
+      return PostUpvote.create(postId, visitorId);
     },
   }),
 }));
