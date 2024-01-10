@@ -7,14 +7,14 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "@types/node": "^20.4.8"
+    "@types/node": "^20.10.8"
   },
   "dependencies": {
-    "@aws-sdk/client-rds-data": "^3.386.0",
-    "aws-sdk": "^2.1431.0",
-    "kysely": "^0.26.1",
+    "@aws-sdk/client-rds-data": "^3.485.0",
+    "aws-sdk": "^2.1532.0",
+    "kysely": "^0.27.2",
     "kysely-data-api": "^0.2.1",
-    "pg": "^8.11.2",
+    "pg": "^8.11.3",
     "ulid": "^2.3.0"
   }
 }

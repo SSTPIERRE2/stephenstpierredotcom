@@ -111,15 +111,15 @@ export type PostUpvote = {
 
 export type Query = {
   __typename?: 'Query';
-  Analytics: Array<Analytic>;
   Categories: Array<Category>;
+  analyticsEvents: Array<Analytic>;
   countEvents: Array<AnalyticCount>;
   recentUpvotesByVisitorId: PostUpvote;
   totalPostUpvotes: TotalVotes;
 };
 
 
-export type QueryAnalyticsArgs = {
+export type QueryAnalyticsEventsArgs = {
   fields: InputMaybe<Scalars['String']['input']>;
 };
 

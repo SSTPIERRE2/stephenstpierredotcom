@@ -6,9 +6,9 @@ import { cache } from 'react';
 import { loadBlogPost } from '@/utils/file-helpers';
 import { notFound } from 'next/navigation';
 import dayjs from 'dayjs';
-import Upvotes from '@/components/Upvotes';
+import { Upvotes } from '@/components/Upvotes';
 import { Post } from '@core/post';
-import PageViews from '@/components/PageViews/PageViews';
+import PageViews from '@/components/PageViews';
 
 
 const getPostMetadata = cache(async (postSlug: string) => {
@@ -54,10 +54,10 @@ const PostPage: NextPage<{ params: { postSlug: string; } }> = async ({ params: {
     <main className={styles.main}>
       <h2>{title}</h2>
       <span>{dayjs(new Date(publishedOn)).format('MMMM D, YYYY')}</span>
-      <Upvotes postId={id} />
+      <Upvotes postId={id} visitorId='123' />
       <MDXRemote source={content} components={COMPONENT_MAP} />
       <div>Last Updated: {dayjs(new Date(updated || created)).format('MMMM D, YYYY')}</div>
-      <PageViews postId={id} views={views} />
+      <PageViews id={id} initialViews={views} />
     </main>
   );
 }

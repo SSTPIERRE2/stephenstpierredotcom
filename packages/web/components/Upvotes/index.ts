@@ -1,1 +1,1 @@
-export { default } from './Upvotes';
+export { default as Upvotes } from './UpvotesContainer';

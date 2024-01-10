@@ -7,18 +7,18 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.119",
-    "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/node": "^20.4.8"
+    "@types/aws-lambda": "^8.10.131",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.10.8"
   },
   "dependencies": {
-    "@pothos/core": "^3.32.1",
+    "@pothos/core": "^3.41.0",
     "bcryptjs": "^2.4.3",
     "device-detector-js": "^3.0.3",
-    "graphql": "^16.7.1",
-    "graphql-scalars": "^1.22.2",
-    "jsonwebtoken": "^9.0.1",
+    "graphql": "^16.8.1",
+    "graphql-scalars": "^1.22.4",
+    "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
     "resend": "^0.17.2",
     "ulid": "^2.3.0"

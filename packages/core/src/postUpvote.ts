@@ -54,13 +54,42 @@ export function getRecentUpvotesByVisitorId(
   visitor_id: string
 ) {
   return SQL.DB.selectFrom('post_upvote')
-    .select('votes')
+    .select(['id', 'votes'])
     .where('post_upvote.post_id', '=', post_id)
     .where('post_upvote.visitor_id', '=', visitor_id)
     .where(
       'post_upvote.created',
       '>',
+      // @ts-ignore The docs don't give an example of how to make TS accept raw sql and I can't find anything on the internet about it
       sql`CURRENT_TIMESTAMP - INTERVAL '1 day'`
     )
     .executeTakeFirst();
+}
+
+export async function updateById(id: string) {
+  const result = await SQL.DB.updateTable('post_upvote')
+    .set((eb) => ({
+      votes: eb('votes', '+', 1),
+    }))
+    .where('id', '=', id)
+    .returning(['id', 'votes'])
+    .executeTakeFirst();
+
+  if (!result) {
+    throw new Error('Post upvote not found.');
+  }
+
+  return result;
+}
+
+export async function createOrUpdate(
+  post_id: string,
+  visitor_id: string,
+  upvote_id: string | undefined
+) {
+  if (upvote_id) {
+    return updateById(upvote_id);
+  }
+
+  return create(post_id, visitor_id);
 }
