@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "sst bind vitest",
+    "test": "sst bind vitest run",
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
@@ -15,10 +15,13 @@
   "dependencies": {
     "@pothos/core": "^3.41.0",
     "bcryptjs": "^2.4.3",
+    "cheerio": "1.0.0-rc.12",
     "device-detector-js": "^3.0.3",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.4",
+    "gray-matter": "^4.0.3",
     "jsonwebtoken": "^9.0.2",
+    "marked": "^11.1.1",
     "node-fetch": "^3.3.2",
     "resend": "^0.17.2",
     "ulid": "^2.3.0"

@@ -5,7 +5,7 @@ import { Kysely, sql } from 'kysely';
  */
 export async function up(db) {
   await db.schema
-    .createTable('category')
+    .createTable('tag')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('name', 'text', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
@@ -18,5 +18,5 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropTable('category').execute();
+  await db.schema.dropTable('tag').execute();
 }

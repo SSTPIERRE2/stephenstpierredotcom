@@ -35,25 +35,23 @@ export interface Analytic {
   created: Generated<Timestamp>;
 }
 
-export interface Category {
-  id: string;
-  name: string;
-  created: Generated<Timestamp>;
-}
-
 export interface Post {
   id: string;
+  title: string;
   slug: string;
-  type: number;
+  abstract: string;
+  content: string;
   views: Generated<number>;
+  is_published: boolean | null;
+  published_on: Timestamp | null;
   created: Generated<Timestamp>;
   updated: Timestamp | null;
 }
 
-export interface PostCategory {
+export interface PostTag {
   id: string;
   post_id: string;
-  category_id: string;
+  tag_id: string;
   created: Generated<Timestamp>;
 }
 
@@ -62,6 +60,12 @@ export interface PostUpvote {
   post_id: string;
   visitor_id: string;
   votes: Generated<number>;
+  created: Generated<Timestamp>;
+}
+
+export interface Tag {
+  id: string;
+  name: string;
   created: Generated<Timestamp>;
 }
 
@@ -74,9 +78,9 @@ export interface User {
 
 export interface Database {
   analytic: Analytic;
-  category: Category;
   post: Post;
-  post_category: PostCategory;
+  post_tag: PostTag;
   post_upvote: PostUpvote;
+  tag: Tag;
   user: User;
 }

@@ -6,8 +6,10 @@ export function Default({ stack }: StackContext) {
     defaults: {
       function: {
         bind: [use(Database)],
+        copyFiles: [{ from: 'packages/functions/content', to: './content' }],
       },
     },
     onCreate: 'packages/functions/src/seed.handler',
+    onUpdate: 'packages/functions/src/seed.handler',
   });
 }

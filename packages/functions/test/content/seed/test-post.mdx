@@ -1,0 +1,27 @@
+---
+title: 'Test Post'
+abstract: 'This is a test.'
+tags: ['javascript']
+---
+
+Check out these two functionally equivalent pieces of code, which do you like better?
+
+```
+let isShown = false;
+
+if (conditionA && conditionB) {
+  isShown = true;
+} else if (conditionC) {
+  isShown = true;
+}
+
+const isShown = conditionA && conditionB
+  ? true
+  : conditionC
+  ? true
+  : false;
+```
+
+<Sandpack />
+
+<h2 id="#better-ternaries">Better Ternaries</h2>

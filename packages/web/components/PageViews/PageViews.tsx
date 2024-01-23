@@ -13,9 +13,6 @@ async function incrementPostViews(postId: string) {
 
   const result = await Post.incrementViews(postId);
 
-  console.log(`pageViews?`, result);
-
-
   return result.views;
 }
 
