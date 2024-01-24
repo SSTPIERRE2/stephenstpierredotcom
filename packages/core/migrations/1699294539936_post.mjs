@@ -1,4 +1,4 @@
-import { Kysely, sql } from 'kysely';
+import { sql } from 'kysely';
 
 /**
  * @param db {Kysely<any>}

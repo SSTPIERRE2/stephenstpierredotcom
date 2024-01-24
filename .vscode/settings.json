@@ -2,6 +2,5 @@
   "search.exclude": {
     "**/.sst": true
   },
-  "eslint.workingDirectories": ["packages/web"],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

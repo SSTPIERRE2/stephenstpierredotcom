@@ -1,7 +1,7 @@
-import { Post, PostToCreate } from '@graphql-rds/core/post';
+import { Post } from '@graphql-rds/core/post';
 import { Tag } from '@graphql-rds/core/tag';
 import { PostTag } from '@graphql-rds/core/postTag';
-import { BlogPost, getBlogPosts, slugify } from './utils/file-helpers';
+import { BlogPost, getBlogPosts } from './utils/file-helpers';
 
 const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
   const { isPublished, publishedOn, tags, ...post } = blogPost;
@@ -41,12 +41,6 @@ const handleCreateTagAndRef = async (name: string, postId: string) => {
     const createdPostTag = await PostTag.create(postId, createdTag.id);
     console.log(`createdPostTag`, createdPostTag);
   }
-};
-
-export const handler = async () => {
-  const posts = await getBlogPosts(
-    process.env.NODE_ENV === 'test' ? './test/content/seed' : undefined
-  );
 };
 
 export const onCreate = async () => {
@@ -115,7 +109,7 @@ export const onUpdate = async () => {
       // create any PostTags that are in postTags but not in dbTags
       for (const tag of postTags) {
         if (!dbTagNames.includes(tag)) {
-          handleCreateTagAndRef(tag, dbPostId);
+          await handleCreateTagAndRef(tag, dbPostId);
         }
       }
 

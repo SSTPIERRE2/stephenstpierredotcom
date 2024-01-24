@@ -4,7 +4,7 @@ import { ulid } from 'ulid';
 import { SQL } from './sql';
 
 export async function create(post_id: string, tag_id: string) {
-  const result = SQL.DB.insertInto('post_tag')
+  const result = await SQL.DB.insertInto('post_tag')
     .values({ id: ulid(), post_id, tag_id })
     .returningAll()
     .execute();

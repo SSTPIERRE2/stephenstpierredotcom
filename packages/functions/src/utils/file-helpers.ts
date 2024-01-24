@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import matter from 'gray-matter';
+import matter, { GrayMatterFile } from 'gray-matter';
 
 interface BlogPostFrontmatter {
   title: string;
@@ -10,7 +10,7 @@ interface BlogPostFrontmatter {
   isPublished?: boolean;
 }
 
-interface BlogPostData {
+interface BlogPostData<I extends matter.Input> extends GrayMatterFile<I> {
   data: BlogPostFrontmatter;
   content: string;
 }
@@ -27,11 +27,12 @@ export async function getBlogPosts(path?: string): Promise<BlogPost[]> {
 
   const blogPosts = [];
 
-  for (let fileName of fileNames.filter((f) => f !== '.DS_Store')) {
+  for (const fileName of fileNames.filter((f) => f !== '.DS_Store')) {
     const rawContent = await readFile(`${directory}/${fileName}`);
 
-    // @ts-ignore gray-matter provides no way to pass known frontmatter properties to the generic
-    const { data: frontmatter, content }: BlogPostData = matter(rawContent);
+    const { data: frontmatter, content } = matter(
+      rawContent
+    ) as BlogPostData<string>;
 
     blogPosts.push({
       slug: fileName.replace('.mdx', ''),

@@ -4,9 +4,5 @@
   "compilerOptions": {
     "lib": ["es6", "dom"]
   },
-  "include": [
-    "**/*.ts",
-    "packages/portfolio/components/PlotFigure/PlotFigure.js",
-    "packages/portfolio/components/PlotFigure/index.js"
-  ]
+  "include": ["**/*.ts"]
 }

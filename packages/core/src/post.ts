@@ -49,7 +49,7 @@ export async function createAll(posts: PostToCreate[]) {
 
 export function updateAll(posts: Post[]) {
   const queries = posts.map(async ({ id, content }) => {
-    const result = SQL.DB.updateTable('post')
+    const result = await SQL.DB.updateTable('post')
       .set({
         content,
       })
