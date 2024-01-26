@@ -6,7 +6,9 @@
     "dev": "sst bind next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "sst bind vitest run",
+    "test:watch": "sst bind vitest"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.11.0",
@@ -39,7 +41,10 @@
     "urql": "^4.0.6"
   },
   "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
+    "@testing-library/react": "^14.1.2",
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint-config-next": "^14.0.4",
-    "@graphql-eslint/eslint-plugin": "^3.20.1"
+    "jsdom": "^24.0.0"
   }
 }
