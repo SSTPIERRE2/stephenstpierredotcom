@@ -13,7 +13,7 @@ export async function up(db) {
     .addColumn('content', 'text', (col) => col.notNull())
     .addColumn('views', 'integer', (col) => col.notNull().defaultTo(0))
     .addColumn('is_published', 'boolean')
-    .addColumn('published_on', 'timestamp')
+    .addColumn('published_on', 'text')
     .addColumn('created', 'timestamp', (col) =>
       col.notNull().defaultTo(sql`now()`)
     )

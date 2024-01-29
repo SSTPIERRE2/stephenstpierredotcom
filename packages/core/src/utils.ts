@@ -24,3 +24,13 @@ export function deleteTableRecords(input: TableName | TableName[]) {
 
   return SQL.DB.deleteFrom(input).execute();
 }
+
+/**
+ * Postgres strips timezone info from dates and adds a space where the T should go
+ * @param timestamp example 2024-01-29 00:00:00 instead of 2024-01-29T00:00:00.000Z
+ * @returns the ISO formatted string
+ */
+export function convertDbTimestampToISOString(timestamp: string) {
+  const result = timestamp.replace(' ', 'T');
+  return result + 'Z';
+}

@@ -12,12 +12,17 @@ export async function create(post_id: string, tag_id: string) {
   return result;
 }
 
-export async function deleteById(id: string) {
-  const result = await SQL.DB.deleteFrom('post_tag')
-    .where('id', '=', id)
-    .returning('id')
-    .execute();
+export async function deleteByIds(ids: string[]) {
+  const queries = ids.map(async (id) => {
+    const result = await SQL.DB.deleteFrom('post_tag')
+      .where('id', '=', id)
+      .returning('id')
+      .execute();
 
+    return result;
+  });
+
+  const result = await Promise.all(queries);
   return result;
 }
 

@@ -43,7 +43,7 @@ export interface Post {
   content: string;
   views: Generated<number>;
   is_published: boolean | null;
-  published_on: Timestamp | null;
+  published_on: string | null;
   created: Generated<Timestamp>;
   updated: Timestamp | null;
 }

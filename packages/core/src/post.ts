@@ -11,7 +11,7 @@ export interface Post {
   content: string;
   views: number;
   is_published: boolean | null;
-  published_on: Date | null;
+  published_on: string | null;
   created: Date;
   updated: Date | null;
 }
@@ -47,19 +47,25 @@ export async function createAll(posts: PostToCreate[]) {
   return result;
 }
 
-export function updateAll(posts: Post[]) {
-  const queries = posts.map(async ({ id, content }) => {
-    const result = await SQL.DB.updateTable('post')
-      .set({
-        content,
-      })
-      .where('id', '=', id)
-      .executeTakeFirstOrThrow();
+export async function updateAll(posts: Post[]) {
+  const queries = posts.map(
+    async ({ id, content, abstract, is_published, published_on }) => {
+      const result = await SQL.DB.updateTable('post')
+        .set({
+          content,
+          abstract,
+          is_published,
+          published_on,
+        })
+        .where('id', '=', id)
+        .executeTakeFirstOrThrow();
 
-    return result;
-  });
+      return result;
+    }
+  );
 
-  return Promise.all(queries);
+  const result = await Promise.all(queries);
+  return result;
 }
 
 export async function getById(id: string) {
@@ -97,6 +103,15 @@ export async function incrementViews(postId: string) {
     .where('id', '=', postId)
     .returning('views')
     .executeTakeFirstOrThrow();
+
+  return result;
+}
+
+export async function deleteById(id: string) {
+  const result = await SQL.DB.deleteFrom('post')
+    .where('id', '=', id)
+    .returning('id')
+    .execute();
 
   return result;
 }

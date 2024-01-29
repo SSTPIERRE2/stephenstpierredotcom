@@ -40,9 +40,9 @@ export function list() {
 
 export async function getAllByPostId(post_id: string) {
   const result = await SQL.DB.selectFrom('tag')
-    .selectAll()
     .innerJoin('post_tag', 'tag.id', 'post_tag.tag_id')
     .where('post_tag.post_id', '=', post_id)
+    .select(['tag.id', 'tag.name', 'post_tag.id as post_tag_id'])
     .execute();
 
   return result;

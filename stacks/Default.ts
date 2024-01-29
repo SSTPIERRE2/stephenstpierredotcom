@@ -9,7 +9,7 @@ export function Default({ stack }: StackContext) {
         copyFiles: [{ from: 'packages/functions/content', to: './content' }],
       },
     },
-    onCreate: 'packages/functions/src/seed.handler',
-    onUpdate: 'packages/functions/src/seed.handler',
+    onCreate: 'packages/functions/src/seed.onCreate',
+    onUpdate: 'packages/functions/src/seed.onUpdate',
   });
 }
