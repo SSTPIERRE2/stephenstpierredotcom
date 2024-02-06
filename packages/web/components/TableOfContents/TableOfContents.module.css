@@ -1,13 +1,17 @@
-.aside {
-  display: none;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 / 16 * 1rem);
 }
 
-@media (min-width: 1000px) {
-  .aside {
-    display: block;
-    grid-column: 15/16;
-    grid-row: 2/7;
-    align-self: start;
-    margin: 0;
-  }
+.header {
+  margin-bottom: calc(4 / 16 * 1rem);
+}
+
+.link {
+  font-weight: var(--font-weight-normal);
+}
+
+.activeLink {
+  font-weight: var(--font-weight-bold);
 }

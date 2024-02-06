@@ -5,7 +5,7 @@ import { SQL } from './sql';
 const tableNames = ['post', 'tag', 'post_tag'] as const;
 export type TableName = (typeof tableNames)[number];
 
-export async function listTableRecords(name: TableName) {
+export async function listTableRecords<T extends TableName>(name: T) {
   const result = await SQL.DB.selectFrom(name).selectAll().execute();
 
   return result;

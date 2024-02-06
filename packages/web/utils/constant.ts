@@ -198,6 +198,7 @@ export type label = 'About' | 'Tips' | 'Posts';
 export type href = '/about' | '/tips' | '/posts';
 export type navLink = { slug: slug; label: label; href: href };
 export type link = { slug: string; label: string; href: string };
+export type headingLink = { text: string; id: string };
 
 export const LINKS: navLink[] = [
   {

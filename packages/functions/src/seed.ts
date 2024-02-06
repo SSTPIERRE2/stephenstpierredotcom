@@ -58,10 +58,15 @@ const handleDeletePostAndRelations = async (id: string) => {
   };
 };
 
-const doesPostHaveAnyChanges = (dbPost: Post, post: BlogPost) =>
-  dbPost.content !== post.content ||
-  dbPost.is_published != post.isPublished ||
-  dbPost.abstract !== post.abstract;
+const doesPostHaveAnyChanges = (dbPost: Post, post: BlogPost) => {
+  console.log(`doesPostHaveAnyChanges`, dbPost.is_published, post.isPublished);
+
+  return (
+    dbPost.content !== post.content ||
+    dbPost.is_published != post.isPublished ||
+    dbPost.abstract !== post.abstract
+  );
+};
 
 export const onCreate = async () => {
   const posts = await getBlogPosts(
@@ -128,7 +133,6 @@ export const onUpdate = async () => {
         dbPostContent === postContent
       );
 
-      // Intentional loose equality check for isPublished since it will be undefined in frontmatter, but null in the db
       if (doesPostHaveAnyChanges(dbPostSlugMap[s], postSlugMap[s])) {
         postToUpdate = {
           ...dbPostSlugMap[s],
@@ -138,7 +142,10 @@ export const onUpdate = async () => {
           postToUpdate.content = postContent;
         }
 
-        if (isPublished !== dbIsPublished) {
+        console.log(`post has some changes`, isPublished, dbIsPublished);
+
+        // Intentional loose equality check for isPublished since it will be undefined in frontmatter, but null in the db
+        if (isPublished != dbIsPublished) {
           postToUpdate.is_published = isPublished as boolean;
           console.log(`post was published`, publishedOn);
           postToUpdate.published_on = new Date(

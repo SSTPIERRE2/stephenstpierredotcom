@@ -16,6 +16,8 @@ export interface Post {
   updated: Date | null;
 }
 
+export type PostWithTags = Partial<Post> & { tags: string[] };
+
 export type PostToCreate = Pick<
   Post,
   'title' | 'slug' | 'abstract' | 'content' | 'is_published' | 'published_on'
@@ -112,6 +114,46 @@ export async function deleteById(id: string) {
     .where('id', '=', id)
     .returning('id')
     .execute();
+
+  return result;
+}
+
+export async function getByTagWithRelations(tag: string) {
+  const map: Record<string, PostWithTags> = {};
+  const allPostsWithRelations = await SQL.DB.selectFrom('post')
+    .innerJoin('post_tag', 'post_tag.post_id', 'post.id')
+    .innerJoin('tag', 'post_tag.tag_id', 'tag.id')
+    // .where('tag.name', '=', tag)
+    .select([
+      'post.id',
+      'post.title',
+      'post.slug',
+      'post.abstract',
+      'post.content',
+      'post.published_on',
+      'post.updated',
+      'tag.name as tagName',
+    ])
+    .execute();
+
+  for (const post of allPostsWithRelations) {
+    if (!map[post.id]) {
+      const { tagName, ...rest } = post;
+      map[post.id] = {
+        ...rest,
+        tags: [tagName],
+      };
+    } else {
+      map[post.id].tags.push(post.tagName);
+    }
+  }
+
+  const result = Object.values(map).reduce((acc: PostWithTags[], curr) => {
+    if (curr.tags.includes(tag)) {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
 
   return result;
 }

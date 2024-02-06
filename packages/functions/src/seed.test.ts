@@ -1,5 +1,5 @@
 import { Post } from '@graphql-rds/core/post';
-import { beforeAll, expect, it, describe } from 'vitest';
+import { afterAll, beforeAll, expect, it, describe } from 'vitest';
 import { onCreate, onUpdate } from './seed';
 import { Tag } from '@graphql-rds/core/tag';
 import { PostTag } from '@graphql-rds/core/postTag';
@@ -7,6 +7,10 @@ import { dbUtils } from '@graphql-rds/core/utils';
 
 describe.sequential('onCreate stack, followed by onUpdate', () => {
   beforeAll(async () => {
+    await dbUtils.deleteTableRecords(['post', 'tag', 'post_tag']);
+  });
+
+  afterAll(async () => {
     await dbUtils.deleteTableRecords(['post', 'tag', 'post_tag']);
   });
 

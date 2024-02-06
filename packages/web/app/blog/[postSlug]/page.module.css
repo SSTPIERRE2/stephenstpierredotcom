@@ -1,0 +1,66 @@
+.hero {
+  width: 100%;
+  grid-column: 1 / -1;
+  background: var(--color-background-accent);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.heroWrapper {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.main {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(auto, 68ch) 250px;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'article sidebar';
+  column-gap: 5rem;
+  isolation: isolate;
+  width: 100%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.article {
+  grid-area: article;
+  font-size: calc(18 / 16 * 1rem);
+}
+
+.aside {
+  display: none;
+  grid-area: sidebar;
+  font-size: calc(14 / 16 * 1rem);
+}
+
+.sticky {
+  position: sticky;
+  top: 3rem;
+}
+
+.upvotes {
+  margin-top: calc(12 / 16 * 1rem);
+}
+
+.article > h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article > p:not(:first-of-type) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1000px) {
+  .aside {
+    display: block;
+  }
+}

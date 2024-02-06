@@ -8,7 +8,7 @@ When I first became a developer, one of my dreams was having my own website, but
 
 React came in hot onto the scene with convenient ways to manage state and interact with the DOM, signaling an end to the era of jQuery. Next.js comes with many optimizations out of the box that you would normally have to implement manually. CSS modules and CSS-in-JS tools like Styled Components offer a method of implementing styles without having to worry about class name collisions anymore, effectively eliminating the need for the BEM pattern. Serverless offers a way to work with AWS services more easily, and the ecosystem will only continue to evolve.
 
-## Project planning, tooling, and architecture
+<h2>Project planning, tooling, and architecture</h2>
 
 In the beginning I had some wild ideas about what I wanted my website to be: a portfolio, blog, dashboard, forum, you name it! This part is super important because it determines the scope of the project and directly leads into selection of technologies. Analytics is one of those things managers want to see in every professional application, and for good reason, so for me it was a high priority. While there are a number of existing analytics services, <a href='https://plausible.io/blog/remove-google-analytics#:~:text=solution%20is%20needed.-,It%E2%80%99s%20overkill%20for%20the%20majority%20of%20site%20owners,-For%20most%20site'>Google Analytics tends to be overkill for most site owners</a> despite being free, and other services generally cost money. Well, I only wanted to collect minimal data and push my limits as a developer, so I decided to build a custom analytics service which meant I needed a database. As for the dashboard, when I took my first swing at learning D3 I quickly realized it would take another course of some sort to actually become proficient with it, so the dashboard would not end up in the first release of the website, but I still wanted to show a page view count which is much easier. Whenever starting a project you have to consider what the Minimum Viable Product (MVP) is - if you try to fit every conceivable feature in the first version of any project, it will take an unreasonable amount of time or may not get finished at all! That said, I definitely had a project or two to display and some blog content, so I finally decided the MVP of my site would be a developer blog/portfolio with custom analytics and room to add features like user profiles and comments.
 
@@ -23,6 +23,6 @@ Now that I had a good idea of the shape of the project, it was time to make some
 
 It may not picture the precise locations within AWS where each of the components will live, but now we have a pretty good idea about how all of the pieces fit together written down somewhere to remind us what we're building.
 
-## Building a modern frontend
+<h2>Building a modern frontend</h2>
 
 When it comes to making the frontend, I think it helps to decide the overall design of the app early, namely the tone and color palette
