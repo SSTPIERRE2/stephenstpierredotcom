@@ -4,13 +4,17 @@ abstract: Echoing a fantastic post by Eric Elliot, a favorite from my formative 
 tags: ['javascript']
 ---
 
-At my first job as a developer, during my formative years I spent a lot of time on Medium.com reading about how other developers thought about code and looking for inspiration about how to contribute to my team's best practices. One of the most common chunks in our code, even as I progressed in my career with other teams, is some logic that produces a value or performs a mutation or side effect, and around the same time I stumbled upon [this awesome post](https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340) by Eric Elliot about how to simplify such code. If you haven't seen it before, it's a quick read with a number of sound points and useful tips, but in this post I will share what I took from it and my experience implementing it in some real code!
+At my first software engineering gig I spent a lot of time on Medium.com reading about how other developers thought about code and looking for inspiration about how to contribute to my team's best practices.
 
-<h2 id="section-chained-vs-nested-logic">Chained vs Nested Logic</h2>
+One of the most common chunks in our code, even as I progressed in my career with other teams, is some logic that produces a value or performs a mutation or side effect, and around the same time I stumbled upon [this awesome post](https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340) by Eric Elliot about how to simplify such code.
+
+If you haven't seen it before, it's a quick read with a number of sound points and useful tips, but in this post I will share what I took from it and my experience implementing it in some real code!
+
+<h2 id="chained-vs-nested-logic">Chained vs Nested Logic</h2>
 
 Let's compare some logic about whether some element should be shown.
 
-```
+```js
 const getIfIsShown = (isOnline, isInvisible) => {
   if (isOnline) {
     if (isInvisible) {
@@ -19,19 +23,18 @@ const getIfIsShown = (isOnline, isInvisible) => {
     return true;
   }
   return false;
-}
+};
 
 const getTernaryIsShown = (isOnline, isInvisible) =>
-  isOnline
-    ? isInvisible
-      ? false
-      : true
-    : false
+  isOnline ?
+    isInvisible ? false
+    : true
+  : false;
 ```
 
-These functions are equivalent, and equally taxing to parse. I don't know about you, but I see some nesting as well as a duplicated return value, so how can we improve them?
+These functions are equivalent, and equally taxing to parse. I see some nesting as well as a duplicated return value, so how can we improve them?
 
-```
+```js
 const getIfIsShown = (isOnline, isInvisible) => {
   if (!isOnline) {
     return false;
@@ -40,39 +43,38 @@ const getIfIsShown = (isOnline, isInvisible) => {
     return false;
   }
   return true;
-}
+};
 
 const getTernaryIsShown = (isOnline, isInvisible) =>
-  !isOnline
-    ? false
-    : isInvisible
-    ? false
-    : true
+  !isOnline ? false
+  : isInvisible ? false
+  : true;
 ```
 
 By using Eric's trick of moving the last clause to the top and reversing the logic of the first condition we've turned what was once nested logic into a straight line. Additionally, you may have noticed we can now simplify the logic even further!
 
-```
+```js
 const getIfIsShown = (isOnline, isInvisible) => {
   if (!isOnline || isInvisible) {
     return false;
   }
   return true;
-}
+};
 
 const getTernaryIsShown = (isOnline, isInvisible) =>
-  !isOnline || isInvisible
-    ? false
-    : true
+  !isOnline || isInvisible ? false : true;
 ```
 
 I'll admit it may have been obvious the logic could be simplified before we performed the _Elliot maneuver_, if I may call it that, but it only further exemplifies how the tactic works in more ways that one.
 
-<img src="picard.jpg" alt="Make it so." />
+<img
+  src="./content/images/picard_maneuver.webp"
+  alt="Captain Jean-Luc Picard from Star Trek: The Next Generation tugging his shirt."
+/>
 
 Let's look at a slightly more complex piece of logic which has more than two potential outcomes. Many websites have something they want to show you when you first arrive, especially if you haven't seen it before, such as a forum where you must log in to be able to participate, or a blog with an optional (but strongly encouraged) newsletter.
 
-```
+```js
 const getIfGreeting = (isLoggedIn, isDismissed) => {
   if (isLoggedIn) {
     if (isDismissed) {
@@ -80,54 +82,92 @@ const getIfGreeting = (isLoggedIn, isDismissed) => {
     }
     return <LoggedInGreeting />;
   }
-  return <LoggedOutGreeting />
-}
+  return <LoggedOutGreeting />;
+};
 
 const getTernaryGreeting = (isLoggedIn, isDismissed) =>
-  isLoggedIn
-    ? isDismissed
-      ? null
-      : <LoggedInGreeting />
-    : <LoggedOutGreeting />
+  isLoggedIn ?
+    isDismissed ? null
+    : <LoggedInGreeting />
+  : <LoggedOutGreeting />;
 ```
 
-Now we have three distinct outcomes: either show the logged out greeting if the user is logged out, the logged in greeting if the user is logged in and hasn't dismissed it at some point in the past, or nothing if the user has seen and dismissed it. Once again the logic begins in nested form, let's fix that.
+Now we have three distinct outcomes: either show the logged out greeting if the user is logged out, the logged in greeting if the user is logged in and hasn't dismissed it at some point in the past, or nothing if the user has seen and dismissed it.
 
-```
+Once again the logic begins in nested form and the ternary version especially hurts my brain, let's fix that.
+
+```js
 const getIfGreetingBanner = (isLoggedIn, isDismissed) => {
   if (!isLoggedIn) {
-    return <LoggedOutBanner />
+    return <LoggedOutBanner />;
   }
   if (isDismissed) {
     return null;
   }
   return <LoggedInBanner />;
-}
+};
 
 const getTernaryGreetingBanner = (isLoggedIn, isDismissed) =>
-  !isLoggedIn
-    ? <LoggedOutBanner />
-    : isDismissed
-    ? null
-    : <LoggedInBanner />
+  !isLoggedIn ? <LoggedOutBanner />
+  : isDismissed ? null
+  : <LoggedInBanner />;
 ```
 
-This time there were no duplicate outcomes we could merge into one to simplify the logic, instead the improvement came from flattening the conditions so they read from top to bottom in a straight line, no more nesting to parse! Now, I'm not going to argue which function is necessarily easier to read, but we can say without a doubt that the ternary version is less lines and characters; whether that's a good or bad thing will take some explanation.
+This time there were no duplicate outcomes we could merge into one to simplify the logic, instead the improvement came from flattening the conditions so they read from top to bottom in a straight line, no more nesting to parse!
 
-<h2 id="section-less-is-more">Less is More</h2>
+<h2 id="less-is-more">Less is More</h2>
 
-The `if` version has extra noise including the `if` keyword vs `?` in the ternary version, `return` which is implicit in the ternary, extra braces, and semicolons. To reason about why less code is good in this case, let's first think about the job of a ternary vs an if statement. Ternaries evaluate to a value, while if statements are more powerful in that they can and frequently do cause side effects or mutate variables. Since we don't need to do either of those, the ternary option seems like the right tool for the job instead of forcing `if` to do this simple task.
+We can say without a doubt that the ternary version is less lines and characters.
 
-Speaking of side effects and mutations, those imply at least once extra variable that must exist outside the scope of the if statement. To understand the effect of the logic, one must understand the history and future of the variable(s) being mutated. In simple cases this may not be an issue, but if those variables are shared outside the function scope, or involve an async operation, it becomes increasingly hard to connect the dots!
+The `if` version has extra noise including the `if` keyword vs `?` in the ternary version, `return` which is implicit in the ternary, extra braces, and semicolons. To reason about why less code is good in this case, let's first think about the job of a ternary vs an if statement.
 
-<h2 id="section-working-memory">Working Memory</h2>
+Ternaries evaluate to a value, while if statements are more powerful in that they can and frequently do cause side effects or mutate variables. Since we don't need to do either of those, the ternary option seems like the right tool for the job instead of forcing `if` to do this simple task.
 
-The human brain has what is called [working memory](https://en.wikipedia.org/wiki/Working_memory) or short-term memory, a limited copacity that can hold information temporarily, just like RAM on a computer. Each line of code we need to remember in order to understand the whole chunk consumes some of that memory which let's just say is at a premium. By writing code that may introduce more variables and/or side effects we're inevitably accumulating more things to remember, which leads to higher error rates. By letting ternaries do their job and letting if statements do theirs, when looking at either we'll immediately know the type of code we're dealing with, which helps reduce noise.
+That said, I generally prefer to use `if` whenever nesting, mutations, or side effects are unavoidable.
 
-<h2 id="section-signal-to-noise-ratio">Signal to Noise Ratio</h2>
+Now, I agree with everything Eric said about if statements encouraging mutations and side effects while ternaries encourage pure code, [working memory](https://en.wikipedia.org/wiki/Working_memory), [signal-to-noise ratio](https://en.wikipedia.org/wiki/Signal-to-noise_ratio), and more, but I want to address the elephant in the room.
 
-[Signal-to-noise ratio](https://en.wikipedia.org/wiki/Signal-to-noise_ratio) is a general science and engineering term, but in our case it basically means some code gives us useful information, and some code just takes up space. While I don't think shorter code is necessarily always better, ternaries don't require arcane JavaScript knowledge to understand; they are simply if statements that produce a value and have been around since the language's early days, so we shouldn't be afraid to use them.
+<h2 id="formatting">Formatting</h2>
 
-<h2 id="section-conclusion">Conclusion</h2>
+I think a big reason why ternaries have been a controversial topic in the JavaScript community is formatting. Before [Prettier](https://prettier.io/) existed, our options for consistently formatting code were somewhat limited, for example my first team used eslint with manual formatting.
 
-I think it's healthy for any engineering team to have opinions about how they write code. Some prefer to only use a ternary when there are two possible outcomes based on a single expression and that's okay, but I hope I encouraged someone to give chained ternaries a try! It's a perfectly valid way to produce a value based on some logic, which I believe even has some advantages over `if` statements.
+Eslint actually had some rules about ternaries, and I think the [no-nested-ternary](https://eslint.org/docs/latest/rules/no-nested-ternary) rule sparked a lot of confusion. I distinctly remember presenting a case to my team for why we should turn the rule off and how we should format them going forward based on Eric's post.
+
+The primary example the Eslint rule presents is misleading. One could argue the semantics of it being two ternaries, but the logic itself is not nested.
+
+```js
+var foo =
+  bar ? baz
+  : qux === quxx ? bing
+  : bam;
+```
+
+The official MDN documentation which I generally consider to have to final word on core web development topics calls this a [conditional chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator#conditional_chains).
+
+<h2 id="prettiers-quest-for-an-acceptable-format">
+  Prettier's Quest for an Acceptable Format
+</h2>
+
+Prettier is "an opinionated code formatter" so the team had to develop some sort of formatting algorithm for ternaries.
+
+Originally they simply added indentation to each level of a nested or chained ternary, but in 2018 that was [replaced with flat ternaries](https://github.com/prettier/prettier/pull/5039) and [chaos ensued](https://github.com/prettier/prettier/issues/5814).
+
+Eventually they developed a novel solution drawing inspiration from the original desire for indentation as well as other languages like Rust and OCaml, I actually just started using the `experimental-ternaries` option on this blog!
+
+Essentially it works like this:
+
+- Every line that ends with a `?` is an "if"
+- Every line that starts with a `:` is an "else"
+- Every line without `:` or `?` is a "then"
+
+I still enjoy the form I learned from Eric for the same reason why I avoid using `if` without any curly braces and `return` on the same line, but this new form where each conditional is grouped with its return value is growing on me in the case of ternaries.
+
+<h2 id="conclusion">Conclusion</h2>
+
+While I don't think shorter code is necessarily always better, ternaries don't require arcane JavaScript knowledge to understand.
+
+Ternaries are simply `if..else` statements that produce a value and have been around since the language's early days, so we shouldn't be afraid to use them and even chain them together in most simple cases.
+
+I think it's healthy for any engineering team to have opinions about how they write code. Some prefer to only use a ternary when there are two possible outcomes based on a single expression and that's okay, but I hope I encouraged someone to give chained ternaries a try!
+
+It's a perfectly valid way to produce a value based on some logic, which I believe even has some advantages over `if` statements.

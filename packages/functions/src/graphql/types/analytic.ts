@@ -145,16 +145,15 @@ builder.mutationFields((t) => ({
       const headers = context.event.headers;
       const userAgent = deviceDetector.parse(headers['user-agent'] || '');
       const { client, os, device } = userAgent;
-      const metadata: Record<string, unknown> = args.metadata
-        ? JSON.parse(args.metadata)
-        : {};
+      const metadata: Record<string, unknown> =
+        args.metadata ? JSON.parse(args.metadata) : {};
 
       console.log('Got the user agent', userAgent);
       console.log(`given metadata`, args.metadata);
 
       if (args.name === 'pageView') {
         const ipRequest = await fetch(
-          `https://ipapi.co/${headers['x-forwarded-for']}/json/`
+          `https://ipapi.co/${headers['x-forwarded-for']}/json/`,
         );
         const ipData = (await ipRequest.json()) as IpData;
         console.log('got user location', ipData);
@@ -189,7 +188,7 @@ builder.mutationFields((t) => ({
         device?.brand || '',
         os?.name || '',
         os?.version || '',
-        JSON.stringify(metadata)
+        JSON.stringify(metadata),
       );
     },
   }),

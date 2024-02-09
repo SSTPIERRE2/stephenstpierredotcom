@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h2 className={styles.linksHeading}>Links</h2>
+          <h3 className={styles.linksHeading}>Links</h3>
           <div className={styles.social}>
             {SOCIAL_LINKS.map(({ slug, label, href }) => (
               <a

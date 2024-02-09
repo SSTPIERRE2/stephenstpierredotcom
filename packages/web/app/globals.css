@@ -163,10 +163,10 @@ h4 {
   text-wrap: balance;
 }
 
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
+/* Override default anchor element color and underline */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -201,9 +201,4 @@ button {
   cursor: pointer;
   text-align: left;
   font: inherit;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }

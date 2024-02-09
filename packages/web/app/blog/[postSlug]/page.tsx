@@ -88,7 +88,7 @@ const PostPage: NextPage<{ params: { postSlug: string; } }> = async ({ params: {
     <>
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
-          <h1 id="section-title">{title}</h1>
+          <h1 id="title">{title}</h1>
           {tags.map((tag) => <span key={tag.id}>#{tag.name}</span>)}
         </div>
       </div>

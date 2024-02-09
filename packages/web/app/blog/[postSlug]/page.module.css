@@ -19,7 +19,7 @@
 .main {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(auto, 68ch) 250px;
+  grid-template-columns: minmax(auto, 65ch) 250px;
   grid-template-rows: 1fr;
   grid-template-areas: 'article sidebar';
   column-gap: 5rem;
@@ -57,6 +57,16 @@
 .article > p:not(:first-of-type) {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.article a {
+  color: var(--color-primary);
+  text-decoration: underline var(--color-primary-900) solid 0.1rem;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+
+.article a:hover {
+  text-decoration-color: var(--color-primary);
 }
 
 @media (min-width: 1000px) {

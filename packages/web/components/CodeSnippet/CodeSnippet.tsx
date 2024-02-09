@@ -4,7 +4,7 @@ import { Code } from 'bright';
 import theme from './theme';
 import styles from './CodeSnippet.module.css';
 
-function CodeSnippet(props: {}) {
+function CodeSnippet(props: object) {
   return (
     <Code
       {...props}

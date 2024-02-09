@@ -27,7 +27,7 @@ export async function getBlogPosts(path?: string): Promise<BlogPost[]> {
 
   const blogPosts = [];
 
-  for (const fileName of fileNames.filter((f) => f !== '.DS_Store')) {
+  for (const fileName of fileNames.filter((f) => f !== '.DS_Store' && f !== 'images')) {
     const rawContent = await readFile(`${directory}/${fileName}`);
 
     const { data: frontmatter, content } = matter(
