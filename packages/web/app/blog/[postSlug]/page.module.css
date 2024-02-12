@@ -62,11 +62,37 @@
 .article a {
   color: var(--color-primary);
   text-decoration: underline var(--color-primary-900) solid 0.1rem;
-  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    text-decoration-color 0.25s ease;
 }
 
 .article a:hover {
   text-decoration-color: var(--color-primary);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+.infoHeading {
+  color: var(--color-text-supporting);
+}
+
+.infoLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.infoRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
 }
 
 @media (min-width: 1000px) {

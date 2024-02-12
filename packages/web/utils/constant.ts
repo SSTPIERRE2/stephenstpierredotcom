@@ -2,6 +2,7 @@ export type THEME = 'light' | 'dark';
 
 export const LIGHT_COLORS = {
   '--color-text': '#030712',
+  '--color-text-supporting': 'var(--color-gray-600)',
   '--color-background': '#FFFFFF',
   '--color-background-accent': 'var(--color-gray-200)',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
@@ -90,6 +91,7 @@ export const LIGHT_COLORS = {
 
 export const DARK_COLORS = {
   '--color-text': '#f8fafc',
+  '--color-text-supporting': 'var(--color-gray-400)',
   '--color-background': '#0f172a',
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',

@@ -35,9 +35,8 @@ const getPostMetadata = cache(async (postSlug: string) => {
     content,
     views,
     created,
-    updated
+    updated,
   } = post;
-
 
   const htmlContent = await marked(content);
   const $ = cheerio.load(htmlContent, null, false);
@@ -45,16 +44,17 @@ const getPostMetadata = cache(async (postSlug: string) => {
 
   const links: headingLink[] = [];
 
-  headings.each((_index, heading) => {
-    console.log($(heading).text(), $(heading).attr('id'));
-    links.push({
-      text: $(heading).text(),
-      id: $(heading).attr('id') as string
+  headings
+    .each((_index, heading) => {
+      console.log($(heading).text(), $(heading).attr('id'));
+      links.push({
+        text: $(heading).text(),
+        id: $(heading).attr('id') as string,
+      });
     })
-  }).toArray();
+    .toArray();
 
   console.log(`links`, links);
-
 
   return {
     id,
@@ -67,11 +67,15 @@ const getPostMetadata = cache(async (postSlug: string) => {
     created,
     updated,
     tags,
-    links
+    links,
   };
 });
 
-export async function generateMetadata({ params: { postSlug } }: { params: { postSlug: string } }) {
+export async function generateMetadata({
+  params: { postSlug },
+}: {
+  params: { postSlug: string };
+}) {
   const { title, abstract } = await getPostMetadata(postSlug);
 
   return {
@@ -80,34 +84,61 @@ export async function generateMetadata({ params: { postSlug } }: { params: { pos
   };
 }
 
-const PostPage: NextPage<{ params: { postSlug: string; } }> = async ({ params: { postSlug } }) => {
-  const test = await getPostMetadata(postSlug)
-  const { id, title, slug, publishedOn, content, views, created, updated, tags, links } = test;
+const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
+  params: { postSlug },
+}) => {
+  const test = await getPostMetadata(postSlug);
+  const {
+    id,
+    title,
+    slug,
+    publishedOn,
+    content,
+    views,
+    created,
+    updated,
+    tags,
+    links,
+  } = test;
 
   return (
     <>
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
           <h1 id="title">{title}</h1>
-          {tags.map((tag) => <span key={tag.id}>#{tag.name}</span>)}
+          {tags.map((tag) => (
+            <span key={tag.id}>#{tag.name}</span>
+          ))}
         </div>
       </div>
       <main className={styles.main}>
         <aside className={styles.aside}>
           <div className={styles.sticky}>
             <TableOfContents slug={slug} links={links} />
-            <Upvotes postId={id} visitorId='123' className={styles.upvotes} />
+            <Upvotes postId={id} visitorId="123" className={styles.upvotes} />
           </div>
         </aside>
         <article className={styles.article}>
           <MDXRemote source={content} components={COMPONENT_MAP} />
-          <div>Last Updated: {dayjs(new Date(updated || created)).format('MMMM D, YYYY')}</div>
-          <span>{dayjs(new Date(publishedOn || new Date())).format('MMMM D, YYYY')}</span>
-          <PageViews id={id} initialViews={views} />
+          <div className={styles.info}>
+            <div className={styles.infoLeft}>
+              <h4 className={styles.infoHeading}>Last Updated</h4>
+              <p>
+                {dayjs(new Date(updated || publishedOn || created)).format(
+                  'MMMM D, YYYY',
+                )}
+              </p>
+            </div>
+
+            <div className={styles.infoRight}>
+              <h4 className={styles.infoHeading}>Hits</h4>
+              <PageViews id={id} initialViews={views} />
+            </div>
+          </div>
         </article>
       </main>
     </>
   );
-}
+};
 
 export default PostPage;

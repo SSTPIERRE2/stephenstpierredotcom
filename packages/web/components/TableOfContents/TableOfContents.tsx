@@ -4,6 +4,7 @@ import { headingLink } from '@/utils/constant';
 import styles from './TableOfContents.module.css';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 
 interface Props {
   links: headingLink[];
@@ -57,14 +58,25 @@ const TableOfContents = ({ links, slug }: Props) => {
 
           // when a section appears, only set it as the active section if the currently active section is not on screen
           if (entry.isIntersecting && activeRef.current) {
+            const linkIdsWithTitle = ['title', ...links.map((link) => link.id)];
+            const sectionIndex = linkIdsWithTitle.findIndex(
+              (id) => id === sectionId,
+            );
             const currentActiveElement = document.querySelector(
               `#${activeRef.current}`,
             ) as Element;
             const isOnScreen = getIsOnScreen(currentActiveElement);
 
-            console.log(`setting active section`, sectionId);
-
-            if (!isOnScreen) {
+            console.log(
+              `section appeared`,
+              sectionId,
+              sectionIndex,
+              links.length - 1,
+            );
+            if (sectionIndex === 0 || sectionIndex === links.length - 1) {
+              setActiveSection(sectionId);
+              activeRef.current = sectionId;
+            } else if (!isOnScreen) {
               setActiveSection(sectionId);
               activeRef.current = sectionId;
             }
@@ -127,7 +139,10 @@ const TableOfContents = ({ links, slug }: Props) => {
       <h3 className={styles.header}>TABLE OF CONTENTS</h3>
       <Link
         href={`/blog/${slug}#title`}
-        className={activeSection === 'title' ? styles.activeLink : styles.link}
+        className={clsx(
+          styles.link,
+          activeSection === 'title' && styles.active,
+        )}
       >
         Introduction
       </Link>
@@ -135,7 +150,7 @@ const TableOfContents = ({ links, slug }: Props) => {
         <Link
           key={id}
           href={`/blog/${slug}#${id}`}
-          className={activeSection === id ? styles.activeLink : styles.link}
+          className={clsx(styles.link, activeSection === id && styles.active)}
         >
           {text}
         </Link>

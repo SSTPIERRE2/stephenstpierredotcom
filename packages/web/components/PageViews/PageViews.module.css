@@ -1,0 +1,18 @@
+.wrapper {
+  position: relative;
+  padding: 3px;
+  width: fit-content;
+  background: linear-gradient(
+    to right,
+    var(--color-gray-400),
+    var(--color-gray-500)
+  );
+}
+
+.inner {
+  padding: 0.25rem;
+  background: var(--color-background);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  box-shadow: inset 0px 0px 1px 1px var(--color-primary-accent);
+}

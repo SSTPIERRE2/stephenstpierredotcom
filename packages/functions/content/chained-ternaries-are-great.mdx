@@ -129,9 +129,9 @@ Now, I agree with everything Eric said about if statements encouraging mutations
 
 <h2 id="formatting">Formatting</h2>
 
-I think a big reason why ternaries have been a controversial topic in the JavaScript community is formatting. Before [Prettier](https://prettier.io/) existed, our options for consistently formatting code were somewhat limited, for example my first team used eslint with manual formatting.
+I think a big reason why ternaries have been a controversial topic in the JavaScript community is formatting. Before [Prettier](https://prettier.io/) existed, our options for consistently formatting code were somewhat limited, for example my first team used [Eslint](https://eslint.org/) with manual formatting.
 
-Eslint actually had some rules about ternaries, and I think the [no-nested-ternary](https://eslint.org/docs/latest/rules/no-nested-ternary) rule sparked a lot of confusion. I distinctly remember presenting a case to my team for why we should turn the rule off and how we should format them going forward based on Eric's post.
+Eslint actually has a number of rules about ternaries, and I think the [no-nested-ternary](https://eslint.org/docs/latest/rules/no-nested-ternary) rule sparked a lot of confusion. I distinctly remember presenting a case to my team for why we should turn the rule off and how we should format them going forward based on Eric's post.
 
 The primary example the Eslint rule presents is misleading. One could argue the semantics of it being two ternaries, but the logic itself is not nested.
 
@@ -142,11 +142,13 @@ var foo =
   : bam;
 ```
 
-The official MDN documentation which I generally consider to have to final word on core web development topics calls this a [conditional chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator#conditional_chains).
+The official MDN documentation which I generally consider to have to final word on core web development topics calls this a [conditional chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator#conditional_chains), so this technique actually seems perfectly acceptable.
 
-<h2 id="prettiers-quest-for-an-acceptable-format">
-  Prettier's Quest for an Acceptable Format
-</h2>
+When one of the most popular tools for JavaScript development enables vastly different configurations to the point of disallowing core language features it encourages disagreement about basic coding practices.
+
+Eslint even includes a [no-ternary](https://eslint.org/docs/latest/rules/no-ternary) rule disallowing ternaries altogether, that seems a little extreme! What's next, enable disallowing optional chaining for folks who prefer explicit checks with `if`?
+
+<h2 id="prettiers-quest-for-a-solution">Prettier's Quest for a Solution</h2>
 
 Prettier is "an opinionated code formatter" so the team had to develop some sort of formatting algorithm for ternaries.
 
