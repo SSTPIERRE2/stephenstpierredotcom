@@ -63,7 +63,7 @@ export async function updateAll(posts: Post[]) {
         .executeTakeFirstOrThrow();
 
       return result;
-    }
+    },
   );
 
   const result = await Promise.all(queries);
@@ -118,12 +118,12 @@ export async function deleteById(id: string) {
   return result;
 }
 
-export async function getByTagWithRelations(tag: string) {
+export async function getPublishedPostsWithTags() {
   const map: Record<string, PostWithTags> = {};
-  const allPostsWithRelations = await SQL.DB.selectFrom('post')
+  const result = await SQL.DB.selectFrom('post')
     .innerJoin('post_tag', 'post_tag.post_id', 'post.id')
     .innerJoin('tag', 'post_tag.tag_id', 'tag.id')
-    // .where('tag.name', '=', tag)
+    .where('published_on', 'is not', null)
     .select([
       'post.id',
       'post.title',
@@ -134,9 +134,11 @@ export async function getByTagWithRelations(tag: string) {
       'post.updated',
       'tag.name as tagName',
     ])
+    .orderBy('published_on', 'desc')
     .execute();
 
-  for (const post of allPostsWithRelations) {
+  // Since joining will give us multiple records for each post-tag relation, we need to reduce the results
+  for (const post of result) {
     if (!map[post.id]) {
       const { tagName, ...rest } = post;
       map[post.id] = {
@@ -148,7 +150,14 @@ export async function getByTagWithRelations(tag: string) {
     }
   }
 
-  const result = Object.values(map).reduce((acc: PostWithTags[], curr) => {
+  return Object.values(map);
+}
+
+export async function getByTagWithRelations(tag: string) {
+  const postsWithTags = await getPublishedPostsWithTags();
+
+  // Since we actually want all tag relations, we can't just use .where('tag.name', '=', tag) in the query
+  const result = postsWithTags.reduce((acc: PostWithTags[], curr) => {
     if (curr.tags.includes(tag)) {
       acc.push(curr);
     }

@@ -13,6 +13,7 @@ import { marked } from 'marked';
 import * as cheerio from 'cheerio';
 import { headingLink } from '@/utils/constant';
 import TableOfContents from '@/components/TableOfContents';
+import SupportingLink from '@/components/SupportingLink';
 
 const getPostMetadata = cache(async (postSlug: string) => {
   let post, tags;
@@ -107,7 +108,9 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
         <div className={styles.heroWrapper}>
           <h1 id="title">{title}</h1>
           {tags.map((tag) => (
-            <span key={tag.id}>#{tag.name}</span>
+            <SupportingLink key={tag.id} href={`/blog/tags/${tag.name}`}>
+              #{tag.name}
+            </SupportingLink>
           ))}
         </div>
       </div>
@@ -122,7 +125,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
           <MDXRemote source={content} components={COMPONENT_MAP} />
           <div className={styles.info}>
             <div className={styles.infoLeft}>
-              <h4 className={styles.infoHeading}>Last Updated</h4>
+              <h4 className={styles.infoHeading}>LAST UPDATED</h4>
               <p>
                 {dayjs(new Date(updated || publishedOn || created)).format(
                   'MMMM D, YYYY',
@@ -131,7 +134,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
             </div>
 
             <div className={styles.infoRight}>
-              <h4 className={styles.infoHeading}>Hits</h4>
+              <h4 className={styles.infoHeading}>HITS</h4>
               <PageViews id={id} initialViews={views} />
             </div>
           </div>

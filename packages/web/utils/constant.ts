@@ -6,6 +6,7 @@ export const LIGHT_COLORS = {
   '--color-background': '#FFFFFF',
   '--color-background-accent': 'var(--color-gray-200)',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
+  '--color-border': 'var(--color-gray-400)',
 
   '--color-primary-50': '#e9eafd',
   '--color-primary-100': '#c7caf8',
@@ -95,6 +96,7 @@ export const DARK_COLORS = {
   '--color-background': '#0f172a',
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
+  '--color-border': 'var(--color-gray-600)',
 
   '--color-primary-200': '#cff49e',
   '--color-primary-300': '#bdef76',
@@ -195,28 +197,23 @@ export const QUERIES = {
 
 export const AVATAR_HEIGHT_WIDTH_RATIO = 0.354;
 
-export type slug = 'about' | 'tips' | 'posts';
-export type label = 'About' | 'Tips' | 'Posts';
-export type href = '/about' | '/tips' | '/posts';
+export type slug = 'about' | 'blog';
+export type label = 'About' | 'Blog';
+export type href = '/about' | '/blog';
 export type navLink = { slug: slug; label: label; href: href };
 export type link = { slug: string; label: string; href: string };
 export type headingLink = { text: string; id: string };
 
 export const LINKS: navLink[] = [
   {
+    slug: 'blog',
+    label: 'Blog',
+    href: '/blog',
+  },
+  {
     slug: 'about',
     label: 'About',
     href: '/about',
-  },
-  {
-    slug: 'tips',
-    label: 'Tips',
-    href: '/tips',
-  },
-  {
-    slug: 'posts',
-    label: 'Posts',
-    href: '/posts',
   },
 ];
 

@@ -2,14 +2,18 @@
 
 import { headingLink } from '@/utils/constant';
 import styles from './TableOfContents.module.css';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import SupportingLink from '../SupportingLink';
 
 interface Props {
   links: headingLink[];
   slug: string;
 }
+
+const titleLink: headingLink = {
+  id: 'title',
+  text: 'Introduction',
+};
 
 const getIsOnScreen = (element: Element) => {
   const { top, left, bottom, right } = element.getBoundingClientRect();
@@ -19,6 +23,11 @@ const getIsOnScreen = (element: Element) => {
 const TableOfContents = ({ links, slug }: Props) => {
   const [activeSection, setActiveSection] = useState<string>();
   const activeRef = useRef<string>();
+
+  const updateActiveState = (state: string) => {
+    setActiveSection(state);
+    activeRef.current = state;
+  };
 
   useEffect(() => {
     let lastScrollTop = 0;
@@ -50,8 +59,7 @@ const TableOfContents = ({ links, slug }: Props) => {
           }
         });
 
-        setActiveSection(sectionsOnScreen[0]);
-        activeRef.current = sectionsOnScreen[0];
+        updateActiveState(sectionsOnScreen[0]);
       } else {
         entries.forEach((entry) => {
           const sectionId = entry.target.id;
@@ -73,12 +81,11 @@ const TableOfContents = ({ links, slug }: Props) => {
               sectionIndex,
               links.length - 1,
             );
+
             if (sectionIndex === 0 || sectionIndex === links.length - 1) {
-              setActiveSection(sectionId);
-              activeRef.current = sectionId;
+              updateActiveState(sectionId);
             } else if (!isOnScreen) {
-              setActiveSection(sectionId);
-              activeRef.current = sectionId;
+              updateActiveState(sectionId);
             }
           } else if (!entry.isIntersecting && sectionId === activeRef.current) {
             /**
@@ -89,6 +96,7 @@ const TableOfContents = ({ links, slug }: Props) => {
             const activeIndex = links.findIndex(
               (link) => link.id === activeRef.current,
             );
+
             console.log(sectionId, `just went offscreen`);
 
             if (scrollDirection === 'down') {
@@ -101,8 +109,7 @@ const TableOfContents = ({ links, slug }: Props) => {
                 const isOnScreen = getIsOnScreen(nextSectionElement);
 
                 if (isOnScreen) {
-                  setActiveSection(nextSection);
-                  activeRef.current = nextSection;
+                  updateActiveState(nextSection);
                 }
               }
             }
@@ -111,8 +118,7 @@ const TableOfContents = ({ links, slug }: Props) => {
               const prevSection = links[activeIndex - 1]?.id;
 
               if (prevSection) {
-                setActiveSection(prevSection);
-                activeRef.current = prevSection;
+                updateActiveState(prevSection);
               }
             }
           }
@@ -137,23 +143,14 @@ const TableOfContents = ({ links, slug }: Props) => {
   return (
     <nav className={styles.wrapper}>
       <h3 className={styles.header}>TABLE OF CONTENTS</h3>
-      <Link
-        href={`/blog/${slug}#title`}
-        className={clsx(
-          styles.link,
-          activeSection === 'title' && styles.active,
-        )}
-      >
-        Introduction
-      </Link>
-      {links.map(({ id, text }) => (
-        <Link
+      {[titleLink, ...links].map(({ id, text }) => (
+        <SupportingLink
           key={id}
           href={`/blog/${slug}#${id}`}
-          className={clsx(styles.link, activeSection === id && styles.active)}
+          active={activeSection === id}
         >
           {text}
-        </Link>
+        </SupportingLink>
       ))}
     </nav>
   );

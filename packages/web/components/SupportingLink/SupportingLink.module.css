@@ -1,0 +1,13 @@
+.link {
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-supporting);
+  transition: all 0.25s ease;
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+.active {
+  font-weight: var(--font-weight-bold);
+}
