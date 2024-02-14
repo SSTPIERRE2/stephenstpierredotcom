@@ -1,19 +1,35 @@
-import { FC, PropsWithChildren } from 'react';
+import {
+  AnchorHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+  PropsWithChildren,
+} from 'react';
 import styles from './PrimaryLink.module.css';
 import Link from 'next/link';
+import clsx from 'clsx';
 
-interface Props {
-  href: string;
-  title?: string;
+interface Props
+  extends DetailedHTMLProps<
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+    HTMLAnchorElement
+  > {
+  className?: string;
 }
 
 const PrimaryLink: FC<Props & PropsWithChildren> = ({
-  href,
+  href = '',
+  title,
   children,
-  ...props
+  className,
 }) => {
   return (
-    <Link className={styles.link} href={href} {...props}>
+    <Link
+      className={clsx(styles.link, className)}
+      href={href}
+      title={title}
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       {children}
     </Link>
   );

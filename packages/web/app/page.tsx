@@ -1,46 +1,37 @@
 import styles from './page.module.css';
-import TipGallery from '@/components/TipGallery/TipGallery';
-import PostGallery from '@/components/PostGallery/PostGallery';
+import PostGallery from '@/components/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import Oasis from '@/components/Oasis';
-import Link from 'next/link';
 import FullBleed from '@/components/FullBleed';
+import PrimaryLink from '@/components/PrimaryLink';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.greeting}>
         <div className={styles.greetingLeft}>
-          <h2 className={styles.mainHeading}>Hey, I'm Stephen!</h2>
+          <h1 className={styles.mainHeading}>Hey, I'm Stephen!</h1>
           <p>
             I'm a full stack JavaScript developer from{' '}
-            <span className={styles.gradientText}>Boston, Massachusetts.</span>
+            <em className={styles.emphasized}>Boston, Massachusetts.</em>
           </p>
 
           <p>
-            Welcome to my{' '}
-            <span className={styles.gradientText}>digital oasis,</span> a
-            curated collection of programming tips and tricks. Please enjoy,
+            Welcome to my <em className={styles.emphasized}>digital oasis,</em>{' '}
+            a curated collection of programming tips and tricks. Please enjoy,
             vote on what you like, and share with your friends and colleagues!
           </p>
 
-          <h2 className={`${styles.gradientText} ${styles.heading}`}>
-            Looking for work!
-          </h2>
+          <h2 className={styles.heading}>Looking for work!</h2>
           <p>
-            <Link href="/about" className={styles.simpleLink}>
-              Read more about me here
-            </Link>{' '}
-            or{' '}
-            <Link
+            <PrimaryLink href="/about">Read more about me here</PrimaryLink> or{' '}
+            <PrimaryLink
               href="/Resume2023.pdf"
-              className={styles.simpleLink}
               target="_blank"
               rel="noopener noreferrer"
-              locale={false}
             >
               view my resume
-            </Link>
+            </PrimaryLink>
           </p>
         </div>
         <div className={styles.greetingRight}>
@@ -50,8 +41,6 @@ export default function Home() {
           <Oasis className={styles.oasis} />
         </div>
       </div>
-
-      <TipGallery />
 
       <PostGallery />
 

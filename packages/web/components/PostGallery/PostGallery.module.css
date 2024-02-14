@@ -5,16 +5,15 @@
 }
 
 .gallery {
-  display: flex;
-  gap: 1rem;
-  overflow-x: scroll;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
-.box {
-  flex: 0 0 100px;
-  width: 100px;
-  height: 100px;
-  background-color: darkslategray;
+.card {
+  background-color: var(--color-background-accent);
+  padding: 2rem;
+  border-radius: 4px;
 }
 
 .link {

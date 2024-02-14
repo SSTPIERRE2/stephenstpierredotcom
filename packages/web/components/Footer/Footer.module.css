@@ -28,6 +28,7 @@
 
 .thanks {
   font-weight: var(--font-weight-medium);
+  font-size: calc(14 / 16 * 1rem);
   animation: 2s fadeIn both;
 }
 
@@ -38,22 +39,22 @@
   padding-top: 12px;
 }
 
+.socialIcon {
+  display: inline;
+  margin-right: 0.5rem;
+}
+
 .linksHeading {
   text-decoration: underline var(--color-primary) 4px;
   text-underline-offset: 6px;
 }
 
-.link:hover {
-  font-weight: var(--font-weight-medium);
+.link {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.link::after {
-  content: attr(data-text) / '';
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
-  user-select: none;
-  pointer-events: none;
-  font-weight: var(--font-weight-bold);
-  display: block;
+.link:hover {
+  color: var(--color-primary);
 }

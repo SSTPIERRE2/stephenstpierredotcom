@@ -1,20 +1,7 @@
-.gradientText {
-  line-height: 1.1;
-  background: var(--retro-horizontal-gradient);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  transform: skewX(-12deg);
-  display: inline-block;
-  font-size: 1.25rem;
+.emphasized {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
-}
-
-.simpleLink {
-  text-decoration: none;
-  background: var(--retro-horizontal-gradient);
-  background-repeat: repeat-x;
-  background-size: 100% 2px;
-  background-position: 0 95%;
 }
 
 .main {
@@ -31,7 +18,6 @@
 .heading {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
-  font-size: var(--font-size-xl);
 }
 
 .greeting {

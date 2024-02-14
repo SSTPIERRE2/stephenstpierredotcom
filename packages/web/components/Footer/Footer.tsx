@@ -5,6 +5,7 @@ import Logo from '../Logo/Primary';
 import styles from './Footer.module.css';
 import { SOCIAL_LINKS } from '@/utils/constant';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
   const [isOnScreen, elementRef] = useIsOnscreen<HTMLDivElement>();
@@ -15,8 +16,6 @@ const Footer = () => {
       setIsInitialized(true);
     }
   }, [isOnScreen, isInitialized]);
-
-  // console.log(`Footer`, isOnScreen);
 
   return (
     <footer className={styles.footer} role="contentinfo" ref={elementRef}>
@@ -30,15 +29,17 @@ const Footer = () => {
         <div>
           <h3 className={styles.linksHeading}>Links</h3>
           <div className={styles.social}>
-            {SOCIAL_LINKS.map(({ slug, label, href }) => (
-              <a
+            {SOCIAL_LINKS.map(({ slug, label, href, icon: Icon }) => (
+              <Link
                 key={slug}
                 className={styles.link}
                 href={href}
-                data-text={label}
+                target="_blank"
+                rel="noreferrer noopener"
               >
+                <Icon size="1rem" />
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

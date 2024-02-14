@@ -1,3 +1,5 @@
+import { GitHub, Icon, Layers, Linkedin, Mail, Twitter } from 'react-feather';
+
 export type THEME = 'light' | 'dark';
 
 export const LIGHT_COLORS = {
@@ -7,6 +9,7 @@ export const LIGHT_COLORS = {
   '--color-background-accent': 'var(--color-gray-200)',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
   '--color-border': 'var(--color-gray-400)',
+  '--color-underline': 'var(--color-primary-100)',
 
   '--color-primary-50': '#e9eafd',
   '--color-primary-100': '#c7caf8',
@@ -97,6 +100,7 @@ export const DARK_COLORS = {
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
   '--color-border': 'var(--color-gray-600)',
+  '--color-underline': 'var(--color-primary-900)',
 
   '--color-primary-200': '#cff49e',
   '--color-primary-300': '#bdef76',
@@ -201,7 +205,7 @@ export type slug = 'about' | 'blog';
 export type label = 'About' | 'Blog';
 export type href = '/about' | '/blog';
 export type navLink = { slug: slug; label: label; href: href };
-export type link = { slug: string; label: string; href: string };
+export type link = { slug: string; label: string; href: string; icon: Icon };
 export type headingLink = { text: string; id: string };
 
 export const LINKS: navLink[] = [
@@ -222,26 +226,31 @@ export const SOCIAL_LINKS: link[] = [
     slug: 'github',
     label: 'Github',
     href: 'https://github.com/SSTPIERRE2',
+    icon: GitHub,
   },
   {
     slug: 'linkedIn',
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/stephencstpierre/',
+    icon: Linkedin,
   },
   {
     slug: 'stackOverflow',
     label: 'Stack Overflow',
     href: 'https://stackoverflow.com/users/8183576/stephen',
+    icon: Layers,
   },
   {
     slug: 'twitter',
     label: 'Twitter',
     href: 'https://twitter.com/nothisisSteve',
+    icon: Twitter,
   },
   {
     slug: 'email',
     label: 'Email',
     href: 'mailto:stephencstpierre@gmail.com',
+    icon: Mail,
   },
 ];
 
