@@ -14,7 +14,6 @@
     "@codesandbox/sandpack-react": "^2.11.0",
     "@codesandbox/sandpack-themes": "^2.0.21",
     "@headlessui/react": "^1.7.18",
-    "@observablehq/plot": "^0.6.13",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.10.8",
     "@types/react": "^18.2.47",

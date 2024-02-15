@@ -3,19 +3,18 @@ import {
   StackContext,
   Api as ApiGateway,
   Config,
-  Auth,
+  // Auth,
 } from 'sst/constructs';
 import { Database } from './Database';
 
 export function Api({ stack }: StackContext) {
-  // const JWT_SECRET = new Config.Secret(stack, 'JWT_SECRET');
   const RESEND_API_KEY = new Config.Secret(stack, 'RESEND_API_KEY');
 
-  const auth = new Auth(stack, 'auth', {
-    authenticator: {
-      handler: 'packages/functions/src/auth.handler',
-    },
-  });
+  // const auth = new Auth(stack, 'auth', {
+  //   authenticator: {
+  //     handler: 'packages/functions/src/auth.handler',
+  //   },
+  // });
 
   const api = new ApiGateway(stack, 'api', {
     defaults: {
@@ -34,9 +33,9 @@ export function Api({ stack }: StackContext) {
     cors: true,
   });
 
-  auth.attach(stack, {
-    api,
-  });
+  // auth.attach(stack, {
+  //   api,
+  // });
 
   stack.addOutputs({
     API: api.url,
