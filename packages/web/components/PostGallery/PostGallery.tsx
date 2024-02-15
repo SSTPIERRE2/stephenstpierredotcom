@@ -1,30 +1,31 @@
-import range from '@/utils/range';
 import TextWithBorder from '../TextWithBorder';
 import styles from './PostGallery.module.css';
 import Link from 'next/link';
+import { Post } from '@core/post';
+import PostCard from '@/components/PostCard';
 
-const PostGallery = () => {
+const PostGallery = async () => {
+  const posts = await Post.getPublishedPostsWithTags();
+
   return (
     <div className={styles.container}>
       <TextWithBorder as={Link} href="/blog" className={styles.link}>
         Blog Posts
       </TextWithBorder>
       <div className={styles.gallery}>
-        {range(10).map((num) => (
-          <div className={styles.card} key={num}>
-            <article>
-              <h3>Blog Post #{num}</h3>
-              <h4>Optional sub heading</h4>
-              <p>
-                Back in the day, centering an element was one of the trickiest
-                things in CSS. As the language has evolved, we’ve been given
-                lots of new tools we can use… But how do we pick the best
-                option? When do we use Flexbox, or CSS Grid, or something else?
-                Let's dig into it.
-              </p>
-            </article>
-          </div>
-        ))}
+        {posts.map((post) => {
+          const { id, title, slug, published_on, abstract, tags } = post;
+          return (
+            <PostCard
+              key={id}
+              title={title}
+              slug={slug}
+              publishedOn={published_on}
+              abstract={abstract}
+              tags={tags}
+            />
+          );
+        })}
       </div>
     </div>
   );

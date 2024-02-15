@@ -107,11 +107,13 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
           <h1 id="title">{title}</h1>
-          {tags.map((tag) => (
-            <SupportingLink key={tag.id} href={`/blog/tags/${tag.name}`}>
-              #{tag.name}
-            </SupportingLink>
-          ))}
+          <div className={styles.tagList}>
+            {tags.map((tag) => (
+              <SupportingLink key={tag.id} href={`/blog/tags/${tag.name}`}>
+                #{tag.name}
+              </SupportingLink>
+            ))}
+          </div>
         </div>
       </div>
       <main className={styles.main}>

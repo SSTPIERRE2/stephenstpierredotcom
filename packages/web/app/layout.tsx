@@ -24,10 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   const savedTheme = cookies().get('color-theme') as
     | {
-      value: THEME;
-    }
+        value: THEME;
+      }
     | undefined;
-  const theme = savedTheme?.value || 'light';
+  const theme = savedTheme?.value || 'dark';
 
   const themeColors = theme === 'light' ? LIGHT_COLORS : DARK_COLORS;
 

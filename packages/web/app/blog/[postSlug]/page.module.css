@@ -16,6 +16,11 @@
   gap: 1rem;
 }
 
+.tagList {
+  display: flex;
+  gap: 0.75rem;
+}
+
 .main {
   position: relative;
   display: grid;
@@ -57,6 +62,10 @@
 .article > p:not(:first-of-type) {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.article > img {
+  margin: 0 auto;
 }
 
 .info {

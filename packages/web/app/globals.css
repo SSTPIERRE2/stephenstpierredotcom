@@ -131,7 +131,8 @@ html {
 
 /* Prevent font size inflation */
 html {
-  scrollbar-gutter: stable;
+  /* Turned this off for now. If a page doesn't have enough content to scroll it will leave a blank space on the edge which clashes with full-bleed elements. */
+  /* scrollbar-gutter: stable; */
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;

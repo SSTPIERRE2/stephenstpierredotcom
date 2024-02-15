@@ -21,6 +21,7 @@
   background: var(--retro-horizontal-gradient);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
+  background-clip: text;
   transform: skewX(-12deg);
   display: inline-block;
   font-size: var(--font-size-normal);

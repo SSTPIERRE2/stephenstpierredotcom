@@ -1,36 +1,33 @@
 import styles from './page.module.css';
 import { NextPage } from 'next';
 import { Post } from '@core/post';
-import { dbUtils } from '@core/utils';
-import PrimaryLink from '@/components/PrimaryLink';
+import PostCard from '@/components/PostCard';
+import TagSidebar from '@/components/TagSidebar';
 
 const TagPage: NextPage<{ params: { tag: string } }> = async ({
   params: { tag },
 }) => {
   const posts = await Post.getByTagWithRelations(tag);
-  const allTags = await dbUtils.listTableRecords('tag');
 
   return (
     <div className={styles.wrapper}>
-      <h2>Posts tagged #{tag}</h2>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <span>{post.published_on}</span>
-          {post.tags.map((tag) => (
-            <span key={tag}>#{tag}</span>
-          ))}
-          <p>{post.abstract}</p>
-        </div>
-      ))}
-      <div>
-        <h2>Tags</h2>
-        {allTags.map((tag) => (
-          <PrimaryLink key={tag.id} href={`/blog/tags/${tag.id}`}>
-            #{tag.name}
-          </PrimaryLink>
-        ))}
-      </div>
+      <main className={styles.main}>
+        <h2>Posts tagged #{tag}</h2>
+        {posts.map((post) => {
+          const { id, title, slug, published_on, abstract, tags } = post;
+          return (
+            <PostCard
+              key={id}
+              title={title}
+              slug={slug}
+              publishedOn={published_on}
+              abstract={abstract}
+              tags={tags}
+            />
+          );
+        })}
+      </main>
+      <TagSidebar />
     </div>
   );
 };

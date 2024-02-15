@@ -1,0 +1,14 @@
+.wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(auto, 65ch) 250px;
+  column-gap: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

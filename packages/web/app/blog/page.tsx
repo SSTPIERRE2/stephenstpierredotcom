@@ -1,35 +1,29 @@
 import styles from './page.module.css';
 import { Post } from '@core/post';
-import { dbUtils } from '@core/utils';
-import PrimaryLink from '@/components/PrimaryLink';
-import SupportingLink from '@/components/SupportingLink';
+import PostCard from '@/components/PostCard';
+import TagSidebar from '@/components/TagSidebar';
 
 const TagPage = async () => {
   const posts = await Post.getPublishedPostsWithTags();
-  const allTags = await dbUtils.listTableRecords('tag');
 
   return (
     <div className={styles.wrapper}>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <span>{post.published_on}</span>
-          {post.tags.map((tag) => (
-            <SupportingLink key={tag} href={`/blog/tags/${tag}`}>
-              #{tag}
-            </SupportingLink>
-          ))}
-          <p>{post.abstract}</p>
-        </div>
-      ))}
-      <div>
-        <h2>Tags</h2>
-        {allTags.map((tag) => (
-          <PrimaryLink key={tag.id} href={`/blog/tags/${tag.id}`}>
-            #{tag.name}
-          </PrimaryLink>
-        ))}
-      </div>
+      <main className={styles.main}>
+        {posts.map((post) => {
+          const { id, title, slug, published_on, abstract, tags } = post;
+          return (
+            <PostCard
+              key={id}
+              title={title}
+              slug={slug}
+              publishedOn={published_on}
+              abstract={abstract}
+              tags={tags}
+            />
+          );
+        })}
+      </main>
+      <TagSidebar />
     </div>
   );
 };

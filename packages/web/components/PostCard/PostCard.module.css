@@ -1,0 +1,50 @@
+@keyframes bounceRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+.wrapper {
+  background-color: var(--color-background-accent);
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.tagList {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.readMoreArrow {
+  display: none;
+}
+
+.wrapper:hover {
+  .readMoreArrow {
+    display: revert;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .readMoreArrow {
+    animation: 1000ms bounceRight infinite alternate ease-in-out;
+  }
+}
