@@ -2,6 +2,7 @@
   color: var(--color-primary);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
+  line-height: 1.1;
 }
 
 .main {

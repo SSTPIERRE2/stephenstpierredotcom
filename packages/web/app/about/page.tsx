@@ -1,9 +1,9 @@
 import StackCarousel from '@/components/StackCarousel';
 import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
-import Link from 'next/link';
 import Button from '@/components/Button';
 import { ArrowRight } from 'react-feather';
+import PrimaryLink, { PrimaryNewTabLink } from '@/components/PrimaryLink';
 
 export default function AboutPage() {
   return (
@@ -11,15 +11,23 @@ export default function AboutPage() {
       <div className={styles.content}>
         <h1 className={styles.mainHeading}>About</h1>
         <p>
-          Thanks for visiting my digital space! I'm Stephen, the human behind
-          the coding content you'll find here. I started making websites when I
-          was 17 with plain old HTML, CSS, and JavaScript.
+          Thanks for visiting my digital space! I'm Stephen, the full stack
+          JavaScript developer behind the content you'll find here. I started
+          making websites when I was 17 with plain old HTML, CSS, and
+          JavaScript.
         </p>
         <p>
           These days I primarily build web applications with TypeScript,
           React.js, Node.js, Express, and PostgreSQL, but am constantly
           experimenting with cutting-edge technologies like Next.js, Serverless,
-          and GraphQL. Continue on to view my full tech stack and resume below!
+          and GraphQL.
+        </p>
+        <p>
+          Continue on to view my{' '}
+          <PrimaryLink href="/about/#techStack">full tech stack</PrimaryLink>{' '}
+          and{' '}
+          <PrimaryNewTabLink href="/Resume2023.pdf">resume</PrimaryNewTabLink>{' '}
+          below!
         </p>
       </div>
 
@@ -33,18 +41,15 @@ export default function AboutPage() {
             with in the past, am currently experimenting with, or am generally
             interested in, in no particular order. Go ahead, take it for a spin!
           </p>
-          <Link
+          <PrimaryNewTabLink
             href="/Resume2023.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            locale={false}
             className={styles.resumeLink}
           >
             <Button size="medium">
               View Resume{' '}
               <ArrowRight className={styles.resumeLinkArrow} size="1.5rem" />
             </Button>
-          </Link>
+          </PrimaryNewTabLink>
         </div>
       </div>
 
@@ -73,42 +78,31 @@ export default function AboutPage() {
         <p>
           Much of what I learned after school came from official documentation
           like{' '}
-          <Link
-            href="https://en.wikipedia.org/wiki/MDN"
-            className={styles.simpleLink}
-          >
+          <PrimaryNewTabLink href="https://en.wikipedia.org/wiki/MDN">
             MDN Web Docs
-          </Link>
+          </PrimaryNewTabLink>
           ,{' '}
-          <Link href="https://react.dev/" className={styles.simpleLink}>
+          <PrimaryNewTabLink href="https://react.dev/">
             react.dev
-          </Link>
+          </PrimaryNewTabLink>
           , online courses and resources from{' '}
-          <Link
-            href="https://www.freecodecamp.org/"
-            className={styles.simpleLink}
-          >
+          <PrimaryNewTabLink href="https://www.freecodecamp.org/">
             Free Code Camp
-          </Link>
+          </PrimaryNewTabLink>
           ,{' '}
-          <Link href="https://zerotomastery.io/" className={styles.simpleLink}>
+          <PrimaryNewTabLink href="https://zerotomastery.io/">
             Zero to Mastery
-          </Link>
+          </PrimaryNewTabLink>
           ,{' '}
-          <Link
-            href="https://www.joshwcomeau.com/"
-            className={styles.simpleLink}
-          >
+          <PrimaryNewTabLink href="https://www.joshwcomeau.com/">
             Josh W Comeau
-          </Link>
+          </PrimaryNewTabLink>
           , and working on real projects with professional teams.
         </p>
         <p>
           In this industry{' '}
-          <span className={styles.gradientText}>
-            "you get out what you put in"
-          </span>
-          . Techniques and technologies are constantly evolving which is what
+          <em className={styles.emphasized}>you get out what you put in</em>.
+          Techniques and technologies are constantly evolving which is what
           makes it so exciting to be immersed in.
         </p>
       </div>
@@ -122,15 +116,15 @@ export default function AboutPage() {
         <p>
           <strong>I have a few hobbies.</strong> I've built a handful of
           high-end PCs from scratch over the years and take pride in a 12 year
-          old Toshiba laptop I refurbished myself. I exercise and lift weights
-          daily in the home gym I designed and built, as a strong body makes the
-          mind strong. I love to cook and grow my own ingredients which is
-          another exciting area of constant improvement and innovation - cast
-          iron, dutch oven, wok, barbeque, casseroles, any style of pizza, you
-          name it.
+          old Toshiba laptop I refurbished myself.
         </p>
         <p>
-          <strong></strong>
+          I exercise and lift weights every day in the home gym I designed and
+          built, as a strong body makes the mind strong.
+        </p>
+        <p>
+          I love to cook and grow my own ingredients which is another exciting
+          area of constant improvement and innovation.
         </p>
       </div>
 

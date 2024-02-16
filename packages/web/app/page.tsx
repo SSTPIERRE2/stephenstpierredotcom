@@ -3,7 +3,7 @@ import PostGallery from '@/components/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import Oasis from '@/components/Oasis';
 import FullBleed from '@/components/FullBleed';
-import PrimaryLink from '@/components/PrimaryLink';
+import PrimaryLink, { PrimaryNewTabLink } from '@/components/PrimaryLink';
 
 export default function Home() {
   return (
@@ -25,13 +25,9 @@ export default function Home() {
           <h2 className={styles.heading}>Looking for work!</h2>
           <p>
             <PrimaryLink href="/about">Read more about me here</PrimaryLink> or{' '}
-            <PrimaryLink
-              href="/Resume2023.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <PrimaryNewTabLink href="/Resume2023.pdf">
               view my resume
-            </PrimaryLink>
+            </PrimaryNewTabLink>
           </p>
         </div>
         <div className={styles.greetingRight}>

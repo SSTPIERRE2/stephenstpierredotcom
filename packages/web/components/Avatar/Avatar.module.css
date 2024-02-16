@@ -1,26 +1,6 @@
-.wrapper {
-  position: absolute;
-  top: 8px;
-  right: 4px;
-  width: 80%;
-}
-
 .base {
-  filter: drop-shadow(2px 4px 32px hsl(0deg 0% 0% / 0.4));
+  filter: drop-shadow(2px 2px 2px hsl(0deg 0% 0% / 0.4));
   height: auto;
   object-fit: cover;
-  transition: opacity 500ms;
   position: relative;
-}
-
-.stacked {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-@media (max-width: 950px) {
-  .wrapper {
-    position: relative;
-  }
 }

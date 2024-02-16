@@ -16,7 +16,10 @@ export interface Post {
   updated: Date | null;
 }
 
-export type PostWithTags = Partial<Post> & { tags: string[] };
+export type PostWithTags = Pick<
+  Post,
+  'id' | 'title' | 'slug' | 'abstract' | 'content' | 'published_on' | 'updated'
+> & { tags: string[] };
 
 export type PostToCreate = Pick<
   Post,
@@ -118,12 +121,13 @@ export async function deleteById(id: string) {
   return result;
 }
 
+// @todo re-enable getting published posts only when we have enough published ones
 export async function getPublishedPostsWithTags() {
   const map: Record<string, PostWithTags> = {};
   const result = await SQL.DB.selectFrom('post')
     .innerJoin('post_tag', 'post_tag.post_id', 'post.id')
     .innerJoin('tag', 'post_tag.tag_id', 'tag.id')
-    .where('published_on', 'is not', null)
+    // .where('published_on', 'is not', null)
     .select([
       'post.id',
       'post.title',
@@ -134,7 +138,7 @@ export async function getPublishedPostsWithTags() {
       'post.updated',
       'tag.name as tagName',
     ])
-    .orderBy('published_on', 'desc')
+    // .orderBy('published_on', 'desc')
     .execute();
 
   // Since joining will give us multiple records for each post-tag relation, we need to reduce the results

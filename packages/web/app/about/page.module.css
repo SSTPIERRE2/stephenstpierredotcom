@@ -7,35 +7,6 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.gradientText {
-  width: fit-content;
-  background: var(--retro-horizontal-gradient);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transform: skewX(-12deg);
-  display: inline-block;
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-medium);
-}
-
-.simpleLink {
-  text-decoration: none;
-  background: var(--retro-horizontal-gradient);
-  background-repeat: repeat-x;
-  background-size: 100% 2px;
-  background-position: 0 95%;
-}
-
 .main {
   grid-column: 2;
   display: grid;
@@ -48,7 +19,8 @@
 }
 
 .mainHeading {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
 
 .heading {
@@ -60,6 +32,17 @@
 
 .content {
   max-width: 65ch;
+}
+
+.content > p {
+  margin-top: 1.5rem;
+}
+
+.emphasized {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.1;
 }
 
 .fullBleed {
