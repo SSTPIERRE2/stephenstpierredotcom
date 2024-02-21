@@ -1,6 +1,6 @@
 .base {
   filter: drop-shadow(2px 2px 2px hsl(0deg 0% 0% / 0.4));
   height: auto;
-  object-fit: cover;
   position: relative;
+  min-width: 200px;
 }

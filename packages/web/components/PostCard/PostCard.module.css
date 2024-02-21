@@ -13,6 +13,10 @@
   border-radius: 4px;
 }
 
+.title:hover {
+  color: var(--color-primary);
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -33,8 +37,13 @@
   font-weight: var(--font-weight-medium);
 }
 
+.readMore:hover {
+  color: var(--color-primary);
+}
+
 .readMoreArrow {
   display: none;
+  color: var(--color-primary);
 }
 
 .wrapper:hover {

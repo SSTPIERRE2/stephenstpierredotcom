@@ -47,6 +47,7 @@
 .linksHeading {
   text-decoration: underline var(--color-primary) 4px;
   text-underline-offset: 6px;
+  margin-bottom: 0.5rem;
 }
 
 .link {

@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AuthProvider>
             <ThemeProvider initialTheme={theme}>
               <AnalyticsWrapper>
-                <div className={styles.maxWidthGridWrapper}>
+                <div className={styles.maxWidthWrapper}>
                   <Header />
                   <MobileMenu />
                   {children}

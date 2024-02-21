@@ -1,0 +1,124 @@
+---
+title: How I Built Yet Another Developer Blog
+abstract: Web development tools and technologies have come a long way since since React came out in 2013. In this post we'll dive into the stack I chose for my website, the design, and the challenges I faced while putting it all together.
+tags:
+  ['nextjs', 'react', 'serverless', 'sst', 'css', 'monorepo', 'sql', 'postgres']
+---
+
+The web development ecosystem has changed a lot since my early days with Bootstrap and jQuery.
+
+In 2013 React exploded onto the scene with the introduction of JSX and offering convenient ways to manage state and interact with the DOM. Not only that, but thanks to Create React App (rest in peace) it was easier than ever to start a new project and get something on the screen.
+
+It was a modular experience and there was some fiddling with config files but it worked. Remember manually configuring code splitting?
+
+React Router was the popular choice for managing navigation, and CRA used Webpack and Babel under the hood to transpile and bundle the app, but these were destined to be dethroned as competition grew, in addition to desire for server-side rendering and better DX.
+
+Naturally, tools dubbed "frameworks" like Gatsby and Next.js emerged boasting features like SSR, routing, code splitting, optimized asset loading all out of the box in addition to a zero-config setup, and the frontend conundrum was solved. I'm mostly kidding, but I think spending less time configuring tools and more time building apps is a good thing!
+
+Hosting options have grown as well, with cloud infrastructure providers like AWS, Azure, and GCP becoming the standard. It wasn't long until Serverless Framework emerged offering a way to simplify the development and deployment of serverless applications, and the ecosystem will only continue to evolve.
+
+<h2 id="project-planning">Project planning</h2>
+
+In the beginning I had some wild ideas about what I wanted my website to be and do. As the scope of the project grew I had to pause and consider the Minimum Viable Product (MVP) - if I tried to fit every conceivable feature in the first version it would take an unreasonable amount of time or may not get finished at all!
+
+There were some features I knew I definitely wanted:
+
+- Dark/light mode
+- Blog posts
+- About page
+- Post upvotes
+- Analytics
+- RSS
+
+And some technologies I wanted to work with:
+
+- Next.js
+- GraphQL
+- AWS
+- CSS grid
+
+I've dabbled with Angular 4 and 6, but I've always been a [React](https://react.dev/) guy so that was a no brainer. Since I wanted to get experience with Server Side Rendering, [Next.js v13.4](https://nextjs.org/blog/next-13-4) was just being released with the now stable App Router, and having recently finished Josh W Comeau's [The Joy of React](https://www.joyofreact.com/) which includes lessons on Next.js, it seemed to be an obvious choice.
+
+What about hosting? [Vercel](https://vercel.com/) is quite popular for Next.js projects since that's what it was built for, but I wanted to get more experience with AWS since it's a valuable skill. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive!
+
+One of my classmates suggested I check out [Serverless Stack](https://sst.dev/) which offers a way to build full-stack applications on AWS, so I had to check it out. By using the [OpenNext](https://open-next.js.org/) serverless adapter for Next.js we can actually [deploy our app](https://sst.dev/examples/how-to-create-a-nextjs-app-with-serverless.html) as function, and our api will be another function, both of which can directly interact with RDS 🤯
+
+Now that the project was beginning to take shape, it was time to make some architecture diagrams in [Figma](https://www.figma.com/), here is the second version after reducing it to the MVP:
+
+<img
+  src="arch_diagram_0.2.png"
+  alt="Diagram describing my application's architecture."
+/>
+
+It may not picture the precise locations within AWS where each of the components will live, but now we have a pretty good idea about how all of the pieces fit together written down somewhere to remind us what we're building.
+
+At this point the important decisions were made and it was time to scaffold the project. Conveniently, SST has a number of templates and examples to help us get started including Next.js, GraphQL, and RDS, so that's where I started.
+
+<h2 id="designing-a-color-palette">Designing a Color Palette</h2>
+
+From here I wanted to jump into the design which is a whole can of worms especially since I wanted both a dark and light mode. [Tailwind's docs](https://tailwindcss.com/docs/customizing-colors) and [Material palette generator](https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors) helped me greatly here.
+
+Picking a range of gray colors is relatively easy, but things got more complicated as I got to picking primary, secondary, and status colors. Once you start putting text on a background you have to be mindful of contrast with regard to accessibility. Thankfully tools like [color review](https://color.review/) exist to help fine tune our colors so they play nicely together.
+
+I'm more of a dark mode guy and found that palette to be easier to develop. I wanted to go for a sort of retrowave meets The Matrix type feel, which seems to fit a dark theme more naturally than light.
+
+It felt like I had a lot of options while developing the primary color for dark mode, but the light theme seemed to leave me with little choice in order to achieve good contrast. I tried to make purple work, but ultimately blue felt like the only viable option, although purple was acceptable as a secondary since I wouldn't be using it for text.
+
+Once I was happy with my color selections I put them all into a constant file which would be used to set each as a [CSS variable](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). Josh has a [great post](https://www.joshwcomeau.com/react/dark-mode/#adding-a-toggle-13) about implementing dark mode using this strategy which is more or less how it works, but I use a cookie instead of local storage so I can use Next.js to generate HTML on the server and avoid a flicker when loading the user's preference.
+
+<h2 id="building-a-modern-frontend">Building a modern frontend</h2>
+
+We have our colors selected, but have barely scratched the surface of the frontend - it's time to make a layout! A header and footer are a given, but there are a couple things to consider here which will affect both of those: maximum line length for text, and maximum width of app content.
+
+It's nice when all the elements on a page line up along the edge, so the content in our header, body, and footer should all have the same max width, typically this is somewhere around 1000-1100 pixels. On top of that, WCAG dictates a line of text be no longer than 80 characters, but even that is pretty wide - I think 65 characters is plenty for the standard 16px font size.
+
+Speaking of pixels, over the years I learned it's better to use relative units like `rem` and `em` for font sizes, spacing, breakpoints, and more so that everything scales with the user's browser font size. Whenever I need to size something in CSS I simply use [calc](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) to convert pixels to `rem` like so `calc(desiredPixels / 16 * 1rem)`.
+
+I find dealing with pixels in an increment like 4 helps avoid relying on `calc` too much while allowing just enough flexibility to control the size of any element. Since 4 is one quarter of 16 we can easily do some quick math on smaller numbers without running into a nasty third decimal, and using this strategy has the additional benefit of consistency within our design choices.
+
+Anyway, I got some experience with CSS grid in Josh's CSS course so I wanted to use it in my root layout if possible, mostly to avoid setting a max width on individual elements while still allowing full-bleed elements. You'll notice every page on this site is wrapped in a `.maxWidthWrapper` which is a grid with these columns `1fr min(var(--max-width), calc(100% - 64px)) 1fr`.
+
+This is a powerful piece of code which makes the middle column's width be either our max width variable, or the full width of the screen minus some space for gutters on those smaller screens. Thanks to the `1fr` columns on either side, the middle content will stay centered without having to use auto margins.
+
+This strategy also allows _full-bleed_ elements like my header, footer, and <em>retrowave grid</em> with a single line of code `grid-column: 1 / -1`. I make another interesting use of CSS grid on my About page with many more columns, but that's a topic for another post!
+
+<h2 id="backend-concerns">Backend Concerns</h2>
+
+At this point I mainly wanted a relational database that my Next.js app could interact with. SST has this handy feature called [resource binding](https://docs.sst.dev/resource-binding) which allows you to connect your infrastructure to your frontend and functions, so it was relatively simple to [bind an RDS instance](https://docs.sst.dev/databases#bind-the-table) to my Next.js app.
+
+SST also makes it easy to [add an API](https://docs.sst.dev/apis#add-an-api) like the GraphQL one I chose to experiment with, but thanks to server components and bound resources I found I didn't really need it. Something big I learned during this process is that everything I was doing with GraphQL could instead be done in a server component or [server action](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) with less code.
+
+I'm sure there are practical use cases for GraphQL in more complex apps, but for me it was only burning time. SST already [generates database types](https://docs.sst.dev/learn/write-to-the-database#query-the-table) for us when a migration is run, so we already get great type safety without having to go through the whole process of implementing GraphQL types, configuring generating a types file for that too, and oh yeah don't forget to install a minimal client like [graphql-request](https://www.npmjs.com/package/graphql-request) if you want to actually use it with server components.
+
+Why shouldn't I simply query my database directly from server components if I have the power to do so?.
+
+<img
+  src="/why_shouldnt_i.gif"
+  alt="Bilbo Baggins in the Lord of The Rings stroking The One Ring."
+/>
+
+Getting back to the database, the schema itself was relatively simple. We have a table for posts, tags, upvotes, and `post_tag` as an associative table.
+
+<img src="/database_diagram.png" alt="Diagram describing my database schema." />
+
+Now I can easily get all of the tags related to a post and vice versa, great! Once I figured out how to actually get some data in these tables it felt like I was building momentum, but this part took a surprising amount of work.
+
+I knew I wanted to write my posts in [MDX](https://nextjs.org/docs/app/building-your-application/configuring/mdx) files since I had some experience with that from Josh's React course, but after setting all that up the next big question was: how could I get the posts into my database?
+
+<h2 id="sst-to-the-rescue">SST to the Rescue</h2>
+
+SST has another cool feature called the [Script construct](https://docs.sst.dev/constructs/Script#onupdate) which makes it easy to run a script in a Lambda function during the deployment process. Theoretically, each time my app is deployed I could use [Node file system](https://nodejs.org/api/fs.html) to read my blog posts and update the database as needed, whoa!
+
+<img src="/chris_pog.jpeg" alt="Chris Pratt is very excited." />
+
+Having this process in place was one thing, implementing functions for "updating the database as needed" was a different story.
+
+Basically, any Post or Tag described in my MDX files that hasn't been created, gets created. For anything that has already been created I needed to check existing properties and relations, update those that have changed and delete any unused relations. Finally, for good measure we can't forget to delete any post which has no file along with its relations.
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+There are a couple features I didn't talk about yet, but at this point the MVP of the blog was more or less complete. Originally I started implementing my own custom analytics solution, but ultimately decided it wasn't worth reinventing the wheel at least at my app's scale. There are so many analytics solutions out there to choose from with more in-depth dashboards and features than I could hope to build in any reasonable amount of time, and time is money!
+
+By total coincidence, I joined the [Logrocket](https://logrocket.com/) [Content Advisory Board](https://lp.logrocket.com/lia/content-advisory-board-signup) around the same time I was researching analytics solutions, and I liked their platform and free tier enough to give it a try, so that was that.
+
+In future posts I'll dive deeper into two features I mentioned earlier: upvotes (with server actions), and building a super-powered layout with CSS grid, stay tuned!

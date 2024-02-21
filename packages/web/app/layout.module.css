@@ -1,12 +1,12 @@
-.maxWidthGridWrapper {
+.maxWidthWrapper {
   display: grid;
   grid-template-columns: 1fr min(var(--max-width), calc(100% - 64px)) 1fr;
   grid-template-rows: min-content 1fr min-content;
-  column-gap: 32px;
+  column-gap: 2rem;
   min-height: 100vh;
   min-height: 100svh;
 }
 
-.maxWidthGridWrapper > * {
+.maxWidthWrapper > * {
   grid-column: 2;
 }

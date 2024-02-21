@@ -14,8 +14,11 @@ interface Props {
 const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
   return (
     <article className={styles.wrapper}>
-      <Link href={`/blog/${slug}`} className={styles.content}>
-        <h2>{title}</h2>
+      <div className={styles.content}>
+        <Link href={`/blog/${slug}`}>
+          <h2 className={styles.title}>{title}</h2>
+        </Link>
+
         <span>{publishedOn}</span>
         <div className={styles.tagList}>
           {tags.map((tag) => (
@@ -25,11 +28,11 @@ const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
           ))}
         </div>
         <p>{abstract}</p>
-        <div className={styles.readMore}>
+        <Link href={`/blog/${slug}`} className={styles.readMore}>
           Read more{' '}
           <ArrowRight className={styles.readMoreArrow} size="1.25rem" />
-        </div>
-      </Link>
+        </Link>
+      </div>
     </article>
   );
 };

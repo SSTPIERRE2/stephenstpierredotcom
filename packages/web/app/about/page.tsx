@@ -13,7 +13,7 @@ export default function AboutPage() {
         <p>
           Thanks for visiting my digital space! I'm Stephen, the full stack
           JavaScript developer behind the content you'll find here. I started
-          making websites when I was 17 with plain old HTML, CSS, and
+          making websites when I was 16 with plain old HTML, CSS, and
           JavaScript.
         </p>
         <p>

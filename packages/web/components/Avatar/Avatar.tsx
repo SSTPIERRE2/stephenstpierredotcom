@@ -7,7 +7,7 @@ const Avatar = () => {
     <Image
       src={avatar}
       alt="Stephen's avatar"
-      sizes="100vw"
+      sizes="33vw"
       className={styles.base}
       priority
     />
