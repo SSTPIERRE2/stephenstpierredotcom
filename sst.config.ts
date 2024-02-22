@@ -5,7 +5,7 @@ import { Database } from './stacks/Database';
 import { Default } from './stacks/Default';
 
 export default {
-  config(_input) {
+  config() {
     return {
       name: 'stephenstpierredotcom',
       region: 'us-east-1',

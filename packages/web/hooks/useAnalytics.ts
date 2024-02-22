@@ -64,7 +64,7 @@ export const useCreateAnalytic = () => {
         createAnalytic({ name, visitorId, metadata });
       }
     },
-    [visitorId, createAnalytic]
+    [visitorId, createAnalytic],
   );
 
   return {

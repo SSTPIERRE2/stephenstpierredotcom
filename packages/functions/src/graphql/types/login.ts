@@ -1,6 +1,6 @@
-// import { SQL } from '@graphql-rds/core/sql';
+// import { SQL } from '@core/sql';
 // import { builder } from '../builder';
-// import { Login } from '@graphql-rds/core/login';
+// import { Login } from '@core/login';
 // import jwt from 'jsonwebtoken';
 
 // const LoginType = builder.objectRef<SQL.Row['login']>('Login').implement({

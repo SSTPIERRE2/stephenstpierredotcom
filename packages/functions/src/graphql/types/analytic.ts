@@ -1,6 +1,6 @@
-import { SQL } from '@graphql-rds/core/sql';
+import { SQL } from '@core/sql';
 import { builder } from '../builder';
-import { Analytic } from '@graphql-rds/core/analytic';
+import { Analytic } from '@core/analytic';
 import fetch from 'node-fetch';
 import DeviceDetector from 'device-detector-js';
 
@@ -87,14 +87,14 @@ const AnalyticCount = builder
     }),
   });
 
-const PageViewsOverTime = builder
-  .objectRef<{ date: string; total: number }>('PageViewsOverTime')
-  .implement({
-    fields: (t) => ({
-      date: t.exposeString('date'),
-      total: t.exposeInt('total'),
-    }),
-  });
+// const PageViewsOverTime = builder
+//   .objectRef<{ date: string; total: number }>('PageViewsOverTime')
+//   .implement({
+//     fields: (t) => ({
+//       date: t.exposeString('date'),
+//       total: t.exposeInt('total'),
+//     }),
+//   });
 
 builder.queryFields((t) => ({
   analyticsEvents: t.field({
@@ -181,7 +181,7 @@ builder.mutationFields((t) => ({
         headers.origin || '',
         client?.name || '',
         client?.version || '',
-        // @ts-ignore it doesn't matter if engine exists, this is safe
+        // @ts-expect-error it doesn't matter if engine exists, this is safe
         client?.engine || '',
         device?.model || '',
         device?.type || '',

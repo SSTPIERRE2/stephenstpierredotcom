@@ -1,5 +1,5 @@
 const range = (start: number, end?: number, step = 1) => {
-  let output = [];
+  const output: number[] = [];
 
   if (typeof end === 'undefined') {
     end = start;

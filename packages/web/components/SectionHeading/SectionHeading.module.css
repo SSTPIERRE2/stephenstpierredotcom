@@ -1,0 +1,36 @@
+.heading {
+  position: relative;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  scroll-margin-top: 4rem;
+  font-size: 2rem;
+}
+
+.heading::before {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 1.5rem;
+  left: 0;
+  transform: translateX(-2rem);
+}
+
+.heading:hover {
+  .link {
+    opacity: 1;
+  }
+}
+
+.link {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  transform: translateX(-2rem);
+  color: var(--color-primary);
+  transition: opacity 250ms;
+}
+
+.link:hover {
+  opacity: 1;
+}

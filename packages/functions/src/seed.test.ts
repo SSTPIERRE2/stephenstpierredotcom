@@ -1,9 +1,9 @@
-import { Post } from '@graphql-rds/core/post';
+import { Post } from '@core/post';
 import { afterAll, beforeAll, expect, it, describe } from 'vitest';
 import { onCreate, onUpdate } from './seed';
-import { Tag } from '@graphql-rds/core/tag';
-import { PostTag } from '@graphql-rds/core/postTag';
-import { dbUtils } from '@graphql-rds/core/utils';
+import { Tag } from '@core/tag';
+import { PostTag } from '@core/postTag';
+import { dbUtils } from '@core/utils';
 
 describe.sequential('onCreate stack, followed by onUpdate', () => {
   beforeAll(async () => {
@@ -37,7 +37,7 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
     // console.log(`checking an updated post`, post);
 
     const isContentUpdated = post.content.includes(
-      'Here is some new content I added.'
+      'Here is some new content I added.',
     );
     expect(isContentUpdated).toBe(true);
 
@@ -50,7 +50,7 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
     console.log(
       'pls',
       post.published_on,
-      post.published_on === new Date('2024-01-29').toISOString()
+      post.published_on === new Date('2024-01-29').toISOString(),
     );
 
     const isPublishedDateUpdated =
@@ -68,7 +68,7 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
     await expect(Post.getBySlug('post-to-be-renamed')).rejects.toThrow();
 
     const oldRenamedPostTags = await PostTag.getAllByPostId(
-      oldDbRenamedPost.id
+      oldDbRenamedPost.id,
     );
     expect(oldRenamedPostTags).toHaveLength(0);
 

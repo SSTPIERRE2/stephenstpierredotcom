@@ -119,12 +119,12 @@ export default function AboutPage() {
           old Toshiba laptop I refurbished myself.
         </p>
         <p>
-          I exercise and lift weights every day in the home gym I designed and
-          built, as a strong body makes the mind strong.
+          <strong>I exercise and train weights every day</strong> in the home
+          gym I designed and built, as a strong body makes the mind strong.
         </p>
         <p>
-          I love to cook and grow my own ingredients which is another exciting
-          area of constant improvement and innovation.
+          <strong>I love to cook</strong> and grow my own ingredients which is
+          another exciting area of constant improvement and innovation.
         </p>
       </div>
 

@@ -2,8 +2,6 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
-import UrqlProvider from './UrqlProvider';
-import AnalyticsWrapper from './AnalyticsWrapper';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AuthProvider from './context/AuthContext/AuthProvider';
@@ -39,20 +37,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body className={inter.className}>
         <Logrocket appId={Config.LOGROCKET_APP_ID} />
-        <UrqlProvider apiUrl={Config.API_URL}>
-          <AuthProvider>
-            <ThemeProvider initialTheme={theme}>
-              <AnalyticsWrapper>
-                <div className={styles.maxWidthWrapper}>
-                  <Header />
-                  <MobileMenu />
-                  {children}
-                  <Footer />
-                </div>
-              </AnalyticsWrapper>
-            </ThemeProvider>
-          </AuthProvider>
-        </UrqlProvider>
+        <AuthProvider>
+          <ThemeProvider initialTheme={theme}>
+            <div className={styles.maxWidthWrapper}>
+              <Header />
+              <MobileMenu />
+              {children}
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

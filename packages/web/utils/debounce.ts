@@ -5,7 +5,10 @@
  * @param timeout how long to wait before executing the function
  * @returns
  */
-const debounce = (func: Function, timeout = 300) => {
+const debounce = <T extends (...args: unknown[]) => unknown>(
+  func: T,
+  timeout = 300,
+) => {
   let timer: NodeJS.Timeout | undefined;
   let count = 0;
 
@@ -20,10 +23,14 @@ const debounce = (func: Function, timeout = 300) => {
 };
 
 const getMouseXDirection = (movement: number) =>
-  movement === 0 ? undefined : movement > 0 ? 'right' : 'left';
+  movement === 0 ? undefined
+  : movement > 0 ? 'right'
+  : 'left';
 
 const getMouseYDirection = (movement: number) =>
-  movement === 0 ? undefined : movement > 0 ? 'down' : 'up';
+  movement === 0 ? undefined
+  : movement > 0 ? 'down'
+  : 'up';
 
 /**
  * Custom debounced cursor thrash tracking function
@@ -36,7 +43,10 @@ const getMouseYDirection = (movement: number) =>
  * @param timeout how long to wait before executing the function
  * @returns
  */
-export const handleCursorThrash = (func: Function, timeout = 500) => {
+export const handleCursorThrash = <T extends (...args: unknown[]) => unknown>(
+  func: T,
+  timeout = 500,
+) => {
   let timer: NodeJS.Timeout | undefined;
   let previousTimestamp = 0;
   let numOfThrashes = 0;

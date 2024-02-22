@@ -1,5 +1,5 @@
 import { builder } from '../builder';
-import { Post } from '@graphql-rds/core/post';
+import { Post } from '@core/post';
 
 const ViewsType = builder.objectRef<{ views: number }>('Post').implement({
   fields: (t) => ({

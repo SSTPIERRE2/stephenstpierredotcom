@@ -27,11 +27,13 @@ export async function getBlogPosts(path?: string): Promise<BlogPost[]> {
 
   const blogPosts = [];
 
-  for (const fileName of fileNames.filter((f) => f !== '.DS_Store' && f !== 'images')) {
+  for (const fileName of fileNames.filter(
+    (f) => f !== '.DS_Store' && f !== 'images',
+  )) {
     const rawContent = await readFile(`${directory}/${fileName}`);
 
     const { data: frontmatter, content } = matter(
-      rawContent
+      rawContent,
     ) as BlogPostData<string>;
 
     blogPosts.push({
@@ -51,12 +53,6 @@ export async function loadBlogPost(slug: string) {
 
   return { frontmatter, content };
 }
-
-export const slugify = (str = '') =>
-  str
-    .toLowerCase()
-    .replace(/\s/g, '-')
-    .replace(/[^a-zA-Z0-9-]/g, '');
 
 function readFile(localPath: string) {
   return fs.readFile(path.join(process.cwd(), localPath), 'utf8');

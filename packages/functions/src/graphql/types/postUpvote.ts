@@ -1,6 +1,6 @@
-// import { SQL } from '@graphql-rds/core/sql';
+// import { SQL } from '@core/sql';
 import { builder } from '../builder';
-import { PostUpvote } from '@graphql-rds/core/postUpvote';
+import { PostUpvote } from '@core/postUpvote';
 
 // const PostUpvoteType = builder
 //   .objectRef<SQL.Row['post_upvote']>('PostUpvote')
@@ -43,7 +43,7 @@ builder.queryFields((t) => ({
       if (visitorId) {
         const result = await PostUpvote.getRecentUpvotesByVisitorId(
           postId,
-          visitorId
+          visitorId,
         );
 
         if (result) {
@@ -69,7 +69,7 @@ builder.queryFields((t) => ({
       const { postId, visitorId } = args;
       const recentUpvotes = await PostUpvote.getRecentUpvotesByVisitorId(
         postId,
-        visitorId
+        visitorId,
       );
 
       return recentUpvotes || { votes: 0 };

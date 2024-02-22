@@ -1,6 +1,6 @@
 // Return to this later with Github oauth
 // import { AuthHandler, LinkAdapter, Session } from 'sst/node/auth';
-// import { User } from '@graphql-rds/core/user';
+// import { User } from '@core/user';
 // import { Resend } from 'resend';
 // import { Config } from 'sst/node/config';
 

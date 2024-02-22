@@ -1,6 +1,6 @@
-// import { SQL } from '@graphql-rds/core/sql';
+// import { SQL } from '@core/sql';
 import { builder } from '../builder';
-import { User } from '@graphql-rds/core/user';
+import { User } from '@core/user';
 import bcrypt, { getRounds } from 'bcryptjs';
 // import jwt from 'jsonwebtoken';
 // import { Config } from 'sst/node/config';

@@ -14,9 +14,12 @@ import * as cheerio from 'cheerio';
 import { headingLink } from '@/utils/constant';
 import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
+import slugify from '@/utils/slugify';
 
 const getPostMetadata = cache(async (postSlug: string) => {
   let post, tags;
+
+  console.log(`getPostMetadata`, postSlug);
 
   try {
     post = await Post.getBySlug(postSlug);
@@ -47,10 +50,11 @@ const getPostMetadata = cache(async (postSlug: string) => {
 
   headings
     .each((_index, heading) => {
-      console.log($(heading).text(), $(heading).attr('id'));
+      const text = $(heading).text();
+      console.log(text, $(heading).attr('id'));
       links.push({
-        text: $(heading).text(),
-        id: $(heading).attr('id') as string,
+        text,
+        id: slugify(text),
       });
     })
     .toArray();
@@ -88,6 +92,8 @@ export async function generateMetadata({
 const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
 }) => {
+  console.log(`Hello PostPage`, postSlug);
+
   const test = await getPostMetadata(postSlug);
   const {
     id,
@@ -106,7 +112,9 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     <>
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
-          <h1 id="title">{title}</h1>
+          <h1 id="title" className={styles.title}>
+            {title}
+          </h1>
           <div className={styles.tagList}>
             {tags.map((tag) => (
               <SupportingLink key={tag.id} href={`/blog/tags/${tag.name}`}>

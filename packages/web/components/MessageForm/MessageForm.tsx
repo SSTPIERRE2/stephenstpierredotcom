@@ -1,9 +1,6 @@
 'use client';
 
-import { useAuth } from '@/app/context/AuthContext';
-import { useCreateAnalytic } from '@/hooks/useAnalytics';
-import { useEffect, useState } from 'react';
-import { gql, useMutation } from 'urql';
+import { useState } from 'react';
 import styles from './MessageForm.module.css';
 
 const defaultState = {
@@ -11,25 +8,14 @@ const defaultState = {
   message: '',
 };
 
-// const MessageQuery = gql`
-//   mutation ($email: String!, $text: String!) {
-//     createMessage(email: $email, text: $text) {
-//       id
-//     }
-//   }
-// `;
-
 const MessageForm = () => {
   const [value, setValue] = useState(defaultState);
   const { email, message } = value;
-  // const [result, createMessage] = useMutation(MessageQuery);
-  const { createAnalytic } = useCreateAnalytic();
-  const { setEmail } = useAuth();
 
   // console.log('MessageForm ', email, message, result);
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setValue({
       ...value,

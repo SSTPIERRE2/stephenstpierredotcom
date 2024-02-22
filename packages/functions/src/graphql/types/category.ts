@@ -1,6 +1,6 @@
-import { SQL } from '@graphql-rds/core/sql';
+import { SQL } from '@core/sql';
 import { builder } from '../builder';
-import { Category } from '@graphql-rds/core/category';
+import { Category } from '@core/category';
 
 const CategoryType = builder
   .objectRef<SQL.Row['category']>('Category')

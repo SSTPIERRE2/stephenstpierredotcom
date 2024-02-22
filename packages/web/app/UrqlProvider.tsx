@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Client, cacheExchange, fetchExchange, Provider } from 'urql';
 // import { useSession } from 'sst/node/auth';
 // import { authExchange } from '@urql/exchange-auth';
@@ -43,13 +43,10 @@ const UrqlProvider: FC<Props & PropsWithChildren> = ({ apiUrl, children }) => {
       // fetchOptions: () => ({
       //   credentials: 'include',
       // }),
-    })
+    });
   }
 
-
-  return (
-    <Provider value={urql}>{children}</Provider>
-  );
-}
+  return <Provider value={urql}>{children}</Provider>;
+};
 
 export default UrqlProvider;

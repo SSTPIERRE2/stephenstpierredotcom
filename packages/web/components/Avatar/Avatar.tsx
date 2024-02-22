@@ -1,5 +1,5 @@
 import styles from './Avatar.module.css';
-import avatar from '../../content/assets/avatar.png';
+import avatar from './avatar.png';
 import Image from 'next/image';
 
 const Avatar = () => {

@@ -1,8 +1,8 @@
-import { Post } from '@graphql-rds/core/post';
-import { Tag } from '@graphql-rds/core/tag';
-import { PostTag } from '@graphql-rds/core/postTag';
+import { Post } from '@core/post';
+import { Tag } from '@core/tag';
+import { PostTag } from '@core/postTag';
 import { BlogPost, getBlogPosts } from './utils/file-helpers';
-import { dbUtils } from '@graphql-rds/core/utils';
+import { dbUtils } from '@core/utils';
 
 const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
   const { isPublished, publishedOn, tags, ...post } = blogPost;
@@ -12,7 +12,7 @@ const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
     post.slug,
     isPublished,
     publishedOn,
-    tags
+    tags,
   );
 
   const created = await Post.create({
@@ -70,7 +70,7 @@ const doesPostHaveAnyChanges = (dbPost: Post, post: BlogPost) => {
 
 export const onCreate = async () => {
   const posts = await getBlogPosts(
-    process.env.NODE_ENV === 'test' ? './test/content/seed' : undefined
+    process.env.NODE_ENV === 'test' ? './test/content/seed' : undefined,
   );
 
   for (const post of posts) {
@@ -84,7 +84,7 @@ export const onUpdate = async () => {
   console.log('on stack update');
 
   const posts = await getBlogPosts(
-    process.env.NODE_ENV === 'test' ? './test/content/updated' : undefined
+    process.env.NODE_ENV === 'test' ? './test/content/updated' : undefined,
   );
 
   // console.log(`read the posts`, posts);
@@ -101,7 +101,7 @@ export const onUpdate = async () => {
       acc[curr.slug] = curr;
       return acc;
     },
-    {}
+    {},
   );
   // const dbPostSlugs = Object.keys(dbPostSlugMap);
 
@@ -130,7 +130,7 @@ export const onUpdate = async () => {
       console.log(
         `post is already in db`,
         dbPostId,
-        dbPostContent === postContent
+        dbPostContent === postContent,
       );
 
       if (doesPostHaveAnyChanges(dbPostSlugMap[s], postSlugMap[s])) {
@@ -149,7 +149,7 @@ export const onUpdate = async () => {
           postToUpdate.is_published = isPublished as boolean;
           console.log(`post was published`, publishedOn);
           postToUpdate.published_on = new Date(
-            publishedOn as string
+            publishedOn as string,
           ).toISOString();
         }
 

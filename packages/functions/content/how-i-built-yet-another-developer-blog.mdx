@@ -5,19 +5,19 @@ tags:
   ['nextjs', 'react', 'serverless', 'sst', 'css', 'monorepo', 'sql', 'postgres']
 ---
 
-The web development ecosystem has changed a lot since my early days with Bootstrap and jQuery.
+The web development ecosystem has changed a lot since my early days with [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 
-In 2013 React exploded onto the scene with the introduction of JSX and offering convenient ways to manage state and interact with the DOM. Not only that, but thanks to Create React App (rest in peace) it was easier than ever to start a new project and get something on the screen.
+In 2013 [React](https://react.dev/) exploded onto the scene with the introduction of JSX and offering convenient ways to manage state and interact with the DOM. Not only that, but thanks to Create React App ([rest in peace](https://www.linkedin.com/pulse/end-era-react-team-longer-recommends-create-app-vivek-dwivedi/)) it was easier than ever to start a new project and get something on the screen.
 
 It was a modular experience and there was some fiddling with config files but it worked. Remember manually configuring code splitting?
 
-React Router was the popular choice for managing navigation, and CRA used Webpack and Babel under the hood to transpile and bundle the app, but these were destined to be dethroned as competition grew, in addition to desire for server-side rendering and better DX.
+[React Router](https://reactrouter.com/en/main) was the popular choice for managing navigation, and CRA used [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/) under the hood to transpile and bundle the app, but these were destined to be dethroned as competition grew, in addition to desire for server-side rendering and better DX.
 
-Naturally, tools dubbed "frameworks" like Gatsby and Next.js emerged boasting features like SSR, routing, code splitting, optimized asset loading all out of the box in addition to a zero-config setup, and the frontend conundrum was solved. I'm mostly kidding, but I think spending less time configuring tools and more time building apps is a good thing!
+Naturally, tools dubbed "frameworks" like [Gatsby](https://www.gatsbyjs.com/) and [Next.js](https://nextjs.org/) emerged boasting features like SSR, routing, code splitting, optimized asset loading all out of the box in addition to a zero-config setup, and the frontend conundrum was solved. I'm mostly kidding, but I think spending less time configuring tools and more time building apps is a good thing!
 
 Hosting options have grown as well, with cloud infrastructure providers like AWS, Azure, and GCP becoming the standard. It wasn't long until Serverless Framework emerged offering a way to simplify the development and deployment of serverless applications, and the ecosystem will only continue to evolve.
 
-<h2 id="project-planning">Project planning</h2>
+## Project planning
 
 In the beginning I had some wild ideas about what I wanted my website to be and do. As the scope of the project grew I had to pause and consider the Minimum Viable Product (MVP) - if I tried to fit every conceivable feature in the first version it would take an unreasonable amount of time or may not get finished at all!
 
@@ -37,7 +37,7 @@ And some technologies I wanted to work with:
 - AWS
 - CSS grid
 
-I've dabbled with Angular 4 and 6, but I've always been a [React](https://react.dev/) guy so that was a no brainer. Since I wanted to get experience with Server Side Rendering, [Next.js v13.4](https://nextjs.org/blog/next-13-4) was just being released with the now stable App Router, and having recently finished Josh W Comeau's [The Joy of React](https://www.joyofreact.com/) which includes lessons on Next.js, it seemed to be an obvious choice.
+I've dabbled with Angular 4 and 6, but I've always been a React guy so that was a no brainer. Since I wanted to get experience with Server Side Rendering, [Next.js v13.4](https://nextjs.org/blog/next-13-4) was just being released with the now stable App Router, and having recently finished Josh W Comeau's [The Joy of React](https://www.joyofreact.com/) which includes lessons on Next.js, it seemed to be an obvious choice.
 
 What about hosting? [Vercel](https://vercel.com/) is quite popular for Next.js projects since that's what it was built for, but I wanted to get more experience with AWS since it's a valuable skill. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive!
 
@@ -46,7 +46,7 @@ One of my classmates suggested I check out [Serverless Stack](https://sst.dev/) 
 Now that the project was beginning to take shape, it was time to make some architecture diagrams in [Figma](https://www.figma.com/), here is the second version after reducing it to the MVP:
 
 <img
-  src="arch_diagram_0.2.png"
+  src="/arch_diagram.png"
   alt="Diagram describing my application's architecture."
 />
 
@@ -54,7 +54,7 @@ It may not picture the precise locations within AWS where each of the components
 
 At this point the important decisions were made and it was time to scaffold the project. Conveniently, SST has a number of templates and examples to help us get started including Next.js, GraphQL, and RDS, so that's where I started.
 
-<h2 id="designing-a-color-palette">Designing a Color Palette</h2>
+## Designing a Color Palette
 
 From here I wanted to jump into the design which is a whole can of worms especially since I wanted both a dark and light mode. [Tailwind's docs](https://tailwindcss.com/docs/customizing-colors) and [Material palette generator](https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors) helped me greatly here.
 
@@ -66,7 +66,7 @@ It felt like I had a lot of options while developing the primary color for dark 
 
 Once I was happy with my color selections I put them all into a constant file which would be used to set each as a [CSS variable](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). Josh has a [great post](https://www.joshwcomeau.com/react/dark-mode/#adding-a-toggle-13) about implementing dark mode using this strategy which is more or less how it works, but I use a cookie instead of local storage so I can use Next.js to generate HTML on the server and avoid a flicker when loading the user's preference.
 
-<h2 id="building-a-modern-frontend">Building a modern frontend</h2>
+## Building a Modern Frontend
 
 We have our colors selected, but have barely scratched the surface of the frontend - it's time to make a layout! A header and footer are a given, but there are a couple things to consider here which will affect both of those: maximum line length for text, and maximum width of app content.
 
@@ -82,7 +82,7 @@ This is a powerful piece of code which makes the middle column's width be either
 
 This strategy also allows _full-bleed_ elements like my header, footer, and <em>retrowave grid</em> with a single line of code `grid-column: 1 / -1`. I make another interesting use of CSS grid on my About page with many more columns, but that's a topic for another post!
 
-<h2 id="backend-concerns">Backend Concerns</h2>
+## Backend Concerns
 
 At this point I mainly wanted a relational database that my Next.js app could interact with. SST has this handy feature called [resource binding](https://docs.sst.dev/resource-binding) which allows you to connect your infrastructure to your frontend and functions, so it was relatively simple to [bind an RDS instance](https://docs.sst.dev/databases#bind-the-table) to my Next.js app.
 
@@ -105,7 +105,7 @@ Now I can easily get all of the tags related to a post and vice versa, great! On
 
 I knew I wanted to write my posts in [MDX](https://nextjs.org/docs/app/building-your-application/configuring/mdx) files since I had some experience with that from Josh's React course, but after setting all that up the next big question was: how could I get the posts into my database?
 
-<h2 id="sst-to-the-rescue">SST to the Rescue</h2>
+## SST to the Rescue
 
 SST has another cool feature called the [Script construct](https://docs.sst.dev/constructs/Script#onupdate) which makes it easy to run a script in a Lambda function during the deployment process. Theoretically, each time my app is deployed I could use [Node file system](https://nodejs.org/api/fs.html) to read my blog posts and update the database as needed, whoa!
 
@@ -115,7 +115,7 @@ Having this process in place was one thing, implementing functions for "updating
 
 Basically, any Post or Tag described in my MDX files that hasn't been created, gets created. For anything that has already been created I needed to check existing properties and relations, update those that have changed and delete any unused relations. Finally, for good measure we can't forget to delete any post which has no file along with its relations.
 
-<h2 id="wrapping-up">Wrapping Up</h2>
+## Wrapping Up
 
 There are a couple features I didn't talk about yet, but at this point the MVP of the blog was more or less complete. Originally I started implementing my own custom analytics solution, but ultimately decided it wasn't worth reinventing the wheel at least at my app's scale. There are so many analytics solutions out there to choose from with more in-depth dashboards and features than I could hope to build in any reasonable amount of time, and time is money!
 
