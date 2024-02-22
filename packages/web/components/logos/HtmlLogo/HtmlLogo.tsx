@@ -1,5 +1,3 @@
-import styles from './HtmlLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

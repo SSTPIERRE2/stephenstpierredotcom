@@ -1,5 +1,3 @@
-import styles from './VitestLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

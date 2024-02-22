@@ -1,5 +1,3 @@
-import styles from './ServerlessLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

@@ -1,5 +1,3 @@
-import styles from './GraphqlLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

@@ -1,5 +1,3 @@
-import styles from './StyledComponentsLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

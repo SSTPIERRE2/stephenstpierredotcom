@@ -1,5 +1,4 @@
 import { THEME } from '@/utils/constant';
-import styles from './AwsLogo.module.css';
 
 interface Props {
   theme: THEME;

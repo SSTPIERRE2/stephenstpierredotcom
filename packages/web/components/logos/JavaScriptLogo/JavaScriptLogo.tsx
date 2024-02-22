@@ -1,5 +1,3 @@
-import styles from './JavaScriptLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

@@ -1,5 +1,3 @@
-import styles from './FigmaLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

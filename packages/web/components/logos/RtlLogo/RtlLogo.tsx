@@ -1,5 +1,3 @@
-import styles from './RtlLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

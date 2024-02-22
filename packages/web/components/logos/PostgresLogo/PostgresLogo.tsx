@@ -1,5 +1,3 @@
-import styles from './PostgresLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

@@ -1,5 +1,4 @@
 import { THEME } from '@/utils/constant';
-import styles from './NextJsLogo.module.css';
 
 interface Props {
   theme: THEME;

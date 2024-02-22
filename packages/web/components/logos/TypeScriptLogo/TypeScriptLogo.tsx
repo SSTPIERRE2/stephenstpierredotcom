@@ -1,5 +1,3 @@
-import styles from './TypeScriptLogo.module.css';
-
 interface Props {
   className?: string;
   size?: number;

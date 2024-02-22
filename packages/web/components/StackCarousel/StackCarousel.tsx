@@ -21,9 +21,7 @@ import DockerLogo from '../logos/DockerLogo';
 import GraphqlLogo from '../logos/GraphqlLogo';
 import PrettierLogo from '../logos/PrettierLogo';
 
-interface Props {}
-
-const StackCarousel = ({}: Props) => {
+const StackCarousel = () => {
   const { theme } = useTheme();
 
   return (

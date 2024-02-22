@@ -1,5 +1,4 @@
 import { THEME } from '@/utils/constant';
-import styles from './NodeJsLogo.module.css';
 
 interface Props {
   className?: string;

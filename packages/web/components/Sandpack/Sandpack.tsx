@@ -1,9 +1,14 @@
 'use client';
 
-import { SandpackProvider, SandpackProviderProps, SandpackCodeEditor, SandpackPreview, SandpackLayout } from '@codesandbox/sandpack-react';
-import styles from './Sandpack.module.css';
+import {
+  SandpackProvider,
+  SandpackProviderProps,
+  SandpackCodeEditor,
+  SandpackPreview,
+  SandpackLayout,
+} from '@codesandbox/sandpack-react';
 
-interface Props extends SandpackProviderProps { }
+interface Props extends SandpackProviderProps {}
 
 const Sandpack = ({ template = 'react', files, ...rest }: Props) => {
   return (
@@ -13,7 +18,7 @@ const Sandpack = ({ template = 'react', files, ...rest }: Props) => {
         <SandpackPreview />
       </SandpackLayout>
     </SandpackProvider>
-  )
-}
+  );
+};
 
 export default Sandpack;
