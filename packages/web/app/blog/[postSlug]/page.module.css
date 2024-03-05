@@ -28,7 +28,7 @@
 .main {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(auto, 65ch) 250px;
+  grid-template-columns: minmax(auto, 65ch) 260px;
   grid-template-rows: 1fr;
   grid-template-areas: 'article sidebar';
   column-gap: 5rem;
@@ -47,11 +47,6 @@
   display: none;
   grid-area: sidebar;
   font-size: calc(14 / 16 * 1rem);
-}
-
-.sticky {
-  position: sticky;
-  top: 3rem;
 }
 
 .upvotes {
@@ -95,5 +90,8 @@
 @media (min-width: 1000px) {
   .aside {
     display: block;
+    position: sticky;
+    top: 3rem;
+    align-self: start;
   }
 }

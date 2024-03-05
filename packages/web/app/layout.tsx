@@ -11,6 +11,7 @@ import MobileMenu from '@/components/MobileMenu';
 import styles from './layout.module.css';
 import Logrocket from '@/components/Logrocket';
 import { Config } from 'sst/node/config';
+import '@fontsource-variable/fira-code';
 
 const inter = Inter({ subsets: ['latin'] });
 

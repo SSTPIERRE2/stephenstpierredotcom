@@ -3,7 +3,7 @@ import { Post } from '@core/post';
 import PostCard from '@/components/PostCard';
 import TagSidebar from '@/components/TagSidebar';
 
-const TagPage = async () => {
+const BlogPage = async () => {
   const posts = await Post.getPublishedPostsWithTags();
 
   return (
@@ -28,4 +28,4 @@ const TagPage = async () => {
   );
 };
 
-export default TagPage;
+export default BlogPage;

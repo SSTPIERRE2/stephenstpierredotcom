@@ -119,11 +119,11 @@ This time there were no duplicate outcomes we could merge into one to simplify t
 
 We can say without a doubt that the ternary version is less lines and characters.
 
-The `if` version has extra noise including the `if` keyword vs `?` in the ternary version, `return` which is implicit in the ternary, extra braces, and semicolons. To reason about why less code is good in this case, let's first think about the job of a ternary vs an if statement.
+The <InlineCode>if</InlineCode> version has extra noise including the <InlineCode>if</InlineCode> keyword vs <InlineCode>?</InlineCode> in the ternary version, <InlineCode>return</InlineCode> which is implicit in the ternary, extra braces, and semicolons. To reason about why less code is good in this case, let's first think about the job of a ternary vs an if statement.
 
-Ternaries evaluate to a value, while if statements are more powerful in that they can and frequently do cause side effects or mutate variables. Since we don't need to do either of those, the ternary option seems like the right tool for the job instead of forcing `if` to do this simple task.
+Ternaries evaluate to a value, while if statements are more powerful in that they can and frequently do cause side effects or mutate variables. Since we don't need to do either of those, the ternary option seems like the right tool for the job instead of forcing <InlineCode>if</InlineCode> to do this simple task.
 
-That said, I generally prefer to use `if` whenever nesting, mutations, or side effects are unavoidable.
+That said, I generally prefer to use <InlineCode>if</InlineCode> whenever nesting, mutations, or side effects are unavoidable.
 
 Now, I agree with everything Eric said about if statements encouraging mutations and side effects while ternaries encourage pure code, [working memory](https://en.wikipedia.org/wiki/Working_memory), [signal-to-noise ratio](https://en.wikipedia.org/wiki/Signal-to-noise_ratio), and more, but I want to address the elephant in the room.
 
@@ -146,7 +146,7 @@ The official MDN documentation which I generally consider to have to final word 
 
 When one of the most popular tools for JavaScript development enables vastly different configurations to the point of disallowing core language features it encourages disagreement about basic coding practices.
 
-Eslint even includes a [no-ternary](https://eslint.org/docs/latest/rules/no-ternary) rule disallowing ternaries altogether, that seems a little extreme! What's next, enable disallowing optional chaining for folks who prefer explicit checks with `if`?
+Eslint even includes a [no-ternary](https://eslint.org/docs/latest/rules/no-ternary) rule disallowing ternaries altogether, that seems a little extreme! What's next, enable disallowing optional chaining for folks who prefer explicit checks with <InlineCode>if</InlineCode>?
 
 ## Prettier's Quest for a Solution
 
@@ -154,22 +154,22 @@ Prettier is "an opinionated code formatter" so the team had to develop some sort
 
 Originally they simply added indentation to each level of a nested or chained ternary, but in 2018 that was [replaced with flat ternaries](https://github.com/prettier/prettier/pull/5039) and [chaos ensued](https://github.com/prettier/prettier/issues/5814).
 
-Eventually they developed a novel solution drawing inspiration from the original desire for indentation as well as other languages like Rust and OCaml, I actually just started using the `experimental-ternaries` option on this blog!
+Eventually they developed a novel solution drawing inspiration from the original desire for indentation as well as other languages like Rust and OCaml, I actually just started using the <InlineCode>experimental-ternaries</InlineCode> option on this blog!
 
 Essentially it works like this:
 
-- Every line that ends with a `?` is an "if"
-- Every line that starts with a `:` is an "else"
-- Every line without `:` or `?` is a "then"
+- Every line that ends with a <InlineCode>?</InlineCode> is an "if"
+- Every line that starts with a <InlineCode>:</InlineCode> is an "else"
+- Every line without <InlineCode>:</InlineCode> or <InlineCode>?</InlineCode> is a "then"
 
-I still enjoy the form I learned from Eric for the same reason why I avoid using `if` without any curly braces and `return` on the same line, but this new form where each conditional is grouped with its return value is growing on me in the case of ternaries.
+I still enjoy the form I learned from Eric for the same reason why I avoid using <InlineCode>if</InlineCode> without any curly braces and <InlineCode>return</InlineCode> on the same line, but this new form where each conditional is grouped with its return value is growing on me in the case of ternaries.
 
 ## Conclusion
 
 While I don't think shorter code is necessarily always better, ternaries don't require arcane JavaScript knowledge to understand.
 
-Ternaries are simply `if..else` statements that produce a value and have been around since the language's early days, so we shouldn't be afraid to use them and even chain them together in most simple cases.
+Ternaries are simply <InlineCode>if..else</InlineCode> statements that produce a value and have been around since the language's early days, so we shouldn't be afraid to use them and even chain them together in most simple cases.
 
 I think it's healthy for any engineering team to have opinions about how they write code. Some prefer to only use a ternary when there are two possible outcomes based on a single expression and that's okay, but I hope I encouraged someone to give chained ternaries a try!
 
-It's a perfectly valid way to produce a value based on some logic, which I believe even has some advantages over `if` statements.
+It's a perfectly valid way to produce a value based on some logic, which I believe even has some advantages over <InlineCode>if</InlineCode> statements.

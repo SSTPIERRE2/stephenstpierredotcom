@@ -51,7 +51,14 @@ const getPostMetadata = cache(async (postSlug: string) => {
   headings
     .each((_index, heading) => {
       const text = $(heading).text();
+      const id = $(heading).attr('id');
+
       console.log(text, $(heading).attr('id'));
+      // Ignore h2's in demos
+      if (id?.includes('demo')) {
+        return;
+      }
+
       links.push({
         text,
         id: slugify(text),
@@ -126,10 +133,8 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
       </div>
       <main className={styles.main}>
         <aside className={styles.aside}>
-          <div className={styles.sticky}>
-            <TableOfContents slug={slug} links={links} />
-            <Upvotes postId={id} visitorId="123" className={styles.upvotes} />
-          </div>
+          <TableOfContents slug={slug} links={links} />
+          <Upvotes postId={id} visitorId="123" className={styles.upvotes} />
         </aside>
         <article className={styles.article}>
           <MDXRemote source={content} components={COMPONENT_MAP} />

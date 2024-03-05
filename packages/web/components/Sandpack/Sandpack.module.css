@@ -1,0 +1,6 @@
+@media (min-width: 1200px) {
+  .sandpack {
+    width: calc(100% + 64px);
+    margin: 0px -32px;
+  }
+}

@@ -72,15 +72,15 @@ We have our colors selected, but have barely scratched the surface of the fronte
 
 It's nice when all the elements on a page line up along the edge, so the content in our header, body, and footer should all have the same max width, typically this is somewhere around 1000-1100 pixels. On top of that, WCAG dictates a line of text be no longer than 80 characters, but even that is pretty wide - I think 65 characters is plenty for the standard 16px font size.
 
-Speaking of pixels, over the years I learned it's better to use relative units like `rem` and `em` for font sizes, spacing, breakpoints, and more so that everything scales with the user's browser font size. Whenever I need to size something in CSS I simply use [calc](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) to convert pixels to `rem` like so `calc(desiredPixels / 16 * 1rem)`.
+Speaking of pixels, over the years I learned it's better to use relative units like <InlineCode>rem</InlineCode> and <InlineCode>em</InlineCode> for font sizes, spacing, breakpoints, and more so that everything scales with the user's browser font size. Whenever I need to size something in CSS I simply use [calc](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) to convert pixels to <InlineCode>rem</InlineCode> like so <InlineCode>calc(desiredPixels / 16 \* 1rem)</InlineCode>.
 
-I find dealing with pixels in an increment like 4 helps avoid relying on `calc` too much while allowing just enough flexibility to control the size of any element. Since 4 is one quarter of 16 we can easily do some quick math on smaller numbers without running into a nasty third decimal, and using this strategy has the additional benefit of consistency within our design choices.
+I find dealing with pixels in an increment like 4 helps avoid relying on <InlineCode>calc</InlineCode> too much while allowing just enough flexibility to control the size of any element. Since 4 is one quarter of 16 we can easily do some quick math on smaller numbers without running into a nasty third decimal, and using this strategy has the additional benefit of consistency within our design choices.
 
-Anyway, I got some experience with CSS grid in Josh's CSS course so I wanted to use it in my root layout if possible, mostly to avoid setting a max width on individual elements while still allowing full-bleed elements. You'll notice every page on this site is wrapped in a `.maxWidthWrapper` which is a grid with these columns `1fr min(var(--max-width), calc(100% - 64px)) 1fr`.
+Anyway, I got some experience with CSS grid in Josh's CSS course so I wanted to use it in my root layout if possible, mostly to avoid setting a max width on individual elements while still allowing full-bleed elements. You'll notice every page on this site is wrapped in a <InlineCode>.maxWidthWrapper</InlineCode> which is a grid with these columns <InlineCode>1fr min(var(--max-width), calc(100% - 64px)) 1fr</InlineCode>.
 
-This is a powerful piece of code which makes the middle column's width be either our max width variable, or the full width of the screen minus some space for gutters on those smaller screens. Thanks to the `1fr` columns on either side, the middle content will stay centered without having to use auto margins.
+This is a powerful piece of code which makes the middle column's width be either our max width variable, or the full width of the screen minus some space for gutters on those smaller screens. Thanks to the <InlineCode>1fr</InlineCode> columns on either side, the middle content will stay centered without having to use auto margins.
 
-This strategy also allows _full-bleed_ elements like my header, footer, and <em>retrowave grid</em> with a single line of code `grid-column: 1 / -1`. I make another interesting use of CSS grid on my About page with many more columns, but that's a topic for another post!
+This strategy also allows _full-bleed_ elements like my header, footer, and <em>retrowave grid</em> with a single line of code <InlineCode>grid-column: 1 / -1</InlineCode>. I make another interesting use of CSS grid on my About page with many more columns, but that's a topic for another post!
 
 ## Backend Concerns
 
@@ -97,7 +97,7 @@ Why shouldn't I simply query my database directly from server components if I ha
   alt="Bilbo Baggins in the Lord of The Rings stroking The One Ring."
 />
 
-Getting back to the database, the schema itself was relatively simple. We have a table for posts, tags, upvotes, and `post_tag` as an associative table.
+Getting back to the database, the schema itself was relatively simple. We have a table for posts, tags, upvotes, and <InlineCode>post_tag</InlineCode> as an associative table.
 
 <img src="/database_diagram.png" alt="Diagram describing my database schema." />
 
