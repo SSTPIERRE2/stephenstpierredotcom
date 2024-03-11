@@ -51,7 +51,7 @@ export async function getTotalPostUpvotes(post_id: string) {
 
 export function getRecentUpvotesByVisitorId(
   post_id: string,
-  visitor_id: string
+  visitor_id: string,
 ) {
   return SQL.DB.selectFrom('post_upvote')
     .select(['id', 'votes'])
@@ -60,8 +60,8 @@ export function getRecentUpvotesByVisitorId(
     .where(
       'post_upvote.created',
       '>',
-      // @ts-ignore The docs don't give an example of how to make TS accept raw sql and I can't find anything on the internet about it
-      sql`CURRENT_TIMESTAMP - INTERVAL '1 day'`
+      // @ts-expect-error The docs don't give an example of how to make TS accept raw sql and I can't find anything on the internet about it
+      sql`CURRENT_TIMESTAMP - INTERVAL '1 day'`,
     )
     .executeTakeFirst();
 }
@@ -82,10 +82,10 @@ export async function updateById(id: string) {
   return result;
 }
 
-export async function createOrUpdate(
+export function createOrUpdate(
   post_id: string,
   visitor_id: string,
-  upvote_id: string | undefined
+  upvote_id: string | undefined,
 ) {
   if (upvote_id) {
     return updateById(upvote_id);

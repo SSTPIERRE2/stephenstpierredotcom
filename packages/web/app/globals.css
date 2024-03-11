@@ -1,8 +1,6 @@
 :root {
   --max-width: 1000px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: 'Fira Code Variable', monospace;
 }
 
 @media (min-width: 500px) {
@@ -125,8 +123,6 @@ html {
     Silence the warning about missing Reach Dialog styles
   */
   --reach-dialog: 1;
-
-  --avatar-ratio: 0.354;
 }
 
 /* Prevent font size inflation */

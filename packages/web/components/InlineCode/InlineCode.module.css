@@ -1,6 +1,6 @@
 .code {
   display: inline-block;
-  font-family: 'Fira Code Variable', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8em;
   letter-spacing: -0.5px;
   padding: 2px 6px;

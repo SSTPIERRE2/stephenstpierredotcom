@@ -24,7 +24,6 @@ const getPostMetadata = cache(async (postSlug: string) => {
   try {
     post = await Post.getBySlug(postSlug);
     tags = await Tag.getAllByPostId(post.id);
-    console.log(`got the post`, post);
   } catch (err) {
     console.log(`error getting post`, err);
     notFound();

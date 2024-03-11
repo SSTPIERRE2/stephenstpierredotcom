@@ -1,7 +1,268 @@
 ---
 title: Using Server Actions to Build an Interactive Upvote Widget
 abstract: Server Actions are a cutting-edge React feature we can use to our advantage in Next.js apps to handle form submissions and data mutations. Let's take a look at how we can use them to build an interactive Upvote widget!
-tags: ['react', 'nextjs']
+tags: ['react', 'nextjs', 'serveractions']
 ---
 
 [Server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) are a brand new, cutting-edge React feature only usable in frameworks that support it like Next.js. Next.js defines them asynchronous functions that are executed on the server, while the [React documentation](https://react.dev/reference/react/use-server) defines them as server-side functions that can be called from client-side code.
+
+Unfortunately, as of March 2024 Sandpack has not implemented a Next.js template supporting the App Router and Server Actions, so this post will not have integrated demos, but I did build [this CodeSandbox](https://codesandbox.io/p/devbox/upvotes-server-actions-g9wl73) so you can follow along and experiment!
+
+## What We're Building
+
+We're going to build an "upvotes" or "likes" widget that gets the number of votes, increments the number by one when clicked, and includes a button to reset the number to zero for demo purposes.
+
+Since we're generally working with a database for this type of feature, we'll simulate the asynchronous processes of getting and updating with the global [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) function and [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+
+While we're waiting on any asynchronous process, we'll show a simple loading indicator, and for added fun, we'll show some UI when a hypothetical maximum number of votes is reached.
+
+## Server Actions and Core Database Functions
+
+In cases where a server action isn't expected to be reused, we can [write them inline](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-components) inside a server component.
+
+Since we know we need interactivity, we'll ultimately need to call our server actions inside a [client component](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#client-components) which requires either defining them in a separate file and using imports, or in a server component and passing each as a prop.
+
+I went ahead and made a separate actions file because it's a bit cleaner whenever you need to define more than one action, compared to writing <InlineCode>'use server'</InlineCode> at the top of each function. This way has another benefit which is not having to manage additional props and their types on our widget.
+
+```ts
+'use server';
+
+import { revalidatePath } from 'next/cache';
+
+let votes = 0;
+
+export const getVotes = (): Promise<number> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(votes);
+    }, 300);
+  });
+};
+
+const setVotes = (v: number) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      votes = v;
+      resolve(votes);
+    }, 300);
+  });
+};
+
+export const setVotesAction = async (v: number) => {
+  await setVotes(v);
+  revalidatePath('/');
+};
+```
+
+By adding the <InlineCode>'use server'</InlineCode> directive at the top of the file, we've marked each of the functions as Server Actions that can be reused in both Client and Server Components. This file also contains our simulated core database functions <InlineCode>getVotes</InlineCode> and <InlineCode>setVotes</InlineCode>, and we'll use a simple variable to track the number of votes in-memory.
+
+Note that the core database functions typically belong with the rest of our backend files, but for the purposes of this demo must live in the same file due to module-level scoping. In practice I would typically <InlineCode>await</InlineCode> an actual database call and return the result, but here we can simply return a promise that resolves with the result after a quick second.
+
+As you'll soon see, we'll use a Server Component to get the current number of votes and pass that value as a prop to our Client Component containing the button interactions, so we need to [revalidate the Next.js cache](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#revalidating-data) at the end of each function to get the latest value.
+
+Since we're [fetching data on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server) we have direct access to our hypothetical database which opens up some interesting options for building modern applications. Essentially, any time where I would have written a new route in an API to get some data and make a request to it from a client component, instead now I find it easier to call the database function directly in a server component and pass the result to the client component.
+
+## The Frontend
+
+Moving onto the frontend, let's start with our first Server Component: <InlineCode>UpvotesContainer</InlineCode>. [Next.js uses Server Components by default](https://nextjs.org/docs/app/building-your-application/rendering/server-components#using-server-components-in-nextjs) so we don't need to write <InlineCode>'use server'</InlineCode> at the top of the file.
+
+All this component needs to do is get the current number of votes, which we can do in Server Components at the top level using <InlineCode>await</InlineCode> since they can be marked <InlineCode>async</InlineCode>, and render the <InlineCode>Upvotes</InlineCode> client component with <InlineCode>votes</InlineCode> as a prop.
+
+```tsx
+import { getVotes } from '@/app/actions';
+import Upvotes from './Upvotes';
+
+const UpvotesContainer = async () => {
+  const votes = await getVotes();
+
+  return <Upvotes votes={votes} />;
+};
+
+export default UpvotesContainer;
+```
+
+For the <InlineCode>Upvotes</InlineCode> component we'll be using a couple new React features [useOptimistic](https://react.dev/reference/react/useOptimistic) and [useTransition](https://react.dev/reference/react/useTransition) to update the UI with a loading state before the server action which updates our vote count finishes executing on the server.
+
+When the upvote button is clicked we'll use <InlineCode>startTransition</InlineCode> to mark that state update as a non-blocking transition and show a loading indicator until the actual vote update is confirmed, and use <InlineCode>addOptimisticVote</InlineCode> to immediately reflect the user's action while that async process runs. When the maximum number of votes is reached we'll show some text indicating so, disable the button, and include a button to reset the number of votes for demo purposes.
+
+Under the hood there is still some communication between the client and server when we call our server action. Behind the scenes, Next.js makes a fetch call with the data we pass to it as well as a unique id.
+
+```tsx
+'use client';
+
+import styles from './Upvotes.module.css';
+import { ThumbsUp } from 'react-feather';
+import { useOptimistic, useTransition } from 'react';
+import { setVotesAction } from '@/app/actions.next';
+
+interface Props {
+  votes: number;
+}
+
+const MAX_VOTES = 10;
+
+const Upvotes = ({ votes }: Props) => {
+  const [isPending, startTransition] = useTransition();
+  const [optimisticVotes, addOptimisticVote] = useOptimistic<number, number>(
+    votes,
+    (_current, next) => next,
+  );
+  const isMaxedOut = optimisticVotes === MAX_VOTES;
+
+  return (
+    <>
+      <button
+        className={styles.wrapper}
+        onClick={async () => {
+          startTransition(() => {
+            addOptimisticVote(optimisticVotes + 1);
+          });
+
+          await setVotesAction(optimisticVotes + 1);
+        }}
+        disabled={isMaxedOut}
+      >
+        <ThumbsUp size="1.5rem" />
+        {optimisticVotes}
+        {isPending && <span>...</span>}
+        {isMaxedOut && <span className={styles.max}>MAX</span>}
+      </button>
+
+      <button
+        className={styles.reset}
+        onClick={async () => {
+          startTransition(() => {
+            addOptimisticVote(0);
+          });
+
+          await setVotesAction(0);
+        }}
+      >
+        Reset
+      </button>
+    </>
+  );
+};
+
+export default Upvotes;
+```
+
+This <InlineCode>useOptimistic</InlineCode> lets us show an optimistic state while we're updating the actual number of votes in our server action, and combined with <InlineCode>startTransition</InlineCode> we get non-blocking state updates along with a bonus <InlineCode>isPending</InlineCode> state while any server actions are underway to create a pretty snappy experience.
+
+This was my first swing at building this component where I wanted to experiment with new React features, but we stumbled upon an inefficiency because we're [unnecessarily invoking multiple server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#event-handlers) when we could instead [debounce](https://lodash.com/docs/4.17.15#debounce) them.
+
+You see, we need a server action to be executing to be able to make use of <InlineCode>isPending</InlineCode>, but we don't actually want to call the action each time when the button is being clicked in quick succession, so if we're going to add a debounce we'll need to use good ol' <InlineCode>useState</InlineCode>.
+
+Here's one more [CodeSandbox](https://codesandbox.io/p/devbox/upvotes-server-actions-debounced-s3r6qg) demonstrating a few ways to implement a debounced version, and it's a bit trickier than you might think unless you already have a solid understanding of <InlineCode>debounce</InlineCode> and React.
+
+```tsx
+'use client';
+
+import styles from './Upvotes.module.css';
+import { ThumbsUp } from 'react-feather';
+import debounce from 'lodash.debounce';
+import { useCallback, useEffect, useState } from 'react';
+import { setVotesAction } from '@/app/actions';
+
+interface Props {
+  votes: number;
+}
+
+const MAX_VOTES = 10;
+
+const stableDebouncedHandleSetVotes = debounce(
+  async (v: number, setIsPending: Function) => {
+    console.log(`debouncedHandleSetVotes called...`, v);
+
+    await setVotesAction(v);
+    setIsPending(false);
+  },
+  300,
+);
+
+const Upvotes = ({ votes }: Props) => {
+  const [isPending, setIsPending] = useState(false);
+  const [optimisticVotes, setOptimisticVotes] = useState(votes);
+  const isMaxedOut = optimisticVotes === MAX_VOTES;
+
+  console.log(`Upvotes rendered...`, votes, isPending);
+
+  const unstableDebouncedHandleSetVotes = debounce(async (v: number) => {
+    console.log(`unstableDebouncedHandleSetVotes called...`, v);
+
+    await setVotesAction(v);
+    setIsPending(false);
+  }, 300);
+
+  // eslint-disable-next-line
+  const stableDebouncedHandleSetVotesWithCallback = useCallback(
+    debounce(async (v: number) => {
+      console.log(`stableDebouncedHandleSetVotesWithCallback called...`, v);
+
+      await setVotesAction(v);
+      setIsPending(false);
+    }, 300),
+    [],
+  );
+
+  // Since votes is our source of truth, whenever it changes we want to use the value
+  useEffect(() => {
+    console.log(`votes updated`, votes);
+
+    setOptimisticVotes(votes);
+  }, [votes]);
+
+  return (
+    <>
+      <button
+        className={styles.wrapper}
+        onClick={async () => {
+          if (!isPending) {
+            setIsPending(true);
+          }
+
+          console.log('adding an optimistic vote...', optimisticVotes);
+
+          setOptimisticVotes(optimisticVotes + 1);
+
+          stableDebouncedHandleSetVotesWithCallback(optimisticVotes + 1);
+        }}
+        disabled={isMaxedOut}
+      >
+        <ThumbsUp size="1.5rem" />
+        {optimisticVotes}
+        {isPending && <span>...</span>}
+        {isMaxedOut && <span className={styles.max}>MAX</span>}
+      </button>
+
+      <button
+        className={styles.reset}
+        onClick={async () => {
+          setOptimisticVotes(0);
+
+          await setVotesAction(0);
+          setIsPending(false);
+        }}
+      >
+        Reset
+      </button>
+    </>
+  );
+};
+
+export default Upvotes;
+```
+
+We're managing our own optimistic state now, as well as the loading state, so when the button is pressed we'll manually set loading state to <InlineCode>true</InlineCode> if it isn't already, increment our optimistic state, then call our debounced server action.
+
+Since the <InlineCode>votes</InlineCode> prop is our source of truth, I added a <InlineCode>useEffect</InlineCode> depending on it where we'll perform one final state update using the true value. If the actual call to update the number of votes succeeds it will be the same as our optimistic value, and React is smart enough to not perform such unnecessary state updates so that will be a no-op, but if some error occurred this would allow us to rollback to the last known value.
+
+In the first, unstable debounced server action implementation, notice how each time we click the thumbsup button the component re-renders. This means a new <InlineCode>unstableDebouncedHandleSetVotes</InlineCode> function is created each time the button is clicked, so the previous call won't be canceled since it's a different function, and you'll see in the logs the function is called on each click.
+
+Now, if we instead use one of the stable implementations, either by declaring the function outside of the component, or using <InlineCode>useCallback</InlineCode> it works as expected since the function never changes, so you'll only see it run once - 300ms after the last click. Try experimenting with each of the 3 debounced functions to see what I mean!
+
+## That's a Wrap
+
+One of my favorite parts about working with a framework like Next.js is getting to experiment with cutting-edge React features and see how they can help us make better applications. Server Actions allow us to mutate data and revalidate on the server without having to make an API route or an extra network call, they offer full type-safety, and we can even use them in client components!
+
+There's a real possibility Server Components combined with Server Actions and Suspense could replace most usage of tools like [swr](https://swr.vercel.app/) and [react-query](https://github.com/TanStack/query) in Next.js apps since we can usually achieve the same result with these built-in features. Now, there's still a bit more to talk about with regard to Server Actions and how they can help us build progressively enhanced forms, but that's a story for another post. Until then, happy coding!
