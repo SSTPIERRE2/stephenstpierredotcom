@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "sst bind next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "sst bind next build",
+    "start": "sst bind next start",
     "lint": "next lint",
     "test": "sst bind vitest run",
     "test:watch": "sst bind vitest"
