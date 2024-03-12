@@ -1,6 +1,5 @@
 import { SSTConfig } from 'sst';
 import { Web } from './stacks/Web';
-// import { Api } from './stacks/Api';
 import { Database } from './stacks/Database';
 import { Default } from './stacks/Default';
 
