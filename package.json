@@ -10,12 +10,9 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "gen": "hygen",
-    "generate": "graphql-codegen"
+    "gen": "hygen"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.0",
-    "@graphql-codegen/typescript": "^4.0.1",
     "@tsconfig/node18": "^18.2.2",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",

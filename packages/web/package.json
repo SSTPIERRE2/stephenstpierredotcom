@@ -25,7 +25,6 @@
     "cheerio": "1.0.0-rc.12",
     "clsx": "^2.1.0",
     "framer-motion": "^10.17.12",
-    "graphql": "^16.8.1",
     "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.5",
     "logrocket": "^7.0.0",
@@ -36,12 +35,9 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "rss": "^1.2.2",
-    "sharp": "^0.33.1",
-    "swiper": "^11.0.5",
-    "urql": "^4.0.6"
+    "sharp": "^0.33.1"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "^3.20.1",
     "@testing-library/react": "^14.1.2",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint-config-next": "^14.0.4",

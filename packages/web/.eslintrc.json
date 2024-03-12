@@ -1,25 +1,4 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
-  "rules": { "react/no-unescaped-entities": 0 },
-  "overrides": [
-    // Setup processor for operations/fragments definitions on code-files
-    {
-      "files": ["*.ts", "*.tsx"],
-      "processor": "@graphql-eslint/graphql"
-    },
-    // Setup GraphQL Parser
-    {
-      "files": ["*.graphql"],
-      "extends": "plugin:@graphql-eslint/operations-recommended",
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      },
-      "parserOptions": {
-        "schema": "../functions/src/graphql/schema.graphql",
-        "operations": "./**/*.{ts, tsx}"
-      }
-    }
-  ]
+  "rules": { "react/no-unescaped-entities": 0 }
 }
