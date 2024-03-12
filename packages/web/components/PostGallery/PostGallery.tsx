@@ -14,7 +14,8 @@ const PostGallery = async () => {
       </TextWithBorder>
       <div className={styles.gallery}>
         {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags } = post;
+          const { id, title, slug, published_on, abstract, tags, updated } =
+            post;
           return (
             <PostCard
               key={id}
@@ -23,6 +24,7 @@ const PostGallery = async () => {
               publishedOn={published_on}
               abstract={abstract}
               tags={tags}
+              updated={updated}
             />
           );
         })}

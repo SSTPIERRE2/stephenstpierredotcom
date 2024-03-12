@@ -53,6 +53,10 @@
   }
 }
 
+.publishDate {
+  color: var(--color-text-supporting);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .readMoreArrow {
     animation: 1000ms bounceRight infinite alternate ease-in-out;

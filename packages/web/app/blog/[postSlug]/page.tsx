@@ -15,11 +15,12 @@ import { headingLink } from '@/utils/constant';
 import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
 import slugify from '@/utils/slugify';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const getPostMetadata = cache(async (postSlug: string) => {
   let post, tags;
-
-  console.log(`getPostMetadata`, postSlug);
 
   try {
     post = await Post.getBySlug(postSlug);
@@ -52,7 +53,6 @@ const getPostMetadata = cache(async (postSlug: string) => {
       const text = $(heading).text();
       const id = $(heading).attr('id');
 
-      console.log(text, $(heading).attr('id'));
       // Ignore h2's in demos
       if (id?.includes('demo')) {
         return;
@@ -64,8 +64,6 @@ const getPostMetadata = cache(async (postSlug: string) => {
       });
     })
     .toArray();
-
-  console.log(`links`, links);
 
   return {
     id,
@@ -98,8 +96,6 @@ export async function generateMetadata({
 const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
 }) => {
-  console.log(`Hello PostPage`, postSlug);
-
   const test = await getPostMetadata(postSlug);
   const {
     id,
@@ -141,9 +137,9 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
             <div className={styles.infoLeft}>
               <h4 className={styles.infoHeading}>LAST UPDATED</h4>
               <p>
-                {dayjs(new Date(updated || publishedOn || created)).format(
-                  'MMMM D, YYYY',
-                )}
+                {dayjs
+                  .utc(new Date(updated || publishedOn || created))
+                  .format('MMMM D, YYYY')}
               </p>
             </div>
 

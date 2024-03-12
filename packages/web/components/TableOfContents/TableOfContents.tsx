@@ -75,13 +75,6 @@ const TableOfContents = ({ links, slug }: Props) => {
             ) as Element;
             const isOnScreen = getIsOnScreen(currentActiveElement);
 
-            console.log(
-              `section appeared`,
-              sectionId,
-              sectionIndex,
-              links.length - 1,
-            );
-
             if (sectionIndex === 0 || sectionIndex === links.length - 1) {
               updateActiveState(sectionId);
             } else if (!isOnScreen) {
@@ -96,8 +89,6 @@ const TableOfContents = ({ links, slug }: Props) => {
             const activeIndex = links.findIndex(
               (link) => link.id === activeRef.current,
             );
-
-            console.log(sectionId, `just went offscreen`);
 
             if (scrollDirection === 'down') {
               const nextSection = links[activeIndex + 1]?.id;

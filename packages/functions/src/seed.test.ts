@@ -34,7 +34,6 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
     await onUpdate();
 
     const post = await Post.getBySlug('test-post');
-    // console.log(`checking an updated post`, post);
 
     const isContentUpdated = post.content.includes(
       'Here is some new content I added.',
@@ -46,12 +45,6 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
 
     const isPublishedUpdated = post.is_published === true;
     expect(isPublishedUpdated).toBe(true);
-
-    console.log(
-      'pls',
-      post.published_on,
-      post.published_on === new Date('2024-01-29').toISOString(),
-    );
 
     const isPublishedDateUpdated =
       post.published_on === new Date('2024-01-29').toISOString();

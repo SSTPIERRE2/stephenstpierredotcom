@@ -8,10 +8,8 @@ import { revalidatePath } from 'next/cache';
 export async function incrementUpvote(
   postId: string,
   visitorId: string,
-  recentVote: string | undefined
+  recentVote: string | undefined,
 ) {
-  console.log(`incrementUpvote called`, postId, visitorId, recentVote);
-
   await PostUpvote.createOrUpdate(postId, visitorId, recentVote); // Accessing bound DB functions causes an error, do not use until SST fixes it
 
   revalidatePath('/[postSlug]', 'page');

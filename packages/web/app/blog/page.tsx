@@ -10,7 +10,8 @@ const BlogPage = async () => {
     <div className={styles.wrapper}>
       <main className={styles.main}>
         {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags } = post;
+          const { id, title, slug, published_on, abstract, tags, updated } =
+            post;
           return (
             <PostCard
               key={id}
@@ -19,6 +20,7 @@ const BlogPage = async () => {
               publishedOn={published_on}
               abstract={abstract}
               tags={tags}
+              updated={updated}
             />
           );
         })}

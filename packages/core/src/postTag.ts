@@ -27,8 +27,6 @@ export async function deleteByIds(ids: string[]) {
 }
 
 export async function getAllByPostId(post_id: string) {
-  console.log(`getting postTags`, post_id);
-
   const result = await SQL.DB.selectFrom('post_tag')
     .selectAll()
     .where('post_id', '=', post_id)

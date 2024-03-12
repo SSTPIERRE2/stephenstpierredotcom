@@ -21,6 +21,8 @@ export type PostWithTags = Pick<
   'id' | 'title' | 'slug' | 'abstract' | 'content' | 'published_on' | 'updated'
 > & { tags: string[] };
 
+type PublishedPostWithTags = PostWithTags & { published_on: string };
+
 export type PostToCreate = Pick<
   Post,
   'title' | 'slug' | 'abstract' | 'content' | 'is_published' | 'published_on'
@@ -123,11 +125,11 @@ export async function deleteById(id: string) {
 
 // @todo re-enable getting published posts only when we have enough published ones
 export async function getPublishedPostsWithTags() {
-  const map: Record<string, PostWithTags> = {};
+  const map: Record<string, PublishedPostWithTags> = {};
   const result = await SQL.DB.selectFrom('post')
     .innerJoin('post_tag', 'post_tag.post_id', 'post.id')
     .innerJoin('tag', 'post_tag.tag_id', 'tag.id')
-    // .where('published_on', 'is not', null)
+    .where('is_published', 'is not', null)
     .select([
       'post.id',
       'post.title',
@@ -138,7 +140,7 @@ export async function getPublishedPostsWithTags() {
       'post.updated',
       'tag.name as tagName',
     ])
-    // .orderBy('published_on', 'desc')
+    .orderBy('published_on', 'desc')
     .execute();
 
   // Since joining will give us multiple records for each post-tag relation, we need to reduce the results
@@ -148,7 +150,7 @@ export async function getPublishedPostsWithTags() {
       map[post.id] = {
         ...rest,
         tags: [tagName],
-      };
+      } as PublishedPostWithTags;
     } else {
       map[post.id].tags.push(post.tagName);
     }

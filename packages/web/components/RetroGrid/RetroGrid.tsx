@@ -16,7 +16,7 @@ const RetroGrid = () => {
   const xLines = Math.floor(width / X_SPACER);
   const yLines = Math.floor(200 / Y_SPACER);
 
-  console.log(`xLines`, xLines, 'yLines', yLines, width);
+  // console.log(`xLines`, xLines, 'yLines', yLines, width);
 
   return (
     <svg height="210px" width={'100%'} className={styles.grid}>

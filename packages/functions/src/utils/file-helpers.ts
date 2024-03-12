@@ -23,8 +23,6 @@ export interface BlogPost extends BlogPostFrontmatter {
 export async function getBlogPosts(path?: string): Promise<BlogPost[]> {
   const directory = path || './content';
   const fileNames = await readDirectory(directory);
-  console.log(`got some fileNames`, fileNames);
-
   const blogPosts = [];
 
   for (const fileName of fileNames.filter(

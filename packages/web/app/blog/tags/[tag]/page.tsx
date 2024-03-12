@@ -14,7 +14,8 @@ const TagPage: NextPage<{ params: { tag: string } }> = async ({
       <main className={styles.main}>
         <h2>Posts tagged #{tag}</h2>
         {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags } = post;
+          const { id, title, slug, published_on, abstract, tags, updated } =
+            post;
           return (
             <PostCard
               key={id}
@@ -23,6 +24,7 @@ const TagPage: NextPage<{ params: { tag: string } }> = async ({
               publishedOn={published_on}
               abstract={abstract}
               tags={tags}
+              updated={updated}
             />
           );
         })}
