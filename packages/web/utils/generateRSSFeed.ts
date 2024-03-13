@@ -4,7 +4,7 @@ import RSS from 'rss';
 export default async function generateRssFeed() {
   const site_url =
     process.env.NODE_ENV === 'production' ?
-      'https://stephenstpierre.com'
+      'https://StephenStPierre.com'
     : 'localhost:3000';
 
   const posts = await Post.getPublishedPostsWithTags();

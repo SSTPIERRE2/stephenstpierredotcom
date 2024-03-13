@@ -4,6 +4,7 @@ import { Rss } from 'react-feather';
 import DarkLightToggle from '../DarkLightToggle';
 import VisuallyHidden from '../VisuallyHidden';
 import NavBar from '../NavBar';
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -15,10 +16,10 @@ const Header = () => {
 
         <div className={styles.right}>
           <DarkLightToggle />
-          <button className={styles.action}>
+          <Link href="/rss.xml" className={styles.action}>
             <Rss size="1.5rem" />
             <VisuallyHidden>RSS Feed</VisuallyHidden>
-          </button>
+          </Link>
         </div>
       </div>
     </header>
