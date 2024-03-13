@@ -1,17 +1,7 @@
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .footer {
   grid-column: 1 / -1;
   background: var(--color-background-accent);
   position: relative;
-  transition: background 350ms ease 0s;
 }
 
 .container {
@@ -29,7 +19,7 @@
 .thanks {
   font-weight: var(--font-weight-medium);
   font-size: calc(14 / 16 * 1rem);
-  animation: 2s fadeIn both;
+  transition: opacity 2s;
 }
 
 .social {

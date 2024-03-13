@@ -1,45 +1,6 @@
-@keyframes rubberBandIn {
-  from {
-    transform: translateX(var(--x-offset-start)) skewX(45deg);
-  }
-  to {
-    transform: translateX(var(--x-offset-end)) skewX(0deg);
-  }
-}
-
-@keyframes spinSlideIn {
-  0% {
-    transform: translate(-150%, 50%) rotate(0deg);
-  }
-  /* 50% {
-    transform: translate(0%) rotate(360deg);
-  } */
-  100% {
-    transform: translate(var(--x-offset), var(--y-offset))
-      rotate(var(--rotation));
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: translate(400%, -100%) rotate(0deg);
-  }
-  to {
-    transform: translate(400%, -100%) rotate(360deg);
-  }
-}
-
-.link {
-  display: block;
-  /* Need to specify actual width due to transforms */
-  width: 11.065rem;
-  /* padding-right: 3.75rem; */
-}
-
 .wrapper {
   display: block;
   position: relative;
-  text-decoration: none;
   width: fit-content;
 }
 
@@ -47,71 +8,35 @@
   transform: translate(50%, -20%);
 }
 
-.star {
-  /* --x-offset: 400%;
-  --y-offset: -100%; */
-  /* --x-offset: 300%;
-  --y-offset: -140%; */
-  --x-offset: 373%;
-  --y-offset: 46%;
-  --rotation: 655deg;
-
-  position: absolute;
-  will-change: transform;
-  transform: translate(var(--x-offset), var(--y-offset)) rotate(var(--rotation));
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: spinSlideIn 500ms both cubic-bezier(0.14, -0.01, 1, 0.99);
-    animation-delay: 1000ms;
-  }
-}
-
-.starTwo {
-  /* --x-offset: 110%;
-  --y-offset: -40%; */
-
-  --x-offset: 81%;
-  --y-offset: -53%;
-}
-
 .text {
-  --x-offset-start: -125%;
-  --delay: 0ms;
   display: block;
   font-size: 1.75rem;
   font-weight: var(--font-weight-medium);
-  will-change: transform;
 }
 
-.lastNameText {
-  --x-offset-start: -175%;
-  --delay: 500ms;
-}
-
-.mainText {
-  --x-offset-end: 0;
+.primary {
   color: var(--color-primary);
   position: relative;
-  z-index: 2;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: rubberBandIn 1000ms both;
-    animation-delay: var(--delay);
-  }
+  z-index: 1;
+  transition: transform 300ms;
+  transform: translateX(-1.1%);
 }
 
-.subCopy {
-  --x-offset-end: calc(1rem / 6);
+.accent {
   color: var(--color-primary-accent);
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  transition: transform 300ms;
+  transform: translateX(1.1%);
+}
 
-  @media (prefers-reduced-motion: no-preference) {
-    animation: rubberBandIn 1000ms both;
-    animation-delay: var(--delay);
+.wrapper:hover {
+  .primary {
+    transform: translateX(1.1%);
+  }
+
+  .accent {
+    transform: translateX(-1.1%);
   }
 }

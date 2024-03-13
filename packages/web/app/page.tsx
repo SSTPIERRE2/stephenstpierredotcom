@@ -25,7 +25,7 @@ export default function Home() {
           <h2 className={styles.heading}>Looking for work!</h2>
           <p>
             <PrimaryLink href="/about">Read more about me here</PrimaryLink> or{' '}
-            <PrimaryNewTabLink href="/Resume2023.pdf">
+            <PrimaryNewTabLink href="/Resume2024.pdf">
               view my resume
             </PrimaryNewTabLink>
           </p>

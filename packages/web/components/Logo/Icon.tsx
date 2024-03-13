@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import styles from './Icon.module.css';
 import { useEffect, useId, useState } from 'react';
+import VisuallyHidden from '../VisuallyHidden';
+import clsx from 'clsx';
 
 const Icon = () => {
   const [key, setKey] = useState(useId());
@@ -29,35 +31,35 @@ const Icon = () => {
   }, [initialized]);
 
   return (
-    <Link href="/" id="icon">
-      <div
-        key={key}
-        className={styles.wrapper}
-        onMouseEnter={() => {
-          if (!isPlaying) {
-            setKey(crypto.randomUUID());
-            setTurn((t) => t + 0.75);
-            setIsPlaying(true);
-          }
-        }}
-        style={
-          {
-            '--icon-logo-border-turn': turn + 'turn',
-            '--animation-delay': delay + 'ms',
-          } as React.CSSProperties
+    <Link
+      href="/"
+      key={key}
+      className={styles.wrapper}
+      onMouseEnter={() => {
+        if (!isPlaying) {
+          setKey(crypto.randomUUID());
+          setTurn((t) => t + 0.75);
+          setIsPlaying(true);
         }
-      >
-        <span className={`${styles.text} ${styles.accent}`}>S</span>
-        <span className={`${styles.text} ${styles.primary}`}>S</span>
-        <div
-          className={`${styles.border} ${styles.bottomLeft}`}
-          style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
-        />
-        <div
-          className={`${styles.border} ${styles.topRight}`}
-          style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
-        />
-      </div>
+      }}
+      style={
+        {
+          '--icon-logo-border-turn': turn + 'turn',
+          '--animation-delay': delay + 'ms',
+        } as React.CSSProperties
+      }
+    >
+      <span className={clsx(styles.text, styles.accent)}>S</span>
+      <span className={clsx(styles.text, styles.primary)}>S</span>
+      <div
+        className={clsx(styles.border, styles.bottomLeft)}
+        style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
+      />
+      <div
+        className={clsx(styles.border, styles.topRight)}
+        style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
+      />
+      <VisuallyHidden>Home</VisuallyHidden>
     </Link>
   );
 };

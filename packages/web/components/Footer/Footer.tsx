@@ -21,11 +21,15 @@ const Footer = () => {
     <footer className={styles.footer} role="contentinfo" ref={elementRef}>
       {/* container necessary for max width + background color */}
       <div className={styles.container}>
-        <div style={{ visibility: isInitialized ? 'revert' : 'hidden' }}>
+        <div>
           <Logo />
-          <span className={styles.thanks}>Thanks for visiting!</span>
+          <span
+            className={styles.thanks}
+            style={{ opacity: isInitialized ? 1 : 0 }}
+          >
+            Thanks for visiting!
+          </span>
         </div>
-
         <div>
           <h3 className={styles.linksHeading}>Links</h3>
           <div className={styles.social}>

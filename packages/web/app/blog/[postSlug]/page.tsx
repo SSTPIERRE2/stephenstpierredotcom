@@ -4,7 +4,6 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import COMPONENT_MAP from '@/utils/mdx-components';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
-import dayjs from 'dayjs';
 import { Upvotes } from '@/components/Upvotes';
 import { Post } from '@core/post';
 import { Tag } from '@core/tag';
@@ -15,9 +14,7 @@ import { headingLink } from '@/utils/constant';
 import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
 import slugify from '@/utils/slugify';
-import utc from 'dayjs/plugin/utc';
-
-dayjs.extend(utc);
+import dayjs from '@/utils/extendedDayJs';
 
 const getPostMetadata = cache(async (postSlug: string) => {
   let post, tags;

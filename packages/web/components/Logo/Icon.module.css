@@ -6,6 +6,7 @@
     transform: rotate(calc(var(--icon-logo-border-turn) + 0.75turn));
   }
 }
+
 .wrapper {
   display: block;
   position: relative;
@@ -22,18 +23,19 @@
   overflow-wrap: break-word;
   font-size: 2rem;
   font-weight: var(--font-weight-medium);
+  transition: transform 300ms;
 }
 
 .primary {
   color: var(--color-primary);
   position: relative;
+  transform: translateX(0%);
 }
 
 .accent {
   color: var(--color-primary-accent);
   position: absolute;
-  top: 0.4rem;
-  left: 0.7rem;
+  transform: translateX(15%);
 }
 
 .border {
@@ -59,4 +61,14 @@
     50% 7.5%,
     50% 0%
   );
+}
+
+.wrapper:hover {
+  .primary {
+    transform: translateX(15%);
+  }
+
+  .accent {
+    transform: translateX(0%);
+  }
 }

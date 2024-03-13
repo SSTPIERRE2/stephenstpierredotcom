@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import Icon from '../Logo/Icon';
+import IconLogo from '../Logo/Icon';
 import { Rss } from 'react-feather';
 import DarkLightToggle from '../DarkLightToggle';
 import VisuallyHidden from '../VisuallyHidden';
@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <Icon />
+        <IconLogo />
 
         <NavBar />
 

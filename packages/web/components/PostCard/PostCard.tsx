@@ -2,10 +2,7 @@ import Link from 'next/link';
 import SupportingLink from '../SupportingLink';
 import styles from './PostCard.module.css';
 import { ArrowRight } from 'react-feather';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-
-dayjs.extend(utc);
+import dayjs from '@/utils/extendedDayJs';
 
 interface Props {
   title: string;

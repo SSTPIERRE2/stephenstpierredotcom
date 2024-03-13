@@ -11,10 +11,10 @@ export default function AboutPage() {
       <div className={styles.content}>
         <h1 className={styles.mainHeading}>About</h1>
         <p>
-          Thanks for visiting my digital space! I'm Stephen, the full stack
-          JavaScript developer behind the content you'll find here. I started
-          making websites when I was 16 with plain old HTML, CSS, and
-          JavaScript.
+          Thanks for visiting my digital space! I'm{' '}
+          <em className={styles.emphasized}>Stephen</em>, the full stack
+          JavaScript developer behind this blog. I started making websites when
+          I was 16 with plain old HTML, CSS, and JavaScript.
         </p>
         <p>
           These days I primarily build web applications with TypeScript,
@@ -23,10 +23,17 @@ export default function AboutPage() {
           and GraphQL.
         </p>
         <p>
+          <strong>
+            You won't find any AI generated content or layout templates here.
+          </strong>{' '}
+          This website is built from scratch with love and inspiration drawn
+          from a wide variety of sources.
+        </p>
+        <p>
           Continue on to view my{' '}
           <PrimaryLink href="/about/#techStack">full tech stack</PrimaryLink>{' '}
           and{' '}
-          <PrimaryNewTabLink href="/Resume2023.pdf">resume</PrimaryNewTabLink>{' '}
+          <PrimaryNewTabLink href="/Resume2024.pdf">resume</PrimaryNewTabLink>{' '}
           below!
         </p>
       </div>
@@ -42,7 +49,7 @@ export default function AboutPage() {
             interested in, in no particular order. Go ahead, take it for a spin!
           </p>
           <PrimaryNewTabLink
-            href="/Resume2023.pdf"
+            href="/Resume2024.pdf"
             className={styles.resumeLink}
           >
             <Button size="medium">
@@ -111,7 +118,7 @@ export default function AboutPage() {
         <h2 className={styles.heading}>A little more</h2>
         <p>
           <strong>I live</strong> in a town called Westport, Massachusetts with
-          my cat, chickens, and 50 square foot garden.
+          my cat Leon, chickens, and an extra large garden.
         </p>
         <p>
           <strong>I have a few hobbies.</strong> I've built a handful of
