@@ -46,7 +46,7 @@ importers:
         specifier: ^2.40.6
         version: 2.40.6(@aws-sdk/credential-provider-node@3.529.1)
       typescript:
-        specifier: ^5.4.2
+        specifier: ^5.4.0
         version: 5.4.2
       vite-tsconfig-paths:
         specifier: ^4.3.1
