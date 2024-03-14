@@ -43,7 +43,7 @@ I've dabbled with Angular 4 and 6, but I've always been a React guy so that was 
 
 What about hosting? [Vercel](https://vercel.com/) is quite popular for Next.js projects since that's what it was built for, but I wanted to get more experience with AWS since it's a valuable skill. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive!
 
-One of my classmates suggested I check out [Serverless Stack](https://sst.dev/) which offers a way to build full-stack applications on AWS, so I had to check it out. By using the [OpenNext](https://open-next.js.org/) serverless adapter for Next.js we can actually [deploy our app](https://sst.dev/examples/how-to-create-a-nextjs-app-with-serverless.html) as function, and our api will be another function, both of which can directly interact with RDS 🤯
+One of my classmates suggested I check out [Serverless Stack](https://sst.dev/) which offers a way to build full stack applications on AWS, so I had to check it out. By using the [OpenNext](https://open-next.js.org/) serverless adapter for Next.js we can actually [deploy our app](https://sst.dev/examples/how-to-create-a-nextjs-app-with-serverless.html) as function, and our api will be another function, both of which can directly interact with RDS 🤯
 
 Now that the project was beginning to take shape, it was time to make some architecture diagrams in [Figma](https://www.figma.com/), here is the second version after reducing it to the MVP:
 
@@ -92,7 +92,7 @@ SST also makes it easy to [add an API](https://docs.sst.dev/apis#add-an-api) lik
 
 I'm sure there are practical use cases for GraphQL in more complex apps, but for me it was only burning time. SST already [generates database types](https://docs.sst.dev/learn/write-to-the-database#query-the-table) for us when a migration is run, so we already get great type safety without having to go through the whole process of implementing GraphQL types, configuring generating a types file for that too, and oh yeah don't forget to install a minimal client like [graphql-request](https://www.npmjs.com/package/graphql-request) if you want to actually use it with server components.
 
-Why shouldn't I simply query my database directly from server components if I have the power to do so?.
+Why shouldn't I simply query my database directly from server components if I have the power to do so?
 
 <img
   src="/why_shouldnt_i.gif"

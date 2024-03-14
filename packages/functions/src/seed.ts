@@ -59,12 +59,13 @@ const handleDeletePostAndRelations = async (id: string) => {
 };
 
 const doesPostHaveAnyChanges = (dbPost: Post, post: BlogPost) => {
-  console.log(`doesPostHaveAnyChanges`, dbPost.is_published, post.isPublished);
+  console.log(`doesPostHaveAnyChanges`, dbPost.published_on, post.publishedOn);
 
   return (
     dbPost.content !== post.content ||
+    dbPost.abstract !== post.abstract ||
     dbPost.is_published != post.isPublished ||
-    dbPost.abstract !== post.abstract
+    dbPost.published_on !== post.publishedOn
   );
 };
 
@@ -103,7 +104,6 @@ export const onUpdate = async () => {
     },
     {},
   );
-  // const dbPostSlugs = Object.keys(dbPostSlugMap);
 
   // loop over local posts
   for (const s of postSlugs) {
