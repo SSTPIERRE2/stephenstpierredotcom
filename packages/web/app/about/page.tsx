@@ -4,6 +4,7 @@ import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import { ArrowRight } from 'react-feather';
 import PrimaryLink, { PrimaryNewTabLink } from '@/components/PrimaryLink';
+import Link from 'next/link';
 
 export default function AboutPage() {
   return (
@@ -48,15 +49,17 @@ export default function AboutPage() {
             with in the past, am currently experimenting with, or am generally
             interested in, in no particular order. Go ahead, take it for a spin!
           </p>
-          <PrimaryNewTabLink
+          <Link
             href="/Resume2024.pdf"
             className={styles.resumeLink}
+            target="_blank"
+            rel="noreferrer noopener"
           >
             <Button size="medium">
               View Resume{' '}
               <ArrowRight className={styles.resumeLinkArrow} size="1.5rem" />
             </Button>
-          </PrimaryNewTabLink>
+          </Link>
         </div>
       </div>
 
@@ -118,7 +121,7 @@ export default function AboutPage() {
         <h2 className={styles.heading}>A little more</h2>
         <p>
           <strong>I live</strong> in a town called Westport, Massachusetts with
-          my cat Leon, chickens, and an extra large garden.
+          my family, my cat Leon, chickens, and an extra large garden.
         </p>
         <p>
           <strong>I have a few hobbies.</strong> I've built a handful of
