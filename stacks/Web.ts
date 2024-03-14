@@ -7,6 +7,10 @@ export function Web({ stack }: StackContext) {
   const web = new NextjsSite(stack, 'web', {
     customDomain: stack.stage === 'prod' ? 'stephenstpierre.com' : undefined,
     path: 'packages/web',
+    timeout: '20 seconds',
+    imageOptimization: {
+      memorySize: '2048 MB',
+    },
     environment: {
       NEXT_SHARP_PATH: '/tmp/node_modules/sharp',
     },
