@@ -1,10 +1,11 @@
 import styles from './Avatar.module.css';
+import avatar from './avatar.png';
 import Image from 'next/image';
 
 const Avatar = () => {
   return (
     <Image
-      src="/avatar.png"
+      src={avatar}
       alt="Picture of Stephen"
       sizes="33vw"
       className={styles.base}
