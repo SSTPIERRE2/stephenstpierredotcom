@@ -12,6 +12,10 @@ const Avatar = () => {
       className={styles.base}
       width={350 * aspectRatio}
       height={350}
+      style={{
+        width: '100%',
+        height: 'auto',
+      }}
       priority
     />
   );
