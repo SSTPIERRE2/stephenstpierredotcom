@@ -1,7 +1,7 @@
 .base {
   filter: drop-shadow(2px 2px 2px hsl(0deg 0% 0% / 0.4));
-  height: auto;
+  /* height: auto; */
   position: relative;
-  min-width: 200px;
-  max-width: 250px;
+  /* min-width: 200px; */
+  /* max-width: 250px; */
 }
