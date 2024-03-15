@@ -16,7 +16,12 @@ const Header = () => {
 
         <div className={styles.right}>
           <DarkLightToggle />
-          <Link href="/rss.xml" className={styles.action}>
+          <Link
+            href="/rss.xml"
+            className={styles.action}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             <Rss size="1.5rem" />
             <VisuallyHidden>RSS Feed</VisuallyHidden>
           </Link>
