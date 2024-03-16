@@ -23,28 +23,27 @@
 
 .greeting {
   display: flex;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .greetingLeft {
-  flex: 3 350px;
-  padding-right: 1rem;
+  flex: 3 40ch;
 }
 
 .greetingRight {
-  flex: 2 150px;
+  flex: 2 250px;
   position: relative;
 }
 
 .retroSun {
   position: absolute;
   left: 0;
-  top: -10px;
+  top: -20px;
   clip-path: circle(50%);
   background: var(--retro-sun-gradient);
   min-width: 150px;
-  max-width: 200px;
-  width: 100%;
+  max-width: 190px;
+  width: 60%;
   aspect-ratio: 1/1;
   z-index: 0;
   content: '';
@@ -54,23 +53,33 @@
 .oasis {
   position: relative;
   top: 50px;
-  min-width: 300px;
-  max-width: 350px;
+  min-width: 250px;
+  max-width: 320px;
 }
 
 .retroSunWrapper {
   filter: var(--retro-sun-shadow);
 }
 
-@media (max-width: 46.5625rem) {
+@media (max-width: 50rem) {
+  .greeting {
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .greetingLeft {
+    flex: 1;
+  }
   .greetingRight {
-    padding-top: 3.5rem;
+    flex: 1;
   }
   .retroSun {
     left: 15%;
+    max-width: 170px;
   }
   .oasis {
+    top: 30px;
     margin-left: auto;
     margin-right: auto;
+    max-width: 300px;
   }
 }

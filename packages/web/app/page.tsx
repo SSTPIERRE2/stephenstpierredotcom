@@ -12,7 +12,7 @@ export default function Home() {
         <div className={styles.greetingLeft}>
           <h1 className={styles.mainHeading}>Hey, I'm Stephen!</h1>
           <p>
-            I'm a full stack JavaScript developer from{' '}
+            I'm a full-stack JavaScript developer from{' '}
             <em className={styles.emphasized}>Boston, Massachusetts.</em>
           </p>
 

@@ -30,7 +30,7 @@ const Footer = () => {
             Thanks for visiting!
           </span>
         </div>
-        <div>
+        <div className={styles.socialContainer}>
           <h3 className={styles.linksHeading}>Links</h3>
           <div className={styles.social}>
             {SOCIAL_LINKS.map(({ slug, label, href, icon: Icon }) => (

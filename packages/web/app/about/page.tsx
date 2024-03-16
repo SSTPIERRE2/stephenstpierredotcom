@@ -13,7 +13,7 @@ export default function AboutPage() {
         <h1 className={styles.mainHeading}>About</h1>
         <p>
           Thanks for visiting my digital space! I'm{' '}
-          <em className={styles.emphasized}>Stephen</em>, the full stack
+          <em className={styles.emphasized}>Stephen</em>, the full-stack
           JavaScript developer behind this blog. I started making websites when
           I was 16 with plain old HTML, CSS, and JavaScript.
         </p>

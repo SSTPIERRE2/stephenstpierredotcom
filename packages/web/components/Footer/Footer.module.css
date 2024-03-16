@@ -49,3 +49,15 @@
 .link:hover {
   color: var(--color-primary);
 }
+
+@media (max-width: 25rem) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .socialContainer {
+    align-self: flex-end;
+  }
+}
