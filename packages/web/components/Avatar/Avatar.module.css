@@ -1,4 +1,5 @@
 .base {
   filter: drop-shadow(2px 2px 2px hsl(0deg 0% 0% / 0.4));
   position: relative;
+  min-width: 150px;
 }
