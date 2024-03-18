@@ -10,7 +10,7 @@
   font-size: 1.125rem;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 60rem) {
   .wrapper {
     border-radius: 4px !important;
     margin: 0px calc(32px * -1) !important;

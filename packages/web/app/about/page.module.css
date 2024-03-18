@@ -96,7 +96,7 @@
 }
 
 .techStackDescription {
-  flex: 0 0 65ch;
+  flex: 0 0 66%;
   max-width: 65ch;
 }
 
@@ -119,10 +119,9 @@
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 50rem) {
   .main > * {
     grid-column: 1 / -1;
-    padding: 0;
   }
 
   .aside {
@@ -140,5 +139,6 @@
 
   .resumeLink {
     flex: 0;
+    align-self: flex-start;
   }
 }

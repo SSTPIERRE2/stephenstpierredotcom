@@ -93,7 +93,6 @@ export async function generateMetadata({
 const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
 }) => {
-  const test = await getPostMetadata(postSlug);
   const {
     id,
     title,
@@ -105,7 +104,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     updated,
     tags,
     links,
-  } = test;
+  } = await getPostMetadata(postSlug);
 
   return (
     <>
