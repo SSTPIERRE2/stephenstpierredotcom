@@ -6,6 +6,9 @@ export function Database({ stack }: StackContext) {
     defaultDatabaseName: 'main',
     migrations: 'packages/core/migrations',
     types: 'packages/core/src/sql.generated.ts',
+    scaling: {
+      autoPause: stack.stage !== 'prod',
+    },
   });
 
   return rds;
