@@ -23,7 +23,7 @@
   gap: 1.5rem;
 }
 
-@media (max-width: 41.875rem) {
+@media (max-width: 42rem) {
   .right {
     display: none;
   }

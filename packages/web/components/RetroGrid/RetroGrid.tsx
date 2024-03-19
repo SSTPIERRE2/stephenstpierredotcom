@@ -6,27 +6,29 @@ import { useWindowSize } from '@uidotdev/usehooks';
 
 const RetroGrid = () => {
   const { width } = useWindowSize();
-  const X_SPACER = 55;
+  const X_SPACER = 50;
   const Y_SPACER = 20;
 
   if (!width) {
     return <div className={styles.placeholder} />;
   }
 
-  const xLines = Math.floor(width / X_SPACER);
+  const dividedWidth = Math.floor(width / X_SPACER);
+  const xLines = dividedWidth < 5 ? 5 : dividedWidth;
   const yLines = Math.floor(200 / Y_SPACER);
+  const modifier = width < 550 ? 4 : 5;
 
   // console.log(`xLines`, xLines, 'yLines', yLines, width);
 
   return (
     <svg height="210px" width={'100%'} className={styles.grid}>
-      {/* Diagonal lines, drawn from left */}
-      {range(xLines / 2 <= 18 ? xLines / 2 + 3 : xLines / 2).map((num) => {
+      {/* Diagonal lines, drawn from left/bottom to top */}
+      {range(xLines / 2 <= 10 ? xLines : xLines / 2).map((num) => {
         return (
           <line
             key={num}
-            x1={num < 6 ? 0 : Math.min((num - 5) * 88, width / 2)}
-            y1={num < 6 ? (num + 1) * 33.333 : 210}
+            x1={num < modifier ? 0 : Math.min((num - modifier) * 88, width / 2)}
+            y1={num < modifier ? (num + 1) * 33.333 : 210}
             x2={Math.min((num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}
@@ -34,13 +36,17 @@ const RetroGrid = () => {
         );
       })}
 
-      {/* Diagonal lines, drawn from right */}
-      {range(xLines / 2 <= 18 ? xLines / 2 + 3 : xLines / 2).map((num) => {
+      {/* Diagonal lines, drawn from right/bottom to top */}
+      {range(xLines / 2 <= 10 ? xLines : xLines / 2).map((num) => {
         return (
           <line
             key={num}
-            x1={num < 6 ? width : Math.max(width - (num - 5) * 88, width / 2)}
-            y1={num < 6 ? (num + 1) * 33.333 : 210}
+            x1={
+              num < modifier ? width : (
+                Math.max(width - (num - modifier) * 88, width / 2)
+              )
+            }
+            y1={num < modifier ? (num + 1) * 33.333 : 210}
             x2={Math.max(width - (num + 1) * 57, width / 2)}
             y2={0}
             className={styles.gridLine}

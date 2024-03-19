@@ -27,7 +27,6 @@
 .main {
   position: relative;
   max-width: 65ch;
-  margin: 0 auto;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -77,6 +76,12 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-end;
+}
+
+@media (min-width: 43rem) {
+  .main {
+    justify-self: center;
+  }
 }
 
 @media (min-width: 60rem) {
