@@ -3,7 +3,8 @@
 import styles from './Upvotes.module.css';
 import { ThumbsUp } from 'react-feather';
 import clsx from 'clsx';
-import { useOptimistic, useTransition } from 'react';
+import { useState, useCallback } from 'react';
+import debounce from '@/utils/debounce';
 
 interface Props {
   votes: number;
@@ -14,22 +15,29 @@ interface Props {
 const MAX_VOTES = 16;
 
 const Upvotes = ({ votes, className, incrementVotes }: Props) => {
-  const [isPending, startTransition] = useTransition();
-  const [optimisticVotes, addOptimisticVote] = useOptimistic<number, number>(
-    votes,
-    (_current, next) => next,
-  );
+  const [isPending, setIsPending] = useState(false);
+  const [optimisticVotes, setOptimisticVotes] = useState(votes);
   const isMaxedOut = optimisticVotes === MAX_VOTES;
+
+  const stableDebouncedHandleIncrementVotes = useCallback(
+    debounce(async () => {
+      await incrementVotes();
+      setIsPending(false);
+    }, 300),
+    [],
+  );
 
   return (
     <button
       className={clsx(styles.wrapper, className)}
       onClick={async () => {
-        startTransition(() => {
-          addOptimisticVote(votes + 1);
-        });
+        if (!isPending) {
+          setIsPending(true);
+        }
 
-        await incrementVotes();
+        setOptimisticVotes(optimisticVotes + 1);
+
+        stableDebouncedHandleIncrementVotes();
       }}
       disabled={isMaxedOut}
     >

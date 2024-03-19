@@ -11,7 +11,7 @@ The web development ecosystem has changed a lot since my early days with [Bootst
 
 In 2013 [React](https://react.dev/) exploded onto the scene with the introduction of JSX and offering convenient ways to manage state and interact with the DOM. Not only that, but thanks to Create React App ([rest in peace](https://www.linkedin.com/pulse/end-era-react-team-longer-recommends-create-app-vivek-dwivedi/)) it was easier than ever to start a new project and get something on the screen.
 
-It was a modular experience and there was some fiddling with config files but it worked. Remember manually configuring code splitting?
+It was a modular experience and there was some fiddling with config files, but it worked. Remember manually configuring code splitting?
 
 [React Router](https://reactrouter.com/en/main) was the popular choice for managing navigation, and CRA used [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/) under the hood to transpile and bundle the app, but these were destined to be dethroned as competition grew, in addition to desire for server-side rendering and better DX.
 
@@ -41,7 +41,7 @@ And some technologies I wanted to work with:
 
 I've dabbled with Angular 4 and 6, but I've always been a React guy so that was a no brainer. Since I wanted to get experience with Server Side Rendering, [Next.js v13.4](https://nextjs.org/blog/next-13-4) was just being released with the now stable App Router, and having recently finished Josh W Comeau's [The Joy of React](https://www.joyofreact.com/) which includes lessons on Next.js, it seemed to be an obvious choice.
 
-What about hosting? [Vercel](https://vercel.com/) is quite popular for Next.js projects since that's what it was built for, but I wanted to get more experience with AWS since it's a valuable skill. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive!
+What about hosting? [Vercel](https://vercel.com/) is quite popular for Next.js projects since that's what it was built for, but I wanted to get more experience with AWS since it's a valuable skill to have. At the last two companies I worked with, we hosted our applications on AWS ECS so my initial thought was to host the whole app there, but it turns out ECS can get quite expensive!
 
 One of my classmates suggested I check out [Serverless Stack](https://sst.dev/) which offers a way to build full stack applications on AWS, so I had to check it out. By using the [OpenNext](https://open-next.js.org/) serverless adapter for Next.js we can actually [deploy our app](https://sst.dev/examples/how-to-create-a-nextjs-app-with-serverless.html) as function, and our api will be another function, both of which can directly interact with RDS 🤯
 
@@ -90,7 +90,7 @@ At this point I mainly wanted a relational database that my Next.js app could in
 
 SST also makes it easy to [add an API](https://docs.sst.dev/apis#add-an-api) like the GraphQL one I chose to experiment with, but thanks to server components and bound resources I found I didn't really need it. Something big I learned during this process is that everything I was doing with GraphQL could instead be done in a server component or [server action](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) with less code.
 
-I'm sure there are practical use cases for GraphQL in more complex apps, but for me it was only burning time. SST already [generates database types](https://docs.sst.dev/learn/write-to-the-database#query-the-table) for us when a migration is run, so we already get great type safety without having to go through the whole process of implementing GraphQL types, configuring generating a types file for that too, and oh yeah don't forget to install a minimal client like [graphql-request](https://www.npmjs.com/package/graphql-request) if you want to actually use it with server components.
+I'm sure there are practical use cases for GraphQL in more complex apps, but for me it was only burning time. SST already [generates database types](https://docs.sst.dev/learn/write-to-the-database#query-the-table) for us when a migration is run, so we get great type safety without having to go through the whole process of implementing GraphQL types, configuring generating a types file for that too, and oh yeah don't forget to install a minimal client like [graphql-request](https://www.npmjs.com/package/graphql-request) if you want to actually use it with server components.
 
 Why shouldn't I simply query my database directly from server components if I have the power to do so?
 
