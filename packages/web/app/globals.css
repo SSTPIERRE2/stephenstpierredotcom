@@ -3,20 +3,18 @@
   --font-mono: 'Fira Code Variable', monospace;
 }
 
-@media (min-width: 500px) {
-  ::-webkit-scrollbar {
-    /* Track color */
-    background-color: var(--scrollbar-background-color);
-    width: 12px;
-    height: 12px;
-  }
+::-webkit-scrollbar {
+  /* Track color */
+  background-color: var(--scrollbar-background-color);
+  width: 12px;
+  height: 12px;
+}
 
-  ::-webkit-scrollbar-thumb {
-    /* Thumb color */
-    background-color: var(--scrollbar-color);
-    border-radius: 6px;
-    border: 2px solid var(--scrollbar-background-color);
-  }
+::-webkit-scrollbar-thumb {
+  /* Thumb color */
+  background-color: var(--scrollbar-color);
+  border-radius: 6px;
+  border: 2px solid var(--scrollbar-background-color);
 }
 
 /*
@@ -124,15 +122,14 @@ html {
     Silence the warning about missing Reach Dialog styles
   */
   --reach-dialog: 1;
-}
 
-/* Prevent font size inflation */
-html {
-  /* Turned this off for now. If a page doesn't have enough content to scroll it will leave a blank space on the edge which clashes with full-bleed elements. */
-  /* scrollbar-gutter: stable; */
+  /* Prevent font size inflation */
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+
+  /* Turned this off for now. If a page doesn't have enough content to scroll it will leave a blank space on the edge which clashes with full-bleed elements. */
+  /* scrollbar-gutter: stable; */
 }
 
 /* Remove default list styles on ul, ol elements with a list role */
@@ -199,4 +196,11 @@ button {
   cursor: pointer;
   text-align: left;
   font: inherit;
+}
+
+@media (orientation: portrait) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-color) var(--scrollbar-background-color);
+  }
 }
