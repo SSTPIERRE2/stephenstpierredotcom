@@ -1,8 +1,5 @@
 .wrapper {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(auto, 65ch) 250px;
-  column-gap: 5rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -11,4 +8,17 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 50rem) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: minmax(auto, 65ch) 250px;
+    column-gap: 5rem;
+  }
+
+  .main {
+    margin-bottom: revert;
+  }
 }

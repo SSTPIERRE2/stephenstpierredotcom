@@ -48,6 +48,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className={styles.copyrightContainer}>
+        <span>&copy; 2024-present Stephen St.Pierre</span>
+      </div>
     </footer>
   );
 };

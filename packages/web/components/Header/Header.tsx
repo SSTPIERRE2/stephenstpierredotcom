@@ -5,6 +5,7 @@ import DarkLightToggle from '../DarkLightToggle';
 import VisuallyHidden from '../VisuallyHidden';
 import NavBar from '../NavBar';
 import Link from 'next/link';
+import MobileMenu from '../MobileMenu';
 
 const Header = () => {
   return (
@@ -25,6 +26,9 @@ const Header = () => {
             <Rss size="1.5rem" />
             <VisuallyHidden>RSS Feed</VisuallyHidden>
           </Link>
+        </div>
+        <div className={styles.mobileRight}>
+          <MobileMenu />
         </div>
       </div>
     </header>

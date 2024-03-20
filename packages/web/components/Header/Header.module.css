@@ -23,9 +23,17 @@
   gap: 1.5rem;
 }
 
+.mobileRight {
+  display: none;
+}
+
 @media (max-width: 42rem) {
   .right {
     display: none;
+  }
+
+  .mobileRight {
+    display: revert;
   }
 }
 

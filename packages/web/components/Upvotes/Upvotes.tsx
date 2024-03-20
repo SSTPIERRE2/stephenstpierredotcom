@@ -3,8 +3,9 @@
 import styles from './Upvotes.module.css';
 import { ThumbsUp } from 'react-feather';
 import clsx from 'clsx';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import debounce from '@/utils/debounce';
+import VisuallyHidden from '../VisuallyHidden';
 
 interface Props {
   votes: number;
@@ -27,6 +28,10 @@ const Upvotes = ({ votes, className, incrementVotes }: Props) => {
     [],
   );
 
+  useEffect(() => {
+    setOptimisticVotes(votes);
+  }, [votes]);
+
   return (
     <button
       className={clsx(styles.wrapper, className)}
@@ -42,6 +47,7 @@ const Upvotes = ({ votes, className, incrementVotes }: Props) => {
       disabled={isMaxedOut}
     >
       <ThumbsUp size="1.5rem" />
+      <VisuallyHidden>Upvote this post</VisuallyHidden>
       {optimisticVotes}
       {isPending && <span>...</span>}
       {isMaxedOut && <span className={styles.max}>MAX</span>}

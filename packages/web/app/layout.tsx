@@ -7,7 +7,6 @@ import Footer from '@/components/Footer';
 import AuthProvider from './context/AuthContext/AuthProvider';
 import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
 import { ThemeProvider } from './context/ThemeContext';
-import MobileMenu from '@/components/MobileMenu';
 import styles from './layout.module.css';
 import Logrocket from '@/components/Logrocket';
 import { Config } from 'sst/node/config';
@@ -42,7 +41,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ThemeProvider initialTheme={theme}>
             <div className={styles.maxWidthWrapper}>
               <Header />
-              <MobileMenu />
               {children}
               <Footer />
             </div>

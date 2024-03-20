@@ -6,7 +6,7 @@ isPublished: true
 publishedOn: 2024-03-13
 ---
 
-[Server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) are a brand new, cutting-edge React feature only usable in frameworks that support it like Next.js. Next.js defines them asynchronous functions that are executed on the server, while the [React documentation](https://react.dev/reference/react/use-server) defines them as server-side functions that can be called from client-side code.
+[Server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) are a brand new, cutting-edge React feature only usable in frameworks that support it like Next.js. Next.js defines them as asynchronous functions that are executed on the server, while the [React documentation](https://react.dev/reference/react/use-server) defines them as server-side functions that can be called from client-side code.
 
 Unfortunately, as of March 2024 Sandpack has not implemented a Next.js template supporting the App Router and Server Actions, so this post will not have integrated demos, but I did build [this CodeSandbox](https://codesandbox.io/p/devbox/upvotes-server-actions-g9wl73) so you can follow along and experiment!
 
@@ -56,7 +56,7 @@ export const setVotesAction = async (v: number) => {
 };
 ```
 
-By adding the <InlineCode>'use server'</InlineCode> directive at the top of the file, we've marked each of the functions as Server Actions that can be reused in both Client and Server Components. This file also contains our simulated core database functions <InlineCode>getVotes</InlineCode> and <InlineCode>setVotes</InlineCode>, and we'll use a simple variable to track the number of votes in-memory.
+By adding the <InlineCode>'use server'</InlineCode> directive at the top of the file, we've marked each of the functions as a Server Action that can be reused in both Client and Server Components. This file also contains our simulated core database functions <InlineCode>getVotes</InlineCode> and <InlineCode>setVotes</InlineCode>, and we'll use a simple variable to track the number of votes in-memory.
 
 Note that the core database functions typically belong with the rest of our backend files, but for the purposes of this demo must live in the same file due to module-level scoping. In practice I would typically <InlineCode>await</InlineCode> an actual database call and return the result, but here we can simply return a promise that resolves with the result after a quick second.
 
@@ -83,7 +83,7 @@ const UpvotesContainer = async () => {
 export default UpvotesContainer;
 ```
 
-For the <InlineCode>Upvotes</InlineCode> component we'll be using a couple new React features [useOptimistic](https://react.dev/reference/react/useOptimistic) and [useTransition](https://react.dev/reference/react/useTransition) to update the UI with a loading state before the server action which updates our vote count finishes executing on the server.
+For the <InlineCode>Upvotes</InlineCode> component we'll experiment with a couple new React features [useOptimistic](https://react.dev/reference/react/useOptimistic) and [useTransition](https://react.dev/reference/react/useTransition) to update the UI with a loading state before the server action which updates our vote count finishes executing on the server.
 
 When the upvote button is clicked we'll use <InlineCode>startTransition</InlineCode> to mark that state update as a non-blocking transition and show a loading indicator until the actual vote update is confirmed, and use <InlineCode>addOptimisticVote</InlineCode> to immediately reflect the user's action while that async process runs. When the maximum number of votes is reached we'll show some text indicating so, disable the button, and include a button to reset the number of votes for demo purposes.
 
@@ -149,9 +149,9 @@ const Upvotes = ({ votes }: Props) => {
 export default Upvotes;
 ```
 
-This <InlineCode>useOptimistic</InlineCode> lets us show an optimistic state while we're updating the actual number of votes in our server action, and combined with <InlineCode>startTransition</InlineCode> we get non-blocking state updates along with a bonus <InlineCode>isPending</InlineCode> state while any server actions are underway to create a pretty snappy experience.
+The <InlineCode>useOptimistic</InlineCode> hook lets us show an optimistic state while we're updating the actual number of votes in our server action, and combined with <InlineCode>startTransition</InlineCode> we get non-blocking state updates along with a bonus <InlineCode>isPending</InlineCode> state while any server actions are underway to create a pretty snappy experience.
 
-This was my first swing at building this component where I wanted to experiment with new React features, but we stumbled upon an inefficiency because we're [unnecessarily invoking multiple server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#event-handlers) when we could instead [debounce](https://lodash.com/docs/4.17.15#debounce) them.
+This was my first swing at building this component where I wanted to try out new React features, but we stumbled upon an inefficiency because we're [unnecessarily invoking multiple server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#event-handlers) when we could instead [debounce](https://lodash.com/docs/4.17.15#debounce) them.
 
 You see, we need a server action to be executing to be able to make use of <InlineCode>isPending</InlineCode>, but we don't actually want to call the action each time when the button is being clicked in quick succession, so if we're going to add a debounce we'll need to use good ol' <InlineCode>useState</InlineCode>.
 

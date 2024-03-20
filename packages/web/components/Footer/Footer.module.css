@@ -2,10 +2,10 @@
   grid-column: 1 / -1;
   background: var(--color-background-accent);
   position: relative;
+  padding: 2rem 0;
 }
 
 .container {
-  padding: 2rem 0;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -48,6 +48,13 @@
 
 .link:hover {
   color: var(--color-primary);
+}
+
+.copyrightContainer {
+  color: var(--color-text-supporting);
+  text-align: center;
+  padding-top: 2rem;
+  font-size: var(--font-size-supporting);
 }
 
 @media (max-width: 25rem) {

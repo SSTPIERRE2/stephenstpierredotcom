@@ -16,7 +16,7 @@ But here's where things got _really_ interesting.
 
 The content on the page was effectively laid out into two columns, but the grid itself had 12 columns! The property in question was <InlineCode>grid-template-columns: repeat(12,1fr)</InlineCode>, what was the purpose of this technique?
 
-It seemed rather unconventional, and I'm still not sure if this is how grid is intended to be used, but it's still pretty cool! Let's work through what this technique can do for us with an interactive demo.
+It seemed rather unconventional, and I'm still not sure if this is how grid is intended to be used, but it's clever! Let's work through what this technique can do for us with an interactive demo.
 
 In the sandbox below is the 12 column layout I described earlier, more or less the way I found it. Try playing with the number of columns, the grid lines the <InlineCode>article</InlineCode> or <InlineCode>aside</InlineCode> span, or even adding some content!
 
@@ -30,7 +30,7 @@ Go ahead, try changing <InlineCode>grid-row-gap</InlineCode> to <InlineCode>gap<
 
 By adding a gap to each column we're effectively reducing its content space up to a certain point, until the size of the gap exceeds the size of the column, then its size is determined by the gap!
 
-You see, once we start using more grid columns as dynamic gaps, using the <InlineCode>gap-column-gap</InlineCode> property itself becomes redundant since we're inserting it manually. We're essentially making our whole layout, including gaps, a function of the available space.
+You see, once we start using grid columns as dynamic gaps, using the <InlineCode>gap-column-gap</InlineCode> property itself becomes redundant since we're inserting it manually. We're essentially making our whole layout, including gaps, a function of the available space.
 
 Our content takes up 8/12 or 2/3 of the available space, our aside takes 3/12, our gap takes 1/12, and each of those variables can be adjusted as needed, pretty neat!
 
@@ -48,7 +48,7 @@ Watch what happens when we set <InlineCode>grid-template-rows</InlineCode> and i
 
 <DynamicRowDemo />
 
-Essentially, the minimum content size of the tallest <InlineCode>1fr</InlineCode> row becomes the value of <InlineCode>1fr</InlineCode>, so since we set each row to <InlineCode>1fr</InlineCode>, the height of each becomes the height of the second section which is the tallest.
+Essentially, the minimum height of the tallest <InlineCode>1fr</InlineCode> row becomes the value of <InlineCode>1fr</InlineCode>, so since we set each row to <InlineCode>1fr</InlineCode>, the height of each becomes the height of the second section which is the tallest.
 
 That isn't what we want in the case of our dynamic divider, but there is one case I can think of <InlineCode>fr</InlineCode> being useful in the context of rows...
 
@@ -60,7 +60,7 @@ We can make this easy by using grid, letting the header and footer rows be their
 
 <NotFoundDemo />
 
-Here we're using the default grid flow where it uses a single column, but we're setting three explicit rows with <InlineCode>grid-template-rows: min-content 1fr min-content</InlineCode>.
+Here we're using the default grid flow where it lays content out in a single column, but we're setting three explicit rows with <InlineCode>grid-template-rows: min-content 1fr min-content</InlineCode>.
 
 The first and third elements within the grid, the header and footer, will be assigned to the first and third rows whose height will be <InlineCode>min-content</InlineCode>. The second element, <InlineCode>main</InlineCode>, will be assigned to the second row which fills the remaining space with <InlineCode>1fr</InlineCode>.
 
@@ -108,4 +108,4 @@ If you change the height of the aside that will also affect when it scrolls. The
 
 CSS Grid may not be the right tool for every job as it locks all children into a defined set of columns and rows, which may work for or against you, or sometimes both! I found a way for it to work for me on this very blog and it was a joy to get more experience with this powerful layout mode.
 
-I hope this post encourages more developers to experiment and make more, wild grid recipes. For further reading, check out Josh W. Comeau's [interactive guide to CSS Grid](https://www.joshwcomeau.com/css/interactive-guide-to-grid/#grid-flow-2) which providers a more comprehensive guide on how it all works.
+I hope this post encourages more developers to experiment and make more, wild grid recipes. For further reading, check out Josh W. Comeau's [interactive guide to CSS Grid](https://www.joshwcomeau.com/css/interactive-guide-to-grid/#grid-flow-2) which provides a more comprehensive guide on how it all works.

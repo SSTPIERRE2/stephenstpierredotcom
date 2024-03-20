@@ -2,9 +2,11 @@
   display: none;
 }
 
-.mobileMenuIcon {
+.closeButton {
   position: absolute;
-  top: 0.25rem;
+  top: 1rem;
+  right: 2rem;
+  z-index: 1;
 }
 
 .mobileNavWrapper {
@@ -19,9 +21,9 @@
   position: absolute;
   left: 0px;
   bottom: 100px;
-  width: 75%;
+  width: 33%;
   height: 75%;
-  z-index: 2;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,26 +53,25 @@
   backdrop-filter: blur(8px);
 }
 
-.portal {
+.portal,
+.mobileMenuButton {
   display: none;
 }
 
 @media (max-width: 42rem) {
   .mobileMenuButton {
-    display: revert;
-    position: fixed;
-    z-index: 10001;
-    top: 16px;
-    right: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
-
     padding: 0px;
     border: none;
     background: transparent;
     cursor: pointer;
     color: var(--color-text);
   }
+
   .portal {
     display: revert;
   }
