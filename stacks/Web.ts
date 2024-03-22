@@ -7,8 +7,8 @@ export function Web({ stack }: StackContext) {
   const web = new NextjsSite(stack, 'web', {
     customDomain: stack.stage === 'prod' ? 'stephenstpierre.com' : undefined,
     path: 'packages/web',
-    warm: 20,
-    timeout: '30 seconds',
+    warm: stack.stage === 'prod' ? 40 : undefined,
+    timeout: stack.stage === 'prod' ? '30 seconds' : undefined,
     openNextVersion: '2.3.7',
     environment: {
       NEXT_SHARP_PATH: '/tmp/node_modules/sharp',
