@@ -3,6 +3,7 @@ import SupportingLink from '../SupportingLink';
 import styles from './PostCard.module.css';
 import { ArrowRight } from 'react-feather';
 import dayjs from '@/utils/extendedDayJs';
+import VisuallyHidden from '../VisuallyHidden';
 
 interface Props {
   title: string;
@@ -43,7 +44,7 @@ const PostCard = ({
         </div>
         <p>{abstract}</p>
         <Link href={`/blog/${slug}`} className={styles.readMore}>
-          Read more{' '}
+          Read more <VisuallyHidden>about this post</VisuallyHidden>
           <ArrowRight className={styles.readMoreArrow} size="1.25rem" />
         </Link>
       </div>
