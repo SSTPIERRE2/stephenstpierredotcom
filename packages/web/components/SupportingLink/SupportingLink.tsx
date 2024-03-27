@@ -19,6 +19,7 @@ const SupportingLink: FC<Props & PropsWithChildren> = ({
     <Link
       className={clsx(styles.link, active && styles.active)}
       href={href}
+      prefetch={false}
       {...props}
     >
       {children}

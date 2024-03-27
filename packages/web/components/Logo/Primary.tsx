@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 const Logo = () => {
   return (
-    <Link href="/" id="logo" className={styles.wrapper}>
+    <Link href="/" id="logo" className={styles.wrapper} prefetch={false}>
       <span className={clsx(styles.text, styles.primary)}>Stephen</span>
       <span className={clsx(styles.text, styles.accent)}>Stephen</span>
       <div className={clsx(styles.wrapper, styles.lastNameWrapper)}>

@@ -15,7 +15,7 @@ const NavBar = () => {
   const underlineId = useId();
 
   const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement> & { target: { id: slug } }
+    e: React.MouseEvent<HTMLAnchorElement> & { target: { id: slug } },
   ) => {
     setHoveredLink(e.target.id);
   };
@@ -53,11 +53,12 @@ const NavBar = () => {
                 data-text={label}
                 style={{
                   fontWeight:
-                    pathName === href
-                      ? 'var(--font-weight-bold)'
-                      : 'var(--font-weight-medium)',
+                    pathName === href ?
+                      'var(--font-weight-bold)'
+                    : 'var(--font-weight-medium)',
                 }}
                 onMouseEnter={() => setHoveredLink(slug)}
+                prefetch={false}
               >
                 {label}
               </Link>

@@ -14,7 +14,7 @@ const SectionHeading = ({ children }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h2 id={id} className={styles.heading}>
       {children}
-      <Link href={`${path}#${id}`} className={styles.link}>
+      <Link href={`${path}#${id}`} className={styles.link} prefetch={false}>
         <LinkIcon />
       </Link>
     </h2>

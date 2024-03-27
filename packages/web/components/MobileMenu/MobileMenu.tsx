@@ -84,6 +84,7 @@ const MobileMenu = () => {
                       key={slug}
                       href={href}
                       onClick={() => toggleMobileMenu()}
+                      prefetch={false}
                     >
                       {label}
                     </Link>

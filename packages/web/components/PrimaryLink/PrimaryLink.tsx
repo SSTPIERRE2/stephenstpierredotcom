@@ -19,6 +19,7 @@ const PrimaryLink: FC<Props & PropsWithChildren> = ({
       className={clsx(styles.link, className)}
       href={href}
       title={title}
+      prefetch={false}
       {...props}
     >
       {children}

@@ -28,7 +28,7 @@ const PostCard = ({
   return (
     <article className={styles.wrapper}>
       <div className={styles.content}>
-        <Link href={`/blog/${slug}`}>
+        <Link href={`/blog/${slug}`} prefetch={false}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
 
@@ -43,7 +43,11 @@ const PostCard = ({
           ))}
         </div>
         <p>{abstract}</p>
-        <Link href={`/blog/${slug}`} className={styles.readMore}>
+        <Link
+          href={`/blog/${slug}`}
+          className={styles.readMore}
+          prefetch={false}
+        >
           Read more <VisuallyHidden>about this post</VisuallyHidden>
           <ArrowRight className={styles.readMoreArrow} size="1.25rem" />
         </Link>
