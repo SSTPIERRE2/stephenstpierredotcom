@@ -8,6 +8,7 @@ export function Web({ stack }: StackContext) {
     customDomain: stack.stage === 'prod' ? 'stephenstpierre.com' : undefined,
     path: 'packages/web',
     warm: stack.stage === 'prod' ? 40 : undefined,
+    timeout: stack.stage === 'prod' ? '20 seconds' : '10 seconds',
     openNextVersion: '2.3.7',
     environment: {
       NEXT_SHARP_PATH: '/tmp/node_modules/sharp',
