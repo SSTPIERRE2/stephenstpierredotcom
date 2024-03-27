@@ -1,34 +1,28 @@
-import TextWithBorder from '../TextWithBorder';
 import styles from './PostGallery.module.css';
-import Link from 'next/link';
-import { Post } from '@core/post';
+import { PublishedPostWithTags } from '@core/post';
 import PostCard from '@/components/PostCard';
 
-const PostGallery = async () => {
-  const posts = await Post.getPublishedPostsWithTags();
+interface Props {
+  posts: PublishedPostWithTags[];
+}
 
+const PostGallery = ({ posts }: Props) => {
   return (
-    <div className={styles.container}>
-      <TextWithBorder as={Link} href="/blog" className={styles.link}>
-        Blog Posts
-      </TextWithBorder>
-      <div className={styles.gallery}>
-        {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags, updated } =
-            post;
-          return (
-            <PostCard
-              key={id}
-              title={title}
-              slug={slug}
-              publishedOn={published_on}
-              abstract={abstract}
-              tags={tags}
-              updated={updated}
-            />
-          );
-        })}
-      </div>
+    <div className={styles.gallery}>
+      {posts.map((post) => {
+        const { id, title, slug, published_on, abstract, tags, updated } = post;
+        return (
+          <PostCard
+            key={id}
+            title={title}
+            slug={slug}
+            publishedOn={published_on}
+            abstract={abstract}
+            tags={tags}
+            updated={updated}
+          />
+        );
+      })}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export function Database({ stack }: StackContext) {
     migrations: 'packages/core/migrations',
     types: 'packages/core/src/sql.generated.ts',
     scaling: {
-      autoPause: stack.stage === 'prod' ? 60 : true,
+      autoPause: stack.stage === 'prod' ? 30 : true,
     },
   });
 

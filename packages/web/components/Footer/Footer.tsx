@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.copyrightContainer}>
-        <span>&copy; 2024-present Stephen St.Pierre</span>
+        <span>&copy; 2024-present Stephen St.Pierre. All rights reserved.</span>
       </div>
     </footer>
   );

@@ -3,7 +3,13 @@ import styles from './TagSidebar.module.css';
 import { dbUtils } from '@core/utils';
 
 const TagList = async () => {
-  const allTags = await dbUtils.listTableRecords('tag');
+  let allTags = [];
+
+  try {
+    allTags = await dbUtils.listTableRecords('tag');
+  } catch (err) {
+    allTags = await dbUtils.listTableRecords('tag');
+  }
 
   return (
     <aside className={styles.aside}>

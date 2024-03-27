@@ -15,6 +15,7 @@ import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
 import slugify from '@/utils/slugify';
 import dayjs from '@/utils/extendedDayJs';
+import PostMetadata from '@/components/PostMetadata';
 
 const getPostMetadata = cache(async (postSlug: string) => {
   let post, tags;
@@ -23,8 +24,8 @@ const getPostMetadata = cache(async (postSlug: string) => {
     post = await Post.getBySlug(postSlug);
     tags = await Tag.getAllByPostId(post.id);
   } catch (err) {
-    console.log(`error getting post`, err);
-    notFound();
+    post = await Post.getBySlug(postSlug);
+    tags = await Tag.getAllByPostId(post.id);
   }
 
   const {
@@ -77,18 +78,10 @@ const getPostMetadata = cache(async (postSlug: string) => {
   };
 });
 
-export async function generateMetadata({
-  params: { postSlug },
-}: {
-  params: { postSlug: string };
-}) {
-  const { title, abstract } = await getPostMetadata(postSlug);
-
-  return {
-    title: `${title} • StephenStPierre.com`,
-    description: abstract,
-  };
-}
+export const metadata = {
+  title: `Loading... • StephenStPierre.com`,
+  description: 'Loading blog post...',
+};
 
 const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
@@ -97,6 +90,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     id,
     title,
     slug,
+    abstract,
     publishedOn,
     content,
     views,
@@ -108,6 +102,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
 
   return (
     <>
+      <PostMetadata title={title} description={abstract} />
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
           <h1 id="title" className={styles.title}>

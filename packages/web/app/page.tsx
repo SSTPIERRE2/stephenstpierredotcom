@@ -1,9 +1,13 @@
 import styles from './page.module.css';
-import PostGallery from '@/components/PostGallery';
 import RetroGrid from '@/components/RetroGrid';
 import Oasis from '@/components/Oasis';
 import FullBleed from '@/components/FullBleed';
 import PrimaryLink, { PrimaryNewTabLink } from '@/components/PrimaryLink';
+import { Suspense } from 'react';
+import PostSkeletonGallery from '@/components/PostSkeletonGallery';
+import TextWithBorder from '@/components/TextWithBorder';
+import Link from 'next/link';
+import PostGalleryContainer from '@/components/PostGalleryContainer';
 
 export default function Home() {
   return (
@@ -29,6 +33,20 @@ export default function Home() {
               view my resume
             </PrimaryNewTabLink>
           </p>
+
+          <h2 className={styles.heading}>News</h2>
+          <p>
+            I'm hard at work migrating to DynamoDB, Amazon's serverless database
+            service!
+          </p>
+          <p>
+            Until then, Amazon RDS will automatically pause to save on operating
+            costs between periods of activity on the site.
+          </p>
+          <p>
+            Please be patient while RDS resumes which can take up to 1 minute.
+            Sorry for the inconvenience, I promise this will be worth it!
+          </p>
         </div>
         <div className={styles.greetingRight}>
           <div className={styles.retroSunWrapper}>
@@ -38,7 +56,14 @@ export default function Home() {
         </div>
       </div>
 
-      <PostGallery />
+      <div className={styles.postsContainer}>
+        <TextWithBorder as={Link} href="/blog" className={styles.postsLink}>
+          Blog Posts
+        </TextWithBorder>
+        <Suspense fallback={<PostSkeletonGallery />}>
+          <PostGalleryContainer />
+        </Suspense>
+      </div>
 
       <FullBleed>
         <RetroGrid />

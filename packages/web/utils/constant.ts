@@ -10,6 +10,8 @@ export const LIGHT_COLORS = {
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
   '--color-border': 'var(--color-gray-400)',
   '--color-underline': 'var(--color-primary-100)',
+  '--color-skeleton': 'var(--color-gray-300)',
+  '--color-skeleton-highlight': 'var(--color-gray-200)',
 
   '--color-primary-50': '#e9eafd',
   '--color-primary-100': '#c7caf8',
@@ -101,6 +103,8 @@ export const DARK_COLORS = {
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
   '--color-border': 'var(--color-gray-600)',
   '--color-underline': 'var(--color-primary-900)',
+  '--color-skeleton': 'var(--color-gray-700)',
+  '--color-skeleton-highlight': 'var(--color-gray-600)',
 
   '--color-primary-200': '#cff49e',
   '--color-primary-300': '#bdef76',

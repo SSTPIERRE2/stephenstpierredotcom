@@ -1,31 +1,22 @@
 import styles from './page.module.css';
-import { Post } from '@core/post';
-import PostCard from '@/components/PostCard';
 import TagSidebar from '@/components/TagSidebar';
+import { Suspense } from 'react';
+import PostSkeletonGallery from '@/components/PostSkeletonGallery';
+import TagSkeletonSidebar from '@/components/TagSkeletonSidebar';
+import PostGalleryContainer from '@/components/PostGalleryContainer';
 
-const BlogPage = async () => {
-  const posts = await Post.getPublishedPostsWithTags();
-
+const BlogPage = () => {
   return (
     <div className={styles.wrapper}>
       <main className={styles.main}>
-        {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags, updated } =
-            post;
-          return (
-            <PostCard
-              key={id}
-              title={title}
-              slug={slug}
-              publishedOn={published_on}
-              abstract={abstract}
-              tags={tags}
-              updated={updated}
-            />
-          );
-        })}
+        <PostSkeletonGallery />
+        <Suspense fallback={<PostSkeletonGallery />}>
+          <PostGalleryContainer />
+        </Suspense>
       </main>
-      <TagSidebar />
+      <Suspense fallback={<TagSkeletonSidebar />}>
+        <TagSidebar />
+      </Suspense>
     </div>
   );
 };

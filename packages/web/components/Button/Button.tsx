@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import { MouseEventHandler, PropsWithChildren } from 'react';
 import styles from './Button.module.css';
 import clsx from 'clsx';
 import { useTheme } from '@/app/context/ThemeContext';
@@ -9,6 +9,7 @@ interface Props {
   variant?: 'fill' | 'outline' | 'ghost';
   size?: 'small' | 'medium' | 'large';
   className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const SIZES = {
@@ -33,6 +34,7 @@ const Button = ({
   variant = 'fill',
   size = 'small',
   className,
+  onClick,
   children,
 }: Props & PropsWithChildren) => {
   const sizeStyles = SIZES[size];
@@ -45,15 +47,16 @@ const Button = ({
         {
           ...(sizeStyles as React.CSSProperties),
           '--color-ghost-hover-text':
-            theme === 'light'
-              ? 'var(--color-gray-1000)'
-              : 'var(--color-gray-300)',
+            theme === 'light' ?
+              'var(--color-gray-1000)'
+            : 'var(--color-gray-300)',
           '--color-fill-base-text':
-            theme === 'light'
-              ? 'var(--color-gray-0)'
-              : 'var(--color-gray-1000)',
+            theme === 'light' ?
+              'var(--color-gray-0)'
+            : 'var(--color-gray-1000)',
         } as React.CSSProperties
       }
+      onClick={onClick}
     >
       {children}
     </button>

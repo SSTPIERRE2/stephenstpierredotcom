@@ -61,6 +61,21 @@
   filter: var(--retro-sun-shadow);
 }
 
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.postsLink {
+  text-wrap: balance;
+  line-height: 1.1;
+  overflow-wrap: break-word;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 @media (max-width: 50rem) {
   .greeting {
     flex-direction: column;

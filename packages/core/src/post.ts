@@ -21,7 +21,7 @@ export type PostWithTags = Pick<
   'id' | 'title' | 'slug' | 'abstract' | 'content' | 'published_on' | 'updated'
 > & { tags: string[] };
 
-type PublishedPostWithTags = PostWithTags & { published_on: string };
+export type PublishedPostWithTags = PostWithTags & { published_on: string };
 
 export type PostToCreate = Pick<
   Post,
@@ -159,11 +159,11 @@ export async function getPublishedPostsWithTags() {
   return Object.values(map);
 }
 
-export async function getByTagWithRelations(tag: string) {
+export async function getPublishedPostsByTagWithRelations(tag: string) {
   const postsWithTags = await getPublishedPostsWithTags();
 
   // Since we actually want all tag relations, we can't just use .where('tag.name', '=', tag) in the query
-  const result = postsWithTags.reduce((acc: PostWithTags[], curr) => {
+  const result = postsWithTags.reduce((acc: PublishedPostWithTags[], curr) => {
     if (curr.tags.includes(tag)) {
       acc.push(curr);
     }
