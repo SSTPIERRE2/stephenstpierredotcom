@@ -9,7 +9,6 @@ const BlogPage = () => {
   return (
     <div className={styles.wrapper}>
       <main className={styles.main}>
-        <PostSkeletonGallery />
         <Suspense fallback={<PostSkeletonGallery />}>
           <PostGalleryContainer />
         </Suspense>
