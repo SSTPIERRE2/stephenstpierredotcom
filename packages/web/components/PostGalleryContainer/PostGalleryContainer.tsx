@@ -5,21 +5,27 @@ interface Props {
   tag?: string;
 }
 
-const PostGalleryContainer = async ({ tag }: Props) => {
-  let posts = [];
-  let query = Post.getPublishedPostsWithTags;
+const PostGalleryContainer = ({ tag }: Props) => {
+  async function getPosts() {
+    'use server';
 
-  if (tag) {
-    query = () => Post.getPublishedPostsByTagWithRelations(tag);
+    let posts = [];
+    let query = Post.getPublishedPostsWithTags;
+
+    if (tag) {
+      query = () => Post.getPublishedPostsByTagWithRelations(tag);
+    }
+
+    try {
+      posts = await query();
+    } catch (err) {
+      posts = await query();
+    }
+
+    return posts;
   }
 
-  try {
-    posts = await query();
-  } catch (err) {
-    posts = await query();
-  }
-
-  return <PostGallery posts={posts} />;
+  return <PostGallery getPosts={getPosts} />;
 };
 
 export default PostGalleryContainer;
