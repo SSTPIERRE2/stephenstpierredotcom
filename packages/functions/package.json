@@ -7,19 +7,9 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.136",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.26"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cheerio": "1.0.0-rc.12",
-    "device-detector-js": "^3.0.3",
-    "gray-matter": "^4.0.3",
-    "jsonwebtoken": "^9.0.2",
-    "node-fetch": "^3.3.2",
-    "resend": "^3.2.0",
-    "ulid": "^2.3.0"
+    "gray-matter": "^4.0.3"
   }
 }

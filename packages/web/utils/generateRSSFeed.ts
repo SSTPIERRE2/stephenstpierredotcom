@@ -1,4 +1,4 @@
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import RSS from 'rss';
 import { Table } from 'sst/node/table';
 

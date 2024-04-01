@@ -1,4 +1,4 @@
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import PostGallery from '../PostGallery';
 import { Table } from 'sst/node/table';
 
@@ -13,7 +13,8 @@ const PostGalleryContainer = ({ tag, numSkeletonPosts = 4 }: Props) => {
   async function getPosts() {
     'use server';
 
-    return Post.queryPublished(PostTable, tag);
+    const posts = await Post.queryPublished(PostTable, tag);
+    return posts;
   }
 
   return (

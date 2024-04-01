@@ -1,4 +1,4 @@
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import Upvotes from './Upvotes';
 import { Table } from 'sst/node/table';
 
@@ -10,11 +10,12 @@ interface Props {
   className?: string;
 }
 
-const UpvotesContainer = async ({ postId, initialVotes, className }: Props) => {
+const UpvotesContainer = ({ postId, initialVotes, className }: Props) => {
   async function incrementVotes() {
     'use server';
 
-    return Post.increment(PostTable, postId, 'likes');
+    const updated = await Post.increment(PostTable, postId, 'likes');
+    return updated;
   }
 
   return (

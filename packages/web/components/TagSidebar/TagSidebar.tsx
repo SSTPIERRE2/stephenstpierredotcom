@@ -1,7 +1,7 @@
 import PrimaryLink from '../PrimaryLink';
 import TagSkeleton from '../TagSkeleton';
 import styles from './TagSidebar.module.css';
-import { Tag } from '@core/tag-dynamo';
+import { Tag } from '@core/tag';
 import { Table } from 'sst/node/table';
 
 const TagTable = Table.Tag.tableName;

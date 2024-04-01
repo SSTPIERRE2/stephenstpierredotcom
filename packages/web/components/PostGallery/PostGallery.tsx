@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './PostGallery.module.css';
-import { PublishedPost } from '@core/post-dynamo';
+import { PublishedPost } from '@core/post';
 import PostCard from '@/components/PostCard';
 import { useEffect, useState } from 'react';
 import PostSkeletonGallery from '../PostSkeletonGallery';
@@ -28,7 +28,7 @@ const PostGallery = ({ getPosts, numSkeletonPosts }: Props) => {
     } catch (err) {
       LogRocket.captureException(toErrorWithMessage(err));
     }
-  }, []);
+  }, [getPosts]);
 
   return (
     <div className={styles.gallery}>

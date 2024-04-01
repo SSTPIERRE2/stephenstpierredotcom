@@ -5,7 +5,7 @@ import COMPONENT_MAP from '@/utils/mdx-components';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { Upvotes } from '@/components/Upvotes';
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import PageViews from '@/components/PageViews';
 import { marked } from 'marked';
 import * as cheerio from 'cheerio';
@@ -14,7 +14,6 @@ import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
 import slugify from '@/utils/slugify';
 import dayjs from '@/utils/extendedDayJs';
-import PostMetadata from '@/components/PostMetadata';
 import { Table } from 'sst/node/table';
 import LogRocket from 'logrocket';
 
@@ -77,7 +76,6 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     id,
     title,
     slug,
-    abstract,
     publishedOn,
     content,
     views,
@@ -92,7 +90,6 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
 
   return (
     <>
-      <PostMetadata title={title} description={abstract} />
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
           <h1 id="title" className={styles.title}>

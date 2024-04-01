@@ -1,5 +1,5 @@
-import { Post, PostToCreate } from '@core/post-dynamo';
-import { Tag } from '@core/tag-dynamo';
+import { Post, PostToCreate } from '@core/post';
+import { Tag } from '@core/tag';
 import { BlogPost, getBlogPosts } from './utils/file-helpers';
 import { Table } from 'sst/node/table';
 

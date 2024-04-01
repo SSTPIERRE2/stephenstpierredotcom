@@ -20,6 +20,8 @@ const Upvotes = ({ initialVotes, className, incrementVotes }: Props) => {
   const [optimisticVotes, setOptimisticVotes] = useState(initialVotes);
   const isMaxedOut = optimisticVotes === MAX_VOTES;
 
+  // This function doesn't need any dependencies
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const stableDebouncedHandleIncrementVotes = useCallback(
     debounce(async () => {
       await incrementVotes();
@@ -31,7 +33,7 @@ const Upvotes = ({ initialVotes, className, incrementVotes }: Props) => {
   return (
     <button
       className={clsx(styles.wrapper, className)}
-      onClick={async () => {
+      onClick={() => {
         if (!isPending) {
           setIsPending(true);
         }

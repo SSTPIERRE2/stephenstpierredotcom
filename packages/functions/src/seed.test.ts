@@ -1,7 +1,7 @@
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import { afterAll, beforeAll, expect, it, describe } from 'vitest';
 import { onCreate, onUpdate } from './seed';
-import { Tag } from '@core/tag-dynamo';
+import { Tag } from '@core/tag';
 import { Table } from 'sst/node/table';
 
 const PostTable = Table.Post.tableName;

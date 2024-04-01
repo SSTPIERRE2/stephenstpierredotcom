@@ -1,67 +1,110 @@
 export * as Tag from './tag';
 
-import { ulid } from 'ulid';
-import { SQL } from './sql';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import {
+  BatchGetCommand,
+  DeleteCommand,
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+  ScanCommand,
+} from '@aws-sdk/lib-dynamodb';
 
 export interface Tag {
-  id: string;
   name: string;
+  created: string;
 }
 
-export async function create(name: string) {
-  const result = await SQL.DB.insertInto('tag')
-    .values({ id: ulid(), name })
-    .returningAll()
-    .executeTakeFirstOrThrow();
+const client = new DynamoDBClient();
+const docClient = DynamoDBDocumentClient.from(client);
 
-  return result;
+export async function create(tableName: string, name: string) {
+  const command = new PutCommand({
+    TableName: tableName,
+    Item: {
+      name,
+      created: new Date().toISOString(),
+    },
+  });
+
+  console.log(`Tag - create`, command.input);
+
+  try {
+    await docClient.send(command);
+    console.log(`finished putting a Tag...`);
+  } catch (err) {
+    console.log(`caught an error while creating a Tag`, err);
+  }
+
+  const created = await getByName(tableName, name);
+
+  return created;
 }
 
-export async function createAll(names: string[]) {
-  const values = names.map((name) => ({
-    id: ulid(),
-    name,
-  }));
+export async function getByName(tableName: string, name: string) {
+  const command = new GetCommand({
+    TableName: tableName,
+    Key: {
+      name,
+    },
+  });
 
-  const result = await SQL.DB.insertInto('tag')
-    .values(values)
-    .returningAll()
-    .execute();
+  console.log(`Tag - getByName - start`, command.input);
 
-  return result;
+  try {
+    const response = await docClient.send(command);
+    console.log(`Tag - getByName - response`, response);
+    return response['Item'];
+  } catch (err) {
+    console.log(`caught an error while getting a Tag`, err);
+    return;
+  }
 }
 
-export function list() {
-  return SQL.DB.selectFrom('tag')
-    .selectAll()
-    .orderBy('created', 'desc')
-    .execute();
+export async function getAllByNames(tableName: string, names: string[]) {
+  const Keys = names.map((name) => ({ name }));
+  console.log(`Tag - getAllByNames`, Keys);
+
+  const command = new BatchGetCommand({
+    RequestItems: {
+      [tableName]: {
+        Keys,
+      },
+    },
+  });
+
+  try {
+    const result = await docClient.send(command);
+    const responses = result['Responses'] || {};
+    console.log(`Tag - getAllByNames - response`, responses);
+
+    return responses[tableName];
+  } catch (err) {
+    console.log(`caught an error while batchGetting Tags`, err);
+    return;
+  }
 }
 
-export async function getAllByPostId(post_id: string) {
-  const result = await SQL.DB.selectFrom('tag')
-    .innerJoin('post_tag', 'tag.id', 'post_tag.tag_id')
-    .where('post_tag.post_id', '=', post_id)
-    .select(['tag.id', 'tag.name', 'post_tag.id as post_tag_id'])
-    .execute();
+export async function list(tableName: string) {
+  const command = new ScanCommand({
+    TableName: tableName,
+  });
+  const result = await docClient.send(command);
 
-  return result;
+  return result.Items || [];
 }
 
-export async function getByName(name: string) {
-  const result = await SQL.DB.selectFrom('tag')
-    .selectAll()
-    .where('name', '=', name)
-    .executeTakeFirst();
+export async function deleteAll(tableName: string) {
+  const tags = await list(tableName);
+  console.log(`Tag - deleteAll listed Tags`, tags);
 
-  return result;
-}
-
-export async function getAllByNames(names: string[]) {
-  const result = await SQL.DB.selectFrom('tag')
-    .selectAll()
-    .where('name', 'in', names)
-    .execute();
-
-  return result;
+  for (const tag of tags) {
+    const deleteCommand = new DeleteCommand({
+      TableName: tableName,
+      Key: {
+        name: tag.name,
+      },
+    });
+    await docClient.send(deleteCommand);
+  }
 }

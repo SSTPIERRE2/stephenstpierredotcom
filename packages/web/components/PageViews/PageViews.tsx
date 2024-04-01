@@ -1,6 +1,6 @@
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
-import { Post } from '@core/post-dynamo';
+import { Post } from '@core/post';
 import { Table } from 'sst/node/table';
 
 const PostTable = Table.Post.tableName;
