@@ -27,14 +27,7 @@ export async function create(tableName: string, name: string) {
     },
   });
 
-  console.log(`Tag - create`, command.input);
-
-  try {
-    await docClient.send(command);
-    console.log(`finished putting a Tag...`);
-  } catch (err) {
-    console.log(`caught an error while creating a Tag`, err);
-  }
+  await docClient.send(command);
 
   const created = await getByName(tableName, name);
 
@@ -49,21 +42,12 @@ export async function getByName(tableName: string, name: string) {
     },
   });
 
-  console.log(`Tag - getByName - start`, command.input);
-
-  try {
-    const response = await docClient.send(command);
-    console.log(`Tag - getByName - response`, response);
-    return response['Item'];
-  } catch (err) {
-    console.log(`caught an error while getting a Tag`, err);
-    return;
-  }
+  const response = await docClient.send(command);
+  return response['Item'];
 }
 
 export async function getAllByNames(tableName: string, names: string[]) {
   const Keys = names.map((name) => ({ name }));
-  console.log(`Tag - getAllByNames`, Keys);
 
   const command = new BatchGetCommand({
     RequestItems: {
@@ -73,16 +57,10 @@ export async function getAllByNames(tableName: string, names: string[]) {
     },
   });
 
-  try {
-    const result = await docClient.send(command);
-    const responses = result['Responses'] || {};
-    console.log(`Tag - getAllByNames - response`, responses);
+  const result = await docClient.send(command);
+  const responses = result['Responses'] || {};
 
-    return responses[tableName];
-  } catch (err) {
-    console.log(`caught an error while batchGetting Tags`, err);
-    return;
-  }
+  return responses[tableName];
 }
 
 export async function list(tableName: string) {
@@ -96,7 +74,6 @@ export async function list(tableName: string) {
 
 export async function deleteAll(tableName: string) {
   const tags = await list(tableName);
-  console.log(`Tag - deleteAll listed Tags`, tags);
 
   for (const tag of tags) {
     const deleteCommand = new DeleteCommand({

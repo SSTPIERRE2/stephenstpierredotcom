@@ -1,28 +1,34 @@
-@keyframes fadeOut {
-  from {
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
     opacity: 1;
   }
-  to {
+  100% {
     opacity: 0;
   }
 }
 
 .wrapper {
+  color: var(--color-text-supporting);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.button {
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.wrapper:disabled {
-  color: var(--color-primary);
-  cursor: not-allowed;
-}
-
-.wrapper:hover {
+.button:hover {
   color: var(--color-primary);
 }
 
 .max {
-  animation: fadeOut 3000ms forwards;
+  animation: fadeInOut 5000ms forwards;
 }

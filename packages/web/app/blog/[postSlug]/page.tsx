@@ -86,8 +86,6 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     likes,
   } = await getPostMetadata(postSlug);
 
-  console.log(`PostPage`, views, likes);
-
   return (
     <>
       <div className={styles.hero}>

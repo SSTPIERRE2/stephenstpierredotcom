@@ -19,7 +19,7 @@ const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
   return (
     <article className={styles.wrapper}>
       <div className={styles.content}>
-        <Link href={`/blog/${slug}`} prefetch={false}>
+        <Link href={`/blog/${slug}`}>
           <h2 className={styles.title}>{title}</h2>
         </Link>
 

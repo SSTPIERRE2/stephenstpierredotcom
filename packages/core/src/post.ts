@@ -54,17 +54,9 @@ export async function create(
     },
   });
 
-  console.log(`Post - create`, command.input);
-
-  try {
-    await docClient.send(command);
-    console.log(`finished putting a Post...`);
-  } catch (err) {
-    console.log(`caught an error while creating a Post`, err);
-  }
+  await docClient.send(command);
 
   const created = await getById(tableName, id);
-  console.log(`created post`, created);
 
   return created;
 }
@@ -77,16 +69,9 @@ export async function getById(tableName: string, id: string) {
     },
   });
 
-  console.log(`Post - getById - start`, command.input);
+  const response = await docClient.send(command);
 
-  try {
-    const response = await docClient.send(command);
-    console.log(`Post - getById - response`, response);
-    return response['Item'];
-  } catch (err) {
-    console.log(`caught an error while getting a Post`, err);
-    return;
-  }
+  return response['Item'];
 }
 
 export async function getBySlug(tableName: string, slug: string) {
@@ -99,24 +84,14 @@ export async function getBySlug(tableName: string, slug: string) {
     },
   });
 
-  console.log(`Post - getBySlug - start`, slug);
+  const response = await docClient.send(command);
+  const result = response['Items'] || [];
 
-  try {
-    const response = await docClient.send(command);
-    const result = response['Items'] || [];
-    console.log(`Post - getBySlug - response`, response.Count);
-
-    return result[0] as Post | undefined;
-  } catch (err) {
-    console.log(`caught an error while getting a Post`, err);
-    return;
-  }
+  return result[0] as Post | undefined;
 }
 
 export async function getAllBySlugs(tableName: string, slugs: string[]) {
   const promises: Promise<Post | undefined>[] = [];
-
-  console.log(`Post - getAllBySlugs`, slugs);
 
   for (const slug of slugs) {
     promises.push(getBySlug(tableName, slug));
@@ -124,33 +99,7 @@ export async function getAllBySlugs(tableName: string, slugs: string[]) {
 
   const result = await Promise.all(promises);
 
-  console.log(`Post - getAllBySlugs - result`, result);
-
   return result.filter((result) => !!result) as Post[];
-  // const slugFilter = slugs.map((_slug, index) => {
-  //   return `:slug${index}`;
-  // });
-  // const slugExpression = slugFilter.reduce((acc, curr, index) => {
-  //   return {
-  //     ...acc,
-  //     [curr]: slugs[index],
-  //   };
-  // }, {});
-  // const command = new ScanCommand({
-  //   TableName: tableName,
-  //   IndexName: 'SlugIndex',
-  //   FilterExpression: `slug IN (${slugFilter.join(', ')})`,
-  //   ExpressionAttributeValues: slugExpression,
-  // });
-
-  // try {
-  //   const response = await docClient.send(command);
-  //   console.log(`Post - getAllBySlugs - response`, response);
-  //   return response['Items'] as Post[];
-  // } catch (err) {
-  //   console.log(`caught an error while getting Posts by slugs`, err);
-  //   return;
-  // }
 }
 
 export async function list(tableName: string) {
@@ -173,13 +122,11 @@ export async function queryPublished(tableName: string, tag?: string) {
   });
 
   const result = await docClient.send(command);
-  console.log(`queryPublished`, result.Count);
 
   let posts = (result.Items || []) as PublishedPost[];
 
   if (tag) {
     posts = posts.filter((post) => post.tags.includes(tag));
-    console.log(`filtered posts by tag ${tag}...`);
   }
 
   posts.sort(
@@ -193,17 +140,16 @@ export async function queryPublished(tableName: string, tag?: string) {
 export async function update(tableName: string, values: Partial<Post>) {
   const { id, ...props } = values;
   delete props.updated;
-  console.log(`Post - Update`);
 
   const setStatement = Object.keys(props)
     .map((key) => {
-      console.log(key);
       if (key === 'views') {
         return `#views = :views`;
       }
       return `${key} = :${key}`;
     })
     .join(', ');
+
   const UpdateExpression = `set ${setStatement}, updated = :updated`;
   console.log(`UpdateExpression`, UpdateExpression);
 
@@ -215,8 +161,7 @@ export async function update(tableName: string, values: Partial<Post>) {
       [`:${curr}`]: values[curr as keyof Post],
     };
   }, {});
-  ExpressionAttributeValues.updated = new Date().toISOString();
-  console.log(`ExpressionAttributeValues`, ExpressionAttributeValues);
+  ExpressionAttributeValues[':updated'] = new Date().toISOString();
 
   const command = new UpdateCommand({
     TableName: tableName,
@@ -231,14 +176,10 @@ export async function update(tableName: string, values: Partial<Post>) {
     ReturnValues: 'ALL_NEW',
   });
 
-  try {
-    const response = await docClient.send(command);
-    console.log(`Post - update - response`, response);
-    return response;
-  } catch (err) {
-    console.log(`caught an error while updating a Post`, err);
-    return;
-  }
+  console.log(`UpdateCommand`, command.input);
+
+  const response = await docClient.send(command);
+  return response;
 }
 
 export async function increment(
@@ -260,8 +201,6 @@ export async function increment(
   });
   const response = await docClient.send(command);
 
-  console.log(`increment`, response);
-
   return response?.Attributes?.[attribute] as number;
 }
 
@@ -278,7 +217,6 @@ export async function deleteById(tableName: string, id: string) {
 
 export async function deleteAll(tableName: string) {
   const posts = await list(tableName);
-  console.log(`Post - deleteAll listed posts`, posts);
 
   for (const post of posts) {
     const deleteCommand = new DeleteCommand({

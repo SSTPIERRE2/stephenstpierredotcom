@@ -13,43 +13,38 @@ interface Props {
   className?: string;
 }
 
-const MAX_VOTES = 16;
-
 const Upvotes = ({ initialVotes, className, incrementVotes }: Props) => {
-  const [isPending, setIsPending] = useState(false);
   const [optimisticVotes, setOptimisticVotes] = useState(initialVotes);
-  const isMaxedOut = optimisticVotes === MAX_VOTES;
+  const [wasClicked, setWasClicked] = useState(false);
 
   // This function doesn't need any dependencies
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stableDebouncedHandleIncrementVotes = useCallback(
     debounce(async () => {
       await incrementVotes();
-      setIsPending(false);
     }, 300),
     [],
   );
 
   return (
-    <button
-      className={clsx(styles.wrapper, className)}
-      onClick={() => {
-        if (!isPending) {
-          setIsPending(true);
-        }
-
-        setOptimisticVotes(optimisticVotes + 1);
-
-        stableDebouncedHandleIncrementVotes();
-      }}
-      disabled={isMaxedOut}
-    >
-      <ThumbsUp size="1.5rem" />
-      <VisuallyHidden>Upvote this post</VisuallyHidden>
-      {optimisticVotes}
-      {isPending && <span>...</span>}
-      {isMaxedOut && <span className={styles.max}>MAX</span>}
-    </button>
+    <div className={clsx(styles.wrapper, className)}>
+      <h4 className={styles.heading}>Like this post?</h4>
+      <button
+        className={styles.button}
+        onClick={() => {
+          setOptimisticVotes(optimisticVotes + 1);
+          stableDebouncedHandleIncrementVotes();
+          if (!wasClicked) {
+            setWasClicked(true);
+          }
+        }}
+      >
+        <ThumbsUp size="1.5rem" />
+        <VisuallyHidden>Upvote this post</VisuallyHidden>
+        {optimisticVotes}
+      </button>
+      {wasClicked && <span className={styles.max}>Thanks for supporting!</span>}
+    </div>
   );
 };
 

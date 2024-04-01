@@ -34,8 +34,8 @@ export default function Home() {
 
           <h2 className={styles.heading}>News</h2>
           <p>
-            The migration to DynamoDB is complete. I hope you enjoy the new and
-            improved experience, I know my wallet will!
+            The migration to DynamoDB is complete! I hope you enjoy the new and
+            improved experience. Expect a new blog post soon.
           </p>
         </div>
         <div className={styles.greetingRight}>
