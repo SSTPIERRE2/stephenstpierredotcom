@@ -1,5 +1,5 @@
 import { SSTConfig } from 'sst';
-import { Web } from './stacks/Web';
+// import { Web } from './stacks/Web';
 import { Database } from './stacks/Database';
 
 export default {
@@ -10,6 +10,6 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(Database).stack(Web);
+    app.stack(Database);
   },
 } satisfies SSTConfig;
