@@ -1,6 +1,7 @@
+import 'react-loading-skeleton/dist/skeleton.css';
 import range from '@/utils/range';
-import styles from './PostSkeletonGallery.module.css';
 import PostCardSkeleton from '../PostCardSkeleton';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 interface Props {
   numPosts?: number;
@@ -8,11 +9,14 @@ interface Props {
 
 const PostSkeletonGallery = ({ numPosts = 4 }: Props) => {
   return (
-    <div className={styles.gallery}>
+    <SkeletonTheme
+      baseColor="var(--color-skeleton)"
+      highlightColor="var(--color-skeleton-highlight)"
+    >
       {range(numPosts).map((num) => (
         <PostCardSkeleton key={num} />
       ))}
-    </div>
+    </SkeletonTheme>
   );
 };
 

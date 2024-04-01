@@ -16,6 +16,7 @@
 
 .wrapper:disabled {
   color: var(--color-primary);
+  cursor: not-allowed;
 }
 
 .wrapper:hover {

@@ -1,72 +1,53 @@
-import { Post } from '@core/post';
-import { Tag } from '@core/tag';
-import { PostTag } from '@core/postTag';
+import { Post, PostToCreate } from '@core/post-dynamo';
+import { Tag } from '@core/tag-dynamo';
 import { BlogPost, getBlogPosts } from './utils/file-helpers';
-import { dbUtils } from '@core/utils';
+import { Table } from 'sst/node/table';
+
+const PostTable = Table.Post.tableName;
+const TagTable = Table.Tag.tableName;
 
 const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
-  const { isPublished, publishedOn, tags, ...post } = blogPost;
+  const { publishedOn, tags, ...post } = blogPost;
+  const tagIds = [];
 
   console.log(
     `about to create a new post`,
     post.slug,
-    isPublished,
+    post.isPublished,
     publishedOn,
     tags,
   );
 
-  const created = await Post.create({
-    ...post,
-    is_published: isPublished || null,
-    // Since we're not concerned with the exact time a post is published at, we store it in UTC and just need to remember to output it in UTC
-    published_on: publishedOn ? new Date(publishedOn).toISOString() : null,
-  });
-
-  console.log(`created a brand new post`, created.slug);
-
   for (const tag of tags) {
-    await handleCreateTagAndRef(tag, created.id);
+    const name = await handleCreateTag(tag);
+    tagIds.push(name);
   }
-};
 
-const handleCreateTagAndRef = async (name: string, postId: string) => {
-  const dbTag = await Tag.getByName(name);
-  console.log(`handleCreateTagAndRef`, dbTag);
-
-  if (dbTag) {
-    const createdPostTag = await PostTag.create(postId, dbTag.id);
-    console.log(`Tag exists, created a post tag`, createdPostTag);
-  } else {
-    console.log(`no tag exists, need to create a Tag and PostTag`);
-    const createdTag = await Tag.create(name);
-    console.log(`createdTag`, createdTag);
-    const createdPostTag = await PostTag.create(postId, createdTag.id);
-    console.log(`createdPostTag`, createdPostTag);
-  }
-};
-
-const handleDeletePostAndRelations = async (id: string) => {
-  const relations = await PostTag.getAllByPostId(id);
-  const deletedPostTags = await PostTag.deleteByIds(relations.map((r) => r.id));
-  const deletedPost = await Post.deleteById(id);
-
-  console.log(`deleted post and relations`, deletedPost, deletedPostTags);
-
-  return {
-    deletedPost,
-    deletedPostTags,
+  const postToCreate: PostToCreate = {
+    ...post,
+    tags: tagIds,
   };
+
+  if (publishedOn) {
+    // Since we're not concerned with the exact time a post is published at, we store it in UTC and just need to remember to output it in UTC
+    postToCreate.publishedOn = new Date(publishedOn).toISOString();
+  }
+
+  await Post.create(PostTable, postToCreate);
 };
 
-const doesPostHaveAnyChanges = (dbPost: Post, post: BlogPost) => {
-  console.log(`doesPostHaveAnyChanges`, dbPost.published_on, post.publishedOn);
+const handleCreateTag = async (name: string) => {
+  const dbTag = await Tag.getByName(TagTable, name);
+  console.log(`handleCreateTag`, dbTag);
 
-  return (
-    dbPost.content !== post.content ||
-    dbPost.abstract !== post.abstract ||
-    dbPost.is_published != post.isPublished ||
-    dbPost.published_on !== post.publishedOn
-  );
+  if (!dbTag) {
+    console.log(`no tag exists, need to create a new one`);
+    const created = await Tag.create(TagTable, name);
+    console.log(`createdTag`, created);
+    return created?.name;
+  }
+
+  return dbTag.name;
 };
 
 export const onCreate = async () => {
@@ -96,9 +77,11 @@ export const onUpdate = async () => {
   }, {});
   const postSlugs = Object.keys(postSlugMap);
 
-  const dbPosts = await Post.getAllBySlugs(postSlugs);
-  const dbPostSlugMap = dbPosts.reduce(
-    (acc: Record<string, Post.Post>, curr) => {
+  const dbPosts = await Post.getAllBySlugs(PostTable, postSlugs);
+  const dbPostSlugMap = (dbPosts || []).reduce(
+    (acc: Record<string, Post>, curr) => {
+      console.log(`looping thru dbPostSlugMap`, curr);
+
       acc[curr.slug] = curr;
       return acc;
     },
@@ -109,9 +92,9 @@ export const onUpdate = async () => {
   for (const s of postSlugs) {
     // If the post isn't in the db, create it
     if (!dbPostSlugMap[s]) {
-      handleCreatePostAndRelations(postSlugMap[s]);
+      await handleCreatePostAndRelations(postSlugMap[s]);
     } else {
-      // otherwise compare content and tags, then add to update queue
+      // otherwise compare each property that may have changed in the frontmatter and update accordingly
       const {
         content: postContent,
         abstract,
@@ -123,77 +106,74 @@ export const onUpdate = async () => {
         id: dbPostId,
         abstract: dbPostAbstract,
         content: dbPostContent,
-        is_published: dbIsPublished,
+        isPublished: dbPostIsPublished,
+        tags: dbPostTags,
       } = dbPostSlugMap[s];
-      let postToUpdate;
+      const postToUpdate: Partial<Post> = {};
 
-      console.log(
-        `post is already in db`,
-        dbPostId,
-        dbPostContent === postContent,
-      );
+      console.log(`post is already in db`, dbPostId);
 
-      if (doesPostHaveAnyChanges(dbPostSlugMap[s], postSlugMap[s])) {
-        postToUpdate = {
+      if (dbPostContent !== postContent) {
+        console.log(`content changed...`);
+        postToUpdate.content = postContent;
+      }
+
+      // Intentional loose equality check for isPublished since it will be undefined in frontmatter, but null in the db
+      // update: WIP not sure if need number or can use boolean, but we could actually use an enum to work with the number type for many different post types anyway
+
+      if (isPublished !== dbPostIsPublished && publishedOn) {
+        postToUpdate.isPublished = isPublished;
+        console.log(
+          `isPublished changed...`,
+          isPublished,
+          dbPostIsPublished,
+          publishedOn,
+        );
+        postToUpdate.publishedOn = new Date(publishedOn).toISOString();
+      }
+
+      if (abstract !== dbPostAbstract) {
+        console.log(`abstract changed...`);
+        postToUpdate.abstract = abstract;
+      }
+
+      const didTagsChange = tags.some((tag) => !dbPostTags.includes(tag));
+
+      if (didTagsChange) {
+        console.log(`tags changed...`);
+        const tagIds = [];
+        // create any Tags that are in tags but not in dbTags, and update the post in progress
+        for (const tag of tags) {
+          if (!dbPostTags.includes(tag)) {
+            const name = await handleCreateTag(tag);
+            tagIds.push(name);
+          }
+        }
+
+        postToUpdate.tags = tagIds;
+      }
+
+      if (Object.keys(postToUpdate).length) {
+        postsToUpdate.push({
           ...dbPostSlugMap[s],
-        };
-
-        if (dbPostContent !== postContent) {
-          postToUpdate.content = postContent;
-        }
-
-        console.log(`post has some changes`, isPublished, dbIsPublished);
-
-        // Intentional loose equality check for isPublished since it will be undefined in frontmatter, but null in the db
-        if (isPublished != dbIsPublished) {
-          postToUpdate.is_published = isPublished as boolean;
-          console.log(`post was published`, publishedOn);
-          postToUpdate.published_on = new Date(
-            publishedOn as string,
-          ).toISOString();
-        }
-
-        if (abstract !== dbPostAbstract) {
-          postToUpdate.abstract = abstract;
-        }
-
-        postsToUpdate.push(postToUpdate);
-      }
-
-      // get post tags and compare with local tags, then create or delete as needed
-      const dbTags = await Tag.getAllByPostId(dbPostId);
-      const dbTagNames = dbTags.map((t) => t.name);
-
-      // create any Tags that are in tags but not in dbTags, and relations
-      for (const tag of tags) {
-        if (!dbTagNames.includes(tag)) {
-          await handleCreateTagAndRef(tag, dbPostId);
-        }
-      }
-
-      // delete any PostTags that are in dbTags, but not in tags
-      for (const tag of dbTags) {
-        if (!tags.includes(tag.name)) {
-          const deleted = await PostTag.deleteByIds([tag.post_tag_id]);
-          console.log(`deleted a post tag`, deleted);
-        }
+          ...postToUpdate,
+        });
       }
     }
   }
 
-  const allDbPosts = await dbUtils.listTableRecords('post');
+  const allDbPosts = await Post.list(PostTable);
   // loop over db posts and delete any that don't have a local copy, meaning they were likely renamed
   for (const post of allDbPosts) {
     console.log(`looping dbPostSlugs`, post.slug);
 
     if (!postSlugMap[post.slug]) {
-      await handleDeletePostAndRelations(post.id);
+      await Post.deleteById(PostTable, post.id);
     }
   }
 
   console.log(`posts to update`, postsToUpdate);
-  if (postsToUpdate.length) {
-    const test = await Post.updateAll(postsToUpdate);
-    console.log(`updated some posts`, test);
+  for (const post of postsToUpdate) {
+    await Post.update(PostTable, post);
   }
 };

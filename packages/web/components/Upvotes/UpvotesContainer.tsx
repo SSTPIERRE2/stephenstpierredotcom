@@ -1,26 +1,29 @@
-import { PostUpvote } from '@core/postUpvote';
-import { revalidatePath } from 'next/cache';
+import { Post } from '@core/post-dynamo';
 import Upvotes from './Upvotes';
+import { Table } from 'sst/node/table';
+
+const PostTable = Table.Post.tableName;
 
 interface Props {
   postId: string;
-  visitorId: string;
+  initialVotes: number;
   className?: string;
 }
 
-const UpvotesContainer = async ({ postId, visitorId, className }: Props) => {
-  const { votes } = await PostUpvote.getTotalPostUpvotes(postId);
-  const recentVotes = await PostUpvote.getRecentUpvotesByVisitorId(postId, visitorId);
-
+const UpvotesContainer = async ({ postId, initialVotes, className }: Props) => {
   async function incrementVotes() {
     'use server';
 
-    await PostUpvote.createOrUpdate(postId, visitorId, recentVotes?.id);
-
-    revalidatePath('/[postSlug]', 'page');
+    return Post.increment(PostTable, postId, 'likes');
   }
 
-  return <Upvotes votes={votes} className={className} incrementVotes={incrementVotes} />
-}
+  return (
+    <Upvotes
+      initialVotes={initialVotes}
+      className={className}
+      incrementVotes={incrementVotes}
+    />
+  );
+};
 
 export default UpvotesContainer;

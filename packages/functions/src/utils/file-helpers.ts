@@ -6,8 +6,10 @@ interface BlogPostFrontmatter {
   title: string;
   abstract: string;
   tags: string[];
+  isPublished?: 1 | 0;
   publishedOn?: string;
-  isPublished?: boolean;
+  views?: number;
+  likes?: number;
 }
 
 interface BlogPostData<I extends matter.Input> extends GrayMatterFile<I> {

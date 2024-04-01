@@ -1,31 +1,24 @@
-import { Post } from '@core/post';
+import { Post } from '@core/post-dynamo';
 import PostGallery from '../PostGallery';
+import { Table } from 'sst/node/table';
+
+const PostTable = Table.Post.tableName;
 
 interface Props {
   tag?: string;
+  numSkeletonPosts?: number;
 }
 
-const PostGalleryContainer = ({ tag }: Props) => {
+const PostGalleryContainer = ({ tag, numSkeletonPosts = 4 }: Props) => {
   async function getPosts() {
     'use server';
 
-    let posts = [];
-    let query = Post.getPublishedPostsWithTags;
-
-    if (tag) {
-      query = () => Post.getPublishedPostsByTagWithRelations(tag);
-    }
-
-    try {
-      posts = await query();
-    } catch (err) {
-      posts = await query();
-    }
-
-    return posts;
+    return Post.queryPublished(PostTable, tag);
   }
 
-  return <PostGallery getPosts={getPosts} />;
+  return (
+    <PostGallery getPosts={getPosts} numSkeletonPosts={numSkeletonPosts} />
+  );
 };
 
 export default PostGalleryContainer;

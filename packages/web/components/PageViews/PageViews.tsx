@@ -1,20 +1,13 @@
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
-import { Post } from '@core/post';
+import { Post } from '@core/post-dynamo';
+import { Table } from 'sst/node/table';
+
+const PostTable = Table.Post.tableName;
 
 interface Props {
   id: string;
   initialViews: number;
-}
-
-async function incrementPostViews(postId: string) {
-  if (process.env.NODE_ENV !== 'production') {
-    return;
-  }
-
-  const result = await Post.incrementViews(postId);
-
-  return result.views;
 }
 
 const getDisplay = (views: number) => {
@@ -30,7 +23,7 @@ const getDisplay = (views: number) => {
 };
 
 const PageViews = async ({ id, initialViews }: Props) => {
-  const views = await incrementPostViews(id);
+  const views = await Post.increment(PostTable, id, 'views');
 
   return (
     <div className={styles.wrapper}>

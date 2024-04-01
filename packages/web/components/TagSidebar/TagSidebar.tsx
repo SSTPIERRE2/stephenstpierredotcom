@@ -1,25 +1,25 @@
 import PrimaryLink from '../PrimaryLink';
+import TagSkeleton from '../TagSkeleton';
 import styles from './TagSidebar.module.css';
-import { dbUtils } from '@core/utils';
+import { Tag } from '@core/tag-dynamo';
+import { Table } from 'sst/node/table';
+
+const TagTable = Table.Tag.tableName;
 
 const TagList = async () => {
-  let allTags = [];
-
-  try {
-    allTags = await dbUtils.listTableRecords('tag');
-  } catch (err) {
-    allTags = await dbUtils.listTableRecords('tag');
-  }
+  const tags = await Tag.list(TagTable);
 
   return (
     <aside className={styles.aside}>
       <h2>Tags</h2>
       <div className={styles.flexRow}>
-        {allTags.map((tag) => (
-          <PrimaryLink key={tag.id} href={`/blog/tags/${tag.name}`}>
-            #{tag.name}
-          </PrimaryLink>
-        ))}
+        {tags ?
+          tags.map((tag) => (
+            <PrimaryLink key={tag.name} href={`/blog/tags/${tag.name}`}>
+              #{tag.name}
+            </PrimaryLink>
+          ))
+        : <TagSkeleton />}
       </div>
     </aside>
   );

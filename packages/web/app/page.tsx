@@ -34,16 +34,8 @@ export default function Home() {
 
           <h2 className={styles.heading}>News</h2>
           <p>
-            I'm hard at work migrating to DynamoDB, Amazon's serverless database
-            service!
-          </p>
-          <p>
-            Until then, Amazon RDS will automatically pause to save on operating
-            costs between periods of activity on the site.
-          </p>
-          <p>
-            Please be patient while RDS resumes which can take up to 1 minute.
-            Sorry for the inconvenience, I promise this will be worth it!
+            The migration to DynamoDB is complete. I hope you enjoy the new and
+            improved experience, I know my wallet will!
           </p>
         </div>
         <div className={styles.greetingRight}>

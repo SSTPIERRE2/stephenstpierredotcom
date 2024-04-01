@@ -3,21 +3,21 @@
 import styles from './Upvotes.module.css';
 import { ThumbsUp } from 'react-feather';
 import clsx from 'clsx';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import debounce from '@/utils/debounce';
 import VisuallyHidden from '../VisuallyHidden';
 
 interface Props {
-  votes: number;
-  incrementVotes: () => Promise<void>;
+  initialVotes: number;
+  incrementVotes: () => Promise<number>;
   className?: string;
 }
 
 const MAX_VOTES = 16;
 
-const Upvotes = ({ votes, className, incrementVotes }: Props) => {
+const Upvotes = ({ initialVotes, className, incrementVotes }: Props) => {
   const [isPending, setIsPending] = useState(false);
-  const [optimisticVotes, setOptimisticVotes] = useState(votes);
+  const [optimisticVotes, setOptimisticVotes] = useState(initialVotes);
   const isMaxedOut = optimisticVotes === MAX_VOTES;
 
   const stableDebouncedHandleIncrementVotes = useCallback(
@@ -27,10 +27,6 @@ const Upvotes = ({ votes, className, incrementVotes }: Props) => {
     }, 300),
     [],
   );
-
-  useEffect(() => {
-    setOptimisticVotes(votes);
-  }, [votes]);
 
   return (
     <button

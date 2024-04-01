@@ -1,62 +1,56 @@
 'use client';
 
 import styles from './PostGallery.module.css';
-import { PublishedPostWithTags } from '@core/post';
+import { PublishedPost } from '@core/post-dynamo';
 import PostCard from '@/components/PostCard';
 import { useEffect, useState } from 'react';
 import PostSkeletonGallery from '../PostSkeletonGallery';
-// import useAbortController from '@/hooks/useAbortController';
+import LogRocket from 'logrocket';
+import { toErrorWithMessage } from '@/utils/getError';
 
 interface Props {
-  getPosts: Function;
+  getPosts: () => Promise<PublishedPost[]>;
+  numSkeletonPosts: number;
 }
 
-const PostGallery = ({ getPosts }: Props) => {
-  // const signal = useAbortController();
-  const [posts, setPosts] = useState<PublishedPostWithTags[]>([]);
+const PostGallery = ({ getPosts, numSkeletonPosts }: Props) => {
+  const [posts, setPosts] = useState<PublishedPost[]>();
 
   useEffect(() => {
     const getData = async () => {
-      // return new Promise((resolve) => {
-      //   setTimeout(async () => {
-      console.log(`PostGallery getting posts...`);
       const data = await getPosts();
-      console.log(`PostGallery got posts`, data);
 
-      if (!!data && data.length) {
-        setPosts(data);
-      }
-      //     resolve();
-      //   }, 5000);
-      // });
+      setPosts(data);
     };
 
-    getData();
+    try {
+      getData();
+    } catch (err) {
+      LogRocket.captureException(toErrorWithMessage(err));
+    }
   }, []);
 
-  if (!!posts && posts.length) {
-    return (
-      <div className={styles.gallery}>
-        {posts.map((post) => {
-          const { id, title, slug, published_on, abstract, tags, updated } =
+  return (
+    <div className={styles.gallery}>
+      {posts ?
+        posts.map((post) => {
+          const { id, title, slug, publishedOn, abstract, tags, updated } =
             post;
           return (
             <PostCard
               key={id}
               title={title}
               slug={slug}
-              publishedOn={published_on}
+              publishedOn={publishedOn}
               abstract={abstract}
               tags={tags}
               updated={updated}
             />
           );
-        })}
-      </div>
-    );
-  }
-
-  return <PostSkeletonGallery />;
+        })
+      : <PostSkeletonGallery numPosts={numSkeletonPosts} />}
+    </div>
+  );
 };
 
 export default PostGallery;

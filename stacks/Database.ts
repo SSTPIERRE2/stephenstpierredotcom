@@ -1,15 +1,45 @@
-import { RDS, StackContext } from 'sst/constructs';
+import { Table, Script, StackContext } from 'sst/constructs';
 
 export function Database({ stack }: StackContext) {
-  const rds = new RDS(stack, 'db', {
-    engine: 'postgresql11.13',
-    defaultDatabaseName: 'main',
-    migrations: 'packages/core/migrations',
-    types: 'packages/core/src/sql.generated.ts',
-    scaling: {
-      autoPause: stack.stage === 'prod' ? 30 : true,
+  const PostTable = new Table(stack, 'Post', {
+    fields: {
+      id: 'string',
+      title: 'string',
+      slug: 'string',
+      abstract: 'string',
+      content: 'string',
+      isPublished: 'number',
+      publishedOn: 'string',
+      created: 'string',
+      updated: 'string',
+      views: 'number',
+      likes: 'number',
+      tags: 'string',
+    },
+    primaryIndex: { partitionKey: 'id' },
+    globalIndexes: {
+      SlugIndex: { partitionKey: 'slug' },
+      IsPublishedIndex: { partitionKey: 'isPublished' },
     },
   });
+  const TagTable = new Table(stack, 'Tag', {
+    fields: {
+      name: 'string',
+      created: 'string',
+    },
+    primaryIndex: { partitionKey: 'name' },
+  });
 
-  return rds;
+  new Script(stack, 'seed-db', {
+    defaults: {
+      function: {
+        bind: [PostTable, TagTable],
+        copyFiles: [{ from: 'packages/functions/content', to: './content' }],
+      },
+    },
+    onCreate: 'packages/functions/src/seed.onCreate',
+    onUpdate: 'packages/functions/src/seed.onUpdate',
+  });
+
+  return { PostTable, TagTable };
 }

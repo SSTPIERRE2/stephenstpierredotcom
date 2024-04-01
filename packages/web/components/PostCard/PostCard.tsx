@@ -9,22 +9,13 @@ interface Props {
   title: string;
   slug: string;
   abstract: string;
-  publishedOn: string | null;
-  updated: Date | null;
+  publishedOn: string;
   tags: string[];
+  // Only use updated for big updates
+  updated: string | undefined;
 }
 
-const PostCard = ({
-  title,
-  slug,
-  abstract,
-  publishedOn,
-  tags,
-  updated,
-}: Props) => {
-  const displayDate =
-    updated ? new Date(updated) : new Date(publishedOn as string);
-
+const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
   return (
     <article className={styles.wrapper}>
       <div className={styles.content}>
@@ -33,7 +24,7 @@ const PostCard = ({
         </Link>
 
         <span className={styles.publishDate}>
-          {dayjs.utc(displayDate).format('MMMM D, YYYY')}
+          {dayjs.utc(new Date(publishedOn)).format('MMMM D, YYYY')}
         </span>
         <div className={styles.tagList}>
           {tags.map((tag) => (

@@ -1,5 +1,8 @@
-import { Post } from '@core/post';
+import { Post } from '@core/post-dynamo';
 import RSS from 'rss';
+import { Table } from 'sst/node/table';
+
+const PostTable = Table.Post.tableName;
 
 export default async function generateRssFeed() {
   const site_url =
@@ -7,7 +10,7 @@ export default async function generateRssFeed() {
       'https://StephenStPierre.com'
     : 'localhost:3000';
 
-  const posts = await Post.getPublishedPostsWithTags();
+  const posts = await Post.queryPublished(PostTable);
 
   const feedOptions = {
     title: 'Stephen St.Pierre Codes',
@@ -28,7 +31,7 @@ export default async function generateRssFeed() {
       title: post.title,
       description: post.abstract,
       url: `${site_url}/blog/${post.slug}`,
-      date: post.published_on,
+      date: post.publishedOn,
       categories: post.tags || [],
       author: 'Stephen St.Pierre',
     });
