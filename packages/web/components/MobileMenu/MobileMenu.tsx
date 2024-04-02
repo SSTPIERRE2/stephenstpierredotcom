@@ -73,9 +73,9 @@ const MobileMenu = () => {
                     style={{
                       transform:
                         isMobileMenuOpen ? 'translateX(0%)' : (
-                          'translateX(-100%)'
+                          'translateX(-125%)'
                         ),
-                      transition: 'transform 300ms',
+                      transition: 'transform 350ms',
                       transitionDelay:
                         isMobileMenuOpen ? `${index * 100}ms` : '0ms',
                     }}

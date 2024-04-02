@@ -5,7 +5,7 @@ const PostCardSkeleton = () => {
   return (
     <section className={styles.wrapper}>
       <h2>
-        <Skeleton height={50} width={300} />
+        <Skeleton height={50} width="85%" />
       </h2>
 
       {/* Publish date */}
@@ -15,12 +15,12 @@ const PostCardSkeleton = () => {
 
       {/* Tag list */}
       <div>
-        <Skeleton height={20} width={250} />
+        <Skeleton height={20} width="60%" />
       </div>
 
       {/* Abstract */}
       <p>
-        <Skeleton height={100} width={400} />
+        <Skeleton height={100} />
       </p>
 
       {/* Read more */}
