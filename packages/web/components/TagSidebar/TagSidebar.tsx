@@ -2,12 +2,9 @@ import PrimaryLink from '../PrimaryLink';
 import TagSkeleton from '../TagSkeleton';
 import styles from './TagSidebar.module.css';
 import { Tag } from '@core/tag';
-import { Table } from 'sst/node/table';
-
-const TagTable = Table.Tag.tableName;
 
 const TagList = async () => {
-  const tags = await Tag.list(TagTable);
+  const tags = await Tag.list();
 
   return (
     <aside className={styles.aside}>

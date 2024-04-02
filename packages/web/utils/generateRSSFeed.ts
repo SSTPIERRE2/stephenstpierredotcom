@@ -1,8 +1,5 @@
 import { Post } from '@core/post';
 import RSS from 'rss';
-import { Table } from 'sst/node/table';
-
-const PostTable = Table.Post.tableName;
 
 export default async function generateRssFeed() {
   const site_url =
@@ -10,7 +7,7 @@ export default async function generateRssFeed() {
       'https://StephenStPierre.com'
     : 'localhost:3000';
 
-  const posts = await Post.queryPublished(PostTable);
+  const posts = await Post.queryPublished();
 
   const feedOptions = {
     title: 'Stephen St.Pierre Codes',

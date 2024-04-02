@@ -2,42 +2,35 @@ import { Post } from '@core/post';
 import { afterAll, beforeAll, expect, it, describe } from 'vitest';
 import { onCreate, onUpdate } from './seed';
 import { Tag } from '@core/tag';
-import { Table } from 'sst/node/table';
-
-const PostTable = Table.Post.tableName;
-const TagTable = Table.Tag.tableName;
 
 describe.sequential('onCreate stack, followed by onUpdate', () => {
   beforeAll(async () => {
-    await Post.deleteAll(PostTable);
-    await Tag.deleteAll(TagTable);
+    await Post.deleteAll();
+    await Tag.deleteAll();
   });
 
   afterAll(async () => {
-    await Post.deleteAll(PostTable);
-    await Tag.deleteAll(TagTable);
+    await Post.deleteAll();
+    await Tag.deleteAll();
   });
 
   it('Seeds with all posts and post tags', async () => {
     await onCreate();
 
-    const post = await Post.getBySlug(PostTable, 'test-post');
+    const post = await Post.getBySlug('test-post');
     expect(post).toBeDefined();
 
-    const tag = await Tag.getByName(TagTable, 'javascript');
+    const tag = await Tag.getByName('javascript');
     expect(tag).toBeDefined();
   });
 
   it('Updates posts with new content/abstract/published status, creates new tags and post tags as needed, deletes old post tags, and deletes any renamed posts and relations', async () => {
-    const oldDbRenamedPost = await Post.getBySlug(
-      PostTable,
-      'post-to-be-renamed',
-    );
+    const oldDbRenamedPost = await Post.getBySlug('post-to-be-renamed');
     expect(oldDbRenamedPost).toBeDefined();
 
     await onUpdate();
 
-    const post = await Post.getBySlug(PostTable, 'test-post');
+    const post = await Post.getBySlug('test-post');
     expect(post).toBeDefined();
 
     const isContentUpdated = post?.content.includes(
@@ -57,18 +50,15 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
 
     expect(post?.tags).toHaveLength(2);
 
-    const jsTag = await Tag.getByName(TagTable, 'javascript');
+    const jsTag = await Tag.getByName('javascript');
     expect(jsTag).toBeDefined();
-    const expectedTags = await Tag.getAllByNames(TagTable, ['react', 'nextjs']);
+    const expectedTags = await Tag.getAllByNames(['react', 'nextjs']);
     expect(expectedTags).toHaveLength(2);
 
-    const oldRenamedPost = await Post.getBySlug(
-      PostTable,
-      'post-to-be-renamed',
-    );
+    const oldRenamedPost = await Post.getBySlug('post-to-be-renamed');
     expect(oldRenamedPost).not.toBeDefined();
 
-    const renamedPost = await Post.getBySlug(PostTable, 'post-renamed');
+    const renamedPost = await Post.getBySlug('post-renamed');
 
     expect(renamedPost).toBeDefined();
     expect(renamedPost?.tags).toHaveLength(1);

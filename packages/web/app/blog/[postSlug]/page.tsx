@@ -14,15 +14,11 @@ import TableOfContents from '@/components/TableOfContents';
 import SupportingLink from '@/components/SupportingLink';
 import slugify from '@/utils/slugify';
 import dayjs from '@/utils/extendedDayJs';
-import { Table } from 'sst/node/table';
 import LogRocket from 'logrocket';
-// import Loading from './loading';
 import PostMetadata from './PostMetadata';
 
-const PostTable = Table.Post.tableName;
-
 const getPostMetadata = cache(async (postSlug: string) => {
-  const post = await Post.getBySlug(PostTable, postSlug);
+  const post = await Post.getBySlug(postSlug);
 
   if (post) {
     const htmlContent = await marked(post.content);
@@ -58,19 +54,6 @@ const getPostMetadata = cache(async (postSlug: string) => {
   }
 });
 
-// export async function generateMetadata({
-//   params: { postSlug },
-// }: {
-//   params: { postSlug: string };
-// }) {
-//   const { title, abstract } = await getPostMetadata(postSlug);
-
-//   return {
-//     title: `${title} • StephenStPierre.com`,
-//     description: abstract,
-//   };
-// }
-
 export const metadata = {
   title: `Loading... • StephenStPierre.com`,
   description: 'Post is loading...',
@@ -93,24 +76,6 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     links,
     likes,
   } = await getPostMetadata(postSlug);
-
-  // if (!post) {
-  //   return <Loading />;
-  // }
-
-  // const {
-  //   id,
-  //   title,
-  //   slug,
-  //   publishedOn,
-  //   content,
-  //   views,
-  //   created,
-  //   updated,
-  //   tags,
-  //   links,
-  //   likes,
-  // } = post;
 
   return (
     <>

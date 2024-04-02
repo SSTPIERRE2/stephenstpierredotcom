@@ -1,10 +1,6 @@
 import { Post, PostToCreate } from '@core/post';
 import { Tag } from '@core/tag';
 import { BlogPost, getBlogPosts } from './utils/file-helpers';
-import { Table } from 'sst/node/table';
-
-const PostTable = Table.Post.tableName;
-const TagTable = Table.Tag.tableName;
 
 const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
   const { publishedOn, tags, ...post } = blogPost;
@@ -33,16 +29,16 @@ const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
     postToCreate.publishedOn = new Date(publishedOn).toISOString();
   }
 
-  await Post.create(PostTable, postToCreate);
+  await Post.create(postToCreate);
 };
 
 const handleCreateTag = async (name: string) => {
-  const dbTag = await Tag.getByName(TagTable, name);
+  const dbTag = await Tag.getByName(name);
   console.log(`handleCreateTag`, dbTag);
 
   if (!dbTag) {
     console.log(`no tag exists, need to create a new one`);
-    const created = await Tag.create(TagTable, name);
+    const created = await Tag.create(name);
     console.log(`createdTag`, created);
     return created?.name;
   }
@@ -77,7 +73,7 @@ export const onUpdate = async () => {
   }, {});
   const postSlugs = Object.keys(postSlugMap);
 
-  const dbPosts = await Post.getAllBySlugs(PostTable, postSlugs);
+  const dbPosts = await Post.getAllBySlugs(postSlugs);
   const dbPostSlugMap = (dbPosts || []).reduce(
     (acc: Record<string, Post>, curr) => {
       console.log(`looping thru dbPostSlugMap`, curr);
@@ -162,18 +158,18 @@ export const onUpdate = async () => {
     }
   }
 
-  const allDbPosts = await Post.list(PostTable);
+  const allDbPosts = await Post.list();
   // loop over db posts and delete any that don't have a local copy, meaning they were likely renamed
   for (const post of allDbPosts) {
     console.log(`looping dbPostSlugs`, post.slug);
 
     if (!postSlugMap[post.slug]) {
-      await Post.deleteById(PostTable, post.id);
+      await Post.deleteById(post.id);
     }
   }
 
   console.log(`posts to update`, postsToUpdate);
   for (const post of postsToUpdate) {
-    await Post.update(PostTable, post);
+    await Post.update(post);
   }
 };

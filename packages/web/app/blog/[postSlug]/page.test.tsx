@@ -43,6 +43,9 @@ vi.mock('@/components/PageViews', () => ({
 vi.mock('@/components/TableOfContents', () => ({
   default: vi.fn(),
 }));
+vi.mock('./PostMetadata.tsx', () => ({
+  default: vi.fn(),
+}));
 
 it('renders a published post', async () => {
   vi.spyOn(Post, 'getBySlug').mockImplementation(

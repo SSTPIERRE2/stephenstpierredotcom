@@ -1,9 +1,6 @@
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
 import { Post } from '@core/post';
-import { Table } from 'sst/node/table';
-
-const PostTable = Table.Post.tableName;
 
 interface Props {
   id: string;
@@ -23,7 +20,7 @@ const getDisplay = (views: number) => {
 };
 
 const PageViews = async ({ id, initialViews }: Props) => {
-  const views = await Post.increment(PostTable, id, 'views');
+  const views = await Post.increment(id, 'views');
 
   return (
     <div className={styles.wrapper}>

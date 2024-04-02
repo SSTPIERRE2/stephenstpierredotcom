@@ -9,6 +9,9 @@ import {
   PutCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
+import { Table } from 'sst/node/table';
+
+const TagTable = Table.Tag.tableName;
 
 export interface Tag {
   name: string;
@@ -18,9 +21,9 @@ export interface Tag {
 const client = new DynamoDBClient();
 const docClient = DynamoDBDocumentClient.from(client);
 
-export async function create(tableName: string, name: string) {
+export async function create(name: string) {
   const command = new PutCommand({
-    TableName: tableName,
+    TableName: TagTable,
     Item: {
       name,
       created: new Date().toISOString(),
@@ -29,14 +32,14 @@ export async function create(tableName: string, name: string) {
 
   await docClient.send(command);
 
-  const created = await getByName(tableName, name);
+  const created = await getByName(name);
 
   return created;
 }
 
-export async function getByName(tableName: string, name: string) {
+export async function getByName(name: string) {
   const command = new GetCommand({
-    TableName: tableName,
+    TableName: TagTable,
     Key: {
       name,
     },
@@ -46,12 +49,12 @@ export async function getByName(tableName: string, name: string) {
   return response['Item'];
 }
 
-export async function getAllByNames(tableName: string, names: string[]) {
+export async function getAllByNames(names: string[]) {
   const Keys = names.map((name) => ({ name }));
 
   const command = new BatchGetCommand({
     RequestItems: {
-      [tableName]: {
+      [TagTable]: {
         Keys,
       },
     },
@@ -60,24 +63,24 @@ export async function getAllByNames(tableName: string, names: string[]) {
   const result = await docClient.send(command);
   const responses = result['Responses'] || {};
 
-  return responses[tableName];
+  return responses[TagTable];
 }
 
-export async function list(tableName: string) {
+export async function list() {
   const command = new ScanCommand({
-    TableName: tableName,
+    TableName: TagTable,
   });
   const result = await docClient.send(command);
 
   return result.Items || [];
 }
 
-export async function deleteAll(tableName: string) {
-  const tags = await list(tableName);
+export async function deleteAll() {
+  const tags = await list();
 
   for (const tag of tags) {
     const deleteCommand = new DeleteCommand({
-      TableName: tableName,
+      TableName: TagTable,
       Key: {
         name: tag.name,
       },

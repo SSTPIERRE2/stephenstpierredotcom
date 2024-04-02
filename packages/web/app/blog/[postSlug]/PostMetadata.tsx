@@ -17,10 +17,11 @@ const PostMetadata = ({ title, abstract, tags }: Props) => {
       const description = document.createElement('meta');
       description.name = 'description';
       description.content = abstract;
+      head.appendChild(description);
+
       const keywords = document.createElement('meta');
       keywords.name = 'keywords';
       keywords.content = tags.join(',');
-      head.appendChild(description);
       head.appendChild(keywords);
     }
   }, [title, abstract, tags]);

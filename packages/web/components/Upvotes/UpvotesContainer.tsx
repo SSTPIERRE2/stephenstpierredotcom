@@ -1,8 +1,5 @@
 import { Post } from '@core/post';
 import Upvotes from './Upvotes';
-import { Table } from 'sst/node/table';
-
-const PostTable = Table.Post.tableName;
 
 interface Props {
   postId: string;
@@ -14,7 +11,7 @@ const UpvotesContainer = ({ postId, initialVotes, className }: Props) => {
   async function incrementVotes() {
     'use server';
 
-    const updated = await Post.increment(PostTable, postId, 'likes');
+    const updated = await Post.increment(postId, 'likes');
     return updated;
   }
 
