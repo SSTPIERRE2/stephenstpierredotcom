@@ -16,6 +16,8 @@ import slugify from '@/utils/slugify';
 import dayjs from '@/utils/extendedDayJs';
 import { Table } from 'sst/node/table';
 import LogRocket from 'logrocket';
+// import Loading from './loading';
+import PostMetadata from './PostMetadata';
 
 const PostTable = Table.Post.tableName;
 
@@ -56,18 +58,23 @@ const getPostMetadata = cache(async (postSlug: string) => {
   }
 });
 
-export async function generateMetadata({
-  params: { postSlug },
-}: {
-  params: { postSlug: string };
-}) {
-  const { title, abstract } = await getPostMetadata(postSlug);
+// export async function generateMetadata({
+//   params: { postSlug },
+// }: {
+//   params: { postSlug: string };
+// }) {
+//   const { title, abstract } = await getPostMetadata(postSlug);
 
-  return {
-    title: `${title} • StephenStPierre.com`,
-    description: abstract,
-  };
-}
+//   return {
+//     title: `${title} • StephenStPierre.com`,
+//     description: abstract,
+//   };
+// }
+
+export const metadata = {
+  title: `Loading... • StephenStPierre.com`,
+  description: 'Post is loading...',
+};
 
 const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
@@ -75,6 +82,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   const {
     id,
     title,
+    abstract,
     slug,
     publishedOn,
     content,
@@ -86,8 +94,27 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
     likes,
   } = await getPostMetadata(postSlug);
 
+  // if (!post) {
+  //   return <Loading />;
+  // }
+
+  // const {
+  //   id,
+  //   title,
+  //   slug,
+  //   publishedOn,
+  //   content,
+  //   views,
+  //   created,
+  //   updated,
+  //   tags,
+  //   links,
+  //   likes,
+  // } = post;
+
   return (
     <>
+      <PostMetadata title={title} abstract={abstract} tags={tags} />
       <div className={styles.hero}>
         <div className={styles.heroWrapper}>
           <h1 id="title" className={styles.title}>
