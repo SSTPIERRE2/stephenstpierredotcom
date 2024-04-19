@@ -28,7 +28,7 @@ export default async function generateRssFeed() {
       title: post.title,
       description: post.abstract,
       url: `${site_url}/blog/${post.slug}`,
-      date: post.publishedOn,
+      date: new Date(post.publishedOn).toISOString(),
       categories: post.tags || [],
       author: 'Stephen St.Pierre',
     });
