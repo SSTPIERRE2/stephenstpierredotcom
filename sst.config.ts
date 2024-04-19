@@ -10,6 +10,6 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(Database);
+    app.stack(Database).stack(Web);
   },
 } satisfies SSTConfig;
