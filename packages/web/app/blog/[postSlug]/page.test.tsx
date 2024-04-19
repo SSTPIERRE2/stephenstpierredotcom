@@ -59,7 +59,7 @@ it('renders a published post', async () => {
         views: 0,
         likes: 0,
         tags: ['javascript'],
-        publishedOn: new Date('2024-01-26 EST'),
+        publishedOn: new Date('2024-01-26 EST').valueOf(),
         isPublished: 1,
         created: new Date('2024-01-26 EST'),
         updated: null,

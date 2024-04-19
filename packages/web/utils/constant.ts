@@ -5,6 +5,7 @@ export type THEME = 'light' | 'dark';
 export const LIGHT_COLORS = {
   '--color-text': '#030712',
   '--color-text-supporting': 'var(--color-gray-600)',
+  '--color-text-on-primary': 'var(--color-gray-100)',
   '--color-background': '#FFFFFF',
   '--color-background-accent': 'var(--color-gray-200)',
   '--color-backdrop': 'hsla(0deg, 0%, 100%, 0.75)',
@@ -98,6 +99,7 @@ export const LIGHT_COLORS = {
 export const DARK_COLORS = {
   '--color-text': '#f8fafc',
   '--color-text-supporting': 'var(--color-gray-400)',
+  '--color-text-on-primary': 'var(--color-gray-1000)',
   '--color-background': '#0f172a',
   '--color-background-accent': '#1e293b',
   '--color-backdrop': 'hsla(222, 47%, 11%, 0.85)',
@@ -117,7 +119,7 @@ export const DARK_COLORS = {
   '--color-primary-accent': 'var(--color-primary-900)',
 
   '--color-secondary': '#a855f7',
-  '--color-accent': '#ec4899',
+  '--color-accent': '#ea0081',
 
   '--color-info': '#3b82f6',
   '--color-success': '#84cc16',

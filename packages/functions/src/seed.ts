@@ -2,15 +2,19 @@ import { Post, PostToCreate } from '@core/post';
 import { Tag } from '@core/tag';
 import { BlogPost, getBlogPosts } from './utils/file-helpers';
 
-const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
+const handleCreatePostAndRelations = async (
+  blogPost: Omit<BlogPost, 'publishedOn'> & {
+    publishedOn?: string | number;
+  },
+) => {
   const { publishedOn, tags, ...post } = blogPost;
   const tagIds = [];
 
   console.log(
     `about to create a new post`,
     post.slug,
-    post.isPublished,
     publishedOn,
+    typeof publishedOn,
     tags,
   );
 
@@ -26,8 +30,14 @@ const handleCreatePostAndRelations = async (blogPost: BlogPost) => {
 
   if (publishedOn) {
     // Since we're not concerned with the exact time a post is published at, we store it in UTC and just need to remember to output it in UTC
-    postToCreate.publishedOn = new Date(publishedOn).toISOString();
+    // Storing the primitive value so we can sort by publish date in DynamoDB
+    postToCreate.publishedOn =
+      typeof publishedOn === 'string' ?
+        new Date(publishedOn).valueOf()
+      : publishedOn;
   }
+
+  console.log(`Creating post`, postToCreate);
 
   await Post.create(postToCreate);
 };
@@ -65,8 +75,6 @@ export const onUpdate = async () => {
     process.env.NODE_ENV === 'test' ? './test/content/updated' : undefined,
   );
 
-  // console.log(`read the posts`, posts);
-
   const postSlugMap = posts.reduce((acc: Record<string, BlogPost>, curr) => {
     acc[curr.slug] = curr;
     return acc;
@@ -96,41 +104,39 @@ export const onUpdate = async () => {
         abstract,
         tags,
         isPublished,
-        publishedOn,
+        publishedOn: postPublishedOn,
       } = postSlugMap[s];
+      const publishedOn =
+        postPublishedOn ? new Date(postPublishedOn).valueOf() : undefined;
       const {
-        id: dbPostId,
         abstract: dbPostAbstract,
         content: dbPostContent,
         isPublished: dbPostIsPublished,
+        publishedOn: dbPostPublishedOn,
         tags: dbPostTags,
       } = dbPostSlugMap[s];
       const postToUpdate: Partial<Post> = {};
 
-      console.log(`post is already in db`, dbPostId);
+      console.log(`post is already in db`, s);
 
       if (dbPostContent !== postContent) {
         console.log(`content changed...`);
         postToUpdate.content = postContent;
       }
 
-      // Intentional loose equality check for isPublished since it will be undefined in frontmatter, but null in the db
-      // update: WIP not sure if need number or can use boolean, but we could actually use an enum to work with the number type for many different post types anyway
-
-      if (isPublished !== dbPostIsPublished && publishedOn) {
-        postToUpdate.isPublished = isPublished;
-        console.log(
-          `isPublished changed...`,
-          isPublished,
-          dbPostIsPublished,
-          publishedOn,
-        );
-        postToUpdate.publishedOn = new Date(publishedOn).toISOString();
-      }
-
       if (abstract !== dbPostAbstract) {
         console.log(`abstract changed...`);
         postToUpdate.abstract = abstract;
+      }
+
+      if (isPublished !== dbPostIsPublished) {
+        console.log(`isPublished changed...`);
+        postToUpdate.isPublished = isPublished;
+      }
+
+      if (publishedOn !== dbPostPublishedOn) {
+        console.log(`publishedOn changed...`, publishedOn, dbPostPublishedOn);
+        postToUpdate.publishedOn = publishedOn;
       }
 
       const didTagsChange = tags.some((tag) => !dbPostTags.includes(tag));
@@ -164,7 +170,7 @@ export const onUpdate = async () => {
     console.log(`looping dbPostSlugs`, post.slug);
 
     if (!postSlugMap[post.slug]) {
-      await Post.deleteById(post.id);
+      await Post.deleteByPk(post.slug);
     }
   }
 

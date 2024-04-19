@@ -57,6 +57,20 @@
   color: var(--color-text-supporting);
 }
 
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newIndicator {
+  color: var(--color-gray-100);
+  padding: 0.25rem 0.5rem;
+  background: var(--color-accent);
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  font-weight: var(--font-weight-medium);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .readMoreArrow {
     animation: 1000ms bounceRight infinite alternate ease-in-out;

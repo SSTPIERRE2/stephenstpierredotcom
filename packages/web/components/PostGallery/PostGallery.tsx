@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './PostGallery.module.css';
-import { PublishedPost } from '@core/post';
+import { Post } from '@core/post';
 import PostCard from '@/components/PostCard';
 import { useEffect, useState } from 'react';
 import PostSkeletonGallery from '../PostSkeletonGallery';
@@ -9,12 +9,12 @@ import LogRocket from 'logrocket';
 import { toErrorWithMessage } from '@/utils/getError';
 
 interface Props {
-  getPosts: () => Promise<PublishedPost[]>;
+  getPosts: () => Promise<Post[]>;
   numSkeletonPosts: number;
 }
 
 const PostGallery = ({ getPosts, numSkeletonPosts }: Props) => {
-  const [posts, setPosts] = useState<PublishedPost[]>();
+  const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
     const getData = async () => {
@@ -34,11 +34,10 @@ const PostGallery = ({ getPosts, numSkeletonPosts }: Props) => {
     <div className={styles.gallery}>
       {posts ?
         posts.map((post) => {
-          const { id, title, slug, publishedOn, abstract, tags, updated } =
-            post;
+          const { title, slug, publishedOn, abstract, tags, updated } = post;
           return (
             <PostCard
-              key={id}
+              key={slug}
               title={title}
               slug={slug}
               publishedOn={publishedOn}

@@ -31,12 +31,6 @@ export default function Home() {
               view my resume
             </PrimaryNewTabLink>
           </p>
-
-          <h2 className={styles.heading}>News</h2>
-          <p>
-            The migration to DynamoDB is complete! I hope you enjoy the new and
-            improved experience. Expect a new blog post soon.
-          </p>
         </div>
         <div className={styles.greetingRight}>
           <div className={styles.retroSunWrapper}>

@@ -9,13 +9,16 @@ interface Props {
   title: string;
   slug: string;
   abstract: string;
-  publishedOn: string;
+  publishedOn: number;
   tags: string[];
   // Only use updated for big updates
   updated: string | undefined;
 }
 
 const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
+  const newThreshold = dayjs().subtract(2, 'weeks');
+  const isNew = dayjs(publishedOn).isSameOrAfter(newThreshold);
+
   return (
     <article className={styles.wrapper}>
       <div className={styles.content}>
@@ -34,14 +37,17 @@ const PostCard = ({ title, slug, abstract, publishedOn, tags }: Props) => {
           ))}
         </div>
         <p>{abstract}</p>
-        <Link
-          href={`/blog/${slug}`}
-          className={styles.readMore}
-          prefetch={false}
-        >
-          Read more <VisuallyHidden>about this post</VisuallyHidden>
-          <ArrowRight className={styles.readMoreArrow} size="1.25rem" />
-        </Link>
+        <div className={styles.bottomRow}>
+          <Link
+            href={`/blog/${slug}`}
+            className={styles.readMore}
+            prefetch={false}
+          >
+            Read more <VisuallyHidden>about this post</VisuallyHidden>
+            <ArrowRight className={styles.readMoreArrow} size="1.25rem" />
+          </Link>
+          {isNew && <div className={styles.newIndicator}>New!</div>}
+        </div>
       </div>
     </article>
   );

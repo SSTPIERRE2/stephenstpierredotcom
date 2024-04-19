@@ -3,7 +3,7 @@ import styles from './PageViews.module.css';
 import { Post } from '@core/post';
 
 interface Props {
-  id: string;
+  postSlug: string;
   initialViews: number;
 }
 
@@ -19,8 +19,8 @@ const getDisplay = (views: number) => {
   return display + views;
 };
 
-const PageViews = async ({ id, initialViews }: Props) => {
-  const views = await Post.increment(id, 'views');
+const PageViews = async ({ postSlug, initialViews }: Props) => {
+  const views = await Post.increment(postSlug, 'views');
 
   return (
     <div className={styles.wrapper}>

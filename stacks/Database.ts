@@ -2,24 +2,16 @@ import { Table, Script, StackContext } from 'sst/constructs';
 
 export function Database({ stack }: StackContext) {
   const PostTable = new Table(stack, 'Post', {
+    // We only need to specify a field/attribute that is used as a partitionKey or sortKey, otherwise the data type is inferred
     fields: {
-      id: 'string',
-      title: 'string',
       slug: 'string',
-      abstract: 'string',
-      content: 'string',
       isPublished: 'number',
-      publishedOn: 'string',
-      created: 'string',
-      updated: 'string',
-      views: 'number',
-      likes: 'number',
-      tags: 'string',
+      publishedOn: 'number',
     },
-    primaryIndex: { partitionKey: 'id' },
+    primaryIndex: { partitionKey: 'slug' },
     globalIndexes: {
-      SlugIndex: { partitionKey: 'slug' },
-      IsPublishedIndex: { partitionKey: 'isPublished' },
+      // Get published (or unpublished) posts, automatically sorted in descending order
+      isPublishedIndex: { partitionKey: 'isPublished', sortKey: 'publishedOn' },
     },
   });
   const TagTable = new Table(stack, 'Tag', {
