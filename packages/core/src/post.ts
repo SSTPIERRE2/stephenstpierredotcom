@@ -1,22 +1,21 @@
 export * as Post from './post';
 
-import { ulid } from 'ulid';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DeleteCommand,
   DynamoDBDocumentClient,
-  GetCommand,
   PutCommand,
   ScanCommand,
   QueryCommand,
   UpdateCommand,
+  QueryCommandInput,
+  GetCommand,
 } from '@aws-sdk/lib-dynamodb';
 import { Table } from 'sst/node/table';
 
 const PostTable = Table.Post.tableName;
 
 export interface Post {
-  id: string;
   title: string;
   slug: string;
   abstract: string;
@@ -24,32 +23,36 @@ export interface Post {
   views: number;
   likes: number;
   tags: string[];
-  isPublished: 1 | 0;
   created: string;
-  publishedOn?: string;
+  isPublished: 1 | 0;
+  publishedOn: number;
   updated?: string;
 }
-
-export type PublishedPost = Post & { isPublished: 1; publishedOn: string };
 
 const client = new DynamoDBClient();
 const docClient = DynamoDBDocumentClient.from(client);
 
 export type PostToCreate = Pick<
   Post,
-  'title' | 'slug' | 'abstract' | 'content' | 'tags' | 'publishedOn' | 'updated'
->;
+  'title' | 'slug' | 'abstract' | 'content' | 'tags' | 'updated'
+> & {
+  isPublished?: 1 | 0;
+  publishedOn?: number;
+  views?: number;
+  likes?: number;
+};
 
-export async function create(
-  post: PostToCreate & { isPublished?: 1 | 0; views?: number; likes?: number },
-) {
-  const id = ulid();
+export type PostToUpdate = Partial<Post> & {
+  slug: string;
+};
+
+export async function create(post: PostToCreate) {
   const command = new PutCommand({
     TableName: PostTable,
     Item: {
-      id,
       ...post,
       isPublished: post.isPublished || 0,
+      publishedOn: post.publishedOn || 0,
       views: post.views || 0,
       likes: post.likes || 0,
       created: new Date().toISOString(),
@@ -58,38 +61,23 @@ export async function create(
 
   await docClient.send(command);
 
-  const created = await getById(id);
+  const created = await getBySlug(post.slug);
 
   return created;
 }
 
-export async function getById(id: string) {
+export async function getBySlug(slug: string) {
   const command = new GetCommand({
     TableName: PostTable,
     Key: {
-      id,
+      slug,
     },
   });
 
   const response = await docClient.send(command);
+  const result = response['Item'];
 
-  return response['Item'];
-}
-
-export async function getBySlug(slug: string) {
-  const command = new QueryCommand({
-    TableName: PostTable,
-    IndexName: 'SlugIndex',
-    KeyConditionExpression: 'slug = :slug',
-    ExpressionAttributeValues: {
-      ':slug': slug,
-    },
-  });
-
-  const response = await docClient.send(command);
-  const result = response['Items'] || [];
-
-  return result[0] as Post | undefined;
+  return result as Post | undefined;
 }
 
 export async function getAllBySlugs(slugs: string[]) {
@@ -110,38 +98,42 @@ export async function list() {
   });
   const result = await docClient.send(command);
 
-  return result.Items || [];
+  return (result.Items || []) as Post[];
 }
 
 export async function queryPublished(tag?: string) {
-  const command = new QueryCommand({
+  const ExpressionAttributeValues: Record<string, number | string> = {
+    ':isPublished': 1,
+  };
+  const commandInput: QueryCommandInput = {
     TableName: PostTable,
-    IndexName: 'IsPublishedIndex',
-    KeyConditionExpression: 'isPublished = :val',
-    ExpressionAttributeValues: {
-      ':val': 1,
-    },
-  });
+    IndexName: 'isPublishedIndex',
+    KeyConditionExpression: 'isPublished = :isPublished',
+    ExpressionAttributeValues,
+    ScanIndexForward: false,
+  };
+
+  if (tag) {
+    commandInput.FilterExpression = 'contains(tags, :tag)';
+    ExpressionAttributeValues[':tag'] = tag;
+  }
+
+  const command = new QueryCommand(commandInput);
 
   const result = await docClient.send(command);
 
-  let posts = (result.Items || []) as PublishedPost[];
+  const posts = result.Items || [];
 
-  if (tag) {
-    posts = posts.filter((post) => post.tags.includes(tag));
-  }
-
-  posts.sort(
-    (a, b) =>
-      new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime(),
-  );
-
-  return posts;
+  return posts as Post[];
 }
 
-export async function update(values: Partial<Post>) {
-  const { id, ...props } = values;
-  delete props.updated;
+export async function update(values: PostToUpdate) {
+  const { slug, ...props } = values;
+
+  // delete old updated value if Post has been updated before, since we use the keys to build the set statement
+  if (props.updated) {
+    delete props.updated;
+  }
 
   const setStatement = Object.keys(props)
     .map((key) => {
@@ -153,14 +145,13 @@ export async function update(values: Partial<Post>) {
     .join(', ');
 
   const UpdateExpression = `set ${setStatement}, updated = :updated`;
-  console.log(`UpdateExpression`, UpdateExpression);
-
   const ExpressionAttributeValues: Record<string, unknown> = Object.keys(
     props,
   ).reduce((acc, curr) => {
     return {
       ...acc,
-      [`:${curr}`]: values[curr as keyof Post],
+      // Since our only optional Frontmatter-related attributes are numbers, default to 0
+      [`:${curr}`]: values[curr as keyof Post] || 0,
     };
   }, {});
   ExpressionAttributeValues[':updated'] = new Date().toISOString();
@@ -168,7 +159,7 @@ export async function update(values: Partial<Post>) {
   const command = new UpdateCommand({
     TableName: PostTable,
     Key: {
-      id,
+      slug,
     },
     UpdateExpression,
     ExpressionAttributeNames: {
@@ -178,17 +169,15 @@ export async function update(values: Partial<Post>) {
     ReturnValues: 'ALL_NEW',
   });
 
-  console.log(`UpdateCommand`, command.input);
-
   const response = await docClient.send(command);
   return response;
 }
 
-export async function increment(id: string, attribute: 'views' | 'likes') {
+export async function increment(slug: string, attribute: 'views' | 'likes') {
   const command = new UpdateCommand({
     TableName: PostTable,
     Key: {
-      id,
+      slug,
     },
     UpdateExpression: 'ADD #cnt :val',
     ExpressionAttributeNames: { '#cnt': attribute },
@@ -202,11 +191,11 @@ export async function increment(id: string, attribute: 'views' | 'likes') {
   return response?.Attributes?.[attribute] as number;
 }
 
-export async function deleteById(id: string) {
+export async function deleteByPk(slug: string) {
   const deleteCommand = new DeleteCommand({
     TableName: PostTable,
     Key: {
-      id,
+      slug,
     },
   });
 
@@ -215,14 +204,11 @@ export async function deleteById(id: string) {
 
 export async function deleteAll() {
   const posts = await list();
+  const promises = [];
 
   for (const post of posts) {
-    const deleteCommand = new DeleteCommand({
-      TableName: PostTable,
-      Key: {
-        id: post.id,
-      },
-    });
-    await docClient.send(deleteCommand);
+    promises.push(deleteByPk(post.slug));
   }
+
+  await Promise.all(promises);
 }

@@ -63,7 +63,6 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
   params: { postSlug },
 }) => {
   const {
-    id,
     title,
     abstract,
     slug,
@@ -98,7 +97,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
         <aside className={styles.aside}>
           <TableOfContents slug={slug} links={links} />
           <Upvotes
-            postId={id}
+            postSlug={postSlug}
             initialVotes={likes}
             className={styles.upvotes}
           />
@@ -117,7 +116,7 @@ const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
 
             <div className={styles.infoRight}>
               <h4 className={styles.infoHeading}>HITS</h4>
-              <PageViews id={id} initialViews={views} />
+              <PageViews postSlug={postSlug} initialViews={views} />
             </div>
           </div>
         </article>

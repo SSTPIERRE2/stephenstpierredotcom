@@ -41,11 +41,8 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
     const isAbstractUpdated = post?.abstract.includes('Abstract updated.');
     expect(isAbstractUpdated).toBe(true);
 
-    const isPublishedUpdated = post?.isPublished === 1;
-    expect(isPublishedUpdated).toBe(true);
-
     const isPublishedDateUpdated =
-      post?.publishedOn === new Date('2024-01-29').toISOString();
+      post?.publishedOn === new Date('2024-01-29').valueOf();
     expect(isPublishedDateUpdated).toBe(true);
 
     expect(post?.tags).toHaveLength(2);
@@ -62,5 +59,18 @@ describe.sequential('onCreate stack, followed by onUpdate', () => {
 
     expect(renamedPost).toBeDefined();
     expect(renamedPost?.tags).toHaveLength(1);
+  });
+
+  it('queries Posts in descending order by publish date', async () => {
+    const posts = await Post.queryPublished();
+
+    expect(posts[0].slug).toBe('post-renamed');
+    expect(posts[1].slug).toBe('test-post');
+  });
+
+  it('queries Posts with the Tag "javascript"', async () => {
+    const posts = await Post.queryPublished('javascript');
+
+    expect(posts[0].slug).toBe('post-renamed');
   });
 });
