@@ -20,7 +20,6 @@
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@uidotdev/usehooks": "^2.4.1",
-    "@urql/exchange-auth": "^2.1.6",
     "bright": "^0.8.5",
     "cheerio": "1.0.0-rc.12",
     "clsx": "^2.1.0",
