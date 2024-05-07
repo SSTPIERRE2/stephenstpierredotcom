@@ -17,6 +17,21 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Stephen St.Pierre',
   description: "Stephen St.Pierre's Developer Blog",
+  openGraph: {
+    title: 'Stephen St.Pierre',
+    description: "Stephen St.Pierre's Developer Blog",
+    url: 'https://stephenstpierre.com',
+    siteName: 'Stephen St.Pierre',
+    images: [
+      {
+        url: 'https://stephenstpierre.com/opengraph-dark.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
