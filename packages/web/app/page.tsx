@@ -2,7 +2,6 @@ import styles from './page.module.css';
 import RetroGrid from '@/components/RetroGrid';
 import Oasis from '@/components/Oasis';
 import FullBleed from '@/components/FullBleed';
-import PrimaryLink, { PrimaryNewTabLink } from '@/components/PrimaryLink';
 import TextWithBorder from '@/components/TextWithBorder';
 import Link from 'next/link';
 import PostGalleryContainer from '@/components/PostGalleryContainer';
@@ -22,14 +21,6 @@ export default function Home() {
             Welcome to my <em className={styles.emphasized}>digital oasis,</em>{' '}
             a curated collection of programming tips and tricks. Please enjoy,
             vote on what you like, and share with your friends and colleagues!
-          </p>
-
-          <h2 className={styles.heading}>Looking for work!</h2>
-          <p>
-            <PrimaryLink href="/about">Read more about me here</PrimaryLink> or{' '}
-            <PrimaryNewTabLink href="/Resume2024.pdf">
-              view my resume
-            </PrimaryNewTabLink>
           </p>
         </div>
         <div className={styles.greetingRight}>
