@@ -20,6 +20,7 @@ import StyledComponentsLogo from '../logos/StyledComponentsLogo';
 import DockerLogo from '../logos/DockerLogo';
 import GraphqlLogo from '../logos/GraphqlLogo';
 import PrettierLogo from '../logos/PrettierLogo';
+import TailwindLogo from '../logos/TailwindLogo/TailwindLogo';
 
 const StackCarousel = () => {
   const { theme } = useTheme();
@@ -97,6 +98,12 @@ const StackCarousel = () => {
       </li>
       <li className={styles.slide}>
         <GraphqlLogo />
+      </li>
+      <li className={styles.slide}>
+        <TailwindLogo />
+        <span className={styles.wordMark} aria-hidden>
+          TailwindCSS
+        </span>
       </li>
     </ul>
   );
