@@ -11,5 +11,6 @@ export default {
   },
   stacks(app) {
     app.stack(Database).stack(Web);
+    app.setDefaultRemovalPolicy("retain");
   },
 } satisfies SSTConfig;
