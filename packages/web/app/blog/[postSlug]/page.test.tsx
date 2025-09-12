@@ -67,7 +67,6 @@ it('renders a published post', async () => {
     ),
   );
 
-  // @ts-expect-error server components aren't built into RTL render function yet
   render(await Page({ params: { postSlug: 'test-post' } }));
   expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
 });

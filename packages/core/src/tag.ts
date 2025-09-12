@@ -9,9 +9,9 @@ import {
   PutCommand,
   ScanCommand,
 } from '@aws-sdk/lib-dynamodb';
-import { Table } from 'sst/node/table';
+import { Resource } from 'sst';
 
-const TagTable = Table.Tag.tableName;
+const TagTable = Resource.Tag.name;
 
 export interface Tag {
   name: string;

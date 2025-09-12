@@ -17,7 +17,6 @@ export const PostTable = new sst.aws.Dynamo('Post', {
 export const TagTable = new sst.aws.Dynamo('Tag', {
   fields: {
     name: 'string',
-    created: 'string',
   },
   primaryIndex: { hashKey: 'name' },
 });

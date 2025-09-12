@@ -5,6 +5,22 @@
 
 declare module "sst" {
   export interface Resource {
+    "LOGROCKET_APP_ID": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "Post": {
+      "name": string
+      "type": "sst.aws.Dynamo"
+    }
+    "Tag": {
+      "name": string
+      "type": "sst.aws.Dynamo"
+    }
+    "web": {
+      "type": "sst.aws.Nextjs"
+      "url": string
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />

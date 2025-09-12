@@ -10,7 +10,8 @@
     "dev": "sst dev",
     "gen": "hygen",
     "remove": "sst remove",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "reset-workspace": "rm -rf node_modules packages/*/node_modules pnpm-lock.yaml && pnpm install"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",

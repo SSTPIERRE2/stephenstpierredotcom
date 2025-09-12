@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import styles from './page.module.css';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import COMPONENT_MAP from '@/utils/mdx-components';
@@ -16,6 +15,7 @@ import slugify from '@/utils/slugify';
 import dayjs from '@/utils/extendedDayJs';
 import LogRocket from 'logrocket';
 import PostMetadata from './PostMetadata';
+import { Metadata } from 'next';
 
 const getPostMetadata = cache(async (postSlug: string) => {
   const post = await Post.getBySlug(postSlug);
@@ -54,14 +54,17 @@ const getPostMetadata = cache(async (postSlug: string) => {
   }
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: `Loading... • StephenStPierre.com`,
   description: 'Post is loading...',
 };
 
-const PostPage: NextPage<{ params: { postSlug: string } }> = async ({
-  params: { postSlug },
+const PostPage = async ({
+  params,
+}: {
+  params: Promise<{ postSlug: string }>;
 }) => {
+  const { postSlug } = await params;
   const {
     title,
     abstract,
