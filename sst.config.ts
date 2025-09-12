@@ -2,14 +2,13 @@ import { SSTConfig } from 'sst';
 import { Web } from './stacks/Web';
 import { Database } from './stacks/Database';
 
-export default {
-  config() {
+export default $config({
+  app(input) {
     return {
       name: 'stephenstpierredotcom',
-      region: 'us-east-1',
+      home: 'aws',
+      removal: input?.stage === 'production' ? 'retain' : 'remove',
     };
   },
-  stacks(app) {
-    app.stack(Database).stack(Web);
-  },
-} satisfies SSTConfig;
+  async run() {},
+});
