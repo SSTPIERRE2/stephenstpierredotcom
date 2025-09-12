@@ -1,6 +1,6 @@
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
-import { Post } from '@core/post';
+import { incrementViews } from '@/app/actions/incrementViews';
 
 interface Props {
   postSlug: string;
@@ -20,7 +20,7 @@ const getDisplay = (views: number) => {
 };
 
 const PageViews = async ({ postSlug, initialViews }: Props) => {
-  const views = await Post.increment(postSlug, 'views');
+  const views = await incrementViews(postSlug);
 
   return (
     <div className={styles.wrapper}>
