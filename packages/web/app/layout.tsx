@@ -9,7 +9,7 @@ import { DARK_COLORS, LIGHT_COLORS, THEME } from '@/utils/constant';
 import { ThemeProvider } from './context/ThemeContext';
 import styles from './layout.module.css';
 import Logrocket from '@/components/Logrocket';
-import { Config } from 'sst/node/config';
+import { Resource } from 'sst';
 import '@fontsource-variable/fira-code';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -34,12 +34,14 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  const savedTheme = cookies().get('color-theme') as
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies();
+  const savedTheme = cookieStore.get('color-theme') as
     | {
         value: THEME;
       }
     | undefined;
+    console.log(`theme`, savedTheme);
   const theme = savedTheme?.value || 'dark';
 
   const themeColors = theme === 'light' ? LIGHT_COLORS : DARK_COLORS;
@@ -51,7 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       style={themeColors as React.CSSProperties}
     >
       <body className={inter.className}>
-        <Logrocket appId={Config.LOGROCKET_APP_ID} />
+        <Logrocket appId={Resource.LOGROCKET_APP_ID.value} />
         <AuthProvider>
           <ThemeProvider initialTheme={theme}>
             <div className={styles.maxWidthWrapper}>

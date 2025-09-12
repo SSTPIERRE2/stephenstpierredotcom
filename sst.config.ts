@@ -1,14 +1,16 @@
-import { SSTConfig } from 'sst';
-import { Web } from './stacks/Web';
-import { Database } from './stacks/Database';
+/// <reference path="./.sst/platform/config.d.ts" />
 
 export default $config({
   app(input) {
     return {
       name: 'stephenstpierredotcom',
-      home: 'aws',
       removal: input?.stage === 'production' ? 'retain' : 'remove',
+      protect: ['production'].includes(input?.stage),
+      home: 'aws',
     };
   },
-  async run() {},
+  async run() {
+    await import('./infra/Database');
+    await import('./infra/Web');
+  },
 });

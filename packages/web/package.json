@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "sst bind next dev",
+    "dev": "next dev",
     "build": "sst bind next build",
     "start": "sst bind next start",
     "lint": "next lint",

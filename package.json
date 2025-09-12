@@ -4,19 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "sst dev",
     "build": "sst build",
-    "deploy": "sst deploy",
-    "remove": "sst remove",
     "console": "sst console",
-    "typecheck": "tsc --noEmit",
-    "gen": "hygen"
+    "deploy": "sst deploy",
+    "dev": "sst dev",
+    "gen": "hygen",
+    "remove": "sst remove",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
+    "@types/aws-lambda": "8.10.152",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
-    "aws-cdk-lib": "^2.214.0",
     "concurrently": "^9.2.1",
     "constructs": "^10.4.2",
     "eslint": "^9.35.0",
@@ -32,6 +32,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "dayjs": "^1.11.18"
+    "dayjs": "^1.11.18",
+    "sst": "3.17.13"
   }
 }
