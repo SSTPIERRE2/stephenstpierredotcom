@@ -11,10 +11,11 @@ import styles from './layout.module.css';
 import Logrocket from '@/components/Logrocket';
 import { Resource } from 'sst';
 import '@fontsource-variable/fira-code';
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Stephen St.Pierre',
   description: "Stephen St.Pierre's Developer Blog",
   openGraph: {
@@ -34,14 +35,18 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const cookieStore = await cookies();
   const savedTheme = cookieStore.get('color-theme') as
     | {
         value: THEME;
       }
     | undefined;
-    console.log(`theme`, savedTheme);
+  console.log(`theme`, savedTheme);
   const theme = savedTheme?.value || 'dark';
 
   const themeColors = theme === 'light' ? LIGHT_COLORS : DARK_COLORS;
@@ -53,7 +58,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       style={themeColors as React.CSSProperties}
     >
       <body className={inter.className}>
-        <Logrocket appId={Resource.LOGROCKET_APP_ID.value} />
+        {!!Resource.LOGROCKET_APP_ID?.value && (
+          <Logrocket appId={Resource.LOGROCKET_APP_ID.value} />
+        )}
         <AuthProvider>
           <ThemeProvider initialTheme={theme}>
             <div className={styles.maxWidthWrapper}>

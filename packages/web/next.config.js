@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
+  output: 'standalone',
 };
 
 module.exports = nextConfig;

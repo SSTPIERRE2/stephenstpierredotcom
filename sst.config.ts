@@ -1,6 +1,33 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 export default $config({
+  console: {
+    autodeploy: {
+      target(event) {
+        if (event.type === 'branch' && event.action === 'pushed') {
+          if (event.branch === 'main') {
+            return {
+              stage: 'development',
+            };
+          }
+          if (['staging', 'production'].includes(event.branch)) {
+            return {
+              stage: event.branch,
+            };
+          }
+        }
+
+        if (
+          event.type === 'pull_request' &&
+          ['staging', 'main', 'production'].includes(event.base)
+        ) {
+          return {
+            stage: `pr-${event.number}-${event.head}`,
+          };
+        }
+      },
+    },
+  },
   app(input) {
     return {
       name: 'stephenstpierredotcom',
