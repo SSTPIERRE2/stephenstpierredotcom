@@ -2,7 +2,8 @@
 
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
-import { Post } from '@core/post';
+import { incrementViews } from '@/app/actions/incrementViews';
+import { useEffect, useState } from 'react';
 
 interface Props {
   postSlug: string;
@@ -22,12 +23,24 @@ const getDisplay = (views: number) => {
 };
 
 const PageViews = async ({ postSlug, initialViews }: Props) => {
-  const views = await Post.increment(postSlug, 'views');
+  const [views, setViews] = useState(initialViews);
+
+  useEffect(() => {
+    async function updateViews() {
+      try {
+        const newViews = await incrementViews(postSlug);
+        if (newViews) setViews(newViews);
+      } catch (err) {
+        console.error('Failed to increment views:', err);
+      }
+    }
+    updateViews();
+  }, [postSlug]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.inner}>
-        <span>{getDisplay(views || initialViews)}</span>
+        <span>{getDisplay(views)}</span>
       </div>
     </div>
   );
