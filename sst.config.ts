@@ -16,7 +16,7 @@ export default $config({
     new sst.aws.Cron('SeedJob', {
       schedule: 'cron(0 0 31 2 ? *)',
       function: {
-        handler: 'packages/functions/src/seed.ts',
+        handler: 'packages/functions/src/seed.onCreate',
         link: [PostTable, TagTable],
       },
     });
