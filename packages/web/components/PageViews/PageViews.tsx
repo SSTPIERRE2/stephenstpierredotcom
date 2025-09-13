@@ -1,3 +1,5 @@
+'use client';
+
 import range from '@/utils/range';
 import styles from './PageViews.module.css';
 import { Post } from '@core/post';
