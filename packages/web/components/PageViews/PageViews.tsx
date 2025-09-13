@@ -22,7 +22,7 @@ const getDisplay = (views: number) => {
   return display + views;
 };
 
-const PageViews = async ({ postSlug, initialViews }: Props) => {
+const PageViews = ({ postSlug, initialViews }: Props) => {
   const [views, setViews] = useState(initialViews);
 
   useEffect(() => {
