@@ -6,12 +6,9 @@
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit"
   },
-  "devDependencies": {
-    "@types/node": "^20.10.8"
-  },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.540.0",
-    "@aws-sdk/lib-dynamodb": "^3.540.0",
-    "ulid": "^2.3.0"
+    "@aws-sdk/client-dynamodb": "^3.888.0",
+    "@aws-sdk/lib-dynamodb": "^3.888.0",
+    "ulid": "^3.0.1"
   }
 }

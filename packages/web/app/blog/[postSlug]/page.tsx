@@ -59,8 +59,12 @@ export const metadata: Metadata = {
   description: 'Post is loading...',
 };
 
-const PostPage = async ({ params }: { params: { postSlug: string } }) => {
-  const { postSlug } = params;
+const PostPage = async ({
+  params,
+}: {
+  params: Promise<{ postSlug: string }>;
+}) => {
+  const { postSlug } = await params;
   const {
     title,
     abstract,

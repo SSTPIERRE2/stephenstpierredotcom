@@ -21,6 +21,9 @@ importers:
       '@types/aws-lambda':
         specifier: 8.10.152
         version: 8.10.152
+      '@types/node':
+        specifier: ^20
+        version: 20.19.14
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.43.0
         version: 8.43.0(@typescript-eslint/parser@8.43.0(eslint@9.35.0)(typescript@5.9.2))(eslint@9.35.0)(typescript@5.9.2)
@@ -61,28 +64,20 @@ importers:
   packages/core:
     dependencies:
       '@aws-sdk/client-dynamodb':
-        specifier: ^3.540.0
+        specifier: ^3.888.0
         version: 3.888.0
       '@aws-sdk/lib-dynamodb':
-        specifier: ^3.540.0
+        specifier: ^3.888.0
         version: 3.888.0(@aws-sdk/client-dynamodb@3.888.0)
       ulid:
-        specifier: ^2.3.0
-        version: 2.4.0
-    devDependencies:
-      '@types/node':
-        specifier: ^20.10.8
-        version: 20.19.14
+        specifier: ^3.0.1
+        version: 3.0.1
 
   packages/functions:
     dependencies:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-    devDependencies:
-      '@types/node':
-        specifier: ^20.11.26
-        version: 20.19.14
 
   packages/web:
     dependencies:
@@ -101,9 +96,6 @@ importers:
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
-      '@types/node':
-        specifier: ^20
-        version: 20.19.14
       '@types/react':
         specifier: ^19.1.13
         version: 19.1.13
@@ -3996,8 +3988,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ulid@2.4.0:
-    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+  ulid@3.0.1:
+    resolution: {integrity: sha512-dPJyqPzx8preQhqq24bBG1YNkvigm87K8kVEHCD+ruZg24t6IFEFv00xMWfxcC4djmFtiTLdFuADn4+DOz6R7Q==}
     hasBin: true
 
   unbox-primitive@1.1.0:
@@ -9173,7 +9165,7 @@ snapshots:
 
   typescript@5.9.2: {}
 
-  ulid@2.4.0: {}
+  ulid@3.0.1: {}
 
   unbox-primitive@1.1.0:
     dependencies:

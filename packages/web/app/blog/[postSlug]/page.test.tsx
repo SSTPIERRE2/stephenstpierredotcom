@@ -67,6 +67,6 @@ it('renders a published post', async () => {
     ),
   );
 
-  render(await Page({ params: { postSlug: 'test-post' } }));
+  render(await Page({ params: Promise.resolve({ postSlug: 'test-post' }) }));
   expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
 });
