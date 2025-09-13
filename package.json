@@ -14,7 +14,7 @@
     "reset-workspace": "rm -rf node_modules packages/*/node_modules pnpm-lock.yaml && pnpm install"
   },
   "devDependencies": {
-    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/node20": "^20.1.6",
     "@types/aws-lambda": "8.10.152",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
@@ -27,7 +27,8 @@
     "sst": "^3.17.13",
     "typescript": "^5.9.2",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@vitejs/plugin-react": "^5.0.2"
   },
   "workspaces": [
     "packages/*"

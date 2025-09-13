@@ -1,5 +1,3 @@
-// import { Table, Script, StackContext } from 'sst/constructs';
-
 export const PostTable = new sst.aws.Dynamo('Post', {
   // We only need to specify a field/attribute that is used as a partitionKey or sortKey, otherwise the data type is inferred
   fields: {
@@ -20,15 +18,3 @@ export const TagTable = new sst.aws.Dynamo('Tag', {
   },
   primaryIndex: { hashKey: 'name' },
 });
-
-// MIGRATE TO A JOB
-// new Script(stack, 'seed-db', {
-//   defaults: {
-//     function: {
-//       bind: [PostTable, TagTable],
-//       copyFiles: [{ from: 'packages/functions/content', to: './content' }],
-//     },
-//   },
-//   onCreate: 'packages/functions/src/seed.onCreate',
-//   onUpdate: 'packages/functions/src/seed.onUpdate',
-// });

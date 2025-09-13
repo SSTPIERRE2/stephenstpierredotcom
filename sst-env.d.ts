@@ -17,7 +17,7 @@ declare module "sst" {
       "name": string
       "type": "sst.aws.Dynamo"
     }
-    "web": {
+    "Web": {
       "type": "sst.aws.Nextjs"
       "url": string
     }

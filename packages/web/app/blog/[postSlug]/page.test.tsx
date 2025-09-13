@@ -1,7 +1,7 @@
 import { expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Post } from '@core/post';
-import Page from './page';
+import Page from '../app/blog/[postSlug]/page';
 
 vi.mock('react', () => {
   const testCache = <T extends (...args: Array<unknown>) => unknown>(func: T) =>
@@ -67,6 +67,6 @@ it('renders a published post', async () => {
     ),
   );
 
-  render(await Page({ params: { postSlug: 'test-post' } }));
+  render(await Page({ params: Promise.resolve({ postSlug: 'test-post' }) }));
   expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
 });

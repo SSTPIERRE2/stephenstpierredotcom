@@ -10,7 +10,15 @@ export default $config({
     };
   },
   async run() {
-    await import('./infra/Database');
+    const { PostTable, TagTable } = await import('./infra/Database');
     await import('./infra/Web');
+
+    new sst.aws.Cron('SeedJob', {
+      schedule: 'cron(0 0 31 2 ? *)',
+      function: {
+        handler: 'packages/functions/src/seed.ts',
+        link: [PostTable, TagTable],
+      },
+    });
   },
 });
