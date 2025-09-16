@@ -3,10 +3,13 @@
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",
+    "lib": ["esnext"], // explicitly no "dom"
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
       "@core/*": ["../core/src/*"]
     }
   },
-  "include": ["../../types/*", "**/*.ts"]
+  "include": ["../../types/*", "**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

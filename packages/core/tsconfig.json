@@ -2,7 +2,9 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": ["esnext"], // explicitly no "dom"
+    "isolatedModules": true
   },
   "include": ["../../types/*", "**/*.ts"]
 }
