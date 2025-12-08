@@ -39,12 +39,16 @@ export default $config({
   },
   async run() {
     const { PostTable, TagTable } = await import('./infra/Database');
-    await import('./infra/Web');
+    const { Web } = await import('./infra/Web');
 
     new sst.aws.Function('SeedDatabase', {
       handler: 'packages/functions/src/seed.onUpdate',
       link: [PostTable, TagTable],
       copyFiles: [{ from: 'packages/functions/content', to: './content' }],
     });
+
+    return {
+      web: Web.url,
+    };
   },
 });
