@@ -5,12 +5,7 @@ export default $config({
     autodeploy: {
       target(event) {
         if (event.type === 'branch' && event.action === 'pushed') {
-          if (event.branch === 'main') {
-            return {
-              stage: 'development',
-            };
-          }
-          if (['staging', 'production'].includes(event.branch)) {
+          if (['main', 'staging', 'production'].includes(event.branch)) {
             return {
               stage: event.branch,
             };
