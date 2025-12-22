@@ -11,9 +11,9 @@ import {
   QueryCommandInput,
   GetCommand,
 } from '@aws-sdk/lib-dynamodb';
-import { Table } from 'sst/node/table';
+import { Resource } from 'sst';
 
-const PostTable = Table.Post.tableName;
+const PostTable = Resource.Post.name;
 
 export interface Post {
   title: string;

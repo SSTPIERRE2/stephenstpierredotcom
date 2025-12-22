@@ -22,7 +22,7 @@ const getIsOnScreen = (element: Element) => {
 
 const TableOfContents = ({ links, slug }: Props) => {
   const [activeSection, setActiveSection] = useState<string>();
-  const activeRef = useRef<string>();
+  const activeRef = useRef<string>('');
 
   const updateActiveState = (state: string) => {
     setActiveSection(state);

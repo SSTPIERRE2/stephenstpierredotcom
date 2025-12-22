@@ -11,9 +11,11 @@ import {
 import { cyberpunk, cobalt2 } from '@codesandbox/sandpack-themes';
 import styles from './Sandpack.module.css';
 
-interface Props extends SandpackProviderProps {}
-
-const Sandpack = ({ template = 'react', files, ...rest }: Props) => {
+const Sandpack = ({
+  template = 'react',
+  files,
+  ...rest
+}: SandpackProviderProps) => {
   const { theme } = useTheme();
 
   return (

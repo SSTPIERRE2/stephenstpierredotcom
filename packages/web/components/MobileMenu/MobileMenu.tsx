@@ -9,10 +9,11 @@ import Link from 'next/link';
 import DarkLightToggle from '../DarkLightToggle';
 import VisuallyHidden from '../VisuallyHidden';
 import clsx from 'clsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const MobileMenu = () => {
   const [isMobileMenuOpen, toggleMobileMenu] = useToggle(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -23,6 +24,10 @@ const MobileMenu = () => {
       document.body.style.top = '';
     }
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <>
@@ -37,76 +42,79 @@ const MobileMenu = () => {
         <Menu size="2rem" />
         <VisuallyHidden>Open menu</VisuallyHidden>
       </button>
-      <Portal>
-        <div className={styles.portal}>
-          <div
-            className={styles.mobileNavWrapper}
-            style={{ pointerEvents: isMobileMenuOpen ? 'auto' : 'none' }}
-          >
-            <button
-              className={styles.mobileMenuCatchAll}
-              style={{
-                opacity: isMobileMenuOpen ? 1 : 0,
-                touchAction: isMobileMenuOpen ? 'none' : 'auto',
-              }}
-              onClick={() => (isMobileMenuOpen ? toggleMobileMenu() : {})}
-              tabIndex={-1}
-              aria-hidden
-            />
-            <button
-              className={clsx(styles.mobileMenuButton, styles.closeButton)}
-              onClick={() => toggleMobileMenu()}
-              style={{
-                opacity: isMobileMenuOpen ? 1 : 0,
-                transition: `opacity ${isMobileMenuOpen ? '800ms' : '200ms'}`,
-              }}
-            >
-              <X size="2.25rem" />
-              <VisuallyHidden>Close menu</VisuallyHidden>
-            </button>
-            <nav className={styles.mobileNavContainer}>
-              <div>
-                {LINKS.map(({ slug, label, href }, index) => (
-                  <div
-                    key={slug}
-                    className={styles.mobileNavItem}
-                    style={{
-                      transform:
-                        isMobileMenuOpen ? 'translateX(0%)' : (
-                          'translateX(-125%)'
-                        ),
-                      transition: 'transform 350ms',
-                      transitionDelay:
-                        isMobileMenuOpen ? `${index * 100}ms` : '0ms',
-                    }}
-                  >
-                    <Link
-                      key={slug}
-                      href={href}
-                      onClick={() => toggleMobileMenu()}
-                      prefetch={false}
-                    >
-                      {label}
-                    </Link>
-                  </div>
-                ))}
-              </div>
 
-              <div
-                className={styles.mobileNavSettings}
+      {isMounted && (
+        <Portal>
+          <div className={styles.portal}>
+            <div
+              className={styles.mobileNavWrapper}
+              style={{ pointerEvents: isMobileMenuOpen ? 'auto' : 'none' }}
+            >
+              <button
+                className={styles.mobileMenuCatchAll}
                 style={{
                   opacity: isMobileMenuOpen ? 1 : 0,
-                  transition: `opacity ${
-                    isMobileMenuOpen ? '250ms ease 500ms' : '250ms ease 0ms'
-                  }`,
+                  touchAction: isMobileMenuOpen ? 'none' : 'auto',
+                }}
+                onClick={() => (isMobileMenuOpen ? toggleMobileMenu() : {})}
+                tabIndex={-1}
+                aria-hidden
+              />
+              <button
+                className={clsx(styles.mobileMenuButton, styles.closeButton)}
+                onClick={() => toggleMobileMenu()}
+                style={{
+                  opacity: isMobileMenuOpen ? 1 : 0,
+                  transition: `opacity ${isMobileMenuOpen ? '800ms' : '200ms'}`,
                 }}
               >
-                <DarkLightToggle />
-              </div>
-            </nav>
+                <X size="2.25rem" />
+                <VisuallyHidden>Close menu</VisuallyHidden>
+              </button>
+              <nav className={styles.mobileNavContainer}>
+                <div>
+                  {LINKS.map(({ slug, label, href }, index) => (
+                    <div
+                      key={slug}
+                      className={styles.mobileNavItem}
+                      style={{
+                        transform:
+                          isMobileMenuOpen ? 'translateX(0%)' : (
+                            'translateX(-125%)'
+                          ),
+                        transition: 'transform 350ms',
+                        transitionDelay:
+                          isMobileMenuOpen ? `${index * 100}ms` : '0ms',
+                      }}
+                    >
+                      <Link
+                        key={slug}
+                        href={href}
+                        onClick={() => toggleMobileMenu()}
+                        prefetch={false}
+                      >
+                        {label}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+
+                <div
+                  className={styles.mobileNavSettings}
+                  style={{
+                    opacity: isMobileMenuOpen ? 1 : 0,
+                    transition: `opacity ${
+                      isMobileMenuOpen ? '250ms ease 500ms' : '250ms ease 0ms'
+                    }`,
+                  }}
+                >
+                  <DarkLightToggle />
+                </div>
+              </nav>
+            </div>
           </div>
-        </div>
-      </Portal>
+        </Portal>
+      )}
     </>
   );
 };

@@ -1,11 +1,9 @@
 import styles from './page.module.css';
-import { NextPage } from 'next';
 import TagSidebar from '@/components/TagSidebar';
 import PostGalleryContainer from '@/components/PostGalleryContainer';
 
-const TagPage: NextPage<{ params: { tag: string } }> = ({
-  params: { tag },
-}) => {
+const TagPage = async ({ params }: { params: Promise<{ tag: string }> }) => {
+  const { tag } = await params;
   return (
     <div className={styles.wrapper}>
       <main className={styles.main}>
