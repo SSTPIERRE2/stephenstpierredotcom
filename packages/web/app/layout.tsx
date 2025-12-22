@@ -13,7 +13,7 @@ import { Resource } from 'sst';
 import '@fontsource-variable/fira-code';
 import { Metadata } from 'next';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'Stephen St.Pierre',
